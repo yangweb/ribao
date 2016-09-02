@@ -1,0 +1,39 @@
+{template "header.html"}
+<!--product dingzhi-->
+<section class="product-wrap">
+  <div class="product-box w m-auto">
+        {template "side.html"}
+        <!--aside end-->
+        <section class="product-content fr" style="width:890px;" >
+           <div class="news-lsit-top">
+               <div class="title">{$ci->get_cache('module-1-news', 'category', $catid, 'name')}</div>
+            </div>
+            <div class="news-lsit-wrap">
+                <div class="paging-wrap">
+                </div>
+                <div class="news-list-main">
+                    <ul>
+                        {list action=module catid=$catid order=displayorder,updatetime page=1}
+                        <li>
+                            <a href="{$t.url}">{$t.title} <span class="fr">更多</span></a>
+                        </li>                        
+                        {/list}
+                    </ul>
+                   
+                </div>
+                <div class="hide-pages" style="display: none;"> 
+                   {$pages}
+                </div>
+            </div>
+        </section>
+        <div class="clear"></div>
+  </div>
+  <script>
+      D(function(){         
+         D(".paging-wrap").html(D(".hide-pages").html());          
+      });
+  </script>
+</section>
+<!--product dingzhi end -->
+{template "footer.html"}
+

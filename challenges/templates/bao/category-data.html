@@ -1,0 +1,43 @@
+<section>
+    <div class="global-challenges-index-page">
+        {php $imgid = $ci->get_cache('module-1-challenges', 'category', 2, 'thumb'); 
+            $image = dr_thumb($imgid);
+            $cname = $ci->get_cache('module-1-challenges', 'category', 2, 'name');
+            $description = $ci->get_cache('module-1-challenges', 'category', 2, 'description'); 
+        }
+        <div class="row">
+            <div class="global-challenges-description">
+                <h1 class="page-title">{$cname}</h1>
+                <p>{$description}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="columns">
+                <div class="row">
+                    {list action=module catid=2 field=title,url,thumb order=updatetime}
+                    <div class="global-agenda-summary">
+                        <a href="{$t.url}" title="{$t.title}">
+                            <div class="global-agenda-summary__image">
+                                <img class="image" src="{dr_thumb($t.thumb)}" alt="{$t.title}" />
+                            </div>
+                            <div class="global-agenda-summary__title summary__title">
+                               {$t.title}
+                            </div>
+                        </a>
+                    </div>
+                    {/list}
+                    <div class="global-agenda-summary">
+                        <a href="/global-challenges/projects">
+                            <div class="global-agenda-summary__image">
+                                <img class="image" src="{HOME_THEME_PATH}build/imgs/more-projects-aad472c052fac052b43594bd6baeb04586e28519b391eee12ea8d7e455ba3458.jpg" alt="More" />
+                            </div>
+                            <div class="global-agenda-summary__title summary__title">
+                                更多论坛项目
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
