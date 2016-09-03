@@ -183,7 +183,7 @@ class Member_model extends CI_Model {
                 // 虚拟币自动扣费
                 $this->update_score(1, $uid, -abs(intval($group[$data['groupid']]['price'])), '', "lang,m-128");
                 $time = $this->upgrade($uid, $data['groupid'], $group[$data['groupid']]['limit'], $data['overdue']);
-                $time = $time > 2000000000 ? lang('m-265') : dr_date($time);
+                $time = $time > 2000000000 ? lang('m-265') : man_date($time);
                 // 邮件提醒
                 $this->ci->sendmail_queue(
                     $this->member['email'],
@@ -1638,7 +1638,7 @@ class Member_model extends CI_Model {
         if ($uid == $this->uid) {
             $username = $this->member['username'];
         } else {
-            $m = dr_member_info($uid);
+            $m = man_member_info($uid);
             $username = $m['username'];
             unset($m);
         }

@@ -40,7 +40,7 @@ $(function() {
     <td align="left">
 	{MEMBER.group.$data[groupid].name}
 	{if $data.levelid}&nbsp;（{MEMBER.group.$data[groupid].level.$data[levelid].name}）{/if}
-	{if $data.overdue}&nbsp;{dr_lang('html-488', dr_date($data.overdue))}{/if}</td>
+	{if $data.overdue}&nbsp;{dr_lang('html-488', man_date($data.overdue))}{/if}</td>
 </tr>
 {if $data.name}
 <tr>
@@ -51,7 +51,7 @@ $(function() {
 {if $data.regtime}
 <tr>
     <th align="right">{lang('html-351')}：</th>
-    <td align="left">{dr_date($data.regtime)} （<a href="http://www.baidu.com/baidu?wd={$data.regip}&tn=monline_dg" target="_blank">{$data.regip}</a>）</td>
+    <td align="left">{man_date($data.regtime)} （<a href="http://www.baidu.com/baidu?wd={$data.regip}&tn=monline_dg" target="_blank">{$data.regip}</a>）</td>
 </tr>
 {/if}
 <tr>

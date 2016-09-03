@@ -146,7 +146,7 @@ class D_Home_Form extends M_Controller {
     protected function _add($data) {
         // 入库
         $this->link->insert($this->table, $data);
-        if (($id = $this->link->insert_id()) && ($user = dr_member_info($this->cdata['uid']))) {
+        if (($id = $this->link->insert_id()) && ($user = man_member_info($this->cdata['uid']))) {
             $murl = dr_member_url(APP_DIR.'/'.$this->router->class.'/listc', array('cid' => $this->cdata['id']));
             $title = dr_lang('mod-106', $this->cdata['title'], $this->form['name']);
             // 邮件提醒

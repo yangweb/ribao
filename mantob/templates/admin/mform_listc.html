@@ -76,7 +76,7 @@ function dr_confirm_move() {
 			<td align="center">{$t.id}</td>
 			<td align="left"><a href="{dr_url(APP_DIR.'/'.$_class.'/edit',array('cid' => $cid, 'id' => $t.id))}">{dr_keyword_highlight($t.subject, $param.keyword)}</a></td>
 			<td align="center"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
-			<td align="left">{dr_date($t.inputtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 				<a href="{dr_url(APP_DIR.'/'.$_class.'/edit',array('cid' => $cid, 'id' => $t.id))}">{lang('html-564')}</a>
 			</td>

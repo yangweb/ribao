@@ -227,7 +227,7 @@ class F_Files extends A_Field {
             $attr.= ' required="required"';
         }
 		// 上传的URL
-		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&code='.str_replace('=', '', dr_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
+		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&code='.str_replace('=', '', man_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
 		// 字段默认值
 		$file_value = '';
 		$value && $value = dr_string2array($value);

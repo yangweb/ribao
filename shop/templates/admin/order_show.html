@@ -37,7 +37,7 @@ function dr_set_kd(id) {
 			<table border="0" cellspacing="0" cellpadding="0" class="dr_order_item" width="100%">
 			{loop $data.items $i $item}
 			  <tr>
-				<td width="70"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{dr_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
+				<td width="70"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{man_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
 				<td style="padding-right:5px;"><a href="{$item.url}" target="_blank">{$item.title}</a><div style="padding-top:3px; color:#999">{$item.format}</div></td>
 				<td style="width:80px;color:red;" align="center">
 				{if $item.discount}
@@ -95,7 +95,7 @@ function dr_set_kd(id) {
                 <th width="150">订单编号：</th> 
                 <td width="200">{$data.id}</td>
                 <th width="150">下单时间：</th> 
-                <td>{dr_date($data.inputtime, NULL, 'red')}</td>
+                <td>{man_date($data.inputtime, NULL, 'red')}</td>
             </tr>
 			<tr>
                 <th>付款方式：</th> 
@@ -107,7 +107,7 @@ function dr_set_kd(id) {
                 <th>已使用{SITE_SCORE}：</th>
                 <td><span class="dr_pirce">{$data.score}</span></td>
                 <th>{if $data.successtime}成交时间：{/if}</th>
-                <td>{if $data.successtime}{dr_date($data.successtime, NULL, 'red')}{/if}</td>
+                <td>{if $data.successtime}{man_date($data.successtime, NULL, 'red')}{/if}</td>
             </tr>
             <tr>
                 <th>买家信息：</th>

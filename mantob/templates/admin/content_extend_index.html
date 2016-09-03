@@ -76,7 +76,7 @@ function dr_confirm_update() {
 			{if $content.type}
             <td align="center"><a href="{dr_url(APP_DIR.'/extend/index', array('cid'=>$cid,'catid'=>$catid,'type'=>$t.mytype))}">{$content['type'][$t['mytype']]['name']}</a></td>
             {/if}
-			<td align="left">{dr_date($t.inputtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			<a href="{$t.url}" target="_blank">{lang('go')}</a>
 			{if $catrule.edit}<a href="{dr_url(APP_DIR.'/extend/edit',array('cid'=>$cid,'catid'=>$catid,'id'=>$t.id))}">{lang('edit')}</a>{/if}

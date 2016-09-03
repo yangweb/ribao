@@ -53,7 +53,7 @@ function dr_show_wb(obj) {
 			<td align="left">#{dr_keyword_highlight($t.name, $param.keyword)}#</td>
 			<td align="left"><a onclick="dr_dialog_member('{$t.uid}')" href="javascript:;">{$t.username}</a></td>
 			<td align="center">{$t.count}</td>
-			<td align="left">{dr_date($t.inputtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			<a href="{dr_member_url('sns/topic', array('id'=>$t.id))}" target="_blank">{lang('go')}</a>
 			</td>

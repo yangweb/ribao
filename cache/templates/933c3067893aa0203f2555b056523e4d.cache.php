@@ -10,19 +10,19 @@
 
             <div class="header-pane-selectors">
                 <li class="header-pane" data-pane="agenda">
-                    <a class="header-item__link" href=agenda">议题</a>
+                    <a class="header-item__link" href="<?php echo SITE_URL; ?>agenda">议题</a>
                 </li>
                 <li class="header-pane" data-pane="events">
-                    <a class="header-item__link" href="">会议</a>
+                    <a class="header-item__link" href="<?php echo SITE_URL; ?>">会议</a>
                 </li>
                 <li class="header-pane" data-pane="reports">
-                    <a class="header-item__link" href="">报告</a>
+                    <a class="header-item__link" href="<?php echo SITE_URL; ?>/">报告</a>
                 </li>
                 <li class="header-pane" data-pane="projects">
-                    <a class="header-item__link" href="">项目</a>
+                    <a class="header-item__link" href="<?php echo SITE_URL; ?>/">项目</a>
                 </li>
                 <li class="header-pane" data-pane="about">
-                    <a class="header-item__link" href="">关于</a>
+                    <a class="header-item__link" href="<?php echo $ci->get_cache('page-1', 'data', 'index', 1, 'url'); ?>">关于</a>
                 </li>
             </div>
         </ul>

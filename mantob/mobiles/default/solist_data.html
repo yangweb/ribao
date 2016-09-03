@@ -3,7 +3,7 @@
 {list action=module module=$dirname IN_id=$contentid page=1 pagesize=10 urlrule=$urlrule}
 <li>
     <a href="{dr_mobile_show_url($module, $t.id)}">
-        <img src="{dr_thumb($t.thumb,57,72)}" />
+        <img src="{man_thumb($t.thumb,57,72)}" />
         <dl>
             <dt>{dr_keyword_highlight($t.title, $keyword)}</dt>
             <dd class="content">{dr_keyword_highlight($t.description, $keyword)}</dd>

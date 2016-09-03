@@ -865,7 +865,7 @@ class CI_Pagination {
 	
 	/**
 	 * Generate the pagination links (v2)
-	 *
+	 * 分页链接
 	 * @return	string
 	 */
 	public function mantou_mao_links()
@@ -987,6 +987,210 @@ class CI_Pagination {
 		$output = preg_replace('#([^:])//+#', '\\1/', $output);
 		
 		// Add the wrapper HTML if exists
+		return $this->full_tag_open.$output.$this->full_tag_close;
+	}
+
+	/**
+	 * Generate the pagination links (v2)
+	 * 分页链接
+	 * @return	string
+	 */
+	public function mantou_mao_links_bao()
+	{
+		// 如果你的项目计数或单页共为零，就没有必要继续下去。
+		if ($this->total_rows === 0 OR $this->per_page === 0)
+		{
+			return '';
+		}
+
+		// 计算的总页数
+		$num_pages = (int) ceil($this->total_rows / $this->per_page);
+
+		
+		$bao_next_url = '';
+		$bao_prev_url = '';
+
+		// 只有一个也? Hm... nothing more to do here then.
+		if ($num_pages === 1)
+		{
+			return '';
+		}
+
+		// 检查链接的用户定义的数字
+		$this->num_links = (int) $this->num_links;
+
+		if ($this->num_links < 1)
+		{
+			show_error('Your number of links must be a positive number.');
+		}
+
+		$CI =& get_instance();
+
+		// Keep any existing query string items.
+		// Note: Has nothing to do with any other query string option.
+		if ($this->reuse_query_string === TRUE)
+		{
+			$get = $CI->input->get();
+
+			// Unset the controll, method, old-school routing options
+			unset($get['c'], $get['m'], $get[$this->query_string_segment]);
+		}
+		else
+		{
+			$get = array();
+		}
+
+		// Put together our base and first URLs.
+		$this->base_url = trim($this->base_url);
+		$this->first_url = $this->base_url;
+		
+
+		// Determine the current page number.
+		$base_page = ($this->use_page_numbers) ? 1 : 0;
+
+		$this->cur_page = max(1, (int)$CI->input->get($this->query_string_segment));
+
+		// If something isn't quite right, back to the default base page.
+		if ( $this->use_page_numbers && (int) $this->cur_page === 0)
+		{
+			$this->cur_page = $base_page;
+		}
+		else
+		{
+			// Make sure we're using integers for comparisons later.
+			$this->cur_page = (int) $this->cur_page;
+		}
+
+		// Is the page number beyond the result range?
+		// If so, we show the last page.
+		if ($this->use_page_numbers)
+		{
+			if ($this->cur_page > $num_pages)
+			{
+				$this->cur_page = $num_pages;
+			}
+		}
+		elseif ($this->cur_page > $this->total_rows)
+		{
+			$this->cur_page = ($num_pages - 1) * $this->per_page;
+		}
+
+		$uri_page_number = $this->cur_page;
+
+		// If we're using offset instead of page numbers, convert it
+		// to a page number, so we can generate the surrounding number links.
+		if ( ! $this->use_page_numbers)
+		{
+			$this->cur_page = (int) floor(($this->cur_page/$this->per_page) + 1);
+		}
+
+		// Calculate the start and end numbers. These determine
+		// which number to start and end the digit links with.
+		$start	= (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
+		$end	= (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
+
+		// And here we go...
+		$output = '';
+
+		// Render the "First" link.
+		if ($this->first_link !== FALSE && $this->cur_page > ($this->num_links + 1))
+		{
+			// Take the general parameters, and squeeze this pagination-page attr in for JS frameworks.
+			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, 1);
+
+			$output .= $this->first_tag_open.'<a href="'.str_replace('{page}', 1, $this->base_url).'"'.$attributes.$this->_attr_rel('start').'>'
+				.$this->first_link.'</a>'.$this->first_tag_close;
+		}
+
+		// Render the "Previous" link.
+		if ($this->prev_link !== FALSE && $this->cur_page !== 1)
+		{
+			$i = ($this->use_page_numbers) ? $uri_page_number - 1 : $uri_page_number - $this->per_page;
+
+			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
+
+			if ($i === $base_page)
+			{
+				// First page
+				$bao_prev_url = str_replace('{page}', $i, $this->base_url);
+				$output .= $this->prev_tag_open.'<a href="'.$bao_prev_url.'"'.$attributes.$this->_attr_rel('prev').'>'
+					.$this->prev_link.'</a>'.$this->prev_tag_close;
+			}
+			else
+			{	
+				$bao_prev_url = str_replace('{page}', $i, $this->base_url);
+				$output .= $this->prev_tag_open.'<a href="'.$bao_prev_url.'"'.$attributes.$this->_attr_rel('prev').'>'
+					.$this->prev_link.'</a>'.$this->prev_tag_close;
+			}
+
+		}
+
+		// Render the pages
+		if ($this->display_pages !== FALSE)
+		{
+			// Write the digit links
+			for ($loop = $start -1; $loop <= $end; $loop++)
+			{
+				$i = ($this->use_page_numbers) ? $loop : ($loop * $this->per_page) - $this->per_page;
+
+				$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
+
+				if ($i >= $base_page)
+				{
+					if ($this->cur_page === $loop)
+					{
+						// Current page
+						$output .= $this->cur_tag_open.$loop.$this->cur_tag_close;
+					}
+					elseif ($i === $base_page)
+					{
+						// First page
+						$output .= $this->num_tag_open.'<a href="'.str_replace('{page}', 1, $this->base_url).'"'.$attributes.$this->_attr_rel('start').'>'
+							.$loop.'</a>'.$this->num_tag_close;
+					}
+					else
+					{
+						$output .= $this->num_tag_open.'<a href="'.str_replace('{page}', $i, $this->base_url).'"'.$attributes.$this->_attr_rel('start').'>'
+							.$loop.'</a>'.$this->num_tag_close;
+					}
+				}
+			}
+		}
+
+		// Render the "next" link
+		if ($this->next_link !== FALSE && $this->cur_page < $num_pages)
+		{
+			$i = ($this->use_page_numbers) ? $this->cur_page + 1 : $this->cur_page * $this->per_page;
+
+			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
+			$bao_next_url = str_replace('{page}', $i, $this->base_url);
+			$output .= $this->next_tag_open.'<a href="'.$bao_next_url.'"'.$attributes.$this->_attr_rel('next').'>'.$this->next_link.'</a>'.$this->next_tag_close;
+		}
+
+		// Render the "Last" link
+		if ($this->last_link !== FALSE && ($this->cur_page + $this->num_links) < $num_pages)
+		{
+			$i = ($this->use_page_numbers) ? $num_pages : ($num_pages * $this->per_page) - $this->per_page;
+
+			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, (int) $i);
+
+			$output .= $this->last_tag_open.'<a href="'.str_replace('{page}', $i, $this->base_url).'"'.$attributes.'>'
+				.$this->last_link.'</a>'.$this->last_tag_close;
+		}
+
+
+		$output .= '<div class="pagination__page-info">'.$this->cur_page.'/'.$num_pages.'</div>';
+
+
+		$bao_page_on = $this->cur_page;
+		$bao_pages = $num_pages;
+
+
+		$bao_json = '{"pages":"'.$bao_pages.'","page_on":"'.$bao_page_on.'","prev_url":"'.$bao_prev_url.'","next_url":"'.$bao_next_url.'"}';
+
+		$output = $bao_json;
+		$output = preg_replace('#([^:])//+#', '\\1/', $output);
+
 		return $this->full_tag_open.$output.$this->full_tag_close;
 	}
 	

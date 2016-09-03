@@ -3,7 +3,7 @@
 	<td class="algin_r"><input type="checkbox" value="{$t.id}" class="dr_select" name="ids[]"></td>
 	<td class="algin_l"><div class="dr_title"><a href="{$t.url}" title="{$t.title}" target="_blank">{dr_keyword_highlight($t.title, $kw)}</a></div></td>
 	<td class="algin_c"><a href="{CATEGORY.$t[catid].url}" target="_blank">{CATEGORY.$t[catid].name}</a></td>
-	<td class="algin_l">{dr_date($t.updatetime, '', 'red')}</td>
+	<td class="algin_l">{man_date($t.updatetime, '', 'red')}</td>
 	<td class="algin_l">
     {if $extend}
     <a href="{dr_member_url(APP_DIR.'/extend/index',array('cid'=>$t.id))}" style="color:#00F">{lang('mod-29')}</a>&nbsp;

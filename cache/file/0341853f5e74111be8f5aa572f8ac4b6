@@ -1,0 +1,1 @@
+a:3:{s:4:"time";i:1472898952;s:3:"ttl";i:7200;s:4:"data";s:226:"<select id='dr_catid' name='catid' onChange="show_category_field(this.value)"><optgroup label=' 项目'></optgroup><option value='2' >&nbsp;├ 全球挑战</option><option value='3' selected>&nbsp;├ 更多</option></select>";}

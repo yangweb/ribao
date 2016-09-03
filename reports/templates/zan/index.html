@@ -18,7 +18,7 @@
                                                 <!--查询推荐位2（首页幻灯）的内容，field需要用到的字段（不填表示全部），按displayorder（后台指定排序）排序-->
                                                 {list action=module flag=2 field=thumb,title,url order=displayorder,updatetime num=5}
                                                 <div class="{if $key==0}dis{else}undis{/if}" name="f">
-                                                    <a href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}><img alt="{$t.title}" style="width: 100%; height: 274px;" src="{dr_thumb($t.thumb, 350, 270)}" border="0"></a>
+                                                    <a href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}><img alt="{$t.title}" style="width: 100%; height: 274px;" src="{man_thumb($t.thumb, 350, 270)}" border="0"></a>
                                                 </div>
                                                 {/list}
                                                 <table id="font_hd" width="100%" cellSpacing="0" cellPadding="0">
@@ -106,7 +106,7 @@
                                                     <!-- 调用模块的属性的第一条 -->
                                                     {list action=module catid=$c.id flag=1 order=updatetime num=1}
                                                     <a class="pull-left" href="javascript:;">
-                                                        <img class="media-object" src="{dr_thumb($t.thumb, 80, 80)}" style="width:80px; height:80px;"> </a>
+                                                        <img class="media-object" src="{man_thumb($t.thumb, 80, 80)}" style="width:80px; height:80px;"> </a>
                                                     <div class="media-body">
                                                         <h5 class="media-heading"><a href="{$t.url}" class="title">{$t.title}</a></h5>
                                                         <p> {dr_strcut($t.description,120)}</p>
@@ -142,7 +142,7 @@
                                                     <div class="tile-container">
                                                         <div class="tile-thumbnail">
                                                             <a href="javascript:;">
-                                                                <a href="{$t.url}" ><img src="{dr_thumb($t.thumb, 120, 75)}" width="120" height="75"></a>
+                                                                <a href="{$t.url}" ><img src="{man_thumb($t.thumb, 120, 75)}" width="120" height="75"></a>
                                                             </a>
                                                         </div>
                                                         <div class="tile-title">

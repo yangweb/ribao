@@ -79,7 +79,7 @@ if (isset($result['state']) && $result['state'] == 'SUCCESS' && $result['size'])
     $result['url'] = $url;
     // 图片水印
     if (SITE_IMAGE_WATERMARK && SITE_IMAGE_CONTENT && $imageinfo = getimagesize($filename)) {
-        $result['url'] = dr_thumb($id, $imageinfo[0], $imageinfo[1]);
+        $result['url'] = man_thumb($id, $imageinfo[0], $imageinfo[1]);
     }
 
 }

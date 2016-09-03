@@ -1,7 +1,7 @@
 <section>
     <div class="global-challenges-index-page">
         {php $imgid = $ci->get_cache('module-1-challenges', 'category', 2, 'thumb'); 
-            $image = dr_thumb($imgid);
+            $image = man_thumb($imgid);
             $cname = $ci->get_cache('module-1-challenges', 'category', 2, 'name');
             $description = $ci->get_cache('module-1-challenges', 'category', 2, 'description'); 
         }
@@ -18,7 +18,7 @@
                     <div class="global-agenda-summary">
                         <a href="{$t.url}" title="{$t.title}">
                             <div class="global-agenda-summary__image">
-                                <img class="image" src="{dr_thumb($t.thumb)}" alt="{$t.title}" />
+                                <img class="image" src="{man_thumb($t.thumb)}" alt="{$t.title}" />
                             </div>
                             <div class="global-agenda-summary__title summary__title">
                                {$t.title}

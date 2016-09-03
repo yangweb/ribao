@@ -94,7 +94,7 @@ class Sns extends M_Controller {
         if ($uid) {
             // ta的动态
             $this->_show($uid);
-            $ta = dr_member_info($uid);
+            $ta = man_member_info($uid);
             $type = 4;
             $this->db->where('uid', $uid);
             $this->template->assign('ta', $ta);
@@ -223,7 +223,7 @@ class Sns extends M_Controller {
         if ($uid) {
             // 访问权限
             $this->_show($uid);
-            $ta = dr_member_info($uid);
+            $ta = man_member_info($uid);
             $this->db->where('f.fid', $uid);
             $this->template->assign('ta', $ta);
         } else {
@@ -281,7 +281,7 @@ class Sns extends M_Controller {
         if ($uid) {
             // 访问权限
             $this->_show($uid);
-            $ta = dr_member_info($uid);
+            $ta = man_member_info($uid);
             $this->db->where('uid IN(select fid from '.$this->db->dbprefix('sns_follow').' where uid='.$uid.')');
             $this->template->assign('ta', $ta);
         } else {
@@ -323,7 +323,7 @@ class Sns extends M_Controller {
             'uid' => $uid,
             'follow' => $row ? $row['isdouble'] : -1,
             'membersns' => dr_sns_info($uid),
-            'memberinfo' => dr_member_info($uid),
+            'memberinfo' => man_member_info($uid),
         ));
         $this->template->display('sns_member.html');
     }

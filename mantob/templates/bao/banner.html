@@ -8,7 +8,7 @@
                         <!-- SLIDE 1 -->
 						<li data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="{$t.title}">
 
-							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{dr_thumb($t.imgbg)}{else}{HOME_THEME_PATH}build/images/banner.png{/if}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{man_thumb($t.imgbg)}{else}{HOME_THEME_PATH}build/images/banner.png{/if}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
 
 							<div class="overlay dark-1"></div>
 
@@ -26,7 +26,7 @@
 								data-endspeed="1000"
 								data-endeasing="Power4.easeIn" style="z-index: 10;">
 								<span class="weight-300">
-									{if $t.thumb}<img src="{dr_thumb($t.thumb)}" alt="">{/if}
+									{if $t.thumb}<img src="{man_thumb($t.thumb)}" alt="">{/if}
                                 </span>
 							</div>
 
@@ -56,7 +56,7 @@
 						<!-- SLIDE  2-->
 						<li data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="{$t.title}">
 
-							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{dr_thumb($t.imgbg)}{/if}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
+							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{man_thumb($t.imgbg)}{/if}" alt="" data-bgfit="cover" data-bgposition="center bottom" data-bgrepeat="no-repeat" />
 
 							<div class="overlay dark-1"></div>
 
@@ -120,7 +120,7 @@
 						<!-- SLIDE 3 -->
 						<li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="{$t.title}">
 
-							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{dr_thumb($t.imgbg)}{else}{HOME_THEME_PATH}assets/images/demo/video/back.jpg{/if}" alt="video" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+							<img src="{HOME_THEME_PATH}assets/images/1x1.png" data-lazyload="{if $t.imgbg}{man_thumb($t.imgbg)}{else}{HOME_THEME_PATH}assets/images/demo/video/back.jpg{/if}" alt="video" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
 
 							<div class="tp-caption tp-fade fadeout fullscreenvideo"
 								data-x="0"
@@ -142,7 +142,7 @@
 
 								<div class="tp-dottedoverlay twoxtwo"></div>
 
-								<video class="" preload="none" style="widt:100%;height:100%" poster="{if $t.imgbg}{dr_thumb($t.imgbg)}{else}{HOME_THEME_PATH}assets/images/demo/video/back.jpg{/if}">
+								<video class="" preload="none" style="widt:100%;height:100%" poster="{if $t.imgbg}{man_thumb($t.imgbg)}{else}{HOME_THEME_PATH}assets/images/demo/video/back.jpg{/if}">
 									<source src="{dr_get_file($t.webm)}" type="video/webm" />
 									<source src="{dr_get_file($t.mp4)}" type="video/mp4" />
 									<source src='{dr_get_file($t.ogv)}' type='video/ogg' />

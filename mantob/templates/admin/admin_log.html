@@ -32,7 +32,7 @@
 		{loop $list $t}
 		<input id="inputip-{$t.id}" type="hidden" value="{$t.loginip}" />
 		<tr>
-			<td align="left">{dr_date($t.logintime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.logintime, NULL, 'red')}</td>
 			<td align="left"><a href="http://www.baidu.com/baidu?wd={$t.loginip}" target="_blank">{$t.loginip}</a></td>
 			<td align="left">{$t.useragent}</td>
 		</tr>

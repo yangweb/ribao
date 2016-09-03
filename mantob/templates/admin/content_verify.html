@@ -84,7 +84,7 @@ function dr_confirm_verfiy() {
 			<td align="left"><a href="{dr_url(APP_DIR.'/home/verifyedit',array('id'=>$t['id']))}">{if $c['thumb']}<font color="#FF0000">{lang('html-387')}</font>{/if}{$c['title']}</a></td>
 			<td align="center"><a href="{dr_url(APP_DIR.'/home/verify', array('status'=>$param['status'],'catid'=>$t['catid']))}">{CATEGORY.$t[catid].name}</a></td>
 			<td align="center"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
-			<td align="left">{dr_date($t['inputtime'], NULL, 'red')}</td>
+			<td align="left">{man_date($t['inputtime'], NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			{if $this->ci->is_auth(APP_DIR.'/admin/home/verifyedit')}<a href="{dr_url(APP_DIR.'/home/verifyedit',array('id'=>$t['id']))}">{lang('edit')}</a>{/if}
 			</td>

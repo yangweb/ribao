@@ -125,7 +125,7 @@ function copySuccess(){
                     <tbody>
                     <?php $return = $this->list_tag("action=sql sql='select * from @#member_login where uid=$uid order by logintime desc limit 5'"); if ($return) extract($return); $count=count($return); if (is_array($return)) { foreach ($return as $key=>$t) { ?>
                     <tr>
-                        <td class="algin_l"><?php echo dr_date($t['logintime'], NULL, 'red'); ?></td>
+                        <td class="algin_l"><?php echo man_date($t['logintime'], NULL, 'red'); ?></td>
                         <td class="algin_l"><a href="http://www.baidu.com/baidu?wd=<?php echo $t['loginip']; ?>" target="_blank"><?php if ($t['oauthid']) { ?>【<?php echo $t['oauthid']; ?>】<?php }  echo $t['loginip']; ?></a></td>
                         <td class="algin_l"><?php echo dr_strcut($t['useragent'], 60); ?></td>
                     </tr>

@@ -1573,7 +1573,7 @@ class Template {
         $page['query_string_segment'] = 'page';
         $this->ci->pagination->initialize($page);
 
-        return $this->ci->pagination->mantou_mao_links();
+        return $this->ci->pagination->mantou_mao_links_bao();
     }
 
     // 条件子句格式化

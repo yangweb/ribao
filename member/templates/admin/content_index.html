@@ -51,7 +51,7 @@
 			<td align="left"><a href="{dr_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
 			<td align="left"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
 			<td align="left">{if $t.status}<font color="#006600">{lang('html-529')}</font>{else}<font color="#FF0000">{lang('html-530')}</font>{/if}</td>
-			<td align="left">{dr_date($t.updatetime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			<a href="{dr_space_show_url($t.uid, $mid, $t.id)}" target="_blank">{lang('go')}</a>
 			{if $this->ci->is_auth('member/admin/content/edit')}<a href="{dr_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{lang('edit')}</a>{/if}

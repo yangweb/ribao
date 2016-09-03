@@ -789,7 +789,7 @@ $lang['html-723']	= '扩展内容待审核数量 <b>（%s）</b> 篇';
 $lang['html-724']	= '允许上传最大值';
 $lang['html-725']	= 'POST提交最大值';
 $lang['html-726']	= '[设置方法]';
-$lang['html-727']	= '<font color="red">以下参数配置只用于dr_thumb函数，对dr_thumb2等函数无效</font>';
+$lang['html-727']	= '<font color="red">以下参数配置只用于man_thumb函数，对man_thumb2等函数无效</font>';
 $lang['html-728']	= '友情提示';
 $lang['html-729']	= '将域名绑定至根目录';
 $lang['html-730']	= '此域名【%s】不能与当前站点域名相同';

@@ -50,7 +50,7 @@
 			<ul>
             	{list action=module catid=$catid order=hits num=10}
 				<li>
-                	<img align="left" src="{dr_thumb($t.thumb, 50, 40)}">
+                	<img align="left" src="{man_thumb($t.thumb, 50, 40)}">
                 	<div class="r_ct"><a title="{$t.title}" href="{$t.url}">{dr_strcut($t.title, 33)}</a><br><font>¥{$t.price}</font></div>
                 </li>
                 {/list}
@@ -62,7 +62,7 @@
 				{list action=module catid=$catid order=volume num=10}
 				<li>
                 	<span class="one">{$key+1}</span>
-                    <a href="{$t.url}"><div class="libox"><img src="{dr_thumb($t.thumb, 95, 120)}" /><br /><font>¥{$t.price}</font></div>{dr_strcut($t.title, 25)}</a>
+                    <a href="{$t.url}"><div class="libox"><img src="{man_thumb($t.thumb, 95, 120)}" /><br /><font>¥{$t.price}</font></div>{dr_strcut($t.title, 25)}</a>
                 </li>
                 {/list}
 			</ul>
@@ -90,11 +90,11 @@
             </script>
             <div class="zoom-section">    	  
                 <div class="zoom-small-image">
-                	<a href="{dr_get_file($images[0]['file'])}" class="cloud-zoom" id="zoom1" rel="adjustX:10, adjustY:-4"><img id="dr_pic" src="{dr_thumb($images[0]['file'], 360, 360)}" width="300" height="300" /></a>
+                	<a href="{dr_get_file($images[0]['file'])}" class="cloud-zoom" id="zoom1" rel="adjustX:10, adjustY:-4"><img id="dr_pic" src="{man_thumb($images[0]['file'], 360, 360)}" width="300" height="300" /></a>
                 </div>
                 <div class="zoom-desc">
                     {loop $images $i $t}
-                    <img width="50" height="50" id="t_{$i}" class="ab_im" onmouseover="Album({$i}, '{dr_get_file($t.file)}');" src="{dr_thumb($t.file, 50, 50)}">
+                    <img width="50" height="50" id="t_{$i}" class="ab_im" onmouseover="Album({$i}, '{dr_get_file($t.file)}');" src="{man_thumb($t.file, 50, 50)}">
                     {/loop}
                 </div>
             </div>

@@ -37,14 +37,14 @@
             <li>
 				<a href="{$t.url}" title="{$t.title}">
 					<div class="newsl">							
-						<img src="{dr_thumb($t.thumb, 130,110)}" class="attachment-thumbnail wp-post-image" alt="{$t.title}" title="{$t.title}" width="130px" height="110px" />						
+						<img src="{man_thumb($t.thumb, 130,110)}" class="attachment-thumbnail wp-post-image" alt="{$t.title}" title="{$t.title}" width="130px" height="110px" />						
 					</div>
 					<div class="newsr">
 						<h2>
 							{$t.title}
 						</h2>
 						<em>
-							 POST TIME：{dr_date($t._updatetime, 'Y-m-d')}
+							 POST TIME：{man_date($t._updatetime, 'Y-m-d')}
 						</em>
 						<p>
 							{$t.description}

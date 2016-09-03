@@ -32,7 +32,7 @@
 		{loop $list $id $t}
 		{php $t=dr_string2array($t);}
 		<tr>
-			<td align="left">{dr_date($t['time'], null, 'red')}</td>
+			<td align="left">{man_date($t['time'], null, 'red')}</td>
 			<td align="left"><input id="dr_{$id}_ip" type="hidden" value="{$t['ip']}" /><a href="javascript:dr_dialog_ip('{$id}_ip');">{$t['ip']}</a></td>
 			<td align="left"><input id="dr_{$id}_user" type="hidden" value="{$t['admin']}" /><a href="javascript:dr_dialog_member('{$id}_user');">{$t['admin']}</a></td>
 			<td align="center">{php echo $t['app'] ? $t['app'] : '';}</td>

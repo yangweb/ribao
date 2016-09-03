@@ -21,7 +21,7 @@ function dr_show_more(id) {
 	{template navigator.html}
 	<div class="section_wp">
 		<div class="message message_info">
-			当前会员组：{$member.groupname}{if $member.levelid}，会员等级：{$member.levelname}{/if}{if $member.overdue}，过期时间：{if $member.overdue>2000000000}永久{else}{dr_date($member.overdue)}{/if}{/if}
+			当前会员组：{$member.groupname}{if $member.levelid}，会员等级：{$member.levelname}{/if}{if $member.overdue}，过期时间：{if $member.overdue>2000000000}永久{else}{man_date($member.overdue)}{/if}{/if}
 		</div>
         <div class="section_title">
         	{loop $category $p $name}

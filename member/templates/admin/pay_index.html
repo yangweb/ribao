@@ -40,7 +40,7 @@ $(function() {
 		<tbody>
 		{loop $list $t}
 		<tr>
-			<td align="left">&nbsp;&nbsp;{dr_date($t['inputtime'])}</td>
+			<td align="left">&nbsp;&nbsp;{man_date($t['inputtime'])}</td>
 			<td align="center"><b>{if $t['value'] > 0}<font color="#009933">+{$t['value']}</font>{else}<font color="#FF0000">{$t['value']}</font>{/if}</b></td>
 			<td align="center">{if $t.type}{$pay[$t['type']]['name']}{else}{lang('html-400')}{/if}</td>
 			<td align="center">{if $t.status}<font color="#009933">{lang('html-401')}</font>{else}<font color="#FF0000">{lang('html-402')}</font>{/if}</td>

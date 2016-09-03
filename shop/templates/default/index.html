@@ -63,7 +63,7 @@
 	{list action=module flag=1 field=title,url,thumb,price num=5}
 	<li>
     	<div class="hotbg"></div>
-        <a href="{$t.url}" title="{$t.title}"><img src="{dr_thumb($t.thumb, 300, 300)}" /></a>
+        <a href="{$t.url}" title="{$t.title}"><img src="{man_thumb($t.thumb, 300, 300)}" /></a>
         <br />
         <font>￥{$t.price}</font>
         <br /><a href="{$t.url}" title="{$t.title}">{$t.title}</a>
@@ -85,7 +85,7 @@
 		<ul>
 		{list action=module flag=2 field=title,url,thumb,price num=8}
 		<li>
-        	<a href="{$t.url}" title="{$t.title}"><img src="{dr_thumb($t.thumb, 300, 300)}" /></a>
+        	<a href="{$t.url}" title="{$t.title}"><img src="{man_thumb($t.thumb, 300, 300)}" /></a>
         	<div class="titbg"><a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a></div>
             <div class="jgbox"><font>￥ {$t.price}</font></div>
         </li>
@@ -105,7 +105,7 @@
 	{list action=module flag=3 field=title,url,thumb,price num=5}
 	<li>
     	<div class="hotbg"></div>
-        <a href="{$t.url}" title="{$t.title}"><img src="{dr_thumb($t.thumb, 300, 300)}" /></a>
+        <a href="{$t.url}" title="{$t.title}"><img src="{man_thumb($t.thumb, 300, 300)}" /></a>
         <br />
         <font>￥{$t.price}</font>
         <br /><a href="{$t.url}" title="{$t.title}">{$t.title}</a>
@@ -127,7 +127,7 @@
 		<ul>
 		{list action=module flag=4 field=title,url,thumb,price num=8}
 		<li>
-        	<a href="{$t.url}" title="{$t.title}"><img src="{dr_thumb($t.thumb, 300, 300)}" /></a>
+        	<a href="{$t.url}" title="{$t.title}"><img src="{man_thumb($t.thumb, 300, 300)}" /></a>
         	<div class="titbg"><a href="{$t.url}" title="{$t.title}">{dr_strcut($t.title, 20)}</a></div>
             <div class="jgbox"><font>￥ {$t.price}</font></div>
         </li>

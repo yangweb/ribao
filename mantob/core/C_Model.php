@@ -833,7 +833,7 @@ class C_Model extends CI_Model {
         $url = $data['url']; // 地址
         $uid = $data['uid'] ? $data['uid'] : $this->uid;
         $title = $data['title'].($data['description'] ? ' '.$data['description'] : ''); // 标题
-        $thumb = $data['thumb'] ? dr_thumb($data['thumb']) : ''; // 缩略图
+        $thumb = $data['thumb'] ? man_thumb($data['thumb']) : ''; // 缩略图
 
         // 添加到QQ分享任务队列
         if ($this->input->post('qq_share') && $this->member['oauth']['qq']) {

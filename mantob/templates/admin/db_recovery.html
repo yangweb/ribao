@@ -32,7 +32,7 @@ $(function() {
 		<tr>
 		  <td align="right"><input name="ids[]" class="dr_select" type="checkbox" value="{$name}" />&nbsp;</td>
 		  <td align="left">{$name}</td> 
-		  <td align="left">{dr_date($t['time'])}</td>
+		  <td align="left">{man_date($t['time'])}</td>
 		  <td align="center">{dr_format_file_size($t['filesize'])}</td>
 		  <td align="left">
 		  {if $t['version'] === MAN_VERSION}

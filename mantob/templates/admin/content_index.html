@@ -112,7 +112,7 @@ function dr_copy_content(id) {
 			<td align="left"><a class="onloading" href="{dr_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{if $t.thumb}<font color="#FF0000">{lang('html-387')}</font>{/if}{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
 			{if $is_category}<td align="center"><a href="{if $flag}{dr_url(APP_DIR.'/home/index', array('flag'=>$flag,'catid'=>$t.catid))}{else}{dr_url(APP_DIR.'/home/index', array('catid'=>$t.catid))}{/if}">{CATEGORY.$t[catid].name}</a></td>{/if}
 			<td hide="1" align="center"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
-			<td align="left">{dr_date($t.updatetime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			{if $is_category}<a href="{$t.url}" target="_blank">{lang('go')}</a>{/if}
 			{if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}<a class="onloading" href="{dr_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{lang('edit')}</a>{/if}

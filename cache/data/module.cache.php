@@ -1,1 +1,1 @@
-a:1:{i:1;a:4:{i:0;s:4:"news";i:1;s:7:"reports";i:2;s:10:"challenges";i:3;s:6:"agenda";}}
+a:1:{i:1;a:4:{i:0;s:6:"events";i:1;s:7:"reports";i:2;s:10:"challenges";i:3;s:6:"agenda";}}

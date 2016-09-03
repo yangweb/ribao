@@ -70,7 +70,7 @@ class F_Date extends A_Field {
 	 * 字段输出
 	 */
 	public function output($value) {
-		return dr_date($value, NULL, 'red');
+		return man_date($value, NULL, 'red');
 	}
 	
 	/**

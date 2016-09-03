@@ -51,7 +51,7 @@
 			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
 			<td align="center">{$t.id}</td>
 			<td align="left" id="dr_row_{$t.id}"><a href="{$t.url}" target="_blank">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
-			<td align="left">{dr_date($t.updatetime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
 		</tr>
 		{/loop}
 		</tbody>

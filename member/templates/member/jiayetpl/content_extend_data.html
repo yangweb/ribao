@@ -6,7 +6,7 @@
     {if $content.type}
 	<td class="algin_c"><a href="{dr_url(APP_DIR.'/extend/index', array('cid'=>$cid,'type'=>$t.mytype))}">{$content['type'][$t['mytype']]['name']}</a></td>
     {/if}
-	<td class="algin_l">{dr_date($t.inputtime, '', 'red')}</td>
+	<td class="algin_l">{man_date($t.inputtime, '', 'red')}</td>
 	<td class="algin_l">
     {if $catrule.edit}<a href="{dr_member_url(APP_DIR.'/extend/edit', array('cid'=>$cid, 'id'=>$t.id))}">修改</a>&nbsp;{/if}
     {if $catrule.del}<a href="javascript:;" onclick="dr_delete('{$t.id}')">删除</a>&nbsp;{/if}

@@ -98,7 +98,7 @@ function dr_dir_delete($dir) {
 /**
  * discuz加密/解密
  */
-function dr_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
+function man_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
 
     if (!$string) {
         return '';
@@ -161,7 +161,7 @@ function dr_authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
  * @param	intval	$cache	缓存时间
  * @return	string
  */
-function dr_mform_total($cid, $mid, $module = APP_DIR, $cache = 10000) {
+function man_mform_total($cid, $mid, $module = APP_DIR, $cache = 10000) {
 
     $ci = &get_instance();
     $name = 'mform-total-' . $module . '-' . $mid . '-' . $cid;
@@ -183,7 +183,7 @@ function dr_mform_total($cid, $mid, $module = APP_DIR, $cache = 10000) {
  * @param	intval	$cache	缓存时间
  * @return	string
  */
-function dr_member_info($uid, $cache = 10000) {
+function man_member_info($uid, $cache = 10000) {
 
     $ci = &get_instance();
     $data = $ci->get_cache_data('member-info-' . $uid);
@@ -319,10 +319,10 @@ function dr_player($name, $value, $width, $height, $next_url = '', $title = '', 
                         ->get(SITE_ID.'_form_'.$form['table'])
                         ->row_array();
                 if ($data) {
-                    $str.= '			l:\''.dr_thumb($data['thumb']).'\','.PHP_EOL;
+                    $str.= '			l:\''.man_thumb($data['thumb']).'\','.PHP_EOL;
                     $str.= '			r:\''.$data['link'].'\','.PHP_EOL;
                     $str.= '			t:\''.$time.'\','.PHP_EOL;
-                    $str.= '			d:\''.dr_thumb($data['thumb']).'\','.PHP_EOL;
+                    $str.= '			d:\''.man_thumb($data['thumb']).'\','.PHP_EOL;
                     $str.= '			u:\''.$data['link'].'\','.PHP_EOL;
 
                     $member = '<style>.dr_adv td, .dr_adv th { border-bottom: 1px solid #EEEEEE;height: 22px;line-height: 22px;padding-bottom: 3px;padding-top: 3px;}.dr_adv td{ text-align:right;}</style><table class="dr_adv">';
@@ -928,7 +928,7 @@ function get_attachment($id) {
  * @param  $height 缩略图高度
  * @param  $autocut 是否自动裁剪 默认裁剪，当高度或宽度有一个数值为0是，自动关闭
  */
-function dr_thumb2($img, $width = 100, $height = 100, $autocut = 1) {
+function man_thumb2($img, $width = 100, $height = 100, $autocut = 1) {
 
     if (!$img) {
         return SITE_URL . 'mantob/statics/images/nopic.gif';
@@ -951,7 +951,7 @@ function dr_thumb2($img, $width = 100, $height = 100, $autocut = 1) {
  * @param	intval	$water	是否水印
  * @return  url
  */
-function dr_thumb($img, $width = NULL, $height = NULL, $water = 1) {
+function man_thumb($img, $width = NULL, $height = NULL, $water = 1) {
 
     if (!$img) {
         return SITE_URL.'mantob/statics/images/nopic.gif';
@@ -986,7 +986,7 @@ function dr_thumb($img, $width = NULL, $height = NULL, $water = 1) {
  * @param	string	$id
  * @return  array
  */
-function dr_down_file($id) {
+function man_down_file($id) {
 
     if (!$id) {
         return '';
@@ -1282,7 +1282,7 @@ function dr_fdate($sTime) {
  * @param	string	$color	当天显示颜色
  * @return	string
  */
-function dr_date($time = NULL, $format = SITE_TIME_FORMAT, $color = NULL) {
+function man_date($time = NULL, $format = SITE_TIME_FORMAT, $color = NULL) {
 
     $time = (int) $time;
     if (!$time) {

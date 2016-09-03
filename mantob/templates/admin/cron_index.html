@@ -35,8 +35,8 @@
 		{loop $list $t}
 		<tr>
 			<td align="left">{$type[$t.type]}</td>
-			<td align="left">{dr_date($t.inputtime, NULL, 'red')}</td>
-			<td align="left">{dr_date($t.updatetime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
 			<td align="left">{if $t.status}<font color=red>{dr_lang('html-222', $t.status)}</font>{else}{lang('html-221')}{/if}</td>
 			<td align="left" class="dr_option">
             <a href="javascript:;" onclick="dr_dialog_show('{lang('html-224')}', '{dr_url('cron/show', array('id'=>$t.id))}')">{lang('html-224')}</a>

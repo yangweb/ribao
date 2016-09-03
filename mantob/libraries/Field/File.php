@@ -155,7 +155,7 @@ class F_File extends A_Field {
 		// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
 		// 上传的URL
-		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&count=1&code='.str_replace('=', '', dr_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
+		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&count=1&code='.str_replace('=', '', man_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
 		// 文件值
 		$file = $info = '';
 		if ($value) {

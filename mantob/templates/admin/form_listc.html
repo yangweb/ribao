@@ -42,7 +42,7 @@
 			<td align="left">{$t.id}</td>
 			<td align="left"><a href="{dr_url($form.'/edit',array('id' => $t.id))}">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
 			<td align="left"><a href="http://www.baidu.com/baidu?wd={$t.inputip}" target="_blank">{$t.inputip}</a></td>
-			<td align="left">{dr_date($t.inputtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			<a href="{dr_url($form.'/edit',array('id' => $t.id))}">{lang('html-564')}</a>
 			</td>

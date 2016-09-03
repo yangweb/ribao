@@ -178,13 +178,13 @@ end function
                 <th width="150">订单编号：</th> 
                 <td width="200">{$data.id}</td>
                 <th width="150">下单时间：</th> 
-                <td>{dr_date($data.inputtime, NULL, 'red')}</td>
+                <td>{man_date($data.inputtime, NULL, 'red')}</td>
             </tr>
             <tr>
                 <th width="150">付款方式：</th> 
                 <td width="200"><font color="{$paytype[$data.ptid]['color']}"><b>{$paytype[$data.ptid]['name']}</b></font></td>
                 <th width="150">{if $data.successtime}成交时间：{/if}</th> 
-                <td>{if $data.successtime}{dr_date($data.successtime, NULL, 'red')}{/if}</td>
+                <td>{if $data.successtime}{man_date($data.successtime, NULL, 'red')}{/if}</td>
             </tr>
             <tr>
                 <th>所在城市：</th>

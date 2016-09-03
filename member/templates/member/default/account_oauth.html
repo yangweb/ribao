@@ -32,7 +32,7 @@ $(function(){
                         {/if}
                         </td>
                         <td class="algin_l">{if isset($list[$id])}{$list[$id]['nickname']}{/if}</td>
-                        <td class="algin_l">{if isset($list[$id])}{dr_date($list[$id]['expire_at'])}{/if}</td>
+                        <td class="algin_l">{if isset($list[$id])}{man_date($list[$id]['expire_at'])}{/if}</td>
                         <td>
                         {if isset($list[$id])}
 						{if !$regoauth}

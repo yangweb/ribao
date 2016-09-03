@@ -21,7 +21,7 @@
     <td valign="top" style="padding-top:5px; border:none">
         <div class="bubble-main right ">
             <div class="bubble-content" style="color:#444;font-weight:bold">
-			{php $m=dr_member_info($t.authorid);}
+			{php $m=man_member_info($t.authorid);}
             {$m.username}： {dr_fdate($t.dateline)}
             </div>
             <div style="padding:0 10px;">{htmlspecialchars_decode($t.message)}</div>

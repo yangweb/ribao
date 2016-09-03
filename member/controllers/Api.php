@@ -361,7 +361,7 @@ class Api extends M_Controller {
 
         $this->load->model('attachment_model');
 		$code = str_replace(' ', '+', $this->input->get('code'));
-		list($size, $ext, $path) = explode('|', dr_authcode($code, 'DECODE'));
+		list($size, $ext, $path) = explode('|', man_authcode($code, 'DECODE'));
 
         $uid = $this->uid;
         if ($this->session->userdata('member_auth_uid')) {
@@ -380,7 +380,7 @@ class Api extends M_Controller {
 			'fileid' => $this->input->get('filename'),
 			'fcount' => (int)$this->input->get('count'),
             'notused' => $notused,
-            'session' => dr_authcode($uid, 'ENCODE'),
+            'session' => man_authcode($uid, 'ENCODE'),
 		));
 		$this->template->display('upload.html', 'admin');
 	}
@@ -389,7 +389,7 @@ class Api extends M_Controller {
     // sns上传图片
     public function sns_upload() {
 
-        $uid = (int)dr_authcode(str_replace(' ', '+', $this->input->post('PHPSESSID')), 'DECODE');
+        $uid = (int)man_authcode(str_replace(' ', '+', $this->input->post('PHPSESSID')), 'DECODE');
         if (!$uid) {
             exit(json_encode(array('status' => 0, 'data' => lang('m-142'))));
         }
@@ -462,7 +462,7 @@ class Api extends M_Controller {
      */
 	public function swfupload() {
 
-		$uid = (int)dr_authcode(str_replace(' ', '+', $this->input->post('session')), 'DECODE');
+		$uid = (int)man_authcode(str_replace(' ', '+', $this->input->post('session')), 'DECODE');
 		if (!$uid) {
             exit('0,'.lang('m-142'));
         }
@@ -497,7 +497,7 @@ class Api extends M_Controller {
 
 		if (IS_POST) {
 			$code = str_replace(' ', '+', $this->input->post('code'));
-			list($size, $ext, $path) = explode('|', dr_authcode($code, 'DECODE'));
+			list($size, $ext, $path) = explode('|', man_authcode($code, 'DECODE'));
 			if ($path) {
 				$path = FCPATH.'member/uploadfile/'.$path.'/';
 			} else {
@@ -669,7 +669,7 @@ class Api extends M_Controller {
                 exit('0,'.$result);
             }
 			list($id, $file, $_ext) = $result;
-            $url = $type == 'file' ? dr_down_file($id) : dr_file($file);
+            $url = $type == 'file' ? man_down_file($id) : dr_file($file);
 			$title = htmlspecialchars($this->input->post('pictitle', TRUE), ENT_QUOTES);
 			exit("{'id':'".$id."','fileType':'.".$_ext."', 'url':'".$url."','title':'".$title."','original':'" . str_replace('|', '_', $info['client_name']) . "','state':'SUCCESS'}");
 		} else {

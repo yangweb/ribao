@@ -65,9 +65,9 @@ function dr_export() {
 			<td align="left">{$t.card}</td>
 			<td align="center">{$t.password}</td>
 			<td align="center">{$t.money}</td>
-			<td align="center">{dr_date($t.inputtime)}</td>
-			<td align="center">{dr_date($t.endtime)}</td>
-			<td hide="1" align="center">{dr_date($t.usetime)}</td>
+			<td align="center">{man_date($t.inputtime)}</td>
+			<td align="center">{man_date($t.endtime)}</td>
+			<td hide="1" align="center">{man_date($t.usetime)}</td>
 			<td align="left"><input type="hidden" value="{$t['username']}" id="dr_author_{$t['uid']}" name="dr_author_{$t['uid']}">
             <a onclick="dr_dialog_member('author_{$t['uid']}')" href="javascript:;">{$t['username']}</a></td>
 		</tr>

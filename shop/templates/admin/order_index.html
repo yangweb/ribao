@@ -67,7 +67,7 @@
 				{php $items=dr_string2array($t.items);$icount=count($items);}
 				{loop $items $i $item}
 				  <tr class="{if $icount>1 && $i<$icount-1}dr_border_line{/if}">
-					<td width="90"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{dr_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
+					<td width="90"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{man_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
 					<td style="padding-right:5px;"><a href="{$item.url}" target="_blank">{$item.title}</a><div style="padding-top:3px; color:#999">{$item.format}</div></td>
 					<td width="90" style="text-align:center">{$item.num}件</td>
 				  </tr>
@@ -75,7 +75,7 @@
 				</table>
 			</td>
 			<td hide="1" align="center"><input name="dr_author_{$t.id}" id="dr_author_{$t.id}" type="hidden" value="{$t.username}" /><a href="javascript:;" onclick="dr_dialog_member('author_{$t.id}')">{dr_strcut($t.username, 10)}</a></td>
-			<td hide="1" align="center">{dr_date($t.inputtime, NULL, 'red')}</td>
+			<td hide="1" align="center">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td width="100" style="text-align:center">
 				<div style="min-height:80px;padding-top:10px;">
 					<span class="dr_price">{number_format($t.price, 2)}</span><br>

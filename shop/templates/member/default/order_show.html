@@ -37,13 +37,13 @@ $(function(){
                 <tr>
                     <th>下单时间： </th>
                     <td>&nbsp;
-                    {dr_date($data.inputtime, NULL, 'red')}</td>
+                    {man_date($data.inputtime, NULL, 'red')}</td>
                 </tr>
                 {if $data.successtime}
                 <tr>
                   <th>成交时间：</th>
                   <td>&nbsp;
-                  {dr_date($data.successtime, NULL, 'red')}</td>
+                  {man_date($data.successtime, NULL, 'red')}</td>
                 </tr>
                 {/if}
                 <tr class="dr_border_none">
@@ -146,7 +146,7 @@ $(function(){
                     <table border="0" cellspacing="0" cellpadding="0" class="dr_order_item">
                     {loop $data.items $i $item}
                       <tr>
-                        <td width="70"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{dr_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
+                        <td width="70"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{man_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
                         <td style="padding-right:5px;"><a href="{$item.url}" target="_blank">{$item.title}</a><div style="padding-top:3px; color:#999">{$item.format}</div></td>
                         <td style="width:80px;padding:0;" class="algin_c dr_price">
                         {if $item.discount}

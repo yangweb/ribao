@@ -66,7 +66,7 @@
 			<td align="left"><a {if $this->ci->is_auth('member/admin/score/index')}href="{dr_url('member/score/index',array('uid'=>$t.uid))}" style="color: blue;text-decoration: underline;font-size: 12px;"{/if}>{$t.score}</a></td>
 			<td align="left"><a {if $this->ci->is_auth('member/admin/pay/index')}href="{dr_url('member/pay/index',array('uid'=>$t.uid))}" style="color: blue;text-decoration: underline;font-size: 12px;"{/if}>{$t.money}</a></td>
 			<td hide="1" align="left">{$t.spend}</td>
-			<td align="left">{dr_date($t.regtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.regtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
 			{if $this->ci->is_auth('member/admin/home/edit')}<a {if $t.id==1}href="javascript:;" style="color:#999"{else}href="{dr_url('member/home/edit',array('uid'=>$t.uid))}"{/if}>{lang('edit')}</a>{/if}
 			{if MEMBER_OPEN_SPACE && $this->ci->is_auth('member/admin/space/edit')}<a href="{dr_url('member/space/edit',array('uid' => $t.uid))}">{lang('html-334')}</a>{/if}

@@ -52,7 +52,7 @@
 			<td hide="1" align="left"><font {if $t.groupid==1}color="#FF0000"{/if}>{MEMBER.group.$t[groupid].name}</font></td>
 			<td hide="1" align="center">{$t.hits}</td>
 			<td align="center">{php echo $t.status ? '<font color="green">'.lang('html-529').'</font>' : '<font color="#FF0000">'.lang('html-530').'</font>';}</td>
-			<td align="left">{dr_date($t.regtime, NULL, 'red')}</td>
+			<td align="left">{man_date($t.regtime, NULL, 'red')}</td>
 			<td align="left" class="dr_option">
             <a href="{MEMBER_URL}index.php?uid={$t.uid}" target="_blank">{lang('go')}</a>
 			{if $this->ci->is_auth('member/admin/space/edit')}<a href="{dr_url('member/space/edit',array('uid'=>$t.uid))}">{lang('edit')}</a>{/if}

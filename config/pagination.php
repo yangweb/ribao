@@ -11,7 +11,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 $config['pagination'] = array(
 	
 	// 自定义“下一页”链接
-	'next_link' => '', // 你希望在分页中显示“下一页”链接的名字。如果你不希望显示，可以把它的值设为 FALSE 
+	'next_link' => '<div class="pagination__nav-text">下一页</div>', // 你希望在分页中显示“下一页”链接的名字。如果你不希望显示，可以把它的值设为 FALSE 
 	'next_tag_open' => '', // “下一页”链接的打开标签
 	'next_tag_close' => '', // “下一页”链接的关闭标签
 	

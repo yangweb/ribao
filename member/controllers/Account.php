@@ -542,7 +542,7 @@ class Account extends M_Controller {
 			}
 			
 			$time = $this->member_model->upgrade($this->uid, $id, $group['limit'], $time);
-			$time = $time > 2000000000 ? lang('m-265') : dr_date($time);
+			$time = $time > 2000000000 ? lang('m-265') : man_date($time);
 			$subject = $renew ? lang('m-263') : lang('m-261');
 			$message = dr_lang($renew ? 'm-264' : 'm-262', $this->member['name'] ? $this->member['name'] : $this->member['username'], $group['name'], $time);
 			
