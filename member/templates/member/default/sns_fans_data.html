@@ -1,27 +1,27 @@
 {loop $list $t}
-<dl class="feed_list" id="dr_row_{$t.id}">
-    <dt class="face memberinfo_avatar"><a href="{dr_space_url($t.uid)}"><img src="{dr_avatar($t.uid)}" width="50" height="50" /></a></dt>
+<dl class="feed_list" id="man_row_{$t.id}">
+    <dt class="face memberinfo_avatar"><a href="{man_space_url($t.uid)}"><img src="{man_avatar($t.uid)}" width="50" height="50" /></a></dt>
     <dd class="person-info">
         <div class="info-left">
             <p class="hd">
                 {if $ci->db->where('user_id', $t.uid)->count_all_results('member_session')}
-                <img src="{MEMBER_THEME_PATH}images/web0.gif" align="absmiddle" style="cursor:pointer" onclick="dr_chat(this)" username="{$t.username}" uid="{$t.uid}" online=1>
+                <img src="{MEMBER_THEME_PATH}images/web0.gif" align="absmiddle" style="cursor:pointer" onclick="man_chat(this)" username="{$t.username}" uid="{$t.uid}" online=1>
                 {else}
-                <img src="{MEMBER_THEME_PATH}images/web0-off.gif" align="absmiddle" style="cursor:pointer" onclick="dr_chat(this)" username="{$t.username}" uid="{$t.uid}" online=0>
+                <img src="{MEMBER_THEME_PATH}images/web0-off.gif" align="absmiddle" style="cursor:pointer" onclick="man_chat(this)" username="{$t.username}" uid="{$t.uid}" online=0>
                 {/if}
-                <a class="follow_uname" href="javascript:;" onclick="dr_chat(this)" username="{$t.username}" uid="{$t.uid}">{dr_keyword_highlight($t.username, $get.kw)}</a>
+                <a class="follow_uname" href="javascript:;" onclick="man_chat(this)" username="{$t.username}" uid="{$t.uid}">{man_keyword_highlight($t.username, $get.kw)}</a>
 
             </p>
             <p class="action">
-                {php $m=dr_sns_info($t.uid);}
+                {php $m=man_sns_info($t.uid);}
                 关注：
-                <a href="{dr_member_url('sns/follow', array('uid'=>$t.uid))}">{$m.follow}</a>
+                <a href="{man_member_url('sns/follow', array('uid'=>$t.uid))}">{$m.follow}</a>
                 <i class="vline">|</i>
                 粉丝：
-                <a href="{dr_member_url('sns/fans', array('uid'=>$t.uid))}">{$m.fans}</a>
+                <a href="{man_member_url('sns/fans', array('uid'=>$t.uid))}">{$m.fans}</a>
                 <i class="vline">|</i>
                 动态：
-                <a href="{dr_member_url('sns/index', array('uid'=>$t.uid))}">{$m.weibo}</a>
+                <a href="{man_member_url('sns/index', array('uid'=>$t.uid))}">{$m.weibo}</a>
             </p>
         </div>
     </dd>

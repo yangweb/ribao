@@ -49,13 +49,13 @@ class F_Brand extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="dr_'.$name.'_tips"></div>';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="man_'.$name.'_tips"></div>';
 		// 字段默认值
 		$value = $value ? $value : $cfg['option']['value'];
 		// 当字段必填时，加入html5验证标签
 		if (isset($cfg['validate']['required']) && $cfg['validate']['required'] == 1) $attr .= ' required="required"';
 		// 表单选项
-		$str = '<div id="dr_brand_show"></div>'.$tips;
+		$str = '<div id="man_brand_show"></div>'.$tips;
 		return $this->input_format($name, $text, $str);
 	}
 	

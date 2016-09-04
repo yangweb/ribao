@@ -116,15 +116,15 @@
 				//遍历数据，获取html字符串
 				if (data.length > 0) { //本菜单有内容才显示，否者隐藏(mantob添加)
 					_that.$applyTo.eq(selectIndex).show(); 
-					$("#dr_post_submit").hide();
+					$("#man_post_submit").hide();
 				} else {
 					_that.$applyTo.eq(selectIndex).hide();
-					if ($("#dr_catid_"+parent_id).attr('child') == 1) {
-						dr_tips('此栏目无法发布或者权限不够');
+					if ($("#man_catid_"+parent_id).attr('child') == 1) {
+						man_tips('此栏目无法发布或者权限不够');
 						return;
 					}
 					// 显示发布按钮
-					$("#dr_post_submit").show();
+					$("#man_post_submit").show();
 					return;
 				}
 				var _h = _that._getOptionsHtml(data);
@@ -177,7 +177,7 @@
 				var id = 0;
 				_that.$applyTo.eq(index).children().each(function(){
 					if(text && text.toString() == $(this).attr("value")){
-						$(this).attr("class", "onbox dr_catid_"+(index+1));
+						$(this).attr("class", "onbox man_catid_"+(index+1));
 						id = $(this).attr("value");
 						return;
 					}
@@ -199,10 +199,10 @@
 			var $target = $(e.target);
 			var _parentId = $target.val();
 			var _i = index+1;
-			$(".dr_catid_"+_i).attr("class", "dr_catid_"+_i);
-			$("#dr_catid_"+_parentId).attr("class", "onbox dr_catid_"+_i);
+			$(".man_catid_"+_i).attr("class", "man_catid_"+_i);
+			$("#man_catid_"+_parentId).attr("class", "onbox man_catid_"+_i);
 			$("#load_layer").show();
-			$("#dr_post_catid").val($("#dr_catid_"+_parentId).attr("value"));
+			$("#man_post_catid").val($("#man_catid_"+_parentId).attr("value"));
             _that.load(_i, _parentId);									   		
 		},			
 		/**
@@ -232,7 +232,7 @@
 					id = data[i][field.region_id];
 					name = data[i][field.region_name];
 					child = data[i][field.region_child];
-					var _option = "<li id='dr_catid_"+id+"' style='"+(child == 1 ? '' : 'background-image:none')+"' value='"+id+"' child='"+child+"'>"+name+"</li>";
+					var _option = "<li id='man_catid_"+id+"' style='"+(child == 1 ? '' : 'background-image:none')+"' value='"+id+"' child='"+child+"'>"+name+"</li>";
 					aStr.push(_option);						
 				});
 				return aStr;

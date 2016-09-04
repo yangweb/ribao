@@ -1,6 +1,6 @@
 {template header.html}
 <script type="text/javascript">
-function dr_export() {
+function man_export() {
 	
 	var _data = $("#myform").serialize();
 	var _url = window.location.href;
@@ -10,10 +10,10 @@ function dr_export() {
 	}
 	
 	var throughBox	= $.dialog.through;
-	var dr_Dialog	= throughBox({title: "{lang('html-413')}"});
+	var man_Dialog	= throughBox({title: "{lang('html-413')}"});
 	$.ajax({type: "POST", dataType:"text", url: _url, data: _data,
 		success: function(data) {
-			dr_Dialog.content(data);
+			man_Dialog.content(data);
 		},
 		error: function(HttpRequest, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + HttpRequest.statusText + "\r\n" + HttpRequest.responseText);
@@ -48,7 +48,7 @@ function dr_export() {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="10" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="10" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="120" align="left">{lang('html-403')}</th>
 			<th width="40" align="center">{lang('html-061')}</th>
 			<th width="110" align="center">{lang('html-408')}</th>
@@ -61,30 +61,30 @@ function dr_export() {
 		<tbody>
 		{loop $list $t}
 		<tr>
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t['id']}" />&nbsp;</td>
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t['id']}" />&nbsp;</td>
 			<td align="left">{$t.card}</td>
 			<td align="center">{$t.password}</td>
 			<td align="center">{$t.money}</td>
 			<td align="center">{man_date($t.inputtime)}</td>
 			<td align="center">{man_date($t.endtime)}</td>
 			<td hide="1" align="center">{man_date($t.usetime)}</td>
-			<td align="left"><input type="hidden" value="{$t['username']}" id="dr_author_{$t['uid']}" name="dr_author_{$t['uid']}">
-            <a onclick="dr_dialog_member('author_{$t['uid']}')" href="javascript:;">{$t['username']}</a></td>
+			<td align="left"><input type="hidden" value="{$t['username']}" id="man_author_{$t['uid']}" name="man_author_{$t['uid']}">
+            <a onclick="man_dialog_member('author_{$t['uid']}')" href="javascript:;">{$t['username']}</a></td>
 		</tr>
 		{/loop}
 		<tr>
-        	<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+        	<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="7" align="left" style="border:none"> 
              {if $this->ci->is_auth('member/admin/pay/del')}
-			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}')" />
             {/if}
-			<input type="button" class="button" value="{lang('html-413')}" name="option" onClick="$('#action').val('export');dr_export()" />
+			<input type="button" class="button" value="{lang('html-413')}" name="option" onClick="$('#action').val('export');man_export()" />
 			</td>
 		</tr>
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param['total'])}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param['total'])}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

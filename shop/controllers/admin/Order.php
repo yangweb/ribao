@@ -31,12 +31,12 @@ class Order extends D_Order {
 			
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			
 			if ($this->input->post('action') == 'del') {
 				if (!$this->is_auth(APP_DIR.'admin/format/del')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$this->link
 					 ->where_in('id', $ids)
@@ -45,10 +45,10 @@ class Order extends D_Order {
 					 ->where_in('fid', $ids)
 					 ->delete($this->order_model->dataname);
 				$this->order_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				if (!$this->is_auth(APP_DIR.'admin/format/edit')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$_data = $this->input->post('data');
 				foreach ($ids as $id) {
@@ -57,7 +57,7 @@ class Order extends D_Order {
 						 ->update($this->order_model->tablename, $_data[$id]);
 				}
 				$this->order_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}			
 		} else {
             // 执行关闭过期订单操作
@@ -82,7 +82,7 @@ class Order extends D_Order {
 		
 		$this->template->assign(array(
 			'list' => $data,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/order/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/order/index', $param), $param['total']),
 			'param'	=> $_param,
 			'menu' => $this->get_menu(array(
 				lang('my-31') => APP_DIR.'/admin/order/index'

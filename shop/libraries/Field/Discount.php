@@ -37,7 +37,7 @@ class F_Discount extends A_Field {
 	 * 字段输出
 	 */
 	public function output($value) {
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ class F_Discount extends A_Field {
 			$data = NULL;
 		}
 		
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($data);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($data);
 	}
 	
 	/**
@@ -80,12 +80,12 @@ class F_Discount extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_discount_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="dr_discount_tips"></div>';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_discount_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="man_discount_tips"></div>';
 		// 字段默认值
-		$value = $value ? dr_string2array($value) : NULL;
-		$str = '<input type="radio" name="data[discount][use]" onclick="$(\'#dr_div_discount\').hide()" value="0" '.($value ? '' : 'checked').' />&nbsp;不折扣&nbsp;&nbsp;&nbsp;&nbsp;';
-		$str.= '<input type="radio" name="data[discount][use]" onclick="$(\'#dr_div_discount\').show()" value="1" '.($value ? 'checked' : '').' />&nbsp;折扣';
-		$str.= '<div class="dr_format_wrap" id="dr_div_discount" style="margin-top:10px;'.($value ? '' : 'display:none').'"><table width="100%">';
+		$value = $value ? man_string2array($value) : NULL;
+		$str = '<input type="radio" name="data[discount][use]" onclick="$(\'#man_div_discount\').hide()" value="0" '.($value ? '' : 'checked').' />&nbsp;不折扣&nbsp;&nbsp;&nbsp;&nbsp;';
+		$str.= '<input type="radio" name="data[discount][use]" onclick="$(\'#man_div_discount\').show()" value="1" '.($value ? 'checked' : '').' />&nbsp;折扣';
+		$str.= '<div class="man_format_wrap" id="man_div_discount" style="margin-top:10px;'.($value ? '' : 'display:none').'"><table width="100%">';
 		$MEMBER = $this->ci->get_cache('member');
 		foreach ($MEMBER['group'] as $group) {
 			if ($group['id'] > 2) {
@@ -96,7 +96,7 @@ class F_Discount extends A_Field {
 				foreach ($group['level'] as $level) {
 					$id = $group['id'].'_'.$level['id'];
 					$str.= '<tr>';
-					$str.= '<td align="left" width="250" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.dr_show_stars($level['stars']).'</td>';
+					$str.= '<td align="left" width="250" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.man_show_stars($level['stars']).'</td>';
 					$str.= '<td align="left">';
 					$str.= '<input type="text" class="input-text" size="5" name="data[discount]['.$id.']" value="'.$value[$id].'" />';
 					$str.= '</td>';
@@ -114,7 +114,7 @@ class F_Discount extends A_Field {
 			define('mantob_DATE_LD', 1);//防止重复加载JS
 		}
 		$str.= '<tr>';
-		$str.= '	<td colspan="2">开始时间：<input type="hidden" value="'.$value['star'].'" name="data[discount][star]" id="dr_discount_star" />
+		$str.= '	<td colspan="2">开始时间：<input type="hidden" value="'.$value['star'].'" name="data[discount][star]" id="man_discount_star" />
 		<input type="text" readonly="" class="date input-text" style="width:150px;" value="'.($value['star'] ? date('Y-m-d H:i:s', $value['star']) : '').'" id="calendar_discount_star" />
 		<script type="text/javascript">
 			Calendar.setup({
@@ -128,13 +128,13 @@ class F_Discount extends A_Field {
 				this.hide();
 				var time = $("#calendar_discount_star").val();
 				var date = (new Date(Date.parse(time.replace(/-/g,"/")))).getTime() / 1000;
-				$("#dr_discount_star").val(date);
+				$("#man_discount_star").val(date);
 			}
 			});
 		</script><div class="onShow">必填选项</div></td>';
 		$str.= '</tr>';
 		$str.= '<tr>';
-		$str.= '	<td colspan="2">结束时间：<input type="hidden" value="'.$value['end'].'" name="data[discount][end]" id="dr_discount_end" />
+		$str.= '	<td colspan="2">结束时间：<input type="hidden" value="'.$value['end'].'" name="data[discount][end]" id="man_discount_end" />
 		<input type="text" readonly="" class="date input-text" style="width:150px;" value="'.($value['end'] ? date('Y-m-d H:i:s', $value['end']) : '').'" id="calendar_discount_end" />
 		<script type="text/javascript">
 			Calendar.setup({
@@ -148,7 +148,7 @@ class F_Discount extends A_Field {
 				this.hide();
 				var time = $("#calendar_discount_end").val();
 				var date = (new Date(Date.parse(time.replace(/-/g,"/")))).getTime() / 1000;
-				$("#dr_discount_end").val(date);
+				$("#man_discount_end").val(date);
 			}
 			});
 		</script><div class="onShow">必填选项</div></td>';

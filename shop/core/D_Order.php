@@ -163,7 +163,7 @@ class D_Order extends M_Controller {
 				'total' => $total,
 				'format' => trim($format, ','),
 				'_format' => $row['format'],
-				'freight' => isset($row['freight']) ? dr_string2array($row['freight']) : NULL,
+				'freight' => isset($row['freight']) ? man_string2array($row['freight']) : NULL,
 				'tableid' => $row['tableid'],
 				'quantity' => $quantity,
 				'discount' => $discount,
@@ -187,7 +187,7 @@ class D_Order extends M_Controller {
 		
 		if (IS_POST) {
 			// 生成订单信息
-			$url = dr_url('order/buy');
+			$url = man_url('order/buy');
 			$fid = $iid = $num = array();
 			$post = $this->input->post('key');
 			foreach ($post as $key => $_num) {
@@ -222,7 +222,7 @@ class D_Order extends M_Controller {
 	
 		// 登录验证
     	if (!$this->uid) {
-            $this->msg(lang('m-039'), MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(dr_now_url()));
+            $this->msg(lang('m-039'), MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(man_now_url()));
         }
 		
 		// 分析url参数
@@ -323,7 +323,7 @@ class D_Order extends M_Controller {
 				'name' => isset($address['name']) ? $address['name'] : '',
 				'score' => $score,
 				'price' => $total,
-				'items' => dr_array2string($list),
+				'items' => man_array2string($list),
 				'phone' => isset($address['phone']) ? $address['phone'] : '',
 				'gbook' => isset($post['gbook']) ? $post['gbook'] : '',
 				'status' => 1,
@@ -358,7 +358,7 @@ class D_Order extends M_Controller {
             }
 			$this->template->assign(array(
 				'list' => $list,
-				'jsonp' => dr_array2string($jsonp),
+				'jsonp' => man_array2string($jsonp),
                 'online' => $data,
 				'iscode' => $this->mconfig['code'],
 				'paytype' => $paytype,
@@ -621,7 +621,7 @@ class D_Order extends M_Controller {
             $this->member_msg(lang('my-11'));
         }
 		
-		$data['sendnote'] = $data['sendnote'] ? dr_string2array($data['sendnote']) : $data['sendnote'];
+		$data['sendnote'] = $data['sendnote'] ? man_string2array($data['sendnote']) : $data['sendnote'];
 		
 		if (IS_ADMIN) {
 			$kds = $this->link
@@ -629,7 +629,7 @@ class D_Order extends M_Controller {
 						->limit(1)
 						->get(SITE_ID.'_'.APP_DIR.'_config')
 						->row_array();
-			$kds = dr_string2array($kds['value']);
+			$kds = man_string2array($kds['value']);
 			$kdlist = array('null' => lang('my-16'));
 			$expresses = $this->order_model->get_expresses();
 			if ($kds['list']) {
@@ -647,38 +647,38 @@ class D_Order extends M_Controller {
 						$post['name'] = $kdlist[$post['id']];
 						$this->link->where('id', $id)->update($this->order_model->tablename, array(
 							'sendtime' => SYS_TIME,
-							'sendnote' => dr_array2string($post),
+							'sendnote' => man_array2string($post),
 						));
 						$data['status'] = 3;
 						$data['sendtime'] = SYS_TIME;
 						$data['sendnote'] = $post;
 						$this->order_model->order_success($id, 2);
 						// 通知买家
-						$this->member_model->add_notice($data['uid'], 3, dr_lang('my-40', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+						$this->member_model->add_notice($data['uid'], 3, man_lang('my-40', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
 					} elseif ($action == 2) {
 						// 后台退款处理
 						if ($data['ptid'] != 3) {
 							// 在线付款和余额付款都退回到账号中
 							if ($data['score']) {
 								// 虚拟币
-								$this->member_model->update_score(1, $data['uid'], $data['score'], '', dr_lang('my-47', strtoupper(APP_DIR).'-'.$id));
+								$this->member_model->update_score(1, $data['uid'], $data['score'], '', man_lang('my-47', strtoupper(APP_DIR).'-'.$id));
 							}
 							if ($data['price']) {
 								// money
 								$this->load->model('pay_model');
-								$this->pay_model->add($data['uid'], $data['price'], dr_lang('my-47', strtoupper(APP_DIR).'-'.$id));
+								$this->pay_model->add($data['uid'], $data['price'], man_lang('my-47', strtoupper(APP_DIR).'-'.$id));
 							}
                             // 通知买家
-                            $this->member_model->add_notice($data['uid'], 3, dr_lang('my-48', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                            $this->member_model->add_notice($data['uid'], 3, man_lang('my-48', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                         } else {
                             // 通知买家
-                            $this->member_model->add_notice($data['uid'], 3, dr_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                            $this->member_model->add_notice($data['uid'], 3, man_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                         }
 						// 后台关闭订单
 						$this->link
                              ->where('id', $id)
                              ->update($this->order_model->tablename, array('status' => 0));
-						$this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+						$this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
 					}
 				} elseif ($data['status'] == 1) {
 					$action = $this->input->post('action');
@@ -691,7 +691,7 @@ class D_Order extends M_Controller {
 								'price' => $data['price']
 							));
 							// 通知买家
-							$this->member_model->add_notice($data['uid'], 3, dr_lang('my-39', $this->member['username'], strtoupper(APP_DIR).'-'.$id, $price, $data['price']));
+							$this->member_model->add_notice($data['uid'], 3, man_lang('my-39', $this->member['username'], strtoupper(APP_DIR).'-'.$id, $price, $data['price']));
 						}
 					} elseif ($action == 2) {
 						// 后台设置为已付款
@@ -700,7 +700,7 @@ class D_Order extends M_Controller {
                              ->update($this->order_model->tablename, array('status' => 2));
 						$data['status'] = 2;
 						// 通知买家
-						$this->member_model->add_notice($data['uid'], 3, dr_lang('my-19', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+						$this->member_model->add_notice($data['uid'], 3, man_lang('my-19', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
 					} elseif ($action == 3) {
 						// 后台关闭订单
 						$this->link
@@ -708,15 +708,15 @@ class D_Order extends M_Controller {
                              ->update($this->order_model->tablename, array('status' => 0));
 						$data['status'] = 0;
 						// 通知买家 
-						$this->member_model->add_notice($data['uid'], 3, dr_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+						$this->member_model->add_notice($data['uid'], 3, man_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
 					} elseif ($action == 4) {
 						// 后台删除订单
 						$this->link
                              ->where('id', $id)
                              ->delete($this->order_model->tablename);
 						// 通知买家
-						$this->member_model->add_notice($data['uid'], 3, dr_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
-						$this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+						$this->member_model->add_notice($data['uid'], 3, man_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+						$this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
 					}
 				} elseif ($data['status'] == 0) {
 					// 后台删除订单
@@ -724,15 +724,15 @@ class D_Order extends M_Controller {
                          ->where('id', $id)
                          ->delete($this->order_model->tablename);
 					// 通知买家
-					$this->member_model->add_notice($data['uid'], 3, dr_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
-					$this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+					$this->member_model->add_notice($data['uid'], 3, man_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+					$this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
 				} elseif ($data['status'] == 3) {
 					// 后台确认收货
 					$this->order_model->order_success($id, 3);
 					$data['status'] = 4;
 					$data['successtime'] = SYS_TIME;
 					// 通知买家
-					$this->member_model->add_notice($data['uid'], 3, dr_lang('my-18', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+					$this->member_model->add_notice($data['uid'], 3, man_lang('my-18', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
 				}
 			}
 			
@@ -756,7 +756,7 @@ class D_Order extends M_Controller {
 									  ->row_array();
 						// 评论信息
 						$review = TRUE;
-						$data['items'][$i]['value'] = dr_string2array($rdata['value']);
+						$data['items'][$i]['value'] = man_string2array($rdata['value']);
 						$data['items'][$i]['avgsort'] = $rdata['avgsort'];
 						$data['items'][$i]['content'] = $rdata['content'];
 					}
@@ -799,7 +799,7 @@ class D_Order extends M_Controller {
             $this->member_msg(lang('my-11'));
         }
         
-        $data['sendnote'] = $data['sendnote'] ? dr_string2array($data['sendnote']) : $data['sendnote'];
+        $data['sendnote'] = $data['sendnote'] ? man_string2array($data['sendnote']) : $data['sendnote'];
         
         if (IS_ADMIN) {
             $kds = $this->link
@@ -807,7 +807,7 @@ class D_Order extends M_Controller {
                         ->limit(1)
                         ->get(SITE_ID.'_'.APP_DIR.'_config')
                         ->row_array();
-            $kds = dr_string2array($kds['value']);
+            $kds = man_string2array($kds['value']);
             $kdlist = array('null' => lang('my-16'));
             $expresses = $this->order_model->get_expresses();
             if ($kds['list']) {
@@ -825,38 +825,38 @@ class D_Order extends M_Controller {
                         $post['name'] = $kdlist[$post['id']];
                         $this->link->where('id', $id)->update($this->order_model->tablename, array(
                             'sendtime' => SYS_TIME,
-                            'sendnote' => dr_array2string($post),
+                            'sendnote' => man_array2string($post),
                         ));
                         $data['status'] = 3;
                         $data['sendtime'] = SYS_TIME;
                         $data['sendnote'] = $post;
                         $this->order_model->order_success($id, 2);
                         // 通知买家
-                        $this->member_model->add_notice($data['uid'], 3, dr_lang('my-40', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                        $this->member_model->add_notice($data['uid'], 3, man_lang('my-40', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                     } elseif ($action == 2) {
                         // 后台退款处理
                         if ($data['ptid'] != 3) {
                             // 在线付款和余额付款都退回到账号中
                             if ($data['score']) {
                                 // 虚拟币
-                                $this->member_model->update_score(1, $data['uid'], $data['score'], '', dr_lang('my-47', strtoupper(APP_DIR).'-'.$id));
+                                $this->member_model->update_score(1, $data['uid'], $data['score'], '', man_lang('my-47', strtoupper(APP_DIR).'-'.$id));
                             }
                             if ($data['price']) {
                                 // money
                                 $this->load->model('pay_model');
-                                $this->pay_model->add($data['uid'], $data['price'], dr_lang('my-47', strtoupper(APP_DIR).'-'.$id));
+                                $this->pay_model->add($data['uid'], $data['price'], man_lang('my-47', strtoupper(APP_DIR).'-'.$id));
                             }
                             // 通知买家
-                            $this->member_model->add_notice($data['uid'], 3, dr_lang('my-48', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                            $this->member_model->add_notice($data['uid'], 3, man_lang('my-48', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                         } else {
                             // 通知买家
-                            $this->member_model->add_notice($data['uid'], 3, dr_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                            $this->member_model->add_notice($data['uid'], 3, man_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                         }
                         // 后台关闭订单
                         $this->link
                              ->where('id', $id)
                              ->update($this->order_model->tablename, array('status' => 0));
-                        $this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+                        $this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
                     }
                 } elseif ($data['status'] == 1) {
                     $action = $this->input->post('action');
@@ -869,7 +869,7 @@ class D_Order extends M_Controller {
                                 'price' => $data['price']
                             ));
                             // 通知买家
-                            $this->member_model->add_notice($data['uid'], 3, dr_lang('my-39', $this->member['username'], strtoupper(APP_DIR).'-'.$id, $price, $data['price']));
+                            $this->member_model->add_notice($data['uid'], 3, man_lang('my-39', $this->member['username'], strtoupper(APP_DIR).'-'.$id, $price, $data['price']));
                         }
                     } elseif ($action == 2) {
                         // 后台设置为已付款
@@ -878,7 +878,7 @@ class D_Order extends M_Controller {
                              ->update($this->order_model->tablename, array('status' => 2));
                         $data['status'] = 2;
                         // 通知买家
-                        $this->member_model->add_notice($data['uid'], 3, dr_lang('my-19', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                        $this->member_model->add_notice($data['uid'], 3, man_lang('my-19', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                     } elseif ($action == 3) {
                         // 后台关闭订单
                         $this->link
@@ -886,15 +886,15 @@ class D_Order extends M_Controller {
                              ->update($this->order_model->tablename, array('status' => 0));
                         $data['status'] = 0;
                         // 通知买家
-                        $this->member_model->add_notice($data['uid'], 3, dr_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                        $this->member_model->add_notice($data['uid'], 3, man_lang('my-45', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                     } elseif ($action == 4) {
                         // 后台删除订单
                         $this->link
                              ->where('id', $id)
                              ->delete($this->order_model->tablename);
                         // 通知买家
-                        $this->member_model->add_notice($data['uid'], 3, dr_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
-                        $this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+                        $this->member_model->add_notice($data['uid'], 3, man_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                        $this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
                     }
                 } elseif ($data['status'] == 0) {
                     // 后台删除订单
@@ -902,15 +902,15 @@ class D_Order extends M_Controller {
                          ->where('id', $id)
                          ->delete($this->order_model->tablename);
                     // 通知买家
-                    $this->member_model->add_notice($data['uid'], 3, dr_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
-                    $this->admin_msg(lang('000'), dr_url(APP_DIR.'/order/index'), 1);
+                    $this->member_model->add_notice($data['uid'], 3, man_lang('my-46', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                    $this->admin_msg(lang('000'), man_url(APP_DIR.'/order/index'), 1);
                 } elseif ($data['status'] == 3) {
                     // 后台确认收货
                     $this->order_model->order_success($id, 3);
                     $data['status'] = 4;
                     $data['successtime'] = SYS_TIME;
                     // 通知买家
-                    $this->member_model->add_notice($data['uid'], 3, dr_lang('my-18', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
+                    $this->member_model->add_notice($data['uid'], 3, man_lang('my-18', $this->member['username'], strtoupper(APP_DIR).'-'.$id));
                 }
             }
             
@@ -934,7 +934,7 @@ class D_Order extends M_Controller {
                                       ->row_array();
                         // 评论信息
                         $review = TRUE;
-                        $data['items'][$i]['value'] = dr_string2array($rdata['value']);
+                        $data['items'][$i]['value'] = man_string2array($rdata['value']);
                         $data['items'][$i]['avgsort'] = $rdata['avgsort'];
                         $data['items'][$i]['content'] = $rdata['content'];
                     }
@@ -985,7 +985,7 @@ class D_Order extends M_Controller {
 		if (IS_ADMIN) {
 			echo 'document.write(\'' . ($data['review'] ? lang('my-21') : '') . '\');';
 		} else {
-			$html = '<a href="'.dr_member_url(APP_DIR.'/order/review', array('id' => $oid)).'" target="_blank">'.($data['review'] ? lang('my-21') : lang('my-22')).'</a>';
+			$html = '<a href="'.man_member_url(APP_DIR.'/order/review', array('id' => $oid)).'" target="_blank">'.($data['review'] ? lang('my-21') : lang('my-22')).'</a>';
 			echo 'document.write(\'' . $html . '\');';
 		}
 		
@@ -1020,7 +1020,7 @@ class D_Order extends M_Controller {
 					foreach ($review as $rid => $name) {
 						$post[$i]['value'][$rid] = min(5, (int)$post[$i]['value'][$rid]);
 						if (!$post[$i]['value'][$rid]) {
-							$error = dr_lang('my-23', $name);
+							$error = man_lang('my-23', $name);
 							break;
 						}
 						$avgsort+= round($post[$i]['value'][$rid] / 1 * $st, 1);
@@ -1032,7 +1032,7 @@ class D_Order extends M_Controller {
 							'uid' => $this->uid,
 							'iid' => $t['iid'],
 							'item' => $t['format'],
-							'value' => dr_array2string($post[$i]['value']),
+							'value' => man_array2string($post[$i]['value']),
 							'author' => $this->member['username'],
 							'avgsort' => $avgsort,
 							'content' => $post[$i]['content'],
@@ -1050,7 +1050,7 @@ class D_Order extends M_Controller {
 				}
 			}
 			if (!$error) {
-                $this->member_msg(lang('my-24'), dr_url(APP_DIR.'/order/review', array('id' => $id)), 1);
+                $this->member_msg(lang('my-24'), man_url(APP_DIR.'/order/review', array('id' => $id)), 1);
             }
 		}
 		

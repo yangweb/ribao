@@ -34,7 +34,7 @@ class Group extends M_Controller {
 			if ($this->input->post('action') == 'del') { // 删除
 				$this->group_model->del($this->input->post('ids'));
                 $this->clear_cache('member');
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			} elseif ($this->input->post('action') == 'edit') { // 修改
 				$_ids = $this->input->post('ids');
 				$_data = $this->input->post('data');
@@ -45,7 +45,7 @@ class Group extends M_Controller {
 				}
 				unset($_ids, $_data);
                 $this->clear_cache('member');
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			}
 		}
 
@@ -71,7 +71,7 @@ class Group extends M_Controller {
 			} else {
 				$this->group_model->add($data);
                 $this->clear_cache('member');
-				$this->admin_msg(lang('014'), dr_url('member/group/index'), 1);
+				$this->admin_msg(lang('014'), man_url('member/group/index'), 1);
 			}
 		}
 
@@ -89,10 +89,10 @@ class Group extends M_Controller {
 		$this->template->assign(array(
 			'page' => $page,
 			'error' => $error,
-            'space' => array_diff(dr_dir_map(FCPATH.'member/templates/', 1), array('admin', 'member')),
-			'theme' => array_diff(dr_dir_map(FCPATH.'member/statics/', 1), array('avatar', 'js', 'OAuth', 'emotions')),
+            'space' => array_diff(man_dir_map(FCPATH.'member/templates/', 1), array('admin', 'member')),
+			'theme' => array_diff(man_dir_map(FCPATH.'member/statics/', 1), array('avatar', 'js', 'OAuth', 'emotions')),
 			'overdue' => $overdue,
-			'mtemplate' => array_diff(dr_dir_map(FCPATH.'member/templates/member/', 1), array('admin')),
+			'mtemplate' => array_diff(man_dir_map(FCPATH.'member/templates/member/', 1), array('admin')),
 		));
 		$this->template->display('group_add.html');
     }
@@ -119,7 +119,7 @@ class Group extends M_Controller {
 			} else {
 				$this->group_model->edit($id, $post);
                 $this->clear_cache('member');
-				$this->admin_msg(lang('014'), dr_url('member/group/index'), 1);
+				$this->admin_msg(lang('014'), man_url('member/group/index'), 1);
 			}
 		}
 
@@ -139,10 +139,10 @@ class Group extends M_Controller {
 			'data' => $data,
 			'error' => $error,
             'group' => $group,
-            'space' => array_diff(dr_dir_map(FCPATH.'member/templates/', 1), array('admin', 'member')),
-			'theme' => array_diff(dr_dir_map(FCPATH.'member/statics/', 1), array('avatar', 'js', 'OAuth', 'emotions')),
+            'space' => array_diff(man_dir_map(FCPATH.'member/templates/', 1), array('admin', 'member')),
+			'theme' => array_diff(man_dir_map(FCPATH.'member/statics/', 1), array('avatar', 'js', 'OAuth', 'emotions')),
 			'overdue' => $overdue,
-			'mtemplate' => array_diff(dr_dir_map(FCPATH.'member/templates/member/', 1), array('admin')),
+			'mtemplate' => array_diff(man_dir_map(FCPATH.'member/templates/member/', 1), array('admin')),
 		));
 		$this->template->display('group_add.html');
     }
@@ -153,6 +153,6 @@ class Group extends M_Controller {
     public function del() {
 		$this->group_model->del((int)$this->input->get('id'));
         $this->clear_cache('member');
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
 	}
 }

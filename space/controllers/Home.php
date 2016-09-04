@@ -32,7 +32,7 @@ class Home extends M_Controller {
 	
 		// 搜索参数
 		$get = $this->input->get(NULL, TRUE);
-		$get = isset($get['rewrite']) ? dr_rewrite_decode($get['rewrite']) : $get;
+		$get = isset($get['rewrite']) ? man_rewrite_decode($get['rewrite']) : $get;
 		$get['keyword'] = str_replace(array('%', ' '), array('', '%'), $get['keyword']);
 		unset($get['c'], $get['m'], $get['page']);
 		
@@ -47,7 +47,7 @@ class Home extends M_Controller {
 			'get' => $get,
 			'where' => $where,
 			'params' => $get,
-			'urlrule' => dr_space_search_url($get, 'page', '[page]'),
+			'urlrule' => man_space_search_url($get, 'page', '[page]'),
             'meta_title' => $this->space['title'],
             'meta_keywords' => $this->space['keywords'],
             'meta_description' => $this->space['description'],

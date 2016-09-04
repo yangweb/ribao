@@ -497,7 +497,7 @@ class Navigator_model extends CI_Model {
                         if ($catid) {
                             $c = $m['category'][$catid];
                             if ($c) {
-                                $url = isset($c['setting']['linkurl']) && $c['setting']['linkurl'] ? $c['setting']['linkurl'] : dr_category_url($m, $c);
+                                $url = isset($c['setting']['linkurl']) && $c['setting']['linkurl'] ? $c['setting']['linkurl'] : man_category_url($m, $c);
                             }
                         } else {
                             $url = $m['url'];

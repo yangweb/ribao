@@ -92,7 +92,7 @@ class Pay extends M_Controller {
 				$this->member_model->update_score(1, $this->uid, $score, '', 'lang,m-226');
 				// 人民币减少
 				$this->pay_model->add($this->uid, -$money, 'lang,m-228,'.$score);
-				$this->member_msg(lang('m-225'), dr_url('pay/score'), 1);
+				$this->member_msg(lang('m-225'), man_url('pay/score'), 1);
 			}
 		}
 	
@@ -125,7 +125,7 @@ class Pay extends M_Controller {
 					$error = lang('m-170');
 				} else {
 					if ($money = $this->pay_model->add_for_card($data['id'], $data['money'], $card)) {
-						$this->member_msg(dr_lang('m-172', $data['money']), dr_member_url('pay/index'), 1);
+						$this->member_msg(man_lang('m-172', $data['money']), man_member_url('pay/index'), 1);
 					}
 					$error = lang('m-172');
 				}

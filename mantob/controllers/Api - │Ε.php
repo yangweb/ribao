@@ -128,7 +128,7 @@ class Api extends M_Controller {
 		// 页面输出
 		if ($format == 'xml') {
 			header('Content-Type: text/xml');
-			echo dr_array2xml($data, FALSE);
+			echo man_array2xml($data, FALSE);
 		} else {
 			echo json_encode($data);
 		}
@@ -155,7 +155,7 @@ class Api extends M_Controller {
 		// 页面输出
 		if ($format == 'xml') {
 			header('Content-Type: text/xml');
-			echo dr_array2xml($data, FALSE);
+			echo man_array2xml($data, FALSE);
 		} elseif ($format == 'jsonp') {
 			echo $this->input->get('callback').'('.json_encode($data).')';
 		} else {

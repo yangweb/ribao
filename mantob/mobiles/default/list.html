@@ -39,7 +39,7 @@
                             <ul>
                                 <li><a href="{SITE_URL}{APP_DIR}/">全部</a></li>
                                 {loop $related $t}
-                                <li {if $catid==$t.id}class="ui-state-active"{/if}><a href="{dr_mobile_category_url(APP_DIR, $t.id)}">{$t.name}</a></li>
+                                <li {if $catid==$t.id}class="ui-state-active"{/if}><a href="{man_mobile_category_url(APP_DIR, $t.id)}">{$t.name}</a></li>
                                 {/loop}
                             </ul>
                             <span class="bar"></span>
@@ -84,12 +84,12 @@
         <script type="text/javascript">
             (function () {
                 /*组件初始化js begin*/
-                var dr_page = 1; // 记录当前页数
+                var man_page = 1; // 记录当前页数
                 $('.ui-refresh').refresh({
                     load: function (dir, type) {
                         var me = this;
-                        dr_page++;
-                        $.get('{SITE_URL}{APP_DIR}/index.php?c=api&m=template&get={json_encode($get)}&params={json_encode($params)}&name=list_data.html&page='+dr_page, function (html) {
+                        man_page++;
+                        $.get('{SITE_URL}{APP_DIR}/index.php?c=api&m=template&get={json_encode($get)}&params={json_encode($params)}&name=list_data.html&page='+man_page, function (html) {
                             $('.data-list').append(html);
                             me.afterDataLoading();    //数据加载完成后改变状态
                         });

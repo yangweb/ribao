@@ -42,7 +42,7 @@
     <div class="group-name">
         <ul id="followGroupSelector">
             {loop $list $t}
-            <li class="dr_row_{$t.id}">
+            <li class="man_row_{$t.id}">
                 <a href="javascript:;" class="right hover" onclick="delGroup({$t.id})">删除</a>
                 <a href="javascript:void(0)" class="right hover mr10" onclick="editGroup({$t.id})">编辑分组</a>
                 <label onclick="editGroup({$t.id});">
@@ -90,13 +90,13 @@
     var saveGroup = function(gid) {
         var title = $('#edit_'+gid).find('input').val();
         if(title == '') {
-            dr_tips('分组名称不能为空');
+            man_tips('分组名称不能为空');
             return false;
         }
         if(title != $('#title_'+gid).html()) {
-            $.post('{dr_member_url("sns/group_save")}', {gid:gid,title:title},function(msg){
+            $.post('{man_member_url("sns/group_save")}', {gid:gid,title:title},function(msg){
                 if(msg.status == 0){
-                    dr_tips(msg.code);
+                    man_tips(msg.code);
                     $('#edit_'+gid).find('input').val($('#title_'+gid).html());
                 }else{
                     $('.group_title').each(function(){
@@ -151,13 +151,13 @@
     var createFollowGroup = function() {
         var title = $("input[name='followGroupTitle']").val();
         if(title == '') {
-            dr_tips('分组名称不能为空');
+            man_tips('分组名称不能为空');
             return false;
         }
         // 创建分组操作
-        $.post('{dr_member_url("sns/group_add")}', {title: title}, function(res) {
+        $.post('{man_member_url("sns/group_add")}', {title: title}, function(res) {
             if(res.status != 0) {
-                var html = '<li class="dr_row_'+res.id+'"><a href="javascript:;" class="right hover" onclick="delGroup('+res.id+')">删除</a>\
+                var html = '<li class="man_row_'+res.id+'"><a href="javascript:;" class="right hover" onclick="delGroup('+res.id+')">删除</a>\
                         <a href="javascript:void(0)" class="right hover mr10" onclick="editGroup('+res.id+')">编辑分组</a>\
                         <label onclick="editGroup('+res.id+');">\
                         <span id="title_'+res.id+'">'+title+'</span></label>\
@@ -168,7 +168,7 @@
                 $('#followGroupSelector').append(html);
                 createFollowGroupTab('close');
             } else {
-                dr_tips(res.code);
+                man_tips(res.code);
             }
         }, 'json');
     }
@@ -180,12 +180,12 @@
     var delGroup = function(gid) {
         var title = $('#title_' + gid).text();
         art.dialog.confirm('<font color="red">确定要删除" ' + title + ' "分组吗？<br />此分组下的人不会被取消关注。</font>', function() {
-            $.post('{dr_member_url("sns/group_del")}', {gid:gid}, function(msg) {
+            $.post('{man_member_url("sns/group_del")}', {gid:gid}, function(msg) {
                 if(msg.status == 1) {
-                    dr_tips("删除成功",3,1);
-                    $('.dr_row_'+gid).remove();
+                    man_tips("删除成功",3,1);
+                    $('.man_row_'+gid).remove();
                 } else {
-                    dr_tips("删除失败");
+                    man_tips("删除失败");
                 }
                 return false;
             }, 'json');

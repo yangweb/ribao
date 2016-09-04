@@ -1,6 +1,6 @@
 {template header.html}
 <script>
-function dr_confirm_update() {
+function man_confirm_update() {
 	art.dialog.confirm("{lang('015')}", function(){
 		var _data = $("#myform").serialize();
 		var _url = window.location.href;
@@ -41,9 +41,9 @@ function dr_confirm_update() {
 		{lang('mod-34')} ：
 		<input type="text" class="input-text" value="{$param['keyword']}" name="data[keyword]" />&nbsp;
 		{lang('104')} ：
-		{dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
+		{man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
 		-&nbsp;
-		{dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
+		{man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
 		&nbsp;
 		<input type="submit" value="{lang('search')}" class="button" name="search" />
 		</form>
@@ -55,7 +55,7 @@ function dr_confirm_update() {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="30" align="center">{lang('order')}</th>
 			<th width="50" align="center">Id</th>
 			<th align="left">{lang('mod-38')}</th>
@@ -63,37 +63,37 @@ function dr_confirm_update() {
 			<th width="100" align="center">{lang('mod-39')}</th>
             {/if}
 			<th width="120" align="left">{lang('104')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
-		<tr id="dr_row_{$t.id}">
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
+		<tr id="man_row_{$t.id}">
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
 			<td align="center"><input class="input-text displayorder" type="text" name="data[{$t.id}][displayorder]" value="{$t.displayorder}" /></td>
 			<td align="center">{$t.id}</td>
-			<td align="left"><a href="{dr_url(APP_DIR.'/extend/edit',array('id'=>$t.id,'cid'=>$cid,'catid'=>$catid))}">{dr_keyword_highlight($t.name, $param.keyword)}</a></td>
+			<td align="left"><a href="{man_url(APP_DIR.'/extend/edit',array('id'=>$t.id,'cid'=>$cid,'catid'=>$catid))}">{man_keyword_highlight($t.name, $param.keyword)}</a></td>
 			{if $content.type}
-            <td align="center"><a href="{dr_url(APP_DIR.'/extend/index', array('cid'=>$cid,'catid'=>$catid,'type'=>$t.mytype))}">{$content['type'][$t['mytype']]['name']}</a></td>
+            <td align="center"><a href="{man_url(APP_DIR.'/extend/index', array('cid'=>$cid,'catid'=>$catid,'type'=>$t.mytype))}">{$content['type'][$t['mytype']]['name']}</a></td>
             {/if}
 			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
-			<td align="left" class="dr_option">
+			<td align="left" class="man_option">
 			<a href="{$t.url}" target="_blank">{lang('go')}</a>
-			{if $catrule.edit}<a href="{dr_url(APP_DIR.'/extend/edit',array('cid'=>$cid,'catid'=>$catid,'id'=>$t.id))}">{lang('edit')}</a>{/if}
+			{if $catrule.edit}<a href="{man_url(APP_DIR.'/extend/edit',array('cid'=>$cid,'catid'=>$catid,'id'=>$t.id))}">{lang('edit')}</a>{/if}
 			</td>
 		</tr>
 		{/loop}
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="8" align="left" style="border:none">
             {if $catrule.del}
-			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}', 1)" />
+			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}', 1)" />
             {/if}
             {if $catrule.edit}
-			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');dr_confirm_update()" />
+			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');man_confirm_update()" />
             <div class="onShow">{lang('html-565')}</div>
             {if $content.type}
-			<input type="button" class="button" value="{lang('html-265')}" name="option" onClick="$('#action').val('move');dr_confirm_update()" />
+			<input type="button" class="button" value="{lang('html-265')}" name="option" onClick="$('#action').val('move');man_confirm_update()" />
 			<select name="type">
             {loop $content.type $id $t}
             <option value="{$id}">{$t.name}</option>
@@ -106,7 +106,7 @@ function dr_confirm_update() {
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param.total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param.total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

@@ -69,13 +69,13 @@ class M_Controller extends D_Common {
                 $this->member_model->update_score(1, $this->uid, -$score, '', "delete");
             }
 			
-			exit(dr_json(1, lang('000'), $id));
+			exit(man_json(1, lang('000'), $id));
 			
 		} elseif (IS_POST && $this->input->post('action') == 'remove') {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 			
 			$catid = (int)$this->input->post('catid');
@@ -86,10 +86,10 @@ class M_Controller extends D_Common {
 						'catid' => $catid
 					 ));
 			} else {
-				exit(dr_json(0, lang('m-300')));
+				exit(man_json(0, lang('m-300')));
 			}
 			
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->load->model('space_category_model');
@@ -160,7 +160,7 @@ class M_Controller extends D_Common {
 		// 虚拟币检查
 		$score = (int)$model['setting'][$this->markrule]['score'];
 		if ($score && $score + $this->member['score'] < 0) {
-            $this->member_msg(dr_lang('m-302', abs($score), $this->member['score']));
+            $this->member_msg(man_lang('m-302', abs($score), $this->member['score']));
         }
 		// 日投稿上限检查
 		if ($model['setting'][$this->markrule]['postnum']) {
@@ -169,7 +169,7 @@ class M_Controller extends D_Common {
 						  ->where('DATEDIFF(from_unixtime(inputtime),now())=0')
 						  ->count_all_results($this->space_content_model->tablename);
 			if ($total >= $model['setting'][$this->markrule]['postnum']) {
-				$this->member_msg(dr_lang('m-287', $model['setting'][$this->markrule]['postnum']));
+				$this->member_msg(man_lang('m-287', $model['setting'][$this->markrule]['postnum']));
 			}
 		}
 		// 投稿总数检查
@@ -178,7 +178,7 @@ class M_Controller extends D_Common {
 						  ->where('uid', $this->uid)
 						  ->count_all_results($this->space_content_model->tablename);
 			if ($total >= $model['setting'][$this->markrule]['postcount']) {
-				$this->member_msg(dr_lang('m-288', $model['setting'][$this->markrule]['postcount']));
+				$this->member_msg(man_lang('m-288', $model['setting'][$this->markrule]['postcount']));
 			}
 		}
 		if (IS_POST) {
@@ -230,12 +230,12 @@ class M_Controller extends D_Common {
 					// 附件归档到文档
 					$this->attachment_handle($this->uid, $mark, $model['field']);
 					$this->attachment_replace($this->uid, $id, $this->space_content_model->tablename);
-					$this->member_msg(lang('000'), dr_member_url($this->router->class.'/index'), 1);
+					$this->member_msg(lang('000'), man_member_url($this->router->class.'/index'), 1);
 				}
 			}
 			
 			if (IS_AJAX) {
-                exit(dr_json(0, $error['msg'], $error['error']));
+                exit(man_json(0, $error['msg'], $error['error']));
             }
 			
 			$data = $data[1];
@@ -243,11 +243,11 @@ class M_Controller extends D_Common {
 		}
 		
 		$this->template->assign(array(
-			'purl' => dr_url($this->router->class.'/add'),
+			'purl' => man_url($this->router->class.'/add'),
 			'error' => $error,
 			'verify' => 0,
 			'select' => $this->select_space_category($category, (int)$data['catid'], 'name=\'catid\'', NULL, 1),
-			'listurl' => dr_url($this->router->class.'/index'),
+			'listurl' => man_url($this->router->class.'/index'),
 			'myfield' => $this->field_input($model['field'], $data, TRUE),
 			'meta_name' => lang('m-299'),
 			'model_name' => $model['name'],
@@ -311,12 +311,12 @@ class M_Controller extends D_Common {
 				// 修改文档
 				if (($id = $this->space_content_model->edit($id, $data['uid'], $post[1])) != FALSE) {
 					$this->attachment_handle($this->uid, $this->space_content_model->tablename.'-'.$id, $model['field'], $data, $post[1]['status'] ? TRUE : FALSE);
-					$this->member_msg(lang('000'), dr_member_url($this->router->class.'/index'), 1);
+					$this->member_msg(lang('000'), man_member_url($this->router->class.'/index'), 1);
 				}
 			}
 			
 			if (IS_AJAX) {
-                exit(dr_json(0, $error['msg'], $error['error']));
+                exit(man_json(0, $error['msg'], $error['error']));
             }
 			
 			$data = $data[1];
@@ -324,11 +324,11 @@ class M_Controller extends D_Common {
 		}
 		
 		$this->template->assign(array(
-			'purl' => dr_url($this->router->class.'/edit', array('id'=>$id)),
+			'purl' => man_url($this->router->class.'/edit', array('id'=>$id)),
 			'error' => $error,
 			'verify' => 0,
 			'select' => $this->select_space_category($category, (int)$data['catid'], 'name=\'catid\'', NULL, 1),
-			'listurl' => dr_url($this->router->class.'/index'),
+			'listurl' => man_url($this->router->class.'/index'),
 			'myfield' => $this->field_input($model['field'], $data, TRUE),
 			'meta_name' => lang('m-299'),
 			'model_name' => $model['name'],
@@ -393,7 +393,7 @@ class M_Controller extends D_Common {
 	 */
 	public function select_space_category($data, $id = 0, $str = '', $default = ' -- ', $onlysub = 0, $is_push = 0) {
 		
-		$cache = md5(dr_array2string($data).$id.$str.$default.$onlysub.$is_push);
+		$cache = md5(man_array2string($data).$id.$str.$default.$onlysub.$is_push);
 		if ($cache_data = $this->cache->file->get($cache)) {
             return $cache_data;
         }

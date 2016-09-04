@@ -81,11 +81,11 @@ class F_Textarea extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		$value = $value ? $value : $this->get_default_value($cfg['option']['value']);// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
-		$str = '<textarea '.$disabled.' style="height:'.$height.'px; width:'.$width.(is_numeric($width) ? 'px' : '').';" name="data['.$name.']" id="dr_'.$name.'" '.$attr.'>'.$value.'</textarea>'.$tips;
+		$str = '<textarea '.$disabled.' style="height:'.$height.'px; width:'.$width.(is_numeric($width) ? 'px' : '').';" name="data['.$name.']" id="man_'.$name.'" '.$attr.'>'.$value.'</textarea>'.$tips;
 		return $this->input_format($name, $text, $str);
 	}
 	

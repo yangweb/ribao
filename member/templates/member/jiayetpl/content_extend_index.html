@@ -5,21 +5,21 @@ $(function(){
 		var name = $(this).attr("name");
 		$(".msearch a").removeClass("cur");
 		$(this).addClass("cur");
-		$("#dr_order").val(name);
+		$("#man_order").val(name);
 	});
-	$("#dr_loadmore a").click(function(){
-		var page = $("#dr_page").val();
-		$("#dr_loading").html("<div style='padding:30px;text-align:center;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
+	$("#man_loadmore a").click(function(){
+		var page = $("#man_page").val();
+		$("#man_loading").html("<div style='padding:30px;text-align:center;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
 		$.get("{$moreurl}", {page:page}, function(data){
 			if (data != "null") {
-				$("#dr_body").append(data);
-				$("#dr_page").val(Number(page) + 1);
+				$("#man_body").append(data);
+				$("#man_page").val(Number(page) + 1);
 			}
-			$("#dr_loading").html("");
+			$("#man_loading").html("");
 		});
 	});
 	// 排序操作
-	$('.dr_table th').click(function(e) {
+	$('.man_table th').click(function(e) {
 		var _class = $(this).attr("class");
 		if (_class == undefined) return;
 		var _name = $(this).attr("name");
@@ -31,11 +31,11 @@ $(function(){
 		} else {
 			_order = 'desc';
 		}
-		var url = "{dr_member_order($searchurl)}&order="+_name+" "+_order;
+		var url = "{man_member_order($searchurl)}&order="+_name+" "+_order;
 		location.href=url;
 	});
 });
-function dr_update() {
+function man_update() {
     $("#action").val('update');
 	var _data = $("#myform").serialize();
 	var _url = window.location.href;
@@ -61,12 +61,12 @@ function dr_update() {
 	});
 	return false;
 }
-function dr_delete(id) {
+function man_delete(id) {
     art.dialog.confirm("<font color=red><b>你确认要删除吗？</b></font>", function(){
-		$.ajax({type: "POST",dataType:"json", url: "{dr_member_url(APP_DIR.'/extend/del', array('cid'=>$cid))}",data: {id:id}, success: function(data) {
+		$.ajax({type: "POST",dataType:"json", url: "{man_member_url(APP_DIR.'/extend/del', array('cid'=>$cid))}",data: {id:id}, success: function(data) {
 				if (data.status == 1) {
 					$.dialog.tips(data.code, 3, 1);
-					$("#dr_row_"+id).hide();
+					$("#man_row_"+id).hide();
 				} else {
 					$.dialog.tips(data.code, 3, 0);
 				}
@@ -82,23 +82,23 @@ function dr_delete(id) {
 	return false;
 }
 </script>
-<input name="page" id="dr_page" type="hidden" value="2" />
+<input name="page" id="man_page" type="hidden" value="2" />
 <div class="content clearfix">
 	{template navigator.html}
     <div class="article">
         <div class="section">
             <div class="title"><strong>{$content.title}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
 				<div class="msearch mbutton">
                 	<form method="get" action="">
 						<input name="s" type="hidden" value="{APP_DIR}" />
 						<input name="c" type="hidden" value="extend" />
 						<input name="m" type="hidden" value="index" />
 						<input name="cid" type="hidden" value="{$cid}" />
-						<input id="dr_order" name="order" type="hidden" value="{$get.order}" />
-						<a href="{dr_member_url(APP_DIR.'/extend/add', array('cid'=>$cid))}" class="cur">{lang('mod-37')}</a>
+						<input id="man_order" name="order" type="hidden" value="{$get.order}" />
+						<a href="{man_member_url(APP_DIR.'/extend/add', array('cid'=>$cid))}" class="cur">{lang('mod-37')}</a>
 						<button type="submit" class="red_button" style="float:right;margin-left:20px">查询</button>
-						<input type="text" id="dr_keywords" name="kw" value="{$kw}" class="input_text" style="color:#999;width:220px;float:right">
+						<input type="text" id="man_keywords" name="kw" value="{$kw}" class="input_text" style="color:#999;width:220px;float:right">
                         {if $content.type}
 						<span style="color:#333;padding-right:8px;float:right;">
                         <select name="type">
@@ -127,22 +127,22 @@ function dr_delete(id) {
 						<th style="width:60px;" class="algin_l">操作</th>
 					</tr>
 				</thead>
-				<tbody id="dr_body">
+				<tbody id="man_body">
 				{template content_extend_data.html}
 				</tbody>
 				</table>
                 <table style="table-layout:fixed;" class="mbutton">
                 <tr>
-                    <td style="width:20px;border:none" class="algin_r"><input type="checkbox" onclick="dr_selected()" id="dr_select" name="dr_select"></td>
+                    <td style="width:20px;border:none" class="algin_r"><input type="checkbox" onclick="man_selected()" id="man_select" name="man_select"></td>
 					<td class="algin_l" style="padding-top:8px;border:none">
-                    <button type="button" class="blue_button" onClick="dr_update()">排序</button>
+                    <button type="button" class="blue_button" onClick="man_update()">排序</button>
                     <div class="onShow">排序值越大越靠前</div>
                     </td>
                 </tr>
 				</table>
                 </form>
-				<div id="dr_loading"></div>
-                <div id="dr_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
+				<div id="man_loading"></div>
+                <div id="man_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
             </div>
         </div>
     </div>

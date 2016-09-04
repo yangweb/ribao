@@ -2,8 +2,8 @@
 <div class="active editor">
     <table width="180" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="50"><div class="memberinfo_avatar"><img src="{dr_avatar($space.uid)}"></a></div></td>
-        <td style="padding-bottom:10px;"><b>{$space.username}</b><br><div class="dr_stars">{dr_show_stars($space.level.stars)}</div></td> 
+        <td width="50"><div class="memberinfo_avatar"><img src="{man_avatar($space.uid)}"></a></div></td>
+        <td style="padding-bottom:10px;"><b>{$space.username}</b><br><div class="man_stars">{man_show_stars($space.level.stars)}</div></td> 
       </tr>
       <tr height="20">
         <td colspan="2">
@@ -31,11 +31,11 @@
     <div class="clear"></div>
 </div>
 {if $related}
-<h3 class='title line myCorner' data-corner='top 5px'><a href="{dr_space_list_url($spaceid, $parent.id)}" style="color:#FFF">{$parent.name}</a></h3>
+<h3 class='title line myCorner' data-corner='top 5px'><a href="{man_space_list_url($spaceid, $parent.id)}" style="color:#FFF">{$parent.name}</a></h3>
 <div class="active" id="sidebar" data-csnow="19" data-class3="0" data-jsok="2">
     {loop $related $c}
     <dl class="list-none navnow">
-        <dt {if $c.id==$catid}class="on"{/if}><a href='{dr_space_list_url($spaceid, $c.id)}' class="zm"><span>{$c.name}</span></a></dt>
+        <dt {if $c.id==$catid}class="on"{/if}><a href='{man_space_list_url($spaceid, $c.id)}' class="zm"><span>{$c.name}</span></a></dt>
     </dl>
     {/loop}
     <div class="clear"></div>

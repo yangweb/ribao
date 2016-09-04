@@ -7,35 +7,35 @@ $(function() {
     {else if $result}
         art.dialog.tips('{$result}', 3);
     {/if}
-    dr_remote({intval($data['SITE_ATTACH_REMOTE'])});
-	dr_set_mw_type({intval($data['SITE_IMAGE_TYPE'])});
+    man_remote({intval($data['SITE_ATTACH_REMOTE'])});
+	man_set_mw_type({intval($data['SITE_IMAGE_TYPE'])});
     {if empty($data['SITE_IMAGE_WATERMARK'])}
-    $('.dr_image').hide();
+    $('.man_image').hide();
     {else}
-    $('.dr_image').show();
+    $('.man_image').show();
     {/if}
 });
-function dr_form_check() {
+function man_form_check() {
 	if (d_required('name')) return false;
 	if (d_isdomain('domain')) return false;
 	return true;
 }
-function dr_set_mw_type(id) {
-	$(".dr_mw_1").hide();
-	$(".dr_mw_0").hide();
-	$(".dr_mw_"+id).show();
+function man_set_mw_type(id) {
+	$(".man_mw_1").hide();
+	$(".man_mw_0").hide();
+	$(".man_mw_"+id).show();
 }
-function dr_remote(id) {
+function man_remote(id) {
 	$(".r1").hide();
     $(".r2").hide();
     $(".r3").hide();
 	$(".r"+id).show();
 }
-function dr_aliyun_host(val) {
+function man_aliyun_host(val) {
     $('#aliyun').val('http://'+$('#aliyun_bucket').val()+'.'+val);
 }
 </script>
-<form action="" method="post" name="myform" id="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" name="myform" id="myform" onsubmit="return man_form_check()">
 <input name="page" id="page" type="hidden" value="{$page}" />
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
@@ -53,33 +53,33 @@ function dr_aliyun_host(val) {
 			<li onclick="SwapTab(6)">{lang('html-550')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-089')}： </th>
                     <td>
-                    <input class="input-text" type="text" name="domain" id="dr_domain" value="{$data['SITE_DOMAIN']}" size="25" />
+                    <input class="input-text" type="text" name="domain" id="man_domain" value="{$data['SITE_DOMAIN']}" size="25" />
                     {if $data['SITE_DOMAIN']}
                     <script>
-                        $.get("{dr_url('home/domain', array('domain' => $data['SITE_DOMAIN']))}", function(data){
+                        $.get("{man_url('home/domain', array('domain' => $data['SITE_DOMAIN']))}", function(data){
                             if (data) {
-                                $("#dr_domian").html(data);
+                                $("#man_domian").html(data);
                             } else {
-                                $("#dr_domian").hide();
+                                $("#man_domian").hide();
                             }
                         });
                     </script>
-                    <div id="dr_domian" class="onError"></div>
+                    <div id="man_domian" class="onError"></div>
                     {else}
-                    <div class="onShow" id="dr_domain_tips">{lang('html-090')}</div>
+                    <div class="onShow" id="man_domain_tips">{lang('html-090')}</div>
                     {/if}
                     </td>
                 </tr>
                 <tr>
                     <th>{lang('html-087')}： </th>
                     <td>
-                    <input class="input-text" type="text" name="data[SITE_NAME]" id="dr_name" value="{$data['SITE_NAME']}" size="40" />
-                    <div class="onShow" id="dr_name_tips">{lang('html-088')}</div>
+                    <input class="input-text" type="text" name="data[SITE_NAME]" id="man_name" value="{$data['SITE_NAME']}" size="40" />
+                    <div class="onShow" id="man_name_tips">{lang('html-088')}</div>
                     </td>
                 </tr>
                 <tr>
@@ -168,27 +168,27 @@ function dr_aliyun_host(val) {
 				</tr>
 				</table>
 			</div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                     <tr>
-                        <th width="200">{dr_lang('html-290', lang('html-289'))}： </th>
+                        <th width="200">{man_lang('html-290', lang('html-289'))}： </th>
                         <td>
                             <input class="input-text" type="text" name="data[SITE_MOBILE]" value="{$data['SITE_MOBILE']}" size="25" />
                             {if $data['SITE_MOBILE'] == $data['SITE_DOMAIN']}
                             <div class="onError">此域名不能与站点域名相同</div>
                             {else if $data['SITE_MOBILE']}
                             <script>
-                                $.get("{dr_url('home/domain', array('domain' => $data['SITE_MOBILE']))}", function(data){
+                                $.get("{man_url('home/domain', array('domain' => $data['SITE_MOBILE']))}", function(data){
                                     if (data) {
-                                        $("#dr_mb_domian").html(data);
+                                        $("#man_mb_domian").html(data);
                                     } else {
-                                        $("#dr_mb_domian").hide();
+                                        $("#man_mb_domian").hide();
                                     }
                                 });
                             </script>
-                            <div id="dr_mb_domian" class="onError"></div>
+                            <div id="man_mb_domian" class="onError"></div>
                             {else}
-                            <div class="onShow" id="dr_domain_tips">{lang('html-090')}</div>
+                            <div class="onShow" id="man_domain_tips">{lang('html-090')}</div>
                             {/if}
                         </td>
                     </tr>
@@ -209,7 +209,7 @@ function dr_aliyun_host(val) {
                     </tr>
                 </table>
             </div>
-			<div id="cnt_2" style="display:none" class="dr_hide">
+			<div id="cnt_2" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-171')}： </th>
@@ -236,13 +236,13 @@ function dr_aliyun_host(val) {
                 </tr>
                 </table>
             </div>
-			<div id="cnt_3" style="display:none" class="dr_hide">
+			<div id="cnt_3" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
                     <th width="200">{lang('html-085')}： </th>
                     <td>
                     {loop $remote_type $i $t}
-                    <input onclick="dr_remote({$i})" type="radio" name="data[SITE_ATTACH_REMOTE]" value="{$i}" {if $data['SITE_ATTACH_REMOTE'] == $i}checked{/if} />&nbsp;<label>{$t}</label>
+                    <input onclick="man_remote({$i})" type="radio" name="data[SITE_ATTACH_REMOTE]" value="{$i}" {if $data['SITE_ATTACH_REMOTE'] == $i}checked{/if} />&nbsp;<label>{$t}</label>
                     &nbsp;&nbsp;&nbsp;
                     {/loop}
 					<div class="onShow">{lang('html-106')}</div>
@@ -386,7 +386,7 @@ function dr_aliyun_host(val) {
                 <tr class="r3">
                     <th>节点请求地址： </th>
                     <td>
-                        <select id="aliyun_host" onchange="dr_aliyun_host(this.value)" name="data[remote][3][host]">
+                        <select id="aliyun_host" onchange="man_aliyun_host(this.value)" name="data[remote][3][host]">
                         <option value="">选择节点</option>
                         <option {if $data['remote'][3]['host']=='oss-cn-hangzhou.aliyuncs.com'}selected{/if} value="oss-cn-hangzhou.aliyuncs.com">杭州节点</option>
                         <option {if $data['remote'][3]['host']=='oss-cn-qingdao.aliyuncs.com'}selected{/if} value="oss-cn-qingdao.aliyuncs.com">青岛节点</option>
@@ -405,7 +405,7 @@ function dr_aliyun_host(val) {
                 </tr>
                 </table>
             </div>
-			<div id="cnt_4" style="display:none" class="dr_hide">
+			<div id="cnt_4" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-728')}： </th>
@@ -425,12 +425,12 @@ function dr_aliyun_host(val) {
                 <tr>
                     <th>{lang('html-128')}： </th>
                     <td>
-                    <input type="radio" onclick="$('.dr_image').show()" name="data[SITE_IMAGE_WATERMARK]" value="1" {if $data['SITE_IMAGE_WATERMARK']}checked{/if} />&nbsp;<label>{lang('open')}</label>
+                    <input type="radio" onclick="$('.man_image').show()" name="data[SITE_IMAGE_WATERMARK]" value="1" {if $data['SITE_IMAGE_WATERMARK']}checked{/if} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" onclick="$('.dr_image').hide()" name="data[SITE_IMAGE_WATERMARK]" value="0" {if empty($data['SITE_IMAGE_WATERMARK'])}checked{/if} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" onclick="$('.man_image').hide()" name="data[SITE_IMAGE_WATERMARK]" value="0" {if empty($data['SITE_IMAGE_WATERMARK'])}checked{/if} />&nbsp;<label>{lang('close')}</label>
                     </td>
                 </tr>
-				<tr class="dr_image">
+				<tr class="man_image">
                     <th>{lang('html-129')}： </th>
                     <td>
                     <input type="radio" name="data[SITE_IMAGE_REMOTE]" value="1" {if $data['SITE_IMAGE_REMOTE']}checked{/if} />&nbsp;<label>{lang('open')}</label>
@@ -439,7 +439,7 @@ function dr_aliyun_host(val) {
 					<div class="onShow">{lang('html-130')}</div>
                     </td>
                 </tr>
-				<tr class="dr_image">
+				<tr class="man_image">
                     <th>{lang('html-769')}： </th>
                     <td>
                     <input type="radio" name="data[SITE_IMAGE_CONTENT]" value="1" {if $data['SITE_IMAGE_CONTENT']}checked{/if} />&nbsp;<label>{lang('open')}</label>
@@ -448,7 +448,7 @@ function dr_aliyun_host(val) {
 					<div class="onShow">{lang('html-770')}</div>
                     </td>
                 </tr>
-				<tr class="dr_image">
+				<tr class="man_image">
 					<th>{lang('html-143')}： </th>
 					<td>
 					<select name="data[SITE_IMAGE_VRTALIGN]">
@@ -464,7 +464,7 @@ function dr_aliyun_host(val) {
                     </select>
 					</td>
 				</tr>
-				<tr class="dr_image">
+				<tr class="man_image">
                     <th>{lang('html-144')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[SITE_IMAGE_VRTOFFSET]" value="{$data['SITE_IMAGE_VRTOFFSET']}" size="7" />
@@ -473,15 +473,15 @@ function dr_aliyun_host(val) {
 					<div class="onShow">{lang('html-145')}</div>
                     </td>
                 </tr>
-				<tr class="dr_image">
+				<tr class="man_image">
                     <th>{lang('html-131')}： </th>
                     <td>
-                    <input type="radio" name="data[SITE_IMAGE_TYPE]" value="1" onclick="dr_set_mw_type(1)" {if $data['SITE_IMAGE_TYPE']}checked{/if} />&nbsp;<label>{lang('html-132')}</label>
+                    <input type="radio" name="data[SITE_IMAGE_TYPE]" value="1" onclick="man_set_mw_type(1)" {if $data['SITE_IMAGE_TYPE']}checked{/if} />&nbsp;<label>{lang('html-132')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[SITE_IMAGE_TYPE]" value="0" onclick="dr_set_mw_type(0)" {if empty($data['SITE_IMAGE_TYPE'])}checked{/if} />&nbsp;<label>{lang('html-133')}</label>
+					<input type="radio" name="data[SITE_IMAGE_TYPE]" value="0" onclick="man_set_mw_type(0)" {if empty($data['SITE_IMAGE_TYPE'])}checked{/if} />&nbsp;<label>{lang('html-133')}</label>
                     </td>
                 </tr>
-				<tr class="dr_mw_1 dr_image" style="display:none">
+				<tr class="man_mw_1 man_image" style="display:none">
 					<th>{lang('html-134')}： </th>
 					<td>
 					<select name="data[SITE_IMAGE_OVERLAY]">
@@ -492,14 +492,14 @@ function dr_aliyun_host(val) {
                     <div class="onShow">{lang('html-135')}</div>
 					</td>
 				</tr>
-				<tr class="dr_mw_1 dr_image" style="display:none">
+				<tr class="man_mw_1 man_image" style="display:none">
                     <th>{lang('html-136')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[SITE_IMAGE_OPACITY]" value="{$data['SITE_IMAGE_OPACITY']}" size="7" />
 					<div class="onShow">{lang('html-137')}</div>
                     </td>
                 </tr>
-				<tr class="dr_mw_0 dr_image" style="display:none">
+				<tr class="man_mw_0 man_image" style="display:none">
 					<th>{lang('html-138')}： </th>
 					<td>
 					{if $wm_font_path}
@@ -512,19 +512,19 @@ function dr_aliyun_host(val) {
                     <div class="onShow">{lang('html-139')}</div>
 					</td>
 				</tr>
-				<tr class="dr_mw_0 dr_image" style="display:none">
+				<tr class="man_mw_0 man_image" style="display:none">
                     <th>{lang('html-140')}： </th>
                     <td>
-					{dr_field_input('SITE_IMAGE_COLOR', 'Color', array('option'=>array('value'=>$data['SITE_IMAGE_COLOR'])))}
+					{man_field_input('SITE_IMAGE_COLOR', 'Color', array('option'=>array('value'=>$data['SITE_IMAGE_COLOR'])))}
                     </td>
                 </tr>
-				<tr class="dr_mw_0 dr_image" style="display:none">
+				<tr class="man_mw_0 man_image" style="display:none">
                     <th>{lang('html-141')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[SITE_IMAGE_SIZE]" value="{$data['SITE_IMAGE_SIZE']}" size="5" />
                     </td>
                 </tr>
-				<tr class="dr_mw_0 dr_image" style="display:none">
+				<tr class="man_mw_0 man_image" style="display:none">
                     <th>{lang('html-142')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[SITE_IMAGE_TEXT]" value="{$data['SITE_IMAGE_TEXT']}" size="33" />
@@ -532,7 +532,7 @@ function dr_aliyun_host(val) {
                 </tr>
                 </table>
 			</div>
-			<div id="cnt_5" style="display:none" class="dr_hide">
+			<div id="cnt_5" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 {php for ($i = 0; $i <= 9; $i ++) {}
                 <tr>
@@ -545,7 +545,7 @@ function dr_aliyun_host(val) {
                 {php }}
 				</table>
 			</div>
-            <div id="cnt_6" style="display:none" class="dr_hide">
+            <div id="cnt_6" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-250')}： </th>
@@ -588,7 +588,7 @@ function ftp_test() {
 	var pasv = $(".pasv:checked").val();
 	var mode = $(".mode:checked").val();
 	$("#ftptest").val('Loading');
-	$.get("{dr_url('api/testftp')}",{rurl:rurl,host:host,port:port,username:username,password:password,pasv:pasv,path:path,mode:mode}, function(data){
+	$.get("{man_url('api/testftp')}",{rurl:rurl,host:host,port:port,username:username,password:password,pasv:pasv,path:path,mode:mode}, function(data){
 		alert(data);
 		$("#ftptest").val('{lang('html-127')}');
 	})
@@ -600,7 +600,7 @@ function aliyun_test() {
     var host = $('#aliyun_host').val();
     var rurl = $('#aliyun_rurl').val();
     $("#aliyuntest").val('Loading');
-    $.get("{dr_url('api/aliyuntest')}",{rurl:rurl,id:id,secret:secret,bucket:bucket,host:host}, function(data){
+    $.get("{man_url('api/aliyuntest')}",{rurl:rurl,id:id,secret:secret,bucket:bucket,host:host}, function(data){
         alert(data);
         $("#aliyuntest").val('{lang('html-127')}');
     })
@@ -613,7 +613,7 @@ function baidu_test() {
     $('#baidu').val('http://'+host+'/'+bucket);
     var rurl = $('#baidu_rurl').val();
     $("#baidutest").val('Loading');
-    $.get("{dr_url('api/baidutest')}",{rurl:rurl,ak:ak,sk:sk,bucket:bucket,host:host}, function(data){
+    $.get("{man_url('api/baidutest')}",{rurl:rurl,ak:ak,sk:sk,bucket:bucket,host:host}, function(data){
         alert(data);
         $("#baidutest").val('{lang('html-127')}');
     })

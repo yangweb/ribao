@@ -19,7 +19,7 @@
 					{$select}&nbsp;&nbsp;
 					<input class="noloading button" type="submit" name="submit" value="开始生成" />
 				</form>
-                <form action="{dr_url(APP_DIR.'/home/clear', array('type' => 1))}" method="post" name="myform" target="result_1" style="float:left">
+                <form action="{man_url(APP_DIR.'/home/clear', array('type' => 1))}" method="post" name="myform" target="result_1" style="float:left">
                     <input class="noloading button" type="submit" name="submit" value="清除所有静态文件" style="padding-right:10px; padding-left:10px;" />
 				</form>
 				</td>
@@ -34,12 +34,12 @@
 				<form action="{SITE_URL}{APP_DIR}/index.php?c=show&m=html" method="post" name="myform" target="result_2" style="float:left">
 					{$select}&nbsp;&nbsp;
 					时间段：
-					{dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), 0)}
+					{man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), 0)}
 					-&nbsp;
-					{dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), 0)}&nbsp;&nbsp;
+					{man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), 0)}&nbsp;&nbsp;
 					<input class="noloading button" type="submit" name="submit" value="开始生成" />
 				</form>
-                <form action="{dr_url(APP_DIR.'/home/clear', array('type' => 2))}" method="post" name="myform" target="result_2" style="float:left">
+                <form action="{man_url(APP_DIR.'/home/clear', array('type' => 2))}" method="post" name="myform" target="result_2" style="float:left">
                     <input class="noloading button" type="submit" name="submit" value="清除所有静态文件" style="padding-right:10px; padding-left:10px;" />
 				</form>
 				</td>
@@ -67,7 +67,7 @@
                 <th>2、</th> 
                 <td>在“基本配置”选项中，选择当前站点“{SITE_NAME}”，开启“生成静态”开关</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>3、</th> 
                 <td>保存配置后，更新全站缓存，再回到这个页面</td>
             </tr>
@@ -98,7 +98,7 @@
                 <th>4、</th> 
                 <td>把上面配置的域名绑定到目录：{APPPATH}html/{SITE_ID}/</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>5、</th> 
                 <td>绑定目录之后，域名正常解析时，再返回到这个页面</td>
             </tr>
@@ -129,7 +129,7 @@
                 <th>4、</th> 
                 <td>最重要的一步，“更新URL地址”，否则内容页URL是不会生效的</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>5、</th> 
                 <td>URL地址与你设置的规则一致时，再返回到这个页面</td>
             </tr>

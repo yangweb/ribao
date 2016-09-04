@@ -15,7 +15,7 @@
 							<a href="{MODULE_URL}">{MODULE_NAME}</a>
 							<i class="fa fa-circle"></i>
 						</li>
-						{dr_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
+						{man_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
 						<li>
 							<span>频道页</span>
 						</li>
@@ -44,7 +44,7 @@
 														<img class="media-object" src="{man_thumb($t.thumb, 80, 80)}" style="width:80px; height:80px;"> </a>
 													<div class="media-body">
 														<h5 class="media-heading"><a href="{$t.url}" class="title">{$t.title}</a></h5>
-														<p> {dr_strcut($t.description,120)}</p>
+														<p> {man_strcut($t.description,120)}</p>
 													</div>
 													{/list}
 												</div>
@@ -54,7 +54,7 @@
 													<ul class="list-unstyled">
 														<!-- 调用模块最新的数据 -->
 														{list action=module catid=$c.id order=updatetime num=10}
-														<li style="line-height: 23px"><span class="badge badge-empty badge-success"></span> <a href="{$t.url}" class="title">{dr_strcut($t.title, 35)}</a></li>
+														<li style="line-height: 23px"><span class="badge badge-empty badge-success"></span> <a href="{$t.url}" class="title">{man_strcut($t.title, 35)}</a></li>
 														{/list}
 													</ul>
 												</div>
@@ -62,7 +62,7 @@
 													<ul class="list-unstyled">
 														<!-- 调用模块最新的数据 -->
 														{list action=module catid=$c.id order=updatetime num=10,10}
-														<li style="line-height: 23px"><span class="badge badge-empty badge-success"></span> <a href="{$t.url}" class="title">{dr_strcut($t.title, 35)}</a></li>
+														<li style="line-height: 23px"><span class="badge badge-empty badge-success"></span> <a href="{$t.url}" class="title">{man_strcut($t.title, 35)}</a></li>
 														{/list}
 													</ul>
 												</div>
@@ -81,7 +81,7 @@
 															</a>
 														</div>
 														<div class="tile-title">
-															<h5><a href="{$t.url}" class="title">{dr_strcut($t.title, 15)}</a></h5>
+															<h5><a href="{$t.url}" class="title">{man_strcut($t.title, 15)}</a></h5>
 														</div>
 													</div>
 												</div>

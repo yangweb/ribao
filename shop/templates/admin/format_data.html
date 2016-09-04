@@ -14,20 +14,20 @@
 		<table width="100%">
 		<thead>
         <tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="30" align="center">{lang('order')}</th>
             <th width="1" align="left">&nbsp;</th>
             <th align="left">{lang('mod-48')}</th>
-			<th align="left">{if $this->ci->is_auth(APP_DIR.'/admin/format/adddata')}<a class="add" title="{lang('add')}" href="{dr_dialog_url(dr_url(APP_DIR.'/format/adddata', array('pid'=>0, 'fid'=>$fid)), 'add')}"></a>{/if}</th>
+			<th align="left">{if $this->ci->is_auth(APP_DIR.'/admin/format/adddata')}<a class="add" title="{lang('add')}" href="{man_dialog_url(man_url(APP_DIR.'/format/adddata', array('pid'=>0, 'fid'=>$fid)), 'add')}"></a>{/if}</th>
         </tr>
         </thead>
 		<tbody>
 		{$list}
 		<tr>
-			<th align="right"><input name="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th align="right"><input name="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="7" align="left"> 
-            <input type="button" class="button" value="{lang('del')}" name="button" onClick="$('#action').val('del');return dr_confirm_del_all()" />&nbsp;
-			<input type="button" class="button" value="{lang('order')}" name="button" onclick="$('#action').val('order');return dr_confirm_del_all()" />&nbsp;<div class="onShow">{lang('html-054')}</div>
+            <input type="button" class="button" value="{lang('del')}" name="button" onClick="$('#action').val('del');return man_confirm_del_all()" />&nbsp;
+			<input type="button" class="button" value="{lang('order')}" name="button" onclick="$('#action').val('order');return man_confirm_del_all()" />&nbsp;<div class="onShow">{lang('html-054')}</div>
 			</td>
 		</tr>
 		</tbody>

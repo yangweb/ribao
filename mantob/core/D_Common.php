@@ -573,7 +573,7 @@ class D_Common extends CI_Controller {
                                     'tid' => $i,
                                     'pid' => $pid,
                                     'uri' => $furi,
-                                    'name' => dr_lang('m-097', $f['name']),
+                                    'name' => man_lang('m-097', $f['name']),
                                 );
                                 $menu['data'][$i]['left'][$pid]['link'][] = $menu['uri'][$furi] = $link;
                             }
@@ -712,7 +712,7 @@ class D_Common extends CI_Controller {
                     && ($this->router->class != 'home' || $this->router->method != 'index')) {
                     $this->member_msg(lang('m-085'));
                 }
-                $url = MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(dr_now_url());
+                $url = MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(man_now_url());
                 // 没有登录时
                 if ($verify && !$this->uid) {
                     $this->member_msg(lang('m-039').$this->member_model->logout(), $url);
@@ -730,17 +730,17 @@ class D_Common extends CI_Controller {
                             && !isset($this->member['complete'])
                             && $this->router->class != 'account') {
                             // 是否强制完善资料
-                            $this->member_msg(lang('m-154'), dr_url('account/index'), 2, 2);
+                            $this->member_msg(lang('m-154'), man_url('account/index'), 2, 2);
                         } elseif ($MEMBER['setting']['avatar']
                             && !$this->member['avatar']
                             && $this->router->class != 'account') {
                             // 是否强制上传头像
-                            $this->member_msg(lang('m-153'), dr_url('account/avatar'), 2, 2);
+                            $this->member_msg(lang('m-153'), man_url('account/avatar'), 2, 2);
                         } elseif ($MEMBER['setting']['mobile']
                             && !$this->member['ismobile']
                             && $this->router->class != 'account') {
                             // 是否强制手机认证
-                            $this->member_msg(lang('m-094'), dr_url('account/index'), 2, 2);
+                            $this->member_msg(lang('m-094'), man_url('account/index'), 2, 2);
                         }
                     }
                 }
@@ -756,9 +756,9 @@ class D_Common extends CI_Controller {
             $this->admin = $this->is_admin_login();
             if (!$this->is_auth($uri)) {
                 if (IS_AJAX) {
-                    exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.dr_lang('049', $uri));
+                    exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.man_lang('049', $uri));
                 } else {
-                    $this->admin_msg(dr_lang('049', $uri));
+                    $this->admin_msg(man_lang('049', $uri));
                 }
             }
             $this->template->assign('admin', $this->admin);
@@ -774,7 +774,7 @@ class D_Common extends CI_Controller {
                 $path = FCPATH.'cache/optionlog/'.date('Ym', SYS_TIME).'/';
                 $file = $path.date('d', SYS_TIME).'.log';
                 if (!is_dir($path)) {
-                    dr_mkdirs($path);
+                    man_mkdirs($path);
                 }
                 $log = is_file($file) ? @explode(PHP_EOL, file_get_contents($file)) : array();
                 if (IS_POST
@@ -782,7 +782,7 @@ class D_Common extends CI_Controller {
                     && $data['class'] != 'api'
                     && $data['class'] != 'login') {
                     if ($log) {
-                        $end = dr_string2array(end($log));
+                        $end = man_string2array(end($log));
                         if ($end
                             && $end['uri'] == $data['uri']
                             && $data['admin'] == $end['admin']
@@ -793,7 +793,7 @@ class D_Common extends CI_Controller {
                     }
                     // 记录日志
                     if ($data) {
-                        file_put_contents($file, PHP_EOL.dr_array2string($data), FILE_APPEND);
+                        file_put_contents($file, PHP_EOL.man_array2string($data), FILE_APPEND);
                     }
                 }
                 unset($data, $uri, $path, $file, $log, $end);
@@ -913,7 +913,7 @@ class D_Common extends CI_Controller {
             $class = '';
             if (strpos($uri, '_js') !== FALSE) {
                 $uri = substr($uri, 0, -3);
-                $url = dr_dialog_url($this->duri->uri2url($uri), 'add');
+                $url = man_dialog_url($this->duri->uri2url($uri), 'add');
             } else {
                 $url = $this->duri->uri2url($uri);
                 $class = ' class="onloading"';
@@ -1003,7 +1003,7 @@ class D_Common extends CI_Controller {
                 exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('040'));
             }
             if (IS_ADMIN) {
-                redirect(SITE_URL . dr_url('login/index', array('backurl' => urlencode(dr_now_url()))), 'refresh');
+                redirect(SITE_URL . man_url('login/index', array('backurl' => urlencode(man_now_url()))), 'refresh');
             }
             return FALSE;
         }
@@ -1012,11 +1012,11 @@ class D_Common extends CI_Controller {
         if (!is_array($data)) {
             if (IS_ADMIN) {
                 if ($data == 0) {
-                    IS_AJAX ? exit(dr_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('043'))) : $this->admin_msg(lang('043'));
+                    IS_AJAX ? exit(man_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('043'))) : $this->admin_msg(lang('043'));
                 } elseif ($data == -3) {
-                    IS_AJAX ? exit(dr_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('045'))) : $this->admin_msg(lang('045'));
+                    IS_AJAX ? exit(man_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('045'))) : $this->admin_msg(lang('045'));
                 } elseif ($data == -4) {
-                    IS_AJAX ? exit(dr_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('046'))) : $this->admin_msg(lang('046'));
+                    IS_AJAX ? exit(man_json(0, '<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.lang('046'))) : $this->admin_msg(lang('046'));
                 }
             } else {
                 return $data;
@@ -1059,7 +1059,7 @@ class D_Common extends CI_Controller {
     public function member_msg($msg, $url = '', $mark = 0, $time = 1, $ajax = FALSE) {
         // 当指定为ajax提交或者系统提交状态为ajax则返回json数据
         if ($ajax || IS_AJAX) {
-            exit(dr_json(($mark ? 1 : 0), $msg, $url));
+            exit(man_json(($mark ? 1 : 0), $msg, $url));
         } else {
             $this->template->assign(array(
                 'msg' => $msg,
@@ -1169,11 +1169,11 @@ class D_Common extends CI_Controller {
      * @return  string
      */
     public function get_system_run_info() {
-        return dr_lang(
+        return man_lang(
             '314',
             $this->benchmark->elapsed_time('total_execution_time_start', 'total_execution_time_end'),
             count($this->db->queries),
-            str_replace(' ', '', dr_format_file_size(memory_get_usage() / 4))
+            str_replace(' ', '', man_format_file_size(memory_get_usage() / 4))
         );
     }
 
@@ -1222,11 +1222,11 @@ class D_Common extends CI_Controller {
                 && $validate['required']) {
                 // 验证值为空
                 if ($value == '') {
-                    return array('error' => $name, 'msg' => dr_lang('m-197', $field['name']));
+                    return array('error' => $name, 'msg' => man_lang('m-197', $field['name']));
                 }
                 // 当类别为联动时判定0值
                 if ($field['fieldtype'] == 'Linkage' && !$value) {
-                    return array('error' => $name, 'msg' => dr_lang('m-197', $field['name']));
+                    return array('error' => $name, 'msg' => man_lang('m-197', $field['name']));
                 }
                 // 正则验证
                 if (isset($validate['pattern'])
@@ -1319,7 +1319,7 @@ class D_Common extends CI_Controller {
                          ->where('id<>', (int)$_data['id'])
                          ->where($name, $this->post[$name])
                          ->count_all_results(SITE_ID.'_'.APP_DIR)) {
-                    return array('error' => $name, 'msg' => dr_lang('m-201', $field['name']));
+                    return array('error' => $name, 'msg' => man_lang('m-201', $field['name']));
                 }
             }
             $obj->insert_value($field); // 获取入库值
@@ -1327,7 +1327,7 @@ class D_Common extends CI_Controller {
                 $this->data[$field['ismain']][$name.'_lng'] = (double)$this->data[$field['ismain']][$name.'_lng'];
                 $this->data[$field['ismain']][$name.'_lat'] = (double)$this->data[$field['ismain']][$name.'_lat'];
             } elseif ($field['fieldtype'] == 'Syn') {
-                $temp = dr_string2array($this->data[$field['ismain']][$name]);
+                $temp = man_string2array($this->data[$field['ismain']][$name]);
                 $temp['name'] = $name;
                 $this->syn_content = $temp;
                 unset($temp);
@@ -1502,7 +1502,7 @@ class D_Common extends CI_Controller {
         $group = array();
         $myfield = $mygroup = $mycat = $mark = '';
         if ($cat == TRUE) {
-            $mycat = '<tbody id="dr_category_field"></tbody>';
+            $mycat = '<tbody id="man_category_field"></tbody>';
         }
 
         if (!$field) {
@@ -1595,31 +1595,31 @@ class D_Common extends CI_Controller {
 
         foreach ($data as $n => $value) {
             if (isset($fields[$n])) {
-                $format = dr_get_value($fields[$n]['fieldtype'], $value, $fields[$n]['setting']['option'], $dirname);
+                $format = man_get_value($fields[$n]['fieldtype'], $value, $fields[$n]['setting']['option'], $dirname);
                 if ($format !== $value) {
                     $data['_'.$n] = $value;
                     $data[$n] = $format;
                 } elseif (SITE_MOBILE !== TRUE
                     && $n == 'content' && $fields[$n]['fieldtype'] == 'Ueditor'
-                    && strpos($value, '<div name="dr_page_break" class="pagebreak">') !== FALSE
-                    && preg_match_all('/<div name="dr_page_break" class="pagebreak">(.*)<\/div>/Us', $value, $match)
-                    && preg_match('/(.*)<div name="dr_page_break"/Us', $value, $frist)) {
+                    && strpos($value, '<div name="man_page_break" class="pagebreak">') !== FALSE
+                    && preg_match_all('/<div name="man_page_break" class="pagebreak">(.*)<\/div>/Us', $value, $match)
+                    && preg_match('/(.*)<div name="man_page_break"/Us', $value, $frist)) {
                     // 编辑器分页 老版本
                     $page = 1;
                     $content = $title = array();
                     $data['_'.$n] = $value;
-                    $content[$page]['title'] = dr_lang('m-131', $page);
+                    $content[$page]['title'] = man_lang('m-131', $page);
                     $content[$page]['body'] = $frist[1];
                     foreach ($match[0] as $i => $t) {
                         $page ++;
                         $value = str_replace($content[$page - 1]['body'].$t, '', $value);
-                        if (preg_match('/(.*)<div name="dr_page_break"/Us', $value, $match_body)) {
+                        if (preg_match('/(.*)<div name="man_page_break"/Us', $value, $match_body)) {
                             $body = $match_body[1];
                         } else {
                             $body = $value;
                         }
                         $title[$page] = trim($match[1][$i]);
-                        $content[$page]['title'] = trim($match[1][$i]) ? trim($match[1][$i]) : dr_lang('m-131', $page);
+                        $content[$page]['title'] = trim($match[1][$i]) ? trim($match[1][$i]) : man_lang('m-131', $page);
                         $content[$page]['body'] = $body;
                     }
                     $page = max(1, min($page, $curpage));
@@ -1635,7 +1635,7 @@ class D_Common extends CI_Controller {
                     $page = 1;
                     $content = $title = array();
                     $data['_'.$n] = $value;
-                    $content[$page]['title'] = dr_lang('m-131', $page);
+                    $content[$page]['title'] = man_lang('m-131', $page);
                     $content[$page]['body'] = $frist[1];
                     foreach ($match[0] as $i => $t) {
                         $page ++;
@@ -1646,7 +1646,7 @@ class D_Common extends CI_Controller {
                             $body = $value;
                         }
                         $title[$page] = trim($match[1][$i]);
-                        $content[$page]['title'] = trim($match[1][$i]) ? trim($match[1][$i]) : dr_lang('m-131', $page);
+                        $content[$page]['title'] = trim($match[1][$i]) ? trim($match[1][$i]) : man_lang('m-131', $page);
                         $content[$page]['body'] = $body;
                     }
                     $page = max(1, min($page, $curpage));
@@ -1819,7 +1819,7 @@ class D_Common extends CI_Controller {
         if ($isDir) {
             if (is_dir($pathfile)) {
                 mt_srand((double) microtime() * 1000000);
-                $pathfile = $pathfile.'dr_'.uniqid(mt_rand()).'.tmp';
+                $pathfile = $pathfile.'man_'.uniqid(mt_rand()).'.tmp';
             } elseif (@mkdir($pathfile)) {
                 return self::_checkWriteAble($pathfile);
             } else {

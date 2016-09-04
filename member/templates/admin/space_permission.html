@@ -8,7 +8,7 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
+function man_form_check() {
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -17,7 +17,7 @@ function dr_form_check() {
 }
 </script>
 <div style="width:500px;max-height:480px;overflow:auto;margin-bottom:10px;">
-	<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+	<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 	<input name="mark" id="mark" type="hidden" value="0">
 	<div class="subnav">
 		<div class="table-list">
@@ -34,7 +34,7 @@ function dr_form_check() {
 					{loop $group['level'] $level}
 					<tr>
 						{php $id=$group['id'].'_'.$level['id'];}
-						<td align="left" width="250" style="padding-left:20px">{$level['name']}&nbsp;&nbsp;{dr_show_stars($level['stars'])}</td>
+						<td align="left" width="250" style="padding-left:20px">{$level['name']}&nbsp;&nbsp;{man_show_stars($level['stars'])}</td>
 						<td align="left" style="padding-right:10px">
 						<input name="data[{$id}]" type="checkbox" {if isset($data[$id]) && $data[$id]}checked="checked"{/if} value="1" />
 						</td>

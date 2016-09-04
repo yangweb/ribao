@@ -29,7 +29,7 @@ class Home extends M_Controller {
 			$this->_space($uid); // 带会员uid参数时进入会员空间界面
 		} else {
             // 登录验证
-			$url = MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(dr_now_url());
+			$url = MEMBER_URL.SELF.'?c=login&m=index&backurl='.urlencode(man_now_url());
 			if (!$this->uid) {
                 $this->member_msg(lang('m-039').$this->member_model->logout(), $url);
             }
@@ -58,7 +58,7 @@ class Home extends M_Controller {
                 if ($total = $this->db->where('uid', $this->uid)->where('isnew', 1)->count_all_results('pm_members')) {
                     $notice[] = array(
                         'name' => '短消息',
-                        'url' => dr_member_url('pm/index'),
+                        'url' => man_member_url('pm/index'),
                         'total' => $total,
                     );
                 }
@@ -66,7 +66,7 @@ class Home extends M_Controller {
                 if ($total = $this->db->where('uid', $this->uid)->where('type', 1)->where('isnew', 1)->count_all_results('member_notice_'.(int)$this->member['tableid'])) {
                     $notice[] = array(
                         'name' => '系统提醒',
-                        'url' => dr_member_url('notice/index'),
+                        'url' => man_member_url('notice/index'),
                         'total' => $total,
                     );
                 }
@@ -74,7 +74,7 @@ class Home extends M_Controller {
                 if ($total = $this->db->where('uid', $this->uid)->where('type', 2)->where('isnew', 1)->count_all_results('member_notice_'.(int)$this->member['tableid'])) {
                     $notice[] = array(
                         'name' => '会员互动',
-                        'url' => dr_member_url('notice/member'),
+                        'url' => man_member_url('notice/member'),
                         'total' => $total,
                     );
                 }
@@ -82,7 +82,7 @@ class Home extends M_Controller {
                 if ($total = $this->db->where('uid', $this->uid)->where('type', 3)->where('isnew', 1)->count_all_results('member_notice_'.(int)$this->member['tableid'])){
                     $notice[] = array(
                         'name' => '模块提醒',
-                        'url' => dr_member_url('notice/module'),
+                        'url' => man_member_url('notice/module'),
                         'total' => $total,
                     );
                 }
@@ -90,14 +90,14 @@ class Home extends M_Controller {
                 if ($total = $this->db->where('uid', $this->uid)->where('type', 4)->where('isnew', 1)->count_all_results('member_notice_'.(int)$this->member['tableid'])){
                     $notice[] = array(
                         'name' => '应用提醒',
-                        'url' => dr_member_url('notice/app'),
+                        'url' => man_member_url('notice/app'),
                         'total' => $total,
                     );
                 }
             }
 			$this->template->assign(array(
                 'notice' => $notice,
-                'loginlog' => array_reverse(dr_string2array($this->member['loginlog'])),
+                'loginlog' => array_reverse(man_string2array($this->member['loginlog'])),
 				'meta_name' => lang('m-012'),
                 'invite_url' => MEMBER_URL.'index.php?c=register&uid='.$this->uid.'&invite='.$this->member['username'],
                 'new_notice' => $new_notice,
@@ -209,13 +209,13 @@ class Home extends M_Controller {
 					'parent' => $parent,
 					'related' => $related,
 					'modelid' => $cat['modelid'],
-					'urlrule' => dr_space_list_url($uid, $id, TRUE),
+					'urlrule' => man_space_list_url($uid, $id, TRUE),
 				));
 				
 				if ($cat['title']) {
 					$title = $cat['title'];
 				} else {
-					$title = implode('-', array_reverse(explode('{-}', dr_space_catpos($uid, $id, '{-}', FALSE)))).'-'.$space['name'];
+					$title = implode('-', array_reverse(explode('{-}', man_space_catpos($uid, $id, '{-}', FALSE)))).'-'.$space['name'];
 				}
 				
 				$this->template->assign(array(
@@ -332,13 +332,13 @@ class Home extends M_Controller {
 					'modelid' => $cat['modelid'],
 				));
 				
-				$temp = dr_space_catpos($uid, $cat['id'], '{-}', FALSE);
+				$temp = man_space_catpos($uid, $cat['id'], '{-}', FALSE);
 				$temp = explode('{-}', $temp);
 				$catstr = implode('-', array_reverse($temp));
 				$this->template->assign(array(
 					'meta_title' => ($data['content_title'] ? $data['content_title'].'-' : '').$data['title'].'-'.$catstr.'-'.$space['name'],
 					'meta_keywords' => $data['keywords'],
-					'meta_description' => dr_strcut(dr_clearhtml($data['content']), 200, ''),
+					'meta_description' => man_strcut(man_clearhtml($data['content']), 200, ''),
 				));
 				break;
 			

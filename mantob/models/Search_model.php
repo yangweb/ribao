@@ -57,7 +57,7 @@ class Search_model extends CI_Model {
             return array();
         }
 		
-		$data['params'] = dr_string2array($data['params']);
+		$data['params'] = man_string2array($data['params']);
 		
 		return $data;
 	}
@@ -185,7 +185,7 @@ class Search_model extends CI_Model {
 			$this->link->replace($this->tablename, array(
 				'id' => $id,
 				'catid' => intval($get['catid']),
-				'params' => dr_array2string($param),
+				'params' => man_array2string($param),
 				'keyword' => $keyword,
 				'contentid' => implode(',', $contentid),
 				'inputtime' => SYS_TIME

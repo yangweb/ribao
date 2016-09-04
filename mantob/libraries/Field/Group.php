@@ -34,7 +34,7 @@ class F_Group extends A_Field {
 		if ($field) {
 			foreach ($field as $t) {
 				if ($t['fieldtype'] == 'Group') {
-					$t['setting'] = dr_string2array($t['setting']);
+					$t['setting'] = man_string2array($t['setting']);
 					if (preg_match_all('/\{(.+)\}/U', $t['setting']['option']['value'], $value)) {
 						foreach ($value[1] as $v) {
 							$group[] = $v;
@@ -121,7 +121,7 @@ class F_Group extends A_Field {
 		// 字段显示名称
 		$text = (isset($cfg['validate']['required']) && $cfg['validate']['required'] == 1 ? '<font color="red">*</font>' : '').'&nbsp;'.$cname.'：';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		$value = $cfg['option']['value'];
 		// 当字段必填时，加入html5验证标签

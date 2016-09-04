@@ -1,7 +1,7 @@
 <?php
 
 if ($_GET['payok'] == 'payok') {
-    $this->pay_msg('付款成功', dr_member_url('pay/index'), 1);
+    $this->pay_msg('付款成功', man_member_url('pay/index'), 1);
 }
 
 $myf = dirname(__FILE__)."/a.txt";

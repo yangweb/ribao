@@ -4,13 +4,13 @@ $(function() {
 	SwapTab({$page});
 });
 function test_email(value) {
-    $.get('{dr_url("member/home/ajax_email")}&uid={$data.uid}&email='+value+'&rand='+Math.random(), function(data){
+    $.get('{man_url("member/home/ajax_email")}&uid={$data.uid}&email='+value+'&rand='+Math.random(), function(data){
         if (data) {
-            $("#dr_email_tips").html(data);
-            $("#dr_email_tips").attr("class", "onError");
+            $("#man_email_tips").html(data);
+            $("#man_email_tips").attr("class", "onError");
         } else {
-            $("#dr_email_tips").html(" &nbsp;");
-            $("#dr_email_tips").attr("class", "onCorrect");
+            $("#man_email_tips").html(" &nbsp;");
+            $("#man_email_tips").attr("class", "onCorrect");
         }
     });
 }
@@ -29,9 +29,9 @@ function test_email(value) {
 			<li onclick="SwapTab(2)">OAuth2</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th width="200">&nbsp;{lang('html-532')}： </th>
                     <td>{$data.username}</td>
                 </tr>
@@ -43,33 +43,33 @@ function test_email(value) {
                             <option value="{$t.id}" {if $t.id==$data.groupid}selected{/if}> {$t.name} </option>
                             {/list}
                         </select>
-                        <div class="onShow" id="dr_groupid_tips"></div></td>
+                        <div class="onShow" id="man_groupid_tips"></div></td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th><font color="red">*</font>&nbsp;{lang('html-062')}： </th>
                     <td><input onblur="test_email(this.value)" class="input-text" type="text" name="member[email]" value="{$data.email}" size="25" />
-                        <div class="onShow" id="dr_email_tips"></div></td>
+                        <div class="onShow" id="man_email_tips"></div></td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th>&nbsp;{lang('html-227')}： </th>
                     <td><input class="input-text" type="text" name="member[name]" value="{$data.name}" size="25" /></td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th>&nbsp;{lang('html-228')}： </th>
                     <td><input class="input-text" type="text" name="member[phone]" value="{$data.phone}" size="25" /></td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th>&nbsp;{lang('html-061')}： </th>
                     <td>
-					<input class="input-text" type="text" name="member[password]" id="dr_password" value="" size="25" />
+					<input class="input-text" type="text" name="member[password]" id="man_password" value="" size="25" />
 					<div class="onShow">{lang('html-515')}</div>
 					</td>
                 </tr>
                 </table>
 			</div>
-            <div id="cnt_2" style="display:none" class="dr_hide">
+            <div id="cnt_2" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th width="200">&nbsp;{lang('html-532')}： </th>
                     <td>{$data.username}</td>
                 </tr>
@@ -88,9 +88,9 @@ function test_email(value) {
                 {/list}
                 </table>
 			</div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th width="200">&nbsp;{lang('html-532')}： </th>
                     <td>{$data.username}</td>
                 </tr>

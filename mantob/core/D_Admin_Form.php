@@ -62,7 +62,7 @@ class D_Admin_Form extends M_Controller {
 						'tips' => lang('102'),
 						'check' => '_check_member',
 						'required' => 1,
-						'formattr' => ' disabled /><input type="button" class="button" value="'.lang('103').'" onclick="dr_dialog_member(\'author\')" name="user"',
+						'formattr' => ' disabled /><input type="button" class="button" value="'.lang('103').'" onclick="man_dialog_member(\'author\')" name="user"',
 					)
 				)
 			),
@@ -92,7 +92,7 @@ class D_Admin_Form extends M_Controller {
 						'value' => $this->input->ip_address()
 					),
 					'validate' => array(
-						'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="dr_dialog_ip(\'inputip\')" name="ip"',
+						'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="man_dialog_ip(\'inputip\')" name="ip"',
 					)
 				)
 			)
@@ -238,7 +238,7 @@ class D_Admin_Form extends M_Controller {
 		if ($this->input->post('action') == 'del') {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			// 删除表对应的附件
 			$table = SITE_ID.'_'.APP_DIR.'_form_'.$this->fid;
@@ -247,7 +247,7 @@ class D_Admin_Form extends M_Controller {
 				$this->link->where('id', $id)->delete($table);
                 $this->attachment_model->delete_for_table($table.'-'.$id);
 			}
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		// 数据库中分页查询
@@ -258,7 +258,7 @@ class D_Admin_Form extends M_Controller {
 			'tpl' => str_replace(FCPATH, '/', $tpl),
 			'list' => $data,
 			'total' => $total,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/'.$this->router->class.'/index', array('cid' => $this->cid, 'total' => $total, 'where' => $where)), $total),
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/'.$this->router->class.'/index', array('cid' => $this->cid, 'total' => $total, 'where' => $where)), $total),
 			'param' => $where ? $this->cache->file->get($this->cache_file) : array(),
 		));
 		$this->template->display(is_file($tpl) ? basename($tpl) : 'mform_listc.html');
@@ -278,7 +278,7 @@ class D_Admin_Form extends M_Controller {
         }
         // 无权限操作
         if ($this->ids && !in_array($data['cid'], $this->ids)) {
-            $this->admin_msg(dr_lang('049', $data['id']));
+            $this->admin_msg(man_lang('049', $data['id']));
         }
 		
 		if (IS_POST) {
@@ -299,7 +299,7 @@ class D_Admin_Form extends M_Controller {
 					 ->update($table, $post[1]);
 				// 操作成功处理附件
 				$this->attachment_handle($data['uid'], $table.'-'.$id, $this->field, $post);
-				$this->admin_msg(lang('000'), dr_url(APP_DIR.'/'.$this->router->class.'/index', array('cid' => $this->cid)), 1, 0);
+				$this->admin_msg(lang('000'), man_url(APP_DIR.'/'.$this->router->class.'/index', array('cid' => $this->cid)), 1, 0);
 			}
 		}
 		

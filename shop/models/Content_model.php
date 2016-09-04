@@ -49,8 +49,8 @@ class Content_model extends C_Model {
 					  ->limit(1)
 					  ->get($this->prefix.'_data_'.$data1['tableid'])
 					  ->row_array();
-		$data1['format'] = dr_string2array($data2['format']);
-		$data1['discount'] = dr_string2array($data2['discount']);
+		$data1['format'] = man_string2array($data2['format']);
+		$data1['discount'] = man_string2array($data2['discount']);
 		
 		return $data1;
 	}

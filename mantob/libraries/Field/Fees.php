@@ -50,7 +50,7 @@ class F_Fees extends A_Field {
 	 * 字段输出
 	 */
 	public function output($value) {
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ class F_Fees extends A_Field {
 			$data = '';
 		}
 		
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($data);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($data);
 	}
 	
 	/**
@@ -89,17 +89,17 @@ class F_Fees extends A_Field {
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_discount_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_discount_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		
 		// 显示框宽度设置
 		$width = isset($cfg['option']['width']) && $cfg['option']['width'] ? $cfg['option']['width'] : '80%';
 		
 		// 字段默认值
-		$value = $value ? dr_string2array($value) : NULL;
+		$value = $value ? man_string2array($value) : NULL;
 		
-		$str = '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#dr_div_'.$name.'\').hide()" value="0" '.($value ? '' : 'checked').' />&nbsp;<label>关闭</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-		$str.= '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#dr_div_'.$name.'\').show()" value="1" '.($value ? 'checked' : '').' />&nbsp;<label>开启</label>'.$tips;
-		$str.= '<div class="dr_format_wrap" id="dr_div_'.$name.'" style="width:'.$width.(is_numeric($width) ? 'px' : '').';padding:5px;margin-top:10px;'.($value ? '' : 'display:none').'">';
+		$str = '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#man_div_'.$name.'\').hide()" value="0" '.($value ? '' : 'checked').' />&nbsp;<label>关闭</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+		$str.= '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#man_div_'.$name.'\').show()" value="1" '.($value ? 'checked' : '').' />&nbsp;<label>开启</label>'.$tips;
+		$str.= '<div class="man_format_wrap" id="man_div_'.$name.'" style="width:'.$width.(is_numeric($width) ? 'px' : '').';padding:5px;margin-top:10px;'.($value ? '' : 'display:none').'">';
 		$str.= '<table width="100%">';
 		
 		$MEMBER = $this->ci->get_cache('member');
@@ -112,7 +112,7 @@ class F_Fees extends A_Field {
 				foreach ($group['level'] as $level) {
 					$id = $group['id'].'_'.$level['id'];
 					$str.= '<tr>';
-					$str.= '<td align="left" width="250" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.dr_show_stars($level['stars']).'</td>';
+					$str.= '<td align="left" width="250" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.man_show_stars($level['stars']).'</td>';
 					$str.= '<td align="left">';
 					$str.= '<input type="text" class="input-text" style="width:70px;" name="data['.$name.']['.$id.']" value="'.$value[$id].'" />';
 					$str.= '</td>';

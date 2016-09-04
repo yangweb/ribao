@@ -76,7 +76,7 @@ class Api extends M_Controller {
 		// 模块缓存判断
 		$module = $this->get_cache('module-'.$site.'-'.$dirname);
 		if (!$module) {
-            $this->admin_msg(dr_lang('m-102', $dirname));
+            $this->admin_msg(man_lang('m-102', $dirname));
         }
 		
 		// 加载后台用到的语言包
@@ -199,7 +199,7 @@ class Api extends M_Controller {
 					   ->row_array();
 		
 		$string = '<img src="'
-            .$icon.'" align="absmiddle" style="cursor:pointer" onclick="dr_chat(this)" username="'
+            .$icon.'" align="absmiddle" style="cursor:pointer" onclick="man_chat(this)" username="'
             .$member['username'].'" uid='.$uid.' online='.$online.'>';
 		
 		exit("document.write('$string');");
@@ -309,7 +309,7 @@ class Api extends M_Controller {
 		$fields = $this->field_model->get_data();
         $related = $this->input->post('relatedname');
 		if ($data) {
-			$value = dr_string2array($data['setting']);
+			$value = man_string2array($data['setting']);
 			$value = $value['option'];
 		} else {
 			$value = array();
@@ -418,13 +418,13 @@ class Api extends M_Controller {
                 ->row_array();
             $filesize = (int)$data['filesize'];
             if ($filesize > $member_rule['attachsize'] * 1024 * 1024) {
-                exit(json_encode(array('status' => 0, 'data' => dr_lang('m-147', $member_rule['attachsize'].'MB', dr_format_file_size($filesize)))));
+                exit(json_encode(array('status' => 0, 'data' => man_lang('m-147', $member_rule['attachsize'].'MB', man_format_file_size($filesize)))));
             }
         }
 
         $path = FCPATH.'member/uploadfile/'.date('Ym', SYS_TIME).'/';
         if (!is_dir($path)) {
-            dr_mkdirs($path);
+            man_mkdirs($path);
         }
         $this->load->library('upload', array(
             'max_size' => 10240,
@@ -445,7 +445,7 @@ class Api extends M_Controller {
             echo json_encode(array(
                 'status' => 1,
                 'data' => array(
-                    'src' => dr_file($file),
+                    'src' => man_file($file),
                     'extension' => $_ext,
                     'attach_id' => $id
                 )
@@ -491,7 +491,7 @@ class Api extends M_Controller {
 						 ->row_array();
 			$filesize = (int)$data['filesize'];
 			if ($filesize > $member_rule['attachsize'] * 1024 * 1024) {
-                exit('0,'.dr_lang('m-147', $member_rule['attachsize'].'MB', dr_format_file_size($filesize)));
+                exit('0,'.man_lang('m-147', $member_rule['attachsize'].'MB', man_format_file_size($filesize)));
             }
 		}
 
@@ -504,7 +504,7 @@ class Api extends M_Controller {
 				$path = FCPATH.'member/uploadfile/'.date('Ym', SYS_TIME).'/';
 			}
 			if (!is_dir($path)) {
-                dr_mkdirs($path);
+                man_mkdirs($path);
             }
 			$this->load->library('upload', array(
 				'max_size' => (int)$size * 1024,
@@ -524,7 +524,7 @@ class Api extends M_Controller {
 				list($id, $file, $_ext) = $result;
 				$icon = is_file(FCPATH.'mantob/statics/images/ext/'.$_ext.'.gif') ? SITE_URL.'mantob/statics/images/ext/'.$_ext.'.gif' : SITE_URL.'mantob/statics/images/ext/blank.gif';
 				//唯一ID,文件全路径,图标,文件名称,文件大小,扩展名
-				exit($id.','.dr_file($file).','.$icon.','.str_replace(array('|', '.'.$_ext), '', $info['client_name']).','.dr_format_file_size($info['file_size'] * 1024).','.$_ext);
+				exit($id.','.man_file($file).','.$icon.','.str_replace(array('|', '.'.$_ext), '', $info['client_name']).','.man_format_file_size($info['file_size'] * 1024).','.$_ext);
 			} else {
 				exit('0,'.$this->upload->display_errors('', ''));
 			}
@@ -575,7 +575,7 @@ class Api extends M_Controller {
 		$fext = $this->input->get('ext');
 		$exts = explode('|', $fext);
 		$fcount = max(1, (int)$this->input->get('fcount'));
-		$furl = dr_url('api/myattach', array('ext' => $fext, 'fcount' => $fcount));
+		$furl = man_url('api/myattach', array('ext' => $fext, 'fcount' => $fcount));
 
 		if ($data) {
 			foreach ($data as $t) {
@@ -593,7 +593,7 @@ class Api extends M_Controller {
 						$list[] = array(
 							'type' => 'file',
 							'name' => $t,
-							'size' => dr_format_file_size(@filesize($path.$t)),
+							'size' => man_format_file_size(@filesize($path.$t)),
 							'file' => SITE_URL.str_replace(FCPATH, '', $path).$t,
 							'icon' => is_file(FCPATH.'mantob/statics/images/ext/'.$ext.'.gif') ? SITE_URL.'mantob/statics/images/ext/'.$ext.'.gif' : SITE_URL.'mantob/statics/images/ext/blank.gif',
 						);
@@ -642,12 +642,12 @@ class Api extends M_Controller {
 						 ->row_array();
 			$filesize = (int)$data['filesize'];
 			if ($filesize > $this->member_rule['attachsize'] * 1024 * 1024) {
-				exit("{'url':'','title':'','original':'','state':'".dr_lang('m-147', $this->member_rule['attachsize'].'MB', dr_format_file_size($filesize))."'}");
+				exit("{'url':'','title':'','original':'','state':'".man_lang('m-147', $this->member_rule['attachsize'].'MB', man_format_file_size($filesize))."'}");
 			}
 		}
 		$path = FCPATH.'member/uploadfile/'.date('Ym', SYS_TIME).'/';
 		if (!is_dir($path)) {
-            dr_mkdirs($path);
+            man_mkdirs($path);
         }
 
         $type = $this->input->get('type');
@@ -669,7 +669,7 @@ class Api extends M_Controller {
                 exit('0,'.$result);
             }
 			list($id, $file, $_ext) = $result;
-            $url = $type == 'file' ? man_down_file($id) : dr_file($file);
+            $url = $type == 'file' ? man_down_file($id) : man_file($file);
 			$title = htmlspecialchars($this->input->post('pictitle', TRUE), ENT_QUOTES);
 			exit("{'id':'".$id."','fileType':'.".$_ext."', 'url':'".$url."','title':'".$title."','original':'" . str_replace('|', '_', $info['client_name']) . "','state':'SUCCESS'}");
 		} else {
@@ -726,7 +726,7 @@ class Api extends M_Controller {
 
 		$result = array();
 		foreach ($data as $t) {
-			$result[] = dr_file($t['attachment']).'?dr_image_id='.$t['id'];
+			$result[] = man_file($t['attachment']).'?man_image_id='.$t['id'];
 		}
 		echo implode('ue_separate_ue', $result);
 	}
@@ -803,8 +803,8 @@ class Api extends M_Controller {
 
 		$this->load->helper('system');
 		$key = $this->input->get('name');
-		$info = dr_file_info($key);
-		$file = count($info) > 2 ? dr_get_file($info['attachment']) : $key;
+		$info = man_file_info($key);
+		$file = count($info) > 2 ? man_get_file($info['attachment']) : $key;
 
 		if (in_array(strtolower(trim(substr(strrchr($file, '.'), 1, 10))), array('jpg', 'jpeg', 'gif', 'png'))) {
 			echo '<img src="'.$file.'" onload="if(this.width>$(window).width()/2)this.width=$(window).width()/2;">';
@@ -842,7 +842,7 @@ class Api extends M_Controller {
             // 远程图片下载到本地缓存目录
             if (isset($info['remote']) && $info['remote']) {
                 $file = FCPATH.'cache/attach/'.time().'_'.basename($info['attachment']);
-                file_put_contents($file, dr_catcher_data($info['attachment']));
+                file_put_contents($file, man_catcher_data($info['attachment']));
             } else {
                 $file = FCPATH.$info['attachment'];
             }
@@ -885,7 +885,7 @@ class Api extends M_Controller {
 		// 远程图片下载到本地缓存目录
 		if (isset($info['remote']) && $info['remote']) {
 			$file = FCPATH.'cache/attach/'.time().'_'.basename($info['attachment']);
-			file_put_contents($file, dr_catcher_data($info['attachment']));
+			file_put_contents($file, man_catcher_data($info['attachment']));
 		} else {
 			$file = FCPATH.$file;
 		}
@@ -960,7 +960,7 @@ class Api extends M_Controller {
             && !$this->db->where('type', 1)->where('mark', $mark)->count_all_results($table)) {
 			// 虚拟币不足时，提示错误
 			if ($this->member_rule['download_score'] + $this->member['score'] < 0) {
-				$this->admin_msg(dr_lang('m-324', SITE_SCORE, abs($this->member_rule['download_score'])));
+				$this->admin_msg(man_lang('m-324', SITE_SCORE, abs($this->member_rule['download_score'])));
 			}
 			// 虚拟币扣减
 			$this->member_model->update_score(1, $this->uid, (int)$this->member_rule['download_score'], $mark, "lang,m-325");
@@ -1023,7 +1023,7 @@ class Api extends M_Controller {
 	        	$user = $oauth->get_user_info($oauth->access($code));
 				if (is_array($user) && $user['oid']) {
 					$code = $this->member_model->OAuth_login($appid, $user);
-					$this->member_msg(lang('m-002').$code, dr_url('home/index'), 1, 3);
+					$this->member_msg(lang('m-002').$code, man_url('home/index'), 1, 3);
 				} else {
 					$this->member_msg(lang('m-051'));
 				}

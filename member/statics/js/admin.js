@@ -7,34 +7,34 @@
  * @copyright   Copyright (c) 2011 - 9999, mantob.Com, Inc.
  */
 
-function dr_alert(msg) {
+function man_alert(msg) {
     art.dialog({
         icon: 'error',
         content: msg
     });
 }
 
-function dr_member_rule(id, url, title) {
+function man_member_rule(id, url, title) {
 	var throughBox = $.dialog.through; // 创建窗口
-	var dr_Dialog = throughBox({title: title});
+	var man_Dialog = throughBox({title: title});
 	// ajax调用窗口内容
 	$.ajax({type: "GET", url:url, dataType:'text', success: function (text) {
 			var win = $.dialog.top;
-			dr_Dialog.content(text);
+			man_Dialog.content(text);
 			// 添加按钮
-			dr_Dialog.button({name: fc_lang[36], callback:function() {
+			man_Dialog.button({name: fc_lang[36], callback:function() {
 					win.$("#mark").val("0"); // 标示可以提交表单
-					if (win.dr_form_check()) { // 按钮返回验证表单函数
+					if (win.man_form_check()) { // 按钮返回验证表单函数
 						var _data = win.$("#myform").serialize();
 						$.ajax({type: "POST",dataType:"json", url: url, data: _data, // 将表单数据ajax提交验证
 							success: function(data) {
-								$("#dr_status_"+id).attr("class", "onCorrect");
-								$("#dr_status_"+id).html("&nbsp;&nbsp;");
+								$("#man_status_"+id).attr("class", "onCorrect");
+								$("#man_status_"+id).html("&nbsp;&nbsp;");
 								$.dialog.tips(fc_lang[37], 2, 1);
-								dr_Dialog.close();
+								man_Dialog.close();
 							},
 							error: function(HttpRequest, ajaxOptions, thrownError) {
-								dr_alert(HttpRequest.responseText);
+								man_alert(HttpRequest.responseText);
 							}
 						});
 					}
@@ -44,40 +44,40 @@ function dr_member_rule(id, url, title) {
 			});
 	    },
 	    error: function(HttpRequest, ajaxOptions, thrownError) {
-			dr_alert(HttpRequest.responseText);
+			man_alert(HttpRequest.responseText);
 		}
 	});
 }
 
-function dr_install(text, url) {
+function man_install(text, url) {
 	var throughBox	= $.dialog.through;
-	var dr_Dialog	= throughBox({title: fc_lang['33']});
-	dr_Dialog.content("<div style='width:500px;line-height:23px;font-size:13px;padding-bottom:10px'>"+text+"</div>");
-	dr_Dialog.button({name: fc_lang['34'],
+	var man_Dialog	= throughBox({title: fc_lang['33']});
+	man_Dialog.content("<div style='width:500px;line-height:23px;font-size:13px;padding-bottom:10px'>"+text+"</div>");
+	man_Dialog.button({name: fc_lang['34'],
 		callback:function() {
-			dr_tips(lang['waiting'], 99, 1);
-			dr_goto_url(url);
+			man_tips(lang['waiting'], 99, 1);
+			man_goto_url(url);
 		},
 		focus: true
 	}
 	,
 	{name: fc_lang['35'],
 		callback:function() {
-			dr_Dialog.close();
+			man_Dialog.close();
 		},
 		focus: false
 	});
 }
 
-function dr_dialog_member(id) {
+function man_dialog_member(id) {
     if (id == 'author') {
-        id = $('#dr_author').val();
+        id = $('#man_author').val();
     }
 	art.dialog.open(siteurl+'?c=api&m=member&uid='+id,{title: lang['smember']});
 }
 
-function dr_dialog_ip(id) {
-	var name = $("#dr_"+id).val();
+function man_dialog_ip(id) {
+	var name = $("#man_"+id).val();
 	if (name) {
 		art.dialog.open('http://www.baidu.com/baidu?wd='+name, {title: 'IP', width:700, height:400});
 	} else {
@@ -96,7 +96,7 @@ function dr_dialog_ip(id) {
     // [more..]
 })(art.dialog.defaults);
 
-function dr_page_rule() {
+function man_page_rule() {
 	var body = '<style>.table-list2 tbody td, .table-list2 .btn {padding-bottom:1px;padding-top:1px;}</style><table border="0" cellpadding="1" cellspacing="0" class="table-list table-list2">';
 	body +='<tr><td>{id}</td><td>Id</td></tr><tr>';
 	body +='<tr><td>{page}</td><td>'+lang['page']+'</td></tr>';
@@ -110,7 +110,7 @@ function dr_page_rule() {
 	});
 }
 
-function dr_url_rule() {
+function man_url_rule() {
 	var body = '<style>.table-list2 tbody td, .table-list2 .btn {padding-bottom:1px;padding-top:1px;}</style><table border="0" cellpadding="1" cellspacing="0" class="table-list table-list2">';
 	body +='<tr><td width="15%">'+lang['tag']+'</td><td width="85%">&nbsp;</td></tr>';
 	body +='<tr><td>{id}</td><td>Id</td></tr><tr>';
@@ -130,7 +130,7 @@ function dr_url_rule() {
 	});
 }
 
-function dr_seo_rule() {
+function man_seo_rule() {
 	var body = '<style>.table-list tbody td, .table-list .btn {height:25px;line-height:25px;padding-bottom:1px;padding-top:1px;}</style><table border="0" cellpadding="1" cellspacing="0" class="table-list">';
 	body +='<tr><td width="15%">'+lang['tag']+'</td><td width="85%">&nbsp;</td></tr>';
 	body +='<tr><td>{join}</td><td>'+lang['seojoin']+'</td></tr><tr>';
@@ -186,14 +186,14 @@ function set_urltohtml(v) {
 function SwapTab(id) {
 	$("#myform .tabBut").children("li").removeClass("on");
 	$(".tabBut li:eq("+id+")").attr("class", "on");
-	$("#myform .dr_hide").hide();
+	$("#myform .man_hide").hide();
 	$("#cnt_"+id).show();
 	$("#myform #page").val(id);
 }
 
 // 表单提示
-function dr_form_tips(name, status, code) {
-	var obj = $("#dr_"+name+"_tips");
+function man_form_tips(name, status, code) {
+	var obj = $("#man_"+name+"_tips");
 	if (status) {
 		obj.attr("class", "onCorrect");
 	} else {
@@ -201,15 +201,15 @@ function dr_form_tips(name, status, code) {
 	}
 }
 
-function dr_selected() {
-	if ($("#dr_select").attr('checked')) {
-		$(".dr_select").attr("checked",true);
+function man_selected() {
+	if ($("#man_select").attr('checked')) {
+		$(".man_select").attr("checked",true);
 	} else {
-		$(".dr_select").attr("checked",false);
+		$(".man_select").attr("checked",false);
 	}
 }
 
-function dr_selected_by(id) {
+function man_selected_by(id) {
 	if ($("#"+id).attr('checked')) {
 		$("."+id).attr("checked",true);
 	} else {
@@ -217,39 +217,39 @@ function dr_selected_by(id) {
 	}
 }
 
-function dr_goto_url(url) {
+function man_goto_url(url) {
 	window.location.href = url;
 }
 
-function dr_waiting() {
+function man_waiting() {
 	art.dialog.tips(lang['waiting'], 3, 1);
 }
 
-function dr_dialog_show(title, url) {
+function man_dialog_show(title, url) {
 	var throughBox = $.dialog.through;
-	var dr_Dialog = throughBox({title: title});
+	var man_Dialog = throughBox({title: title});
 	$.ajax({type: "POST", dataType:"text", url: url, data: {},
 		success: function(data) {
-			dr_Dialog.content(data);
+			man_Dialog.content(data);
 		},
 		error: function(HttpRequest, ajaxOptions, thrownError) {
-			dr_alert(HttpRequest.responseText);
+			man_alert(HttpRequest.responseText);
 		}
 	});
 }
 
-function dr_dialog_set(text, url) {
+function man_dialog_set(text, url) {
 	var throughBox	= $.dialog.through;
-	var dr_Dialog	= throughBox({title: lang['tips']});
-	dr_Dialog.content('<img src='+memberpath+'statics/js/skins/icons/question.png>&nbsp;&nbsp;'+text);
+	var man_Dialog	= throughBox({title: lang['tips']});
+	man_Dialog.content('<img src='+memberpath+'statics/js/skins/icons/question.png>&nbsp;&nbsp;'+text);
 	// 添加按钮
-	dr_Dialog.button({name: lang['ok'],
+	man_Dialog.button({name: lang['ok'],
 		callback:function() {
 				// 将表单数据ajax提交验证
 				$.ajax({type: "POST", dataType:"json", url: url, data: {},
 					success: function(data) {
 						if (data.status == 1) {
-							dr_Dialog.close();
+							man_Dialog.close();
 							$.dialog.tips(data.code, 2, 1);
 							// 刷新页
 							setTimeout('window.location.reload(true)', 2000);
@@ -259,7 +259,7 @@ function dr_dialog_set(text, url) {
 						}
 					},
 					error: function(HttpRequest, ajaxOptions, thrownError) {
-						dr_alert(HttpRequest.responseText);
+						man_alert(HttpRequest.responseText);
 					}
 				});
 		},
@@ -269,13 +269,13 @@ function dr_dialog_set(text, url) {
 	{name: lang["cancel"],
 		callback:function() {
             top.$('.page-loading').remove();
-            dr_Dialog.close();
+            man_Dialog.close();
 		},
 		focus: false
 	});
 }
 
-function dr_confirm_set_all(title, del) {
+function man_confirm_set_all(title, del) {
 	art.dialog.confirm(title, function(){
 		var _data = $("#myform").serialize();
 		var _url = window.location.href;
@@ -290,9 +290,9 @@ function dr_confirm_set_all(title, del) {
 				if (data.status == 1) {
 					$.dialog.tips(data.code, 3, 1);
 					if (del == 1) {
-						$(".dr_select").each(function(){
+						$(".man_select").each(function(){
 							if ($(this).attr('checked')) {
-								$("#dr_row_"+$(this).val()).remove();
+								$("#man_row_"+$(this).val()).remove();
 							}
 						});
 					} else {
@@ -305,7 +305,7 @@ function dr_confirm_set_all(title, del) {
 				}
 			},
 			error: function(HttpRequest, ajaxOptions, thrownError) {
-				dr_alert(HttpRequest.responseText);
+				man_alert(HttpRequest.responseText);
 			}
 		});
 		return true;
@@ -313,18 +313,18 @@ function dr_confirm_set_all(title, del) {
 	return false;
 }
 
-function dr_dialog_del(text, url) {
+function man_dialog_del(text, url) {
 	var throughBox = $.dialog.through;
-	var dr_Dialog = throughBox({title: lang['del']});
-	dr_Dialog.content('<img src='+memberpath+'statics/js/skins/icons/question.png>&nbsp;&nbsp;'+text);
+	var man_Dialog = throughBox({title: lang['del']});
+	man_Dialog.content('<img src='+memberpath+'statics/js/skins/icons/question.png>&nbsp;&nbsp;'+text);
 	// 添加按钮
-	dr_Dialog.button({name: lang['del'],
+	man_Dialog.button({name: lang['del'],
 		callback:function() {
 				// 将表单数据ajax提交验证
 				$.ajax({type: "POST", dataType:"json", url: url, data: {},
 					success: function(data) {
 						if (data.status == 1) {
-							dr_Dialog.close();
+							man_Dialog.close();
 							$.dialog.tips(data.code, 2, 1);
 							// 刷新页
 							setTimeout('window.location.reload(true)', 2000);
@@ -334,7 +334,7 @@ function dr_dialog_del(text, url) {
 						}
 					},
 					error: function(HttpRequest, ajaxOptions, thrownError) {
-						dr_alert(HttpRequest.responseText);
+						man_alert(HttpRequest.responseText);
 					}
 				});
 		},
@@ -344,13 +344,13 @@ function dr_dialog_del(text, url) {
 	{name: lang["cancel"],
 		callback:function() {
             top.$('.page-loading').remove();
-			dr_Dialog.close();
+			man_Dialog.close();
 		},
 		focus: false
 	});
 }
 
-function dr_confirm_del_all() {
+function man_confirm_del_all() {
 	art.dialog.confirm(lang['confirm'], function(){
 		var _data = $("#myform").serialize();
 		var _url = window.location.href;
@@ -373,7 +373,7 @@ function dr_confirm_del_all() {
 				}
 			},
 			error: function(HttpRequest, ajaxOptions, thrownError) {
-				dr_alert(HttpRequest.responseText);
+				man_alert(HttpRequest.responseText);
 			}
 		});
 		return true;
@@ -381,7 +381,7 @@ function dr_confirm_del_all() {
 	return false;
 }
 
-function dr_dialog(url, func) {
+function man_dialog(url, func) {
 	// 判断窗口类型
 	switch(func){
 		case 'add':
@@ -396,26 +396,26 @@ function dr_dialog(url, func) {
 	}
 	// 创建窗口
 	var throughBox	= $.dialog.through;
-	var dr_Dialog	= throughBox({title: _title});
+	var man_Dialog	= throughBox({title: _title});
 	// ajax调用窗口内容
 	$.ajax({type: "GET", url:url, dataType:'text',
 	    success: function (text) {
 			var win = $.dialog.top;
-			dr_Dialog.content(text);
+			man_Dialog.content(text);
 			// 添加按钮
-			dr_Dialog.button({name: _title,
+			man_Dialog.button({name: _title,
 				callback:function() {
 					// 标示可以提交表单
 					win.$("#mark").val("0");
 					// 按钮返回验证表单函数
-					if (win.dr_form_check()) {
+					if (win.man_form_check()) {
 						var _data = win.$("#myform").serialize();
 						// 将表单数据ajax提交验证
 						$.ajax({type: "POST",dataType:"json", url: url, data: _data,
 							success: function(data) {
 								//验证成功
 								if (data.status == 1) {
-									dr_Dialog.close();
+									man_Dialog.close();
 									$.dialog.tips(data.code, 2, 1);
 									var _url = window.location.href;
 									var _id = window.location.hash;
@@ -424,7 +424,7 @@ function dr_dialog(url, func) {
 										_url = _url.replace(_id, '');
 									}
 									// 赋值并刷新页
-									art.dialog.data('dr_row', _url+"#dr_row_"+data.id);
+									art.dialog.data('man_row', _url+"#man_row_"+data.id);
 									window.location.reload(true);
 								} else {
 									//验证失败
@@ -434,7 +434,7 @@ function dr_dialog(url, func) {
 								}
 							},
 							error: function(HttpRequest, ajaxOptions, thrownError) {
-								dr_alert(HttpRequest.responseText);
+								man_alert(HttpRequest.responseText);
 							}
 						});
 					}
@@ -444,7 +444,7 @@ function dr_dialog(url, func) {
 			});
 	    },
 	    error: function(HttpRequest, ajaxOptions, thrownError) {
-			dr_alert(HttpRequest.responseText);
+			man_alert(HttpRequest.responseText);
 		}
 	});
 }

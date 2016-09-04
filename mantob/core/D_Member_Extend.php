@@ -34,7 +34,7 @@ class D_Member_Extend extends M_Controller {
         }
         // 判断具有此栏目的管理权限
         $this->catrule = $this->module_rule[$this->content['catid']];
-        $this->content['type'] = dr_string2array($this->content['type']);
+        $this->content['type'] = man_string2array($this->content['type']);
         $this->template->assign(array(
             'cid' => $cid,
             'catrule' => $this->catrule,
@@ -54,7 +54,7 @@ class D_Member_Extend extends M_Controller {
             // 判断id是否为空
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             if ($this->input->post('action') == 'update') {
@@ -64,7 +64,7 @@ class D_Member_Extend extends M_Controller {
                          ->where('id', $id)
                          ->update(SITE_ID.'_'.APP_DIR.'_extend', $_data[$id]);
                 }
-                exit(dr_json(1, lang('000')));
+                exit(man_json(1, lang('000')));
             }
         }
 
@@ -138,7 +138,7 @@ class D_Member_Extend extends M_Controller {
 
         // 虚拟币检查
         if ($this->catrule['extend_score'] + $this->member['score'] < 0) {
-            $this->member_msg(dr_lang('mod-44', abs($this->catrule['extend_score']), $this->member['score']));
+            $this->member_msg(man_lang('mod-44', abs($this->catrule['extend_score']), $this->member['score']));
         }
 
         if (IS_POST) {
@@ -171,27 +171,27 @@ class D_Member_Extend extends M_Controller {
                         // 操作成功处理附件
                         $this->attachment_handle($this->content['uid'], $mark, $this->field);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-340'), dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id']))));
+                            exit(man_json(1, lang('m-340'), man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id']))));
                         }
                         $this->template->assign(array(
                             'url' => SITE_URL.APP_DIR.'/index.php?c=extend&id='.$id,
-                            'add' => dr_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
+                            'add' => man_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
                             'edit' => 0,
-                            'html' => MODULE_HTML ? dr_module_create_show_file($this->content['id']).dr_module_create_list_file($this->content['catid']) : '',
-                            'list' => dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
+                            'html' => MODULE_HTML ? man_module_create_show_file($this->content['id']).man_module_create_list_file($this->content['catid']) : '',
+                            'list' => man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
                             'meta_name' => lang('mod-19')
                         ));
                         $this->template->display('success.html');
                     } else {
                         $this->attachment_handle($this->uid, $this->content_model->prefix.'_verify-'.$this->content['id'].'-'.$id, $field);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR . '/everify/index')));
+                            exit(man_json(1, lang('m-341'), man_member_url(APP_DIR . '/everify/index')));
                         }
                         $this->template->assign(array(
-                            'url' => dr_member_url(APP_DIR.'/everify/index'),
-                            'add' => dr_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
+                            'url' => man_member_url(APP_DIR.'/everify/index'),
+                            'add' => man_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
                             'edit' => 0,
-                            'list' => dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
+                            'list' => man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
                             'meta_name' => lang('mod-19')
                         ));
                         $this->template->display('verify.html');
@@ -254,27 +254,27 @@ class D_Member_Extend extends M_Controller {
                         // 操作成功处理附件
                         $this->attachment_handle($this->content['uid'], $mark, $this->field, $_data);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-340'), dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id']))));
+                            exit(man_json(1, lang('m-340'), man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id']))));
                         }
                         $this->template->assign(array(
                             'url' => SITE_URL.APP_DIR.'/index.php?c=extend&id='.$id,
-                            'add' => dr_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
+                            'add' => man_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
                             'edit' => 1,
-                            'html' => MODULE_HTML ? dr_module_create_show_file($this->content['id']).dr_module_create_list_file($this->content['catid']) : '',
-                            'list' => dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
+                            'html' => MODULE_HTML ? man_module_create_show_file($this->content['id']).man_module_create_list_file($this->content['catid']) : '',
+                            'list' => man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
                             'meta_name' => lang('mod-19')
                         ));
                         $this->template->display('success.html');
                     } else {
                         $this->attachment_handle($this->uid, $this->content_model->prefix.'_verify-'.$this->content['id'].'-'.$id, $field);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR . '/everify/index')));
+                            exit(man_json(1, lang('m-341'), man_member_url(APP_DIR . '/everify/index')));
                         }
                         $this->template->assign(array(
-                            'url' => dr_member_url(APP_DIR.'/everify/index'),
-                            'add' => dr_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
+                            'url' => man_member_url(APP_DIR.'/everify/index'),
+                            'add' => man_member_url(APP_DIR.'/extend/add', array('cid' => $this->content['id'], 'type' => $data[1]['mytype'])),
                             'edit' => 0,
-                            'list' => dr_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
+                            'list' => man_member_url(APP_DIR.'/extend/index', array('cid' => $this->content['id'])),
                             'meta_name' => lang('mod-19')
                         ));
                         $this->template->display('verify.html');
@@ -317,7 +317,7 @@ class D_Member_Extend extends M_Controller {
             }
         }
 
-        exit(dr_json(1, lang('000')));
+        exit(man_json(1, lang('000')));
     }
 
 }

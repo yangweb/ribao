@@ -111,7 +111,7 @@ class Order extends D_Order {
             $this->link
                  ->where('id', $id)
                  ->update($this->order_model->tablename, array('status' => 0));
-            $this->member_msg(lang('000'), dr_url(APP_DIR.'/order/show', array('id' => $id)), 1);
+            $this->member_msg(lang('000'), man_url(APP_DIR.'/order/show', array('id' => $id)), 1);
         } else {
             $this->member_msg(lang('my-54'));
         }

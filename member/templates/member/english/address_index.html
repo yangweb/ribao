@@ -1,13 +1,13 @@
 {template header.html}
 <script type="text/javascript">
-function dr_delete(id) {
+function man_delete(id) {
     art.dialog.confirm("你确认要删除吗？", function(){
 		// 将表单数据ajax提交验证
-		$.ajax({type: "POST",dataType:"json", url: "{dr_member_url($dclass.'/index')}",data: {id:id, action:'delete'}, success: function(data) {
+		$.ajax({type: "POST",dataType:"json", url: "{man_member_url($dclass.'/index')}",data: {id:id, action:'delete'}, success: function(data) {
 				//验证成功
 				if (data.status == 1) {
 					$.dialog.tips(data.code, 3, 1);
-					$("#dr_row_"+id).hide();
+					$("#man_row_"+id).hide();
 				} else {
 					$.dialog.tips(data.code, 3, 0);
 				}
@@ -23,15 +23,15 @@ function dr_delete(id) {
 	return false;
 }
 </script>
-<input name="page" id="dr_page" type="hidden" value="2" />
+<input name="page" id="man_page" type="hidden" value="2" />
 <div class="content clearfix">
 	{template navigator.html}
     <div class="article">
         <div class="section">
             <div class="title"><strong>{$meta_name}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
 				<div class="msearch mbutton">
-					<a href="{dr_member_url('address/add')}" class="cur" name="updatetime">添加</a>
+					<a href="{man_member_url('address/add')}" class="cur" name="updatetime">添加</a>
 				</div>
                 <div class="bk10"></div>
 				<table style="table-layout:fixed;margin-bottom: 0;">
@@ -45,17 +45,17 @@ function dr_delete(id) {
 						<th style="width:80px;" class="algin_l">操作</th>
 					</tr>
 				</thead>
-				<tbody id="dr_body">
+				<tbody id="man_body">
 				{loop $list $t}
-                <tr id="dr_row_{$t.id}">
+                <tr id="man_row_{$t.id}">
                     <td class="algin_c">{if $t.default}<font color="green">√</font>{else}<font color="red">×</font>{/if}</td>
                     <td class="algin_l">{$t.name}</td>
                     <td class="algin_l">{$t.phone}</td>
                     <td class="algin_l">{$t.zipcode}</td>
-                    <td class="algin_l">{dr_linkagepos('address', $t.city, '&nbsp;&nbsp;', NULL)}&nbsp;&nbsp;{$t.address}</td>
+                    <td class="algin_l">{man_linkagepos('address', $t.city, '&nbsp;&nbsp;', NULL)}&nbsp;&nbsp;{$t.address}</td>
 					<td class="algin_l">
-                    <a href="{dr_member_url('address/edit', array('id'=>$t.id))}">修改</a>
-                    <a href="{dr_member_url('address/del', array('id'=>$t.id))}">删除</a>
+                    <a href="{man_member_url('address/edit', array('id'=>$t.id))}">修改</a>
+                    <a href="{man_member_url('address/del', array('id'=>$t.id))}">删除</a>
                     </td>
                 </tr>
                 {/loop}
@@ -67,7 +67,7 @@ function dr_delete(id) {
 </div>
 <script type="text/javascript">
 $(function() {
-	$("#dr_body tr").last().addClass("dr_border_none");
+	$("#man_body tr").last().addClass("man_border_none");
 }); 
 </script>
 {template footer.html}

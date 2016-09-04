@@ -52,7 +52,7 @@ class F_Video extends A_Field {
 				foreach ($group['level'] as $level) {
 					$id = $group['id'].'_'.$level['id'];
 					$member.= '<tr>';
-					$member.= '<td align="left" width="210" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.dr_show_stars($level['stars']).'</td>';
+					$member.= '<td align="left" width="210" style="padding-left:40px">'.$level['name'].'&nbsp;&nbsp;'.man_show_stars($level['stars']).'</td>';
 					$member.= '<td align="left">';
 					$member.= '<input type="text" class="input-text" size="5" name="data[setting][option][time]['.$id.']" value="'.$option['time'][$id].'" />'.lang('311');
 					$member.= '</td>';
@@ -125,7 +125,7 @@ class F_Video extends A_Field {
 	 * 字段输出
 	 */
 	public function output($value) {
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
@@ -140,7 +140,7 @@ class F_Video extends A_Field {
 			}
 		}
 		$value['file'] = $data['file'];
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($value);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($value);
 	}
 	
 	/**
@@ -148,7 +148,7 @@ class F_Video extends A_Field {
 	 */
 	public function attach($data, $_data) {
 		
-		$_data = dr_string2array($_data);
+		$_data = man_string2array($_data);
 
         if (!isset($_data['file'])) {
             $_data = array('file' => NULL);
@@ -205,7 +205,7 @@ class F_Video extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 当字段必填时，加入html5验证标签
 		if (isset($cfg['validate']['required'])
             && $cfg['validate']['required'] == 1) {
@@ -217,13 +217,13 @@ class F_Video extends A_Field {
 		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&count=1&code='.str_replace('=', '', man_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
 		// 文件值
 		$file = $info = '';
-		$value = dr_string2array($value);
+		$value = man_string2array($value);
 		if ($value['file']) {
 			$file = $value['file'];
-			$data = dr_file_info($file);
+			$data = man_file_info($file);
 			if ($data) {
 				$size = $data['size'] ? ' ('.$data['size'].')' : '';
-				$info = '<a href="javascript:;" onclick="dr_show_file_info(\''.$file.'\')"><img align="absmiddle" src="'.$data['icon'].'"><div class="onCorrect">'.$data['filename'].$size.'&nbsp;</div></a>';
+				$info = '<a href="javascript:;" onclick="man_show_file_info(\''.$file.'\')"><img align="absmiddle" src="'.$data['icon'].'"><div class="onCorrect">'.$data['filename'].$size.'&nbsp;</div></a>';
 			}
 			unset($data);
 			$default = '';
@@ -231,8 +231,8 @@ class F_Video extends A_Field {
 				$i = 0;
 				foreach ($value['point'] as $time => $title) {
 					$default.= '
-					<li id="dr_items_'.$name.'_'.$i.'">
-					时间(秒)：<input type="text" class="input-text" style="width:70px;" value="'.$time.'" name="data['.$name.'][time][]">&nbsp;&nbsp;提示文字：<input type="text" class="input-text" style="width:250px;" value="'.$title.'" name="data['.$name.'][title][]\">&nbsp;&nbsp;<a href="javascript:;" onclick="$(\'#dr_items_'.$name.'_'.$i.'\').remove()">'.lang('del').'</a>
+					<li id="man_items_'.$name.'_'.$i.'">
+					时间(秒)：<input type="text" class="input-text" style="width:70px;" value="'.$time.'" name="data['.$name.'][time][]">&nbsp;&nbsp;提示文字：<input type="text" class="input-text" style="width:250px;" value="'.$title.'" name="data['.$name.'][title][]\">&nbsp;&nbsp;<a href="javascript:;" onclick="$(\'#man_items_'.$name.'_'.$i.'\').remove()">'.lang('del').'</a>
 					</li>';
 					$i++;
 				}
@@ -246,9 +246,9 @@ class F_Video extends A_Field {
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td style="text-align:left;padding-left:0;">
-							<span>'.dr_lang('m-138', str_replace('|', '、', $cfg['option']['ext'])).'</span>&nbsp;&nbsp;
-							<input type="hidden" id="dr_'.$name.'" name="data['.$name.'][file]" value="'.$file.'" '.$attr.' />
-							<input type="button" style="cursor:pointer;" '.$disabled.' class="button" onclick="dr_upload_file(\''.$name.'\', \''.$url.'\')" value="' . lang('m-119') . '" />
+							<span>'.man_lang('m-138', str_replace('|', '、', $cfg['option']['ext'])).'</span>&nbsp;&nbsp;
+							<input type="hidden" id="man_'.$name.'" name="data['.$name.'][file]" value="'.$file.'" '.$attr.' />
+							<input type="button" style="cursor:pointer;" '.$disabled.' class="button" onclick="man_upload_file(\''.$name.'\', \''.$url.'\')" value="' . lang('m-119') . '" />
 							<span id="show_'.$name.'" />'.$info.'</span>'.$tips.'
 							</td>
 						</tr>
@@ -258,18 +258,18 @@ class F_Video extends A_Field {
 						</ul>
 					</div>
 				<div class="picBut cu">
-					<a href="javascript:;" onClick="dr_add_video_'.$name.'()">添加提示点</a>
+					<a href="javascript:;" onClick="man_add_video_'.$name.'()">添加提示点</a>
 				</div>
 				<div class="onShow" style="margin-top:2px;">鼠标经过进度栏N秒时，N秒会提示相应的文字</div>
 				<script type="text/javascript">
 				$("#'.$name.'-sort-items").sortable();
 				var id=$("#'.$name.'-sort-items li").size();
-				function dr_add_video_'.$name.'() {
+				function man_add_video_'.$name.'() {
 					id ++;
-					var html = "<li id=\"dr_items_'.$name.'_"+id+"\">";
+					var html = "<li id=\"man_items_'.$name.'_"+id+"\">";
 					html+= "时间(秒)：<input type=\"text\" class=\"input-text\" style=\"width:70px;\" value=\"\" name=\"data['.$name.'][time][]\">&nbsp;&nbsp;";
 					html+= "提示文字：<input type=\"text\" class=\"input-text\" style=\"width:250px;\" value=\"\" name=\"data['.$name.'][title][]\">&nbsp;&nbsp;";
-					html+= "<a href=\"javascript:;\" onclick=\"$(\'#dr_items_'.$name.'_"+id+"\').remove()\">'.lang('del').'</a>";
+					html+= "<a href=\"javascript:;\" onclick=\"$(\'#man_items_'.$name.'_"+id+"\').remove()\">'.lang('del').'</a>";
 					html+= "</li>";
 					$("#'.$name.'-sort-items").append(html);
 				}

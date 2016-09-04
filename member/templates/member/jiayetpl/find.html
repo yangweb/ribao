@@ -3,7 +3,7 @@
 <script type="text/javascript">
 $(function(){
 	{if $error}
-	dr_tips("<font color=red>{$error}</font>", 3);
+	man_tips("<font color=red>{$error}</font>", 3);
 	{/if}
 });
 </script>
@@ -37,7 +37,7 @@ $(function(){
                             <th><font color="red">*</font>&nbsp;验证码： </th>
                             <td>
                                 <input class="input-text" style="height:22px;" value="" required type="text" name="code" size="30" />
-                                <span><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{dr_member_url('api/captcha', array('width' => 90, 'height' => 30))}&'+Math.random();" src="{dr_member_url('api/captcha', array('width' => 90, 'height' => 30))}" /></span>
+                                <span><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{man_member_url('api/captcha', array('width' => 90, 'height' => 30))}&'+Math.random();" src="{man_member_url('api/captcha', array('width' => 90, 'height' => 30))}" /></span>
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +63,7 @@ $(function(){
                             <th><font color="red">*</font>&nbsp;验证码： </th>
                             <td>
                                 <input class="input-text" style="height:22px;" value="" required type="text" name="code2" size="30" />
-                                <span><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{dr_member_url('api/captcha', array('width' => 90, 'height' => 30))}&'+Math.random();" src="{dr_member_url('api/captcha', array('width' => 90, 'height' => 30))}" /></span>
+                                <span><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{man_member_url('api/captcha', array('width' => 90, 'height' => 30))}&'+Math.random();" src="{man_member_url('api/captcha', array('width' => 90, 'height' => 30))}" /></span>
                             </td>
                         </tr>
                         <tr>

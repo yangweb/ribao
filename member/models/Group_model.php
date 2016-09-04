@@ -38,8 +38,8 @@ class Group_model extends CI_Model{
 		$data = array();
 		foreach ($_data as $t) {
 			$t['level'] = $this->db->where('groupid', $t['id'])->count_all_results('member_level');
-			$t['allowfield'] = dr_string2array($t['allowfield']);
-			$t['spacefield'] = dr_string2array($t['spacefield']);
+			$t['allowfield'] = man_string2array($t['allowfield']);
+			$t['spacefield'] = man_string2array($t['spacefield']);
 			$data[] = $t;
 		}
 
@@ -63,8 +63,8 @@ class Group_model extends CI_Model{
             return NULL;
         }
 
-		$_data['allowfield'] = dr_string2array($_data['allowfield']);
-		$_data['spacefield'] = dr_string2array($_data['spacefield']);
+		$_data['allowfield'] = man_string2array($_data['allowfield']);
+		$_data['spacefield'] = man_string2array($_data['spacefield']);
 
 		return $_data;
 	}
@@ -89,8 +89,8 @@ class Group_model extends CI_Model{
 			'unit' => (int)$data['unit'],
 			'limit' => (int)$data['limit'],
 			'overdue' => (int)$data['overdue'],
-			'allowfield' => dr_array2string($data['allowfield']),
-			'spacefield' => dr_array2string($data['spacefield']),
+			'allowfield' => man_array2string($data['allowfield']),
+			'spacefield' => man_array2string($data['spacefield']),
 			'allowapply' => (int)$data['allowapply'],
 			'allowspace' => (int)$data['allowspace'],
             'spacetemplate' => $data['spacetemplate'],
@@ -120,8 +120,8 @@ class Group_model extends CI_Model{
 			'limit' => (int)$data['limit'],
 			'overdue' => (int)$data['overdue'],
 			'template' => $data['template'],
-			'allowfield' => dr_array2string($data['allowfield']),
-			'spacefield' => dr_array2string($data['spacefield']),
+			'allowfield' => man_array2string($data['allowfield']),
+			'spacefield' => man_array2string($data['spacefield']),
             'spacetemplate' => $data['spacetemplate'],
 			'allowapply' => (int)$data['allowapply'],
 			'allowspace' => (int)$data['allowspace']
@@ -143,11 +143,11 @@ class Group_model extends CI_Model{
             }
             if (in_array(3, $syn)) {
                 // 会员字段
-                $update['allowfield'] = dr_array2string($data['allowfield']);
+                $update['allowfield'] = man_array2string($data['allowfield']);
             }
             if (in_array(4, $syn)) {
                 // 空间字段
-                $update['spacefield'] = dr_array2string($data['spacefield']);
+                $update['spacefield'] = man_array2string($data['spacefield']);
             }
             if (in_array(5, $syn)) {
                 // 允许使用空间

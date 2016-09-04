@@ -32,7 +32,7 @@
                         <ul>
                             {list action=category module=$m.dirname pid=0}
                             <li class="li">
-                            <a href="{dr_mobile_category_url($m.dirname, $t.id)}">{$t.name}</a>
+                            <a href="{man_mobile_category_url($m.dirname, $t.id)}">{$t.name}</a>
                             </li>
                             {/list}
                         </ul>
@@ -45,7 +45,7 @@
                         <ul>
                             {list action=page module=index pid=0}
                             <li class="li">
-                            <a href="{dr_mobile_page_url('', $t.id)}">{$t.name}</a>
+                            <a href="{man_mobile_page_url('', $t.id)}">{$t.name}</a>
                             </li>
                             {/list}
                         </ul>

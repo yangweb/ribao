@@ -33,7 +33,7 @@ class Update extends M_Controller {
         //
         $page = (int)$this->input->get('page');
         if (!$page) {
-            $this->admin_msg('正在升级数据...', dr_url('update/index', array('page' => $page + 1)), 2);
+            $this->admin_msg('正在升级数据...', man_url('update/index', array('page' => $page + 1)), 2);
         }
 
         switch($page) {
@@ -53,7 +53,7 @@ class Update extends M_Controller {
                         $this->db->query('ALTER TABLE `'.$table.'` ADD INDEX (`extend`) ;');
                     }
                 }
-                $this->admin_msg('正在升级网站导航表结构...', dr_url('update/index', array('page' => $page + 1)), 2);
+                $this->admin_msg('正在升级网站导航表结构...', man_url('update/index', array('page' => $page + 1)), 2);
                 break;
             default:
                 $this->admin_msg('升级完成，请更新全站缓存在刷新页面', '', 1);

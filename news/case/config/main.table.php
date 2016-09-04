@@ -99,7 +99,7 @@ return array(
 				),
 				'validate' => array(
 					'xss' => 1, // xss过滤
-					'filter' => 'dr_clearhtml', // 过滤html 
+					'filter' => 'man_clearhtml', // 过滤html 
 				),
 			)
 		)

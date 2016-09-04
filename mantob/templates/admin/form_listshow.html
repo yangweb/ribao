@@ -11,9 +11,9 @@
         <input type="text" class="input-text" value="{$param['keyword']}" name="data[keyword]" />&nbsp;
         &nbsp;
         {lang('html-563')} ：
-        {dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param['start'])}
+        {man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param['start'])}
         -&nbsp;
-        {dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param['end'])}
+        {man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param['end'])}
         &nbsp;
         <input type="submit" value="{lang('search')}" class="button" name="search" />
         </form>
@@ -25,34 +25,34 @@
         <table width="100%">
         <thead>
         <tr>
-            <th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+            <th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
             <th width="30" align="center">{lang('order')}</th>
             <th width="40" align="left">Id</th>
             <th align="left">{lang('html-375')}</th>
             <th width="120" align="left">Ip</th>
             <th width="120" align="left">{lang('html-563')}</th>
-            <th align="left" class="dr_option">{lang('option')}</th>
+            <th align="left" class="man_option">{lang('option')}</th>
         </tr>
         </thead>
         <tbody>
         {loop $list $t}
         <tr>
-            <td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
+            <td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
             <td align="center"><input class="input-text displayorder" type="text" name="data[{$t['id']}][displayorder]" value="{$t['displayorder']}" /></td>
             <td align="left">{$t.id}</td>
-            <td align="left"><a href="{dr_url($form.'/edit',array('id' => $t.id))}">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
+            <td align="left"><a href="{man_url($form.'/edit',array('id' => $t.id))}">{man_keyword_highlight($t.title, $param.keyword)}</a></td>
             <td align="left"><a href="http://www.baidu.com/baidu?wd={$t.inputip}" target="_blank">{$t.inputip}</a></td>
             <td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
-            <td align="left" class="dr_option">
-            <a href="{dr_url($form.'/edit',array('id' => $t.id))}">{lang('html-564')}</a>
+            <td align="left" class="man_option">
+            <a href="{man_url($form.'/edit',array('id' => $t.id))}">{lang('html-564')}</a>
             </td>
         </tr>
         {/loop}
         <tr>
-            <td width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</td>
+            <td width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</td>
             <td colspan="7" align="left">
-            <input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}')" />
-            <input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');dr_confirm_set_all('{lang('015')}')" />
+            <input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}')" />
+            <input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');man_confirm_set_all('{lang('015')}')" />
             <div class="onShow">{lang('html-565')}</div>
             </td>
         </tr>
@@ -64,7 +64,7 @@
         </tbody>
         </table>
         </form>
-        <div id="pages"><a>{dr_lang('html-346', $param['total'])}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param['total'])}</a>{$pages}</div>
     </div>
 </div>
 {template footer.html}

@@ -55,14 +55,14 @@ class F_Checkbox extends A_Field {
 	 * 字段入库值
 	 */
 	public function insert_value($field) {
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($this->ci->post[$field['fieldname']]);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($this->ci->post[$field['fieldname']]);
 	}
 	
 	/**
 	 * 字段入库值
 	 */
 	public function output($value) {
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
@@ -80,10 +80,10 @@ class F_Checkbox extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		if ($value) {
-			$value = dr_string2array($value);
+			$value = man_string2array($value);
 		} elseif ($cfg['option']['value']) {
 			$value = $this->get_default_value($cfg['option']['value']);
 			$value = is_array($value) ? $value : @explode('|', $value);

@@ -102,16 +102,16 @@ class D_Category extends M_Controller {
 				$t['option'] .= '<a class="onloading" href='.$this->duri->uri2url('admin/field/index/rname/'.APP_DIR.'-'.SITE_ID.'/rid/'.$t['id']).'>'.lang('cat-01').'('.(int)count($category[$t['id']]['field']).')</a>&nbsp;&nbsp;&nbsp;';
 			}
 			if ($this->is_auth(APP_DIR.'/admin/category/add')) {
-				$t['option'] .= '<a class="onloading" href='.dr_url(APP_DIR.'/category/add', array('id' => $t['id'])).'>'.lang('254').'</a>&nbsp;&nbsp;&nbsp;';
+				$t['option'] .= '<a class="onloading" href='.man_url(APP_DIR.'/category/add', array('id' => $t['id'])).'>'.lang('254').'</a>&nbsp;&nbsp;&nbsp;';
 			}
 			if ($this->is_auth(APP_DIR.'/admin/category/edit')) {
-				$t['option'] .= '<a class="onloading" href='.dr_url(APP_DIR.'/category/edit', array('id' => $t['id'])).'>'.lang('edit').'</a>&nbsp;&nbsp;&nbsp;';
+				$t['option'] .= '<a class="onloading" href='.man_url(APP_DIR.'/category/edit', array('id' => $t['id'])).'>'.lang('edit').'</a>&nbsp;&nbsp;&nbsp;';
 			}
 			if (!$t['setting']['linkurl'] && !$t['child'] && $this->is_auth(APP_DIR.'/admin/home/add')) {
-				$t['option'] .= '<a class="onloading" href='.dr_url(APP_DIR.'/home/add', array('catid' => $t['id'])).'><font color=red><b>'.lang('mod-02').'</b></font></a>&nbsp;&nbsp;&nbsp;';
+				$t['option'] .= '<a class="onloading" href='.man_url(APP_DIR.'/home/add', array('catid' => $t['id'])).'><font color=red><b>'.lang('mod-02').'</b></font></a>&nbsp;&nbsp;&nbsp;';
 			}
 			if (!$t['setting']['linkurl'] && !$t['child']) {
-				$t['option'] .= '<a class="onloading" href='.dr_url(APP_DIR.'/home/index', array('catid' => $t['id'])).'>'.lang('admin').'</a>&nbsp;&nbsp;&nbsp;';
+				$t['option'] .= '<a class="onloading" href='.man_url(APP_DIR.'/home/index', array('catid' => $t['id'])).'>'.lang('admin').'</a>&nbsp;&nbsp;&nbsp;';
 			}
 			$t['total'] = (int)$category[$t['id']]['total'];
 			$tree[$t['id']] = $t;
@@ -134,17 +134,17 @@ class D_Category extends M_Controller {
 						$setting['urlrule'] = (int)$this->input->post('urlrule');
 						$this->link
 							 ->where('id', $id)
-							 ->update($this->category_model->tablename, array('setting' => dr_array2string($setting)));
+							 ->update($this->category_model->tablename, array('setting' => man_array2string($setting)));
 					}
 				}
-				$this->admin_msg(dr_lang('312', count($catid)), dr_url(APP_DIR.'/category/index'), 1, 5);
+				$this->admin_msg(man_lang('312', count($catid)), man_url(APP_DIR.'/category/index'), 1, 5);
 			} else {
 				$error = lang('html-604');
 			}
 		}
 		$this->template->assign(array(
 			'error' => $error,
-			'select' => $this->select_category($category, 0, 'id=\'dr_catid\' name=\'catid[]\' multiple style="min-width:200px;height:250px;"', ''),
+			'select' => $this->select_category($category, 0, 'id=\'man_catid\' name=\'catid[]\' multiple style="min-width:200px;height:250px;"', ''),
 		));
 		$this->template->display('category_url.html');
 	}
@@ -156,20 +156,20 @@ class D_Category extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if ($this->input->post('action') == 'order') {
 				$data = $this->input->post('data');
 				foreach ($ids as $id) {
 					$this->category_model->link->where('id', $id)->update($this->category_model->tablename, $data[$id]);
 				}
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			} else {
 				if (!$this->is_auth(APP_DIR.'/admin/category/index')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$this->delete($ids);
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 				
 			}
 		}
@@ -183,11 +183,11 @@ class D_Category extends M_Controller {
 			$tree = $this->_get_tree($data);
 		}
 		$str = "<tr class='\$class'>";
-		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>";
+		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>";
 		$str.= "<td align='left'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>";
 		$str.= "<td align='left'>\$id</td>";
 		if ($this->is_auth(APP_DIR.'/admin/category/edit')) {
-			$str.= "<td>\$spacer<a class='onloading' href='".dr_url(APP_DIR.'/category/edit')."&id=\$id'>\$name</a>  \$parent</td>";
+			$str.= "<td>\$spacer<a class='onloading' href='".man_url(APP_DIR.'/category/edit')."&id=\$id'>\$name</a>  \$parent</td>";
 		} else {
 			$str.= "<td>\$spacer\$name  \$parent</td>";
 		}
@@ -238,7 +238,7 @@ class D_Category extends M_Controller {
 			if ($this->input->post('_all') == 1) {
 				$names = $this->input->post('names', TRUE);
 				$number	= $this->category_model->add_all($names, $data);
-				$this->admin_msg(dr_lang('cat-03', $number), dr_url(APP_DIR.'/category/index'), 1);
+				$this->admin_msg(man_lang('cat-03', $number), man_url(APP_DIR.'/category/index'), 1);
 			} else {
 				$result	= $this->category_model->add($data);
 				if (is_numeric($result)) {
@@ -305,7 +305,7 @@ class D_Category extends M_Controller {
 			'result' => $result,
 			'select' => $this->select_category($category, $data['pid'], 'name=\'data[pid]\'', lang('cat-05')),
             'backurl' => $backurl ? $backurl : $_SERVER['HTTP_REFERER'],
-			'select_syn' => $this->select_category($category, 0, 'id="dr_synid" name=\'synid[]\' multiple style="min-width:150px;height:200px;"', '')
+			'select_syn' => $this->select_category($category, 0, 'id="man_synid" name=\'synid[]\' multiple style="min-width:150px;height:200px;"', '')
 		));
 		$this->template->display('category_add.html');
 	}
@@ -316,7 +316,7 @@ class D_Category extends M_Controller {
 	 * @return void
      */
 	public function field() {
-		$data = dr_string2array($this->input->post('data'));
+		$data = man_string2array($this->input->post('data'));
 		$field = $this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category', (int)$this->input->post('catid'), 'field');
 		if (!$field) {
             exit('');
@@ -345,7 +345,7 @@ class D_Category extends M_Controller {
 			$this->category_model
 				 ->link
 				 ->where('id', $catid)
-				 ->update($this->category_model->tablename, array('permission' => dr_array2string($data)));
+				 ->update($this->category_model->tablename, array('permission' => man_array2string($data)));
 			exit;
 		}
 		
@@ -368,6 +368,6 @@ class D_Category extends M_Controller {
 
     public function select() {
         $id = (int)$this->input->get('id');
-        echo $this->select_category($this->category_model->get_data(), $id, ( $id ? 'disabled ' : '').'name=\'module[catid]\' onChange=\'dr_select_category(this.value)\'', lang('html-740'));
+        echo $this->select_category($this->category_model->get_data(), $id, ( $id ? 'disabled ' : '').'name=\'module[catid]\' onChange=\'man_select_category(this.value)\'', lang('html-740'));
     }
 }

@@ -42,12 +42,12 @@ class Space extends M_Controller {
 			
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			
 			if ($this->input->post('action') == 'del') {
 				$this->space_model->delete($ids);
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} elseif ($this->input->post('action') == 'order') {
 				$_data = $this->input->post('data');
 				foreach ($ids as $id) {
@@ -55,7 +55,7 @@ class Space extends M_Controller {
 						 ->where('uid', (int)$id)
 						 ->update('space', $_data[$id]);
 				}
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} elseif ($this->input->post('action') == 'flag') {
 				$flag = $this->input->post('flagid');
 				foreach ($ids as $uid) {
@@ -75,15 +75,15 @@ class Space extends M_Controller {
 							 ->delete('space_flag');
 					}
 				}
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				if (!$this->is_auth('member/admin/space/edit')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$this->db
 					 ->where_in('uid', $ids)
 					 ->update('space', array('status' => (int)$this->input->post('status')));
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}
 		}
 
@@ -106,7 +106,7 @@ class Space extends M_Controller {
 			'name' => $this->get_cache('member', 'spacefield', 'name', 'name'),
             'param'	=> $param,
 			'flags' => $this->flag,
-			'pages'	=> $this->get_pagination(dr_url('member/space/index', $param), $param['total'])
+			'pages'	=> $this->get_pagination(man_url('member/space/index', $param), $param['total'])
 		));
 		$this->template->display('space_index.html');
     }
@@ -158,7 +158,7 @@ class Space extends M_Controller {
 						 ->where('uid', $uid)
 						 ->update('space', $data);
 					$this->attachment_handle($uid, $this->db->dbprefix('space').'-'.$uid, $field, $data);
-					$this->member_msg(lang('000'), dr_url('member/space/index'), 1);
+					$this->member_msg(lang('000'), man_url('member/space/index'), 1);
 				}
 			}
     	}
@@ -189,7 +189,7 @@ class Space extends M_Controller {
         $this->load->model('space_init_model');
         if (IS_POST) {
             $this->space_init_model->del($this->input->post('ids'));
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         $id = (int)$this->input->get('id');
@@ -232,16 +232,16 @@ class Space extends M_Controller {
                         $t['model'] = lang('m-314');
                         break;
                 }
-                $t['option'] = '<a href="'.dr_url('member/space/addinit', array('gid' => $id, 'type' => $t['type'], 'mid' => $t['modelid'], 'pid' => $t['id'])).'">'.lang('m-298').'</a>&nbsp;&nbsp;';
+                $t['option'] = '<a href="'.man_url('member/space/addinit', array('gid' => $id, 'type' => $t['type'], 'mid' => $t['modelid'], 'pid' => $t['id'])).'">'.lang('m-298').'</a>&nbsp;&nbsp;';
                 $t['option'] = $t['type'] ? $t['option'] : '';
-                $t['option'].= '<a href="'.dr_url('member/space/editinit', array('gid' => $id, 'id' => $t['id'])).'">'.lang('edit').'</a>';
+                $t['option'].= '<a href="'.man_url('member/space/editinit', array('gid' => $id, 'id' => $t['id'])).'">'.lang('edit').'</a>';
                 $tree[$t['id']] = $t;
             }
         }
 
         $str = "<tr>";
-        $str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' /></td>";
-        $str.= "<td>\$spacer<a href='".dr_url('member/space/editinit')."&gid=".$id."&id=\$id'>\$name</a></td>";
+        $str.= "<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' /></td>";
+        $str.= "<td>\$spacer<a href='".man_url('member/space/editinit')."&gid=".$id."&id=\$id'>\$name</a></td>";
         $str.= "<td align='center'>\$model</td>";
         $str.= "<td align='center'>\$show</td>";
         $str.= "<td align='left'>\$option</td>";
@@ -280,7 +280,7 @@ class Space extends M_Controller {
             $this->load->model('space_init_model');
             $result = $this->space_init_model->add($post);
             if ($result === TRUE) {
-                $this->member_msg(lang('000'), dr_url('member/space/category', array('id' => $gid)), 1);
+                $this->member_msg(lang('000'), man_url('member/space/category', array('id' => $gid)), 1);
             }
             $data = $post;
         } else {
@@ -321,7 +321,7 @@ class Space extends M_Controller {
             $post['modelid'] = $data['modelid'];
             $result	= $this->space_init_model->edit($id, $post);
             if ($result === TRUE) {
-                $this->member_msg(lang('000'), dr_url('member/space/category', array('id' => $gid)), 1);
+                $this->member_msg(lang('000'), man_url('member/space/category', array('id' => $gid)), 1);
             }
             $post['id'] = $id;
             $data = $post;
@@ -372,7 +372,7 @@ class Space extends M_Controller {
                     }
                     $this->space_init_model->repair($id);
                 }
-                $this->member_msg(lang('000'), dr_url('member/space/syn', array('gid' => $gid)), 1);
+                $this->member_msg(lang('000'), man_url('member/space/syn', array('gid' => $gid)), 1);
             }
         }
 

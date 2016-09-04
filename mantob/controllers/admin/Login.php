@@ -35,9 +35,9 @@ class Login extends M_Controller {
 			
 			$uid = $this->member_model->admin_login($this->input->post('username', TRUE), $this->input->post('password', TRUE));
 			if ($uid > 0) {
-				$url = $this->input->get('backurl') ? urldecode($this->input->get('backurl')) : dr_url('home');
+				$url = $this->input->get('backurl') ? urldecode($this->input->get('backurl')) : man_url('home');
 				$url = pathinfo($url);
-				$url = $url['basename'] ? $url['basename'] : dr_url('home/index');
+				$url = $url['basename'] ? $url['basename'] : man_url('home/index');
 				$this->admin_msg(lang('042'), $url, 1);
 			}
 
@@ -61,6 +61,6 @@ class Login extends M_Controller {
 	public function logout() {
 		$this->session->unset_userdata('admin');
 		$this->session->unset_userdata('siteid');
-		$this->admin_msg(lang('048'), dr_url(''), 1);
+		$this->admin_msg(lang('048'), man_url(''), 1);
 	}
 }

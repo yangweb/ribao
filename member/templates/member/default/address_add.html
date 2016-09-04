@@ -2,7 +2,7 @@
 <script type="text/javascript">
 $(function(){
 	{if $result_error}
-	dr_tips("{$result_error}", 3);
+	man_tips("{$result_error}", 3);
 	{/if}
 });
 </script>
@@ -17,7 +17,7 @@ $(function(){
             <table width="100%" class="table_form">
             <tr>
                 <th width="160"><font color="red">*</font>&nbsp;城市： </th>
-                <td>{dr_field_input('city', 'Linkage', array('option' => array('linkage' => 'address'),'validate' => array('required' => 1 )), $data['city'])}</td>
+                <td>{man_field_input('city', 'Linkage', array('option' => array('linkage' => 'address'),'validate' => array('required' => 1 )), $data['city'])}</td>
             </tr>
             <tr>
                 <th><font color="#FF0000">*</font>&nbsp;姓名：</th>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>{dr_lang('html-001', SITE_NAME)}</title>
+<title>{man_lang('html-001', SITE_NAME)}</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="{SITE_PATH}mantob/statics/css/bootstrap.css" />
 <link rel="stylesheet" href="{SITE_PATH}mantob/statics/css/bootstrap-responsive.css" />
@@ -20,24 +20,24 @@
 $(function(){
     //var is_member_hide = 0;
     if ($('#navigation').height() >= 80) {
-        //$("#dr_member").hide();
+        //$("#man_member").hide();
         //is_member_hide = 1;
-        $(".dr_module_menu").remove();
-        $("#dr_select_module").show();
+        $(".man_module_menu").remove();
+        $("#man_select_module").show();
     }
     /*
 	if ($(window).width() <= 1024) {
 		if ($('.main-nav').width() > 600 && is_member_hide == 0) {
-            $("#dr_top_nav").hide();
+            $("#man_top_nav").hide();
         }
-		$("#dr_search_submit").hide();
+		$("#man_search_submit").hide();
 	} else if ($(window).width() < 1400) {
 		if ($('.main-nav').width() > 800 && is_member_hide == 0) {
-            $("#dr_top_nav").hide();
+            $("#man_top_nav").hide();
         }
 	}
 	*/
-	$("#dr_select_site, #dr_select_module").bind({
+	$("#man_select_site, #man_select_module").bind({
 		'mouseover':function(){
 			$(this).addClass("open");
 		},
@@ -45,7 +45,7 @@ $(function(){
 			$(this).removeClass("open");
 		}
 	});
-	$("#dr_member").bind({
+	$("#man_member").bind({
 		'mouseover':function(){
 			$(this).addClass("open");
 		},
@@ -74,7 +74,7 @@ $(function(){
 		var id=$(this).attr('id');
 		art.dialog.confirm("<font color=red><b>{lang('html-386')}</b></font>", function(){
 			// ajax提交验证
-			$.ajax({type: "POST",dataType:"json", url: "{dr_url('site/select')}", data: {id: id},
+			$.ajax({type: "POST",dataType:"json", url: "{man_url('site/select')}", data: {id: id},
 				success: function(data) {
 					if (data.status == 1) {
 						//验证成功
@@ -194,7 +194,7 @@ function _MP(id, url) {
     $("#_MP_"+id).parent().show();
     $("#_MP_"+id).parent().parent().attr('class', 'subnav');
     if (url.indexOf('http') == -1) {
-        dr_loading();
+        man_loading();
     }
 }
 function _MAP(mid, sid, url) {
@@ -202,23 +202,23 @@ function _MAP(mid, sid, url) {
 	$('#_M_'+mid).addClass("active");
 	$(".d_menu").hide();
 	$("#D_M_"+mid).show();
-	dr_clear_map();
+	man_clear_map();
 	_MP(sid, url);
 }
 function logout(){
 	if (confirm("{lang('html-017')}"))
-	top.location = '{dr_url("login/logout")}';
+	top.location = '{man_url("login/logout")}';
 	return false;
 }
-function dr_get_map() {
-	$("#dr_backdrop").show();
+function man_get_map() {
+	$("#man_backdrop").show();
 	$("#modal-map").show();
 }
-function dr_clear_map() {
-	$("#dr_backdrop").hide();
+function man_clear_map() {
+	$("#man_backdrop").hide();
 	$("#modal-map").hide();
 }
-function dr_loading() {
+function man_loading() {
 	$('.page-loading').remove();
 	$('body').append('<div class="page-loading"><img src="{SITE_PATH}mantob/statics/images/loading-spinner-grey.gif"/>&nbsp;&nbsp;<span>{lang('html-699')}</span></div>');
 }
@@ -227,7 +227,7 @@ function dr_loading() {
 <body scroll="no" style="overflow:hidden">
 <div class="modal hide" id="modal-map" aria-hidden="true">
     <div class="modal-header">
-        <button  onClick="dr_clear_map()" class="close" type="button">×</button>
+        <button  onClick="man_clear_map()" class="close" type="button">×</button>
         <h3 id="user-infos"><i class="icon-sitemap"></i> {lang('html-025')}</h3>
     </div>
     <div class="modal-body">
@@ -243,7 +243,7 @@ function dr_loading() {
         <ul class="main-nav">
             {php $mark = $i=0;}
             {loop $top $id $t}
-                <li id="_M_{$id}" class="{if $i==0}active{/if}{if $t.mark} dr_module_menu{/if}">
+                <li id="_M_{$id}" class="{if $i==0}active{/if}{if $t.mark} man_module_menu{/if}">
                     <a href="javascript:_M({$id},'{$t.select}','{$t.selurl}','{$t.name}')">
                         <span>{$t.name}</span>
                     </a>
@@ -278,7 +278,7 @@ function dr_loading() {
                 </li> -->
                
            <!--  {if $mark}
-            <li id="dr_select_module" style="display:none">
+            <li id="man_select_module" style="display:none">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                     <span>{lang('html-734')}</span>
                     <span class="caret"></span>
@@ -300,7 +300,7 @@ function dr_loading() {
             </li>
             {/if} -->
             {if count($mysite)>1}
-            <li id="dr_select_site" class="">
+            <li id="man_select_site" class="">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <span>{lang('html-008')}</span>
                     <span class="caret"></span>
@@ -314,37 +314,37 @@ function dr_loading() {
             {/if}
         </ul>
         <div class="user">
-        	<ul class="icon-nav" id="dr_top_nav">
+        	<ul class="icon-nav" id="man_top_nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="{SITE_URL}" target="_blank" title="{SITE_NAME}" id="site_homepage"><i class="icon-home"></i></a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="{dr_url('home/clear')}" title="{lang('html-573')}" target="right"><i class="icon-trash"></i></a>
+                    <a class="dropdown-toggle" href="{man_url('home/clear')}" title="{lang('html-573')}" target="right"><i class="icon-trash"></i></a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="{dr_url('home/cache')}" title="{lang('html-434')}" target="right"><i class="icon-refresh"></i></a>
+                    <a class="dropdown-toggle" href="{man_url('home/cache')}" title="{lang('html-434')}" target="right"><i class="icon-refresh"></i></a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="{dr_url('route/index')}" title="{lang('html-503')}" target="right"><i class="icon-compass"></i></a>
+                    <a class="dropdown-toggle" href="{man_url('route/index')}" title="{lang('html-503')}" target="right"><i class="icon-compass"></i></a>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" href="javascript:;" onClick="dr_get_map()" title="{lang('html-025')}"><i class="icon-sitemap"></i></a>
+                    <a class="dropdown-toggle" href="javascript:;" onClick="man_get_map()" title="{lang('html-025')}"><i class="icon-sitemap"></i></a>
                 </li>
             </ul>
-            <div class="dropdown" id="dr_member">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">{$admin.username}&nbsp;<img style="width:27px;height:27px;" src="{dr_avatar($uid)}" /></a>
+            <div class="dropdown" id="man_member">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">{$admin.username}&nbsp;<img style="width:27px;height:27px;" src="{man_avatar($uid)}" /></a>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="{MEMBER_URL}index.php?c=api&m=member" target="_blank" id="site_member"><i class="icon-user"></i> {lang('html-007')}</a></li>
                     <li><a href="javascript:;" onClick="logout();"><i class="icon-signout"></i> {lang('html-005')}</a></li>
-					<li><div class="dr_hr"></div></li>
+					<li><div class="man_hr"></div></li>
                     {if $member.adminid == 1}
-                    <li><a href="{dr_url('check/index')}" target="right"><i class="icon-zoom-out"></i> {lang('html-533')}</a></li>
+                    <li><a href="{man_url('check/index')}" target="right"><i class="icon-zoom-out"></i> {lang('html-533')}</a></li>
                     {/if}
-                    <li><a href="javascript:;" onClick="dr_get_map()"><i class="icon-sitemap"></i> {lang('html-025')}</a></li>
-					<li><a href="{dr_url('home/clear')}" target="right"><i class="icon-trash"></i> {lang('html-573')}</a></li>
-					<li><a href="{dr_url('route/index')}" target="right"><i class="icon-compass"></i> {lang('html-503')}</a></li>
-					<li><a href="{dr_url('home/cache')}" target="right"><i class="icon-refresh"></i> {lang('html-434')}</a></li>
-					<li><div class="dr_hr"></div></li>
+                    <li><a href="javascript:;" onClick="man_get_map()"><i class="icon-sitemap"></i> {lang('html-025')}</a></li>
+					<li><a href="{man_url('home/clear')}" target="right"><i class="icon-trash"></i> {lang('html-573')}</a></li>
+					<li><a href="{man_url('route/index')}" target="right"><i class="icon-compass"></i> {lang('html-503')}</a></li>
+					<li><a href="{man_url('home/cache')}" target="right"><i class="icon-refresh"></i> {lang('html-434')}</a></li>
+					<li><div class="man_hr"></div></li>
                     <li><a href="http://www.zan3.com/" target="_blank"><i class="icon-cloud"></i> {lang('html-003')}</a></li>
                     <li><a href="http://www.zan3.com/" target="_blank"><i class="icon-book"></i> {lang('html-002')}</a></li>
                 </ul>
@@ -359,18 +359,18 @@ function dr_loading() {
 			<input name="m" type="hidden" value="index" />
             <div class="search-pane">
                 <input type="text" name="keyword" placeholder="{lang('html-146')}" />
-                <button type="submit" id="dr_search_submit" title="{lang('html-146')}"><i class="icon-search"></i></button>
+                <button type="submit" id="man_search_submit" title="{lang('html-146')}"><i class="icon-search"></i></button>
             </div>
         </form>
         {$left}
     </div>
     <div id="main">
-        <iframe name="right" id="rightMain" src="{dr_url('home/main')}" frameborder="false" scrolling="auto" style="border:none; margin-bottom:0px;" width="100%" height="auto" allowtransparency="true"></iframe>
+        <iframe name="right" id="rightMain" src="{man_url('home/main')}" frameborder="false" scrolling="auto" style="border:none; margin-bottom:0px;" width="100%" height="auto" allowtransparency="true"></iframe>
         <div style="background-color:#EEEEEE; height:100px; padding-top:8px; text-align:right; padding-right:10px;margin-top: -5px;">
         &copy; 2013-{date('Y')}&nbsp;&nbsp;<strong><a class="fine-cms" href="http://www.zan3.com/" target="_blank">mantob for{MAN_NAME}</a></strong>&nbsp;v{MAN_VERSION} ({MAN_UPDATE})&nbsp;&nbsp;<span id="mantob_version"></span> &nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </div>
 </div>
-<div id="dr_backdrop" class="modal-backdrop in hide"></div>
+<div id="man_backdrop" class="modal-backdrop in hide"></div>
 </body>
 </html>

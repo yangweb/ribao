@@ -92,7 +92,7 @@ class F_Files extends A_Field {
 	public function output($value) {
 	
 		$data = array();
-		$value = dr_string2array($value);
+		$value = man_string2array($value);
 		if (!$value) {
             return $data;
         }
@@ -117,7 +117,7 @@ class F_Files extends A_Field {
 
 
 		$data = array();
-        $value = dr_string2array($value);
+        $value = man_string2array($value);
 
 		if (!$value) {
             return $data;
@@ -147,7 +147,7 @@ class F_Files extends A_Field {
             }
             unset($info);
 		}
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($data);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($data);
 	}
 	
 	/**
@@ -155,7 +155,7 @@ class F_Files extends A_Field {
 	 */
 	public function attach($data, $_data) {
 		
-		$_data = dr_string2array($_data);
+		$_data = man_string2array($_data);
 
         if (!isset($_data['file'])) {
             $_data = array('file' => NULL);
@@ -218,7 +218,7 @@ class F_Files extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
 		// 当字段必填时，加入html5验证标签
@@ -230,11 +230,11 @@ class F_Files extends A_Field {
 		$url = MEMBER_PATH.'index.php?c=api&m=upload&name='.$name.'&code='.str_replace('=', '', man_authcode($cfg['option']['size'].'|'.$cfg['option']['ext'].'|'.$this->get_upload_path($cfg['option']['uploadpath']), 'ENCODE'));
 		// 字段默认值
 		$file_value = '';
-		$value && $value = dr_string2array($value);
+		$value && $value = man_string2array($value);
 		// 默认值输出
 		if ($value && isset($value['file'])) {
 			foreach ($value['file'] as $id => $fileid) {
-				$info = dr_file_info($fileid);
+				$info = man_file_info($fileid);
 				$title = $value['title'][$id];
 				$file_value.= '
 				<li id="files_'.$name.'_999'.$id.'" list="999'.$id.'" style="cursor:move;">
@@ -242,14 +242,14 @@ class F_Files extends A_Field {
 				<tr>
 					<td width="80" style="text-align:right">
 						'.($id+1).'、
-						<a href="javascript:;" title="'.lang('edit').'" onclick="dr_edit_file(\''.$url.'&count=1\',\''.$name.'\',\'999'.$id.'\')"><img align="absmiddle" src="'.SITE_URL.'mantob/statics/images/b_edit.png"></a>
-						<a href="javascript:;" title="'.lang('del').'" onclick="dr_remove_file(\''.$name.'\',\'999'.$id.'\')"><img align=\"absmiddle\" src="'.SITE_URL.'mantob/statics/images/b_drop.png"></a>
+						<a href="javascript:;" title="'.lang('edit').'" onclick="man_edit_file(\''.$url.'&count=1\',\''.$name.'\',\'999'.$id.'\')"><img align="absmiddle" src="'.SITE_URL.'mantob/statics/images/b_edit.png"></a>
+						<a href="javascript:;" title="'.lang('del').'" onclick="man_remove_file(\''.$name.'\',\'999'.$id.'\')"><img align=\"absmiddle\" src="'.SITE_URL.'mantob/statics/images/b_drop.png"></a>
 					</td>
 					<td>
 						<input type="hidden" value="'.$fileid.'" name="data['.$name.'][file][]" id="fileid_'.$name.'_999'.$id.'" />
 						<input type="text" class="input-text" style="width:300px;" value="'.$title.'" name="data['.$name.'][title][]" />
 						<span id="span_'.$name.'_999'.$id.'">
-							<a href="javascript:;" onclick="dr_show_file_info(\''.$fileid.'\')"><img align="absmiddle" src="'.$info['icon'].'">
+							<a href="javascript:;" onclick="man_show_file_info(\''.$fileid.'\')"><img align="absmiddle" src="'.$info['icon'].'">
 							<div class="onCorrect">'.$info['size'].'&nbsp;</div></a>
 						</span>
 					</td>
@@ -277,7 +277,7 @@ class F_Files extends A_Field {
 		$str.= '<div class="bk10"></div>';
 		$str.= '<div class="picBut cu">';
 		if (!$disabled) {
-			$str.= '<a href="javascript:;" onClick="dr_upload_files(\''.$name.'\',\''.$url.'\', \'\', \''.(int)$cfg['option']['count'].'\')">'.lang('m-119').'</a>';
+			$str.= '<a href="javascript:;" onClick="man_upload_files(\''.$name.'\',\''.$url.'\', \'\', \''.(int)$cfg['option']['count'].'\')">'.lang('m-119').'</a>';
 		}
 		$str.= '</div>';
 		$str.= '<script type="text/javascript">$("#'.$name.'-sort-items").sortable();</script>'.$tips;

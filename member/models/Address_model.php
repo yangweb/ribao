@@ -134,7 +134,7 @@ class Address_model extends CI_Model {
 		}
 		
 		$data['uid'] = $this->uid;
-        $data['name'] = dr_strcut($data['name'],20);
+        $data['name'] = man_strcut($data['name'],20);
         $data['phone'] = $data['phone'];
         $data['zipcode'] = (int)$data['zipcode'];
 
@@ -162,7 +162,7 @@ class Address_model extends CI_Model {
 				 ->update('member_address', array('default' => 0));
 		}
 
-        $data['name'] = dr_strcut($data['name'],20);
+        $data['name'] = man_strcut($data['name'],20);
         $data['phone'] = $data['phone'];
         $data['zipcode'] = (int)$data['zipcode'];
 

@@ -79,24 +79,24 @@ class Install extends CI_Controller {
 					$data['dbhost'] = str_replace('localhost', '127.0.0.1', $data['dbhost']);
                     // 参数判断
 					if (!preg_match('/^[\x7f-\xff\dA-Za-z\.\_]+$/', $data['admin'])) {
-						exit(dr_json(0, '管理员账号格式不正确'));
+						exit(man_json(0, '管理员账号格式不正确'));
 					}
 					if (!$data['password']) {
-						exit(dr_json(0, '管理员密码不能为空'));
+						exit(man_json(0, '管理员密码不能为空'));
 					}
 					if (!$data['dbname']) {
-						exit(dr_json(0, '数据库名称不能为空'));
+						exit(man_json(0, '数据库名称不能为空'));
 					}
 					$this->load->helper('email');
 					if (!$data['email'] || !valid_email($data['email'])) {
-						exit(dr_json(0, 'Email格式不正确'));
+						exit(man_json(0, 'Email格式不正确'));
 					}
 					if (!@mysql_connect($data['dbhost'], $data['dbuser'], $data['dbpw'])) {
-						exit(dr_json(0, '无法连接到数据库服务器，请检查用户名（'.$data['dbuser'].'）和密码（'.$data['dbpw'].'）是否正确'));
+						exit(man_json(0, '无法连接到数据库服务器，请检查用户名（'.$data['dbuser'].'）和密码（'.$data['dbpw'].'）是否正确'));
 					}
 					if (!@mysql_select_db($data['dbname'])) {
 						if (!@mysql_query('CREATE DATABASE '.$data['dbname'])) {
-							exit(dr_json(0, '指定的数据库（'.$data['dbname'].'）不存在，系统尝试创建失败，请通过其他方式建立数据库'));
+							exit(man_json(0, '指定的数据库（'.$data['dbname'].'）不存在，系统尝试创建失败，请通过其他方式建立数据库'));
 						}
 					}
                     // utf8方式打开数据库
@@ -104,7 +104,7 @@ class Install extends CI_Controller {
 					// 格式化端口
 					list($data['dbhost'], $data['dbport']) = explode(':', $data['dbhost']);
 					$data['dbport'] = $data['dbport'] ? (int)$data['dbport'] : 3306;
-                    $data['dbprefix'] = $data['dbprefix'] ? $data['dbprefix'] : 'dr_';
+                    $data['dbprefix'] = $data['dbprefix'] ? $data['dbprefix'] : 'man_';
 					// 配置文件
 					$config = "<?php".PHP_EOL.PHP_EOL;
 					$config.= "if (!defined('BASEPATH')) exit('No direct script access allowed');".PHP_EOL.PHP_EOL;
@@ -134,7 +134,7 @@ class Install extends CI_Controller {
 					$config.= ");".PHP_EOL;
 					// 保存配置文件
 					if (!file_put_contents(FCPATH.'config/database.php', $config)) {
-						exit(dr_json(0, '数据库配置文件保存失败，请检查文件config/database.php权限！'));
+						exit(man_json(0, '数据库配置文件保存失败，请检查文件config/database.php权限！'));
 					}
 					// 加载数据库
 					$this->load->database();
@@ -208,7 +208,7 @@ class Install extends CI_Controller {
 						file_get_contents(FCPATH.'cache/install/default.sql')
 					));
 					
-					exit(dr_json(1, dr_url('install/index', array('step' => $step + 1))));
+					exit(man_json(1, man_url('install/index', array('step' => $step + 1))));
 				}
 				break;
 				
@@ -400,7 +400,7 @@ class Install extends CI_Controller {
 		if ($isDir) {
 			if (is_dir($pathfile)) {
 				mt_srand((double) microtime() * 1000000);
-				$pathfile = $pathfile . 'dr_' . uniqid(mt_rand()) . '.tmp';
+				$pathfile = $pathfile . 'man_' . uniqid(mt_rand()) . '.tmp';
 			} elseif (@mkdir($pathfile)) {
 				return self::_checkWriteAble($pathfile);
 			} else {

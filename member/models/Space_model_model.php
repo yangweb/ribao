@@ -30,7 +30,7 @@ class Space_model_model extends CI_Model{
 	public function edit($id, $data) {
 		$this->db->where('id', (int)$id)->update('space_model', array(
 			'name' => $data['name'],
-			'setting' => dr_array2string($data['setting']),
+			'setting' => man_array2string($data['setting']),
 		));
 	}
 	
@@ -54,7 +54,7 @@ class Space_model_model extends CI_Model{
             return lang('239');
         }
 		
-		$data['setting'] = dr_array2string($data['setting']);
+		$data['setting'] = man_array2string($data['setting']);
 		
 		if ($this->db->insert('space_model', $data)) {
 			$id = $this->db->insert_id();
@@ -79,7 +79,7 @@ class Space_model_model extends CI_Model{
 				}
 			}')) {
 				$this->db->where('id', $id)->delete($this->db->dbprefix('space_model'));
-				return dr_lang('243', '/member/controllers/');
+				return man_lang('243', '/member/controllers/');
 			}
 			$sql = "
 			CREATE TABLE IF NOT EXISTS `{tablename}` (
@@ -135,7 +135,7 @@ class Space_model_model extends CI_Model{
 				'issystem' => 1,
 				'issearch' => 1,
 				'disabled' => 0,
-				'setting' => dr_array2string(array(
+				'setting' => man_array2string(array(
 					'option' => array(
 						'width' => 400, // 表单宽度
 						'fieldtype' => 'VARCHAR', // 字段类型
@@ -233,12 +233,12 @@ class Space_model_model extends CI_Model{
 						 ->result_array();
 			if ($data) {
 				foreach ($data as $field) {
-					$field['setting'] = dr_string2array($field['setting']);
+					$field['setting'] = man_string2array($field['setting']);
 					$t['field'][$field['fieldname']] = $field;
 				}
 			}
 			
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['setting'] = man_string2array($t['setting']);
 			$cache[$t['id']] = $t;
 		}
 		

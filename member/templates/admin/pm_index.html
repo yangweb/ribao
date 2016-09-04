@@ -2,9 +2,9 @@
 <script type="text/javascript">
 // 定位到被修改的地方
 $(function() {
-	var _url = art.dialog.data('dr_row');
+	var _url = art.dialog.data('man_row');
 	if (_url) {
-		art.dialog.data('dr_row', '');
+		art.dialog.data('man_row', '');
 		window.location.href=_url;
 	}
 	var _id = window.location.hash;
@@ -29,14 +29,14 @@ $(function() {
 		<tr>
 			<th width="200"><font color="red">*</font>&nbsp;{lang('a-48')}： </th>
 			<td>
-			<input class="input-text" type="text" name="data[name]" value="{dr_set_value('name', $data['name'])}" size="20" />
+			<input class="input-text" type="text" name="data[name]" value="{man_set_value('name', $data['name'])}" size="20" />
 			<div class="onShow">{lang('a-55')}</div>
 			</td>
 		</tr>
 		<tr>
 			<th><font color="red">*</font>&nbsp;{lang('a-49')}： </th>
 			<td>
-			<input class="input-text" type="text" name="data[url]" value="{dr_set_value('url', $data['url'])}" size="40" />
+			<input class="input-text" type="text" name="data[url]" value="{man_set_value('url', $data['url'])}" size="40" />
 			<div class="onShow">{lang('a-56')}</div>{
 			</td>
 		</tr>

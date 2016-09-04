@@ -7,7 +7,7 @@ $(function() { //防止回车提交表单
 		}
 	}
 });
-function dr_form_check() {
+function man_form_check() {
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -15,7 +15,7 @@ function dr_form_check() {
 	}
 }
 </script>
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0" />
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin:20px;">
   <tr height="30">

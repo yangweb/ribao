@@ -50,7 +50,7 @@ class Module extends M_Controller {
         }
 
 		$store = $data = array();
-		$local = @array_diff(dr_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); // 搜索本地模块
+		$local = @array_diff(man_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); // 搜索本地模块
 		$module = $this->module_model->get_data(); // 库中已安装模块
 		
 		if ($local) {
@@ -93,7 +93,7 @@ class Module extends M_Controller {
 		
 		$this->template->assign(array(
 			'list' => $data,
-			'store' => dr_base64_encode(dr_array2string($store)),
+			'store' => man_base64_encode(man_array2string($store)),
 		));
 		$this->template->display('module_index.html');
 	}
@@ -143,13 +143,13 @@ class Module extends M_Controller {
                      ->where('mark', 'module-'.$_data['dirname'])
                      ->update('member_menu', array('name' => $name));
                 $this->clear_cache('module');
-				$this->admin_msg(lang('014'), $all ? dr_url('module/index') : dr_url('module/config', array('id' => $id)), 1);
+				$this->admin_msg(lang('014'), $all ? man_url('module/index') : man_url('module/config', array('id' => $id)), 1);
 			}
 		} else {
             $cfg = require FCPATH.$data['dirname'].'/config/module.php';
             if (isset($cfg['mydb']) && $cfg['mydb']) {
                 // 跳转到模块自身的配置页面去
-                redirect(SITE_URL.dr_url($data['dirname'].'/mconfig/index'), 'refresh');
+                redirect(SITE_URL.man_url($data['dirname'].'/mconfig/index'), 'refresh');
             }
         }
 		
@@ -163,7 +163,7 @@ class Module extends M_Controller {
 					 ->row_array();
 		
 		// 模块风格
-		$theme = dr_dir_map(FCPATH.$data['dirname'].'/statics/', 1);
+		$theme = man_dir_map(FCPATH.$data['dirname'].'/statics/', 1);
 		$this->_menu[lang('061')] = 'admin/module/config/id/'.$id;
 		
 		$this->template->assign(array(
@@ -174,7 +174,7 @@ class Module extends M_Controller {
 			'menu' => $this->get_menu($this->_menu),
 			'theme' => $theme ? $theme : array('default'),
 			'result' => $result,
-			'template_path' => @array_diff(dr_dir_map(FCPATH.$data['dirname'].'/templates/', 1), array('admin', 'member')),
+			'template_path' => @array_diff(man_dir_map(FCPATH.$data['dirname'].'/templates/', 1), array('admin', 'member')),
 		));
 		$this->template->display('module_config.html');
     }
@@ -191,7 +191,7 @@ class Module extends M_Controller {
             exit(lang('027'));
         }
 		if (!is_file(FCPATH.$dir.'/config/auth.php')) {
-            exit(dr_lang('174', '/'.$dir.'/config/auth.php'));
+            exit(man_lang('174', '/'.$dir.'/config/auth.php'));
         }
 		if (is_file(FCPATH.$dir.'/language/'.SITE_LANGUAGE.'/module_lang.php')) {
 			require FCPATH.$dir.'/language/'.SITE_LANGUAGE.'/module_lang.php';
@@ -206,7 +206,7 @@ class Module extends M_Controller {
 						 ->get('admin_role')
 						 ->row_array();;
 			if ($data['module']) {
-				$rule = dr_string2array($data['module']);
+				$rule = man_string2array($data['module']);
 				if ($rule) {
 					foreach ($rule as $i => $t) {
 						if (strpos($t, $dir.'/admin') === 0) {
@@ -250,7 +250,7 @@ class Module extends M_Controller {
 				 ->update('module', array('disabled' => ($_data['disabled'] == 1 ? 0 : 1)));
             $this->clear_cache('module');
 		}
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
     }
 	
 	/**
@@ -262,11 +262,11 @@ class Module extends M_Controller {
 			if (IS_POST) {
 				$data = $this->input->post('data');
 				if (!$data['dirname'] || !preg_match('/^[a-z]+$/iU', $data['dirname'])) {
-					exit(dr_json(0, lang('html-519')));
+					exit(man_json(0, lang('html-519')));
 				} elseif (is_dir(FCPATH.$data['dirname'])) {
-					exit(dr_json(0, lang('html-520')));
+					exit(man_json(0, lang('html-520')));
 				} elseif ($data['name'] && strpos($data['name'], "'") !== FALSE) {
-					exit(dr_json(0, lang('html-091')));
+					exit(man_json(0, lang('html-091')));
 				}
 				$this->_copy_file(FCPATH.$dir, FCPATH.$data['dirname']);
 				if ($data['name']) {
@@ -280,12 +280,12 @@ class Module extends M_Controller {
 						 ->space(24)
 						 ->to_require_one($config);
 				}
-				exit(dr_json(1, lang('html-092')));
+				exit(man_json(1, lang('html-092')));
 			} else {
 				$this->template->display('module_copy.html');
 			}
 		} else {
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		}
     }
 	
@@ -302,10 +302,10 @@ class Module extends M_Controller {
 				if ($error) {
 					$this->admin_msg($error);
 				} else {
-					$this->admin_msg(lang('313'), dr_url('module/index'), 1, 10);
+					$this->admin_msg(lang('313'), man_url('module/index'), 1, 10);
 				}
 			} else {
-				$this->admin_msg(lang('html-476'), dr_url('module/export', array('dir' => $dir, 'name' => $name, 'action' => 1)), 2);
+				$this->admin_msg(lang('html-476'), man_url('module/export', array('dir' => $dir, 'name' => $name, 'action' => 1)), 2);
 			}
 		} else {
 			$this->admin_msg(lang('014'));
@@ -323,7 +323,7 @@ class Module extends M_Controller {
             $this->admin_msg(lang('html-519'));
         }
 		if (!is_file(FCPATH.$dir.'/config/module.php')) {
-            $this->admin_msg(dr_lang('089', $dir));
+            $this->admin_msg(man_lang('089', $dir));
         }
 
         $cfg = require FCPATH.$dir.'/config/module.php';
@@ -332,24 +332,24 @@ class Module extends M_Controller {
         // 非自定义表时
         if (!$mydb) {
             if (!is_file(FCPATH.$dir.'/config/main.table.php')) {
-                $this->admin_msg(dr_lang('090', $dir));
+                $this->admin_msg(man_lang('090', $dir));
             }
             if (!is_file(FCPATH.$dir.'/config/data.table.php')) {
-                $this->admin_msg(dr_lang('091', $dir));
+                $this->admin_msg(man_lang('091', $dir));
             }
         }
 
 		// 入库模块表和字段
 		$id = $this->module_model->add($dir, $cfg, $mydb);
 		if (!$id) {
-            $this->admin_msg(dr_lang('092', $dir));
+            $this->admin_msg(man_lang('092', $dir));
         }
 		
 		// 安装当前站点的数据表
         $this->module_model->install($id, $dir, SITE_ID, $cfg, $mydb);
 		
 		// 更新站点到模块表
-		$this->db->where('id', $id)->update('module', array('site' => dr_array2string(array(
+		$this->db->where('id', $id)->update('module', array('site' => man_array2string(array(
 			SITE_ID => array(
 				'use' => 1,
 				'html' => 0,
@@ -372,7 +372,7 @@ class Module extends M_Controller {
         }
 
         $this->clear_cache('module');
-		$this->admin_msg(lang('093'), dr_url('module/index'), 1);
+		$this->admin_msg(lang('093'), man_url('module/index'), 1);
     }
 	
 	/**
@@ -381,7 +381,7 @@ class Module extends M_Controller {
     public function uninstall() {
 		$this->module_model->del((int)$this->input->get('id'));
         $this->clear_cache('module');
-		$this->admin_msg(lang('094'), dr_url('module/index'), 1);
+		$this->admin_msg(lang('094'), man_url('module/index'), 1);
     }
     
 	/**
@@ -390,7 +390,7 @@ class Module extends M_Controller {
     public function clear() {
 		$this->module_model->clear($this->input->get('dir'));
         $this->clear_cache('module');
-		$this->admin_msg(lang('000'), dr_url('module/index'), 1);
+		$this->admin_msg(lang('000'), man_url('module/index'), 1);
     }
 	
 	/**
@@ -415,7 +415,7 @@ class Module extends M_Controller {
         }
 
         $this->clear_cache('module');
-		$this->admin_msg(lang('000'), dr_url('module/index'), 1);
+		$this->admin_msg(lang('000'), man_url('module/index'), 1);
     }
 	
 	/**
@@ -432,7 +432,7 @@ class Module extends M_Controller {
     public function store() {
 	
 		$data = array();
-		$local = @array_diff(dr_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); // 搜索本地模块
+		$local = @array_diff(man_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); // 搜索本地模块
 		if ($local) {
 			foreach ($local as $dir) {
 				if (is_file(FCPATH.$dir.'/config/module.php')) {
@@ -444,7 +444,7 @@ class Module extends M_Controller {
 			}
 		}
 //		
-//		$url = 'http://store.mantob.com/index.php?c=category&id=3&action=module&param='.dr_base64_encode(dr_array2string(array(
+//		$url = 'http://store.mantob.com/index.php?c=category&id=3&action=module&param='.man_base64_encode(man_array2string(array(
 //			'site' => SITE_URL,
 //			'name' => SITE_NAME,
 //			'data' => $data,
@@ -469,7 +469,7 @@ class Module extends M_Controller {
             $this->admin_msg('目录（/'.$dir.'/）已经存在');
         }
 		
-    	$data = dr_catcher_data(urldecode($this->input->get('id')));
+    	$data = man_catcher_data(urldecode($this->input->get('id')));
     	if (!$data) {
             $this->admin_msg('对不起，您的服务器不支持远程下载');
         }
@@ -515,7 +515,7 @@ class Module extends M_Controller {
     	$this->pclzip->extract(PCLZIP_OPT_PATH, FCPATH.$dir.'/', PCLZIP_OPT_REPLACE_NEWER);
     	delete_files(FCPATH.'cache/down/', TRUE);
 		
-		$this->admin_msg('下载成功，即将为您跳转到应用中心', dr_url('module/index'), 1);
+		$this->admin_msg('下载成功，即将为您跳转到应用中心', man_url('module/index'), 1);
     }
 	
 	/**
@@ -533,7 +533,7 @@ class Module extends M_Controller {
 		if (!$key) {
             $this->admin_msg('此模块无法在线更新（key不存在）');
         }
-		$url = 'http://store.mantob.com/index.php?c=down&m=update&action=module&param='.dr_base64_encode(dr_array2string(array(
+		$url = 'http://store.mantob.com/index.php?c=down&m=update&action=module&param='.man_base64_encode(man_array2string(array(
 			'site' => SITE_URL,
 			'name' => SITE_NAME,
 			'data' => array(
@@ -569,7 +569,7 @@ class Module extends M_Controller {
 			 $this->admin_msg('此模块无法在线升级，目录（/'.$dir.'/）不存在');
 		}
 		
-    	$data = dr_catcher_data(urldecode($this->input->get('id')));
+    	$data = man_catcher_data(urldecode($this->input->get('id')));
     	if (!$data) {
             $this->admin_msg('对不起，您的服务器不支持远程下载');
         }
@@ -625,9 +625,9 @@ class Module extends M_Controller {
 		
     	//检查update控制器
 		if (is_file(FCPATH.$dir.'/controllers/admin/Update.php')) {
-            $this->admin_msg('正在升级数据，请稍候...', dr_url($dir.'/update/index'), 2);
+            $this->admin_msg('正在升级数据，请稍候...', man_url($dir.'/update/index'), 2);
         }
-		$this->admin_msg('升级完成，请重新检测一次版本', dr_url('module/index'), 1);
+		$this->admin_msg('升级完成，请重新检测一次版本', man_url('module/index'), 1);
     }
 	
 	/**
@@ -650,7 +650,7 @@ class Module extends M_Controller {
 			$url = $this->input->get('url') ? $this->input->get('url') : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 			$todo = (int)$this->input->get('todo');
 			if (!($admin || !$update) && !$todo) {
-				$this->admin_msg(lang('004'), dr_url('module/cache', array('dir' => $dir, 'todo' => 1, 'url' => urlencode($url))), 2, 0);
+				$this->admin_msg(lang('004'), man_url('module/cache', array('dir' => $dir, 'todo' => 1, 'url' => urlencode($url))), 2, 0);
 			}
 			$this->module_model->cache($dir, $update);
 			if ($admin || !$update) {
@@ -668,19 +668,19 @@ class Module extends M_Controller {
 			if (!$todo && $module) {
 				$cache = array();
 				foreach ($module as $t) {
-					$site = dr_string2array($t['site']);
+					$site = man_string2array($t['site']);
 					foreach ($site as $_site => $url) {
 						$cache[$_site][] = $t['dirname']; // 将模块归类至站点
 					}
 				}
 				$this->dcache->set('module', $cache);
-				$this->admin_msg(lang('004'), dr_url('module/cache', array('step' => 0, 'todo' => 1)), 2, 0);
+				$this->admin_msg(lang('004'), man_url('module/cache', array('step' => 0, 'todo' => 1)), 2, 0);
 			}
 			if (!isset($module[$step])) {
-                $this->admin_msg(lang('116'), dr_url('module/index'), 1);
+                $this->admin_msg(lang('116'), man_url('module/index'), 1);
             }
 			$this->module_model->cache($module[$step]['dirname'], $update);
-			$this->admin_msg(dr_lang('009', $module[$step]['dirname']).' ...', dr_url('module/cache', array('step' => $step + 1, 'todo' => 1)), 2, 0);
+			$this->admin_msg(man_lang('009', $module[$step]['dirname']).' ...', man_url('module/cache', array('step' => $step + 1, 'todo' => 1)), 2, 0);
 		}
 	}
 	

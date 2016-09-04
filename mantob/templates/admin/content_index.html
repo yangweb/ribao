@@ -1,6 +1,6 @@
 {template header.html}
 <script type="text/javascript">
-function dr_confirm_move() {
+function man_confirm_move() {
 	art.dialog.confirm("{lang('015')}", function(){
 		$('#action').val('move');
 		var _data = $("#myform").serialize();
@@ -34,15 +34,15 @@ function dr_confirm_move() {
 	return false;
 }
 // 复制内容
-function dr_copy_content(id) {
+function man_copy_content(id) {
     art.dialog.confirm("{lang('html-768')}", function(){
         // 将表单数据ajax提交验证
-        $.ajax({type: "POST",dataType:"json", url: "{dr_url(APP_DIR.'/home/copy/')}&id="+id,success: function(data) {
+        $.ajax({type: "POST",dataType:"json", url: "{man_url(APP_DIR.'/home/copy/')}&id="+id,success: function(data) {
                 if (data.status == 1) {
-                    dr_tips(data.code, 3, 1);
+                    man_tips(data.code, 3, 1);
                     setTimeout('window.location.reload(true)', 3000); // 刷新页
                 } else {
-                    dr_tips(data.code);
+                    man_tips(data.code);
                 }
             },
             error: function(HttpRequest, ajaxOptions, thrownError) {
@@ -78,9 +78,9 @@ function dr_copy_content(id) {
 		</select> ：
 		<input type="text" class="input-text" value="{$param.keyword}" size="30" placeholder="{lang('html-249')}" name="data[keyword]" />&nbsp;
 		{lang('105')} ：
-		{dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
+		{man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
 		-&nbsp;
-		{dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
+		{man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
 		&nbsp;
 		<input type="submit" value="{lang('search')}" class="button" name="search" />
 		</form>
@@ -93,49 +93,49 @@ function dr_copy_content(id) {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="30" align="center">{lang('order')}</th>
 			<th hide="1" class="{ns_sorting('id')}" name="id" width="50" align="center">Id</th>
 			<th class="{ns_sorting('title')}" name="title" align="left">{lang('mod-35')}</th>
 			{if $is_category}<th class="{ns_sorting('catid')}" name="catid" width="100" align="center">{lang('cat-00')}</th>{/if}
 			<th hide="1" class="{ns_sorting('author')}" name="author" width="80" align="center">{lang('101')}</th>
 			<th class="{ns_sorting('updatetime')}" name="updatetime" width="120" align="left">{lang('105')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
-		<tr id="dr_row_{$t.id}">
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
+		<tr id="man_row_{$t.id}">
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
 			<td align="center"><input class="input-text displayorder" type="text" name="data[{$t.id}][displayorder]" value="{$t.displayorder}" /></td>
 			<td hide="1" align="center">{$t.id}</td>
-			<td align="left"><a class="onloading" href="{dr_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{if $t.thumb}<font color="#FF0000">{lang('html-387')}</font>{/if}{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
-			{if $is_category}<td align="center"><a href="{if $flag}{dr_url(APP_DIR.'/home/index', array('flag'=>$flag,'catid'=>$t.catid))}{else}{dr_url(APP_DIR.'/home/index', array('catid'=>$t.catid))}{/if}">{CATEGORY.$t[catid].name}</a></td>{/if}
-			<td hide="1" align="center"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
+			<td align="left"><a class="onloading" href="{man_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{if $t.thumb}<font color="#FF0000">{lang('html-387')}</font>{/if}{man_keyword_highlight($t.title, $param.keyword)}</a></td>
+			{if $is_category}<td align="center"><a href="{if $flag}{man_url(APP_DIR.'/home/index', array('flag'=>$flag,'catid'=>$t.catid))}{else}{man_url(APP_DIR.'/home/index', array('catid'=>$t.catid))}{/if}">{CATEGORY.$t[catid].name}</a></td>{/if}
+			<td hide="1" align="center"><a href="javascript:;" onclick="man_dialog_member('{$t.uid}')">{man_strcut($t.author, 10)}</a></td>
 			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
-			<td align="left" class="dr_option">
+			<td align="left" class="man_option">
 			{if $is_category}<a href="{$t.url}" target="_blank">{lang('go')}</a>{/if}
-			{if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}<a class="onloading" href="{dr_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{lang('edit')}</a>{/if}
-			{if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}<a onclick="dr_copy_content({$t.id})" href="javascript:;">{lang('html-767')}</a>{/if}
-            {if $extend}<a class="onloading" href="{dr_url(APP_DIR.'/extend/index',array('cid'=>$t.id,'catid'=>$get.catid))}" style="color:#00F">{lang('mod-29')}</a>{/if}
+			{if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}<a class="onloading" href="{man_url(APP_DIR.'/home/edit',array('id'=>$t.id))}">{lang('edit')}</a>{/if}
+			{if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}<a onclick="man_copy_content({$t.id})" href="javascript:;">{lang('html-767')}</a>{/if}
+            {if $extend}<a class="onloading" href="{man_url(APP_DIR.'/extend/index',array('cid'=>$t.id,'catid'=>$get.catid))}" style="color:#00F">{lang('mod-29')}</a>{/if}
 			{loop $app $a}<a class="onloading" href="{$a.url}&cid={$t.id}&catid={$t.catid}&module={APP_DIR}">{$a.name}{if $a.field!='null'}({$t[$a.field]}){/if}</a>{/loop}
 			{loop $form $a}<a class="onloading" href="{$a.url}&cid={$t.id}">{$a.name}</a>{/loop}
 			</td>
 		</tr>
 		{/loop}
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="8" align="left" style="border:none">
-			{if !$get['flag']}{if $this->ci->is_auth(APP_DIR.'/admin/home/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}', 1)" />{/if}{/if}
+			{if !$get['flag']}{if $this->ci->is_auth(APP_DIR.'/admin/home/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}', 1)" />{/if}{/if}
             {if $this->ci->is_auth(APP_DIR.'/admin/home/edit')}
-			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');man_confirm_set_all('{lang('015')}')" />
             <div class="onShow">{lang('html-565')}</div>
 			{if $is_category}
-			<input type="button" class="button" value="{lang('html-265')}" name="option" onClick="dr_confirm_move();" />
+			<input type="button" class="button" value="{lang('html-265')}" name="option" onClick="man_confirm_move();" />
 			{$select}
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			{/if}
-			<input type="button" class="button" value="{lang('html-266')}" name="option" onClick="$('#action').val('flag');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('html-266')}" name="option" onClick="$('#action').val('flag');man_confirm_set_all('{lang('015')}')" />
 			<select name="flagid">
             <option value=""> --- </option>
             {if $get.flag}<option value="-{$get['flag']}">{lang('html-391')}</option>{/if}
@@ -149,7 +149,7 @@ function dr_copy_content(id) {
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param.total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param.total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

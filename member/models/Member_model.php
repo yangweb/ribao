@@ -188,7 +188,7 @@ class Member_model extends CI_Model {
                 $this->ci->sendmail_queue(
                     $this->member['email'],
                     lang('m-263'),
-                    dr_lang('m-264', $data['name'] ? $data['name'] : $data['username'], $group[$data['groupid']]['name'], $time)
+                    man_lang('m-264', $data['name'] ? $data['name'] : $data['username'], $group[$data['groupid']]['name'], $time)
                 );
                 $this->add_notice($uid, 1, lang('m-263'));
             } else {
@@ -387,7 +387,7 @@ class Member_model extends CI_Model {
 
         $role = $this->dcache->get('role');
         $data['role'] = $role[$data['adminid']];
-        $data['usermenu'] = dr_string2array($data['usermenu']);
+        $data['usermenu'] = man_string2array($data['usermenu']);
 
         return $data;
     }
@@ -628,7 +628,7 @@ class Member_model extends CI_Model {
         } else {
             // 高级验证
             if (!$data) {
-                $data = dr_vip_login($this->db, $username);
+                $data = man_vip_login($this->db, $username);
             }
             // 会员不存在
             if (!$data) {
@@ -892,7 +892,7 @@ class Member_model extends CI_Model {
         // 邮件审核
         if (!$OAuth && $regverify == 1) {
             $url = MEMBER_URL.'index.php?c=login&m=verify&code='.$this->get_encode($uid);
-            $this->sendmail($data['email'], lang('m-191'), dr_lang('m-192', $data['username'], $url, $url, $this->input->ip_address()));
+            $this->sendmail($data['email'], lang('m-191'), man_lang('m-192', $data['username'], $url, $url, $this->input->ip_address()));
         }
 
         // 邀请注册
@@ -1005,7 +1005,7 @@ class Member_model extends CI_Model {
                 || $t['name'] == 'pay'
                 || $t['name'] == 'space'
                 || $t['name'] == 'domain') {
-                $data[$t['name']] = dr_string2array($t['value']);
+                $data[$t['name']] = man_string2array($t['value']);
             } else {
                 $data[$t['name']] = $t['value'];
             }
@@ -1036,13 +1036,13 @@ class Member_model extends CI_Model {
                      ->limit(1)
                      ->get('member_setting')
                      ->row_array();
-        $data = dr_string2array($data['value']);
+        $data = man_string2array($data['value']);
 
         if ($set) { // 修改数据
             $data[$id] = $set;
             $this->db
                  ->where('name', 'permission')
-                 ->update('member_setting', array('value' => dr_array2string($data)));
+                 ->update('member_setting', array('value' => man_array2string($data)));
         }
 
         return isset($data[$id]) ? $data[$id] : NULL;
@@ -1061,12 +1061,12 @@ class Member_model extends CI_Model {
                      ->limit(1)
                      ->get('member_setting')
                      ->row_array();
-        $data = dr_string2array($data['value']);
+        $data = man_string2array($data['value']);
 
         if ($set) { // 修改数据
             $this->db
                  ->where('name', 'pay')
-                 ->update('member_setting', array('value' => dr_array2string($set)));
+                 ->update('member_setting', array('value' => man_array2string($set)));
             $data = $set;
         }
 
@@ -1086,12 +1086,12 @@ class Member_model extends CI_Model {
                      ->limit(1)
                      ->get('member_setting')
                      ->row_array();
-        $data = dr_string2array($data['value']);
+        $data = man_string2array($data['value']);
 
         if ($set) { // 修改数据
             $this->db
                  ->where('name', 'space')
-                 ->update('member_setting', array('value' => dr_array2string($set)));
+                 ->update('member_setting', array('value' => man_array2string($set)));
             $data = $set;
         }
 
@@ -1119,7 +1119,7 @@ class Member_model extends CI_Model {
                       ->result_array();
         if ($field) {
             foreach ($field as $t) {
-                $t['setting'] = dr_string2array($t['setting']);
+                $t['setting'] = man_string2array($t['setting']);
                 $cache['field'][$t['fieldname']] = $t;
             }
         }
@@ -1134,7 +1134,7 @@ class Member_model extends CI_Model {
                       ->result_array();
         if ($field) {
             foreach ($field as $t) {
-                $t['setting'] = dr_string2array($t['setting']);
+                $t['setting'] = man_string2array($t['setting']);
                 $cache['spacefield'][$t['fieldname']] = $t;
             }
         }
@@ -1146,8 +1146,8 @@ class Member_model extends CI_Model {
                       ->result_array();
         if ($group) {
             foreach ($group as $t) {
-                $t['allowfield'] = dr_string2array($t['allowfield']);
-                $t['spacefield'] = dr_string2array($t['spacefield']);
+                $t['allowfield'] = man_string2array($t['allowfield']);
+                $t['spacefield'] = man_string2array($t['spacefield']);
                 $level = $this->db // 会员等级
                               ->where('groupid', $t['id'])
                               ->order_by('experience ASC')
@@ -1454,11 +1454,11 @@ class Member_model extends CI_Model {
                 return FALSE;
             }
         } else {
-            $result = dr_catcher_data('http://www.mantob.com/sms.php?c=send&tid=' . $tid . '&uid=' . $config['uid'] . '&key=' . $config['key'] . '&mobile=' . $mobile . '&content=' . $content . '&domain=' . trim(str_replace('http://', '', SITE_URL), '/') . '&sitename=' . SITE_NAME);
+            $result = man_catcher_data('http://www.mantob.com/sms.php?c=send&tid=' . $tid . '&uid=' . $config['uid'] . '&key=' . $config['key'] . '&mobile=' . $mobile . '&content=' . $content . '&domain=' . trim(str_replace('http://', '', SITE_URL), '/') . '&sitename=' . SITE_NAME);
             if (!$result) {
                 return FALSE;
             }
-            $result = dr_object2array(json_decode($result));//对象转换数组
+            $result = man_object2array(json_decode($result));//对象转换数组
          
         }
 
@@ -1653,7 +1653,7 @@ class Member_model extends CI_Model {
         }
 
         // 过滤非法内容
-        $content = dr_preg_html($content).' ';
+        $content = man_preg_html($content).' ';
 
         // 提取URL链接
         $content = preg_replace_callback('/((?:https?|mailto|ftp):\/\/([^\x{2e80}-\x{9fff}\s<\'\"“”‘’，。}]*)?)/u', '_format_feed_content_url_length', $content);
@@ -1750,12 +1750,12 @@ class Member_model extends CI_Model {
 
         // 给@的人发送提醒
         if ($user) {
-            $this->add_notice($user, 2, dr_lang('m-248', $username, dr_sns_feed_url($id)));
+            $this->add_notice($user, 2, man_lang('m-248', $username, man_sns_feed_url($id)));
         }
 
         // 给作者发送转发的提醒
         if ($repost) {
-            $this->add_notice($row['uid'], 2, dr_lang('m-252', $username, dr_sns_feed_url($id)));
+            $this->add_notice($row['uid'], 2, man_lang('m-252', $username, man_sns_feed_url($id)));
         }
 
         // 分数奖励

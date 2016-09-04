@@ -130,7 +130,7 @@ class Duri {
 		$_uri = ($this->app ? $this->app : $this->path).'/'.$this->class.'/'.$this->method;
 		$_uri = trim(trim($_uri, '/'), '/');
 		
-		return dr_url($_uri, $this->param);
+		return man_url($_uri, $this->param);
 	}
 	
 	/**

@@ -11,55 +11,55 @@
 
 // 表单提示
 function d_tips(name, status, code) {
-	var obj = $("#dr_"+name+"_tips");
+	var obj = $("#man_"+name+"_tips");
 	if (code) obj.html(code);
 	if (status) {
 		obj.attr("class", "onCorrect");
 	} else {
 		obj.attr("class", "onError");
-		$("#dr_"+name).focus();
+		$("#man_"+name).focus();
 	}
 	top.$('.page-loading').remove();
 }
 
 function check_title() {
-	var val = $("#dr_title").val();
-	var mod = $("#dr_module").val();
-	var id = $("#dr_id").val();
+	var val = $("#man_title").val();
+	var mod = $("#man_module").val();
+	var id = $("#man_id").val();
 	$.get(memberpath+'index.php?c=api&m=checktitle&title='+val+'&module='+mod+'&id='+id+'&rand='+Math.random(), function(data){
 		if (data) {
-			$("#dr_title_tips").html(data);
-			$("#dr_title_tips").attr("class", "onError");
+			$("#man_title_tips").html(data);
+			$("#man_title_tips").attr("class", "onError");
 		} else {
-			$("#dr_title_tips").html(" &nbsp;");
-			$("#dr_title_tips").attr("class", "onCorrect");
+			$("#man_title_tips").html(" &nbsp;");
+			$("#man_title_tips").attr("class", "onCorrect");
 		}
 	});
 }
 
 function get_keywords(to) {
-	var title = $("#dr_title").val();
-	if ($("#dr_"+to).val()) return false;
+	var title = $("#man_title").val();
+	if ($("#man_"+to).val()) return false;
 	$.get(memberpath+'index.php?c=api&m=getkeywords&title='+title+'&rand='+Math.random(), function(data){
-		$("#dr_"+to).val(data);
+		$("#man_"+to).val(data);
 	});
 }
 
 // 转换拼音
 function d_topinyin(name, from, letter) {
-	var val = $("#dr_"+from).val();
-	if ($("#dr_"+name).val()) return false;
+	var val = $("#man_"+from).val();
+	if ($("#man_"+name).val()) return false;
 	$.get(memberpath+'index.php?c=api&m=pinyin&name='+val+'&rand='+Math.random(), function(data){
-		$("#dr_"+name).val(data);
+		$("#man_"+name).val(data);
 		if (letter) {
-			$("#dr_letter").val(data.substr(0, 1));
+			$("#man_letter").val(data.substr(0, 1));
 		}
 	});
 }
 
 // 验证是否为空
 function d_required(name) {
-	if ($("#dr_"+name).val() == '') {
+	if ($("#man_"+name).val() == '') {
 		d_tips(name, false);
 		return true;
 	} else {
@@ -70,7 +70,7 @@ function d_required(name) {
 
 // 验证email
 function d_isemail(name) {
-	var val	= $("#dr_"+name).val();
+	var val	= $("#man_"+name).val();
 	var reg = /^[-_A-Za-z0-9]+@([_A-Za-z0-9]+\.)+[A-Za-z0-9]{2,3}$/;
 	if (reg.test(val)) {
 		d_tips(name, true);
@@ -83,7 +83,7 @@ function d_isemail(name) {
 
 // 验证url
 function d_isurl(name) {
-	var val	= $("#dr_"+name).val();
+	var val	= $("#man_"+name).val();
 	var reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/; 
 	var Exp = new RegExp(reg);
 	if (Exp.test(val) == true) {
@@ -97,7 +97,7 @@ function d_isurl(name) {
 
 // 验证domain
 function d_isdomain(name) {
-	var val	= $("#dr_"+name).val();
+	var val	= $("#man_"+name).val();
 	if (val.indexOf('/') > 0) {
 		d_tips(name, false);
 		return true;

@@ -60,7 +60,7 @@ class Dcache {
         $value = (!is_array($value)) ? serialize($value) : serialize($value); // 分析缓存内容
         // 分析缓存目录
         if (!is_dir($this->cache_dir)) {
-            dr_mkdirs($this->cache_dir, 0777);
+            man_mkdirs($this->cache_dir, 0777);
         } else {
             if (!is_writeable($this->cache_dir)) @chmod($this->cache_dir, 0777);
         }

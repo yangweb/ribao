@@ -33,17 +33,17 @@ class Root extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/root/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
 	
 			foreach ($ids as $id) {
 				$this->member_model->del_admin($id);
 			}
 			
-			exit(dr_json(1, lang('000'), ''));
+			exit(man_json(1, lang('000'), ''));
 		}
 		$admin_role=$this->admin[role][id];
 	   $this->template->assign('admin_role', $admin_role);
@@ -62,7 +62,7 @@ class Root extends M_Controller {
 		
 			$data = $this->input->post('data', TRUE);
 			if (!$data['adminid'] || !isset($role[$data['adminid']])) {
-                exit(dr_json(0, lang('022'), 'adminid'));
+                exit(man_json(0, lang('022'), 'adminid'));
             }
 			
 			$check = $this->db
@@ -81,26 +81,26 @@ class Root extends M_Controller {
 				);
 				$uid = $this->member_model->register($member, 3);
 				if ($uid == -1) {
-					exit(dr_json(0, lang('m-021'), 'username'));
+					exit(man_json(0, lang('m-021'), 'username'));
 				} elseif ($uid == -2) {
-					exit(dr_json(0, lang('m-011'), 'email'));
+					exit(man_json(0, lang('m-011'), 'email'));
 				} elseif ($uid == -3) {
-					exit(dr_json(0, lang('m-022'), 'email'));
+					exit(man_json(0, lang('m-022'), 'email'));
 				} elseif ($uid == -4) {
-					exit(dr_json(0, lang('m-023'), 'username'));
+					exit(man_json(0, lang('m-023'), 'username'));
 				} elseif ($uid == -5) {
-					exit(dr_json(0, lang('m-024'), 'username'));
+					exit(man_json(0, lang('m-024'), 'username'));
 				} elseif ($uid == -6) {
-					exit(dr_json(0, lang('m-025'), 'username'));
+					exit(man_json(0, lang('m-025'), 'username'));
 				} elseif ($uid == -7) {
-					exit(dr_json(0, lang('m-026'), 'username'));
+					exit(man_json(0, lang('m-026'), 'username'));
 				} elseif ($uid == -8) {
-					exit(dr_json(0, lang('m-027'), 'username'));
+					exit(man_json(0, lang('m-027'), 'username'));
 				} elseif ($uid == -9) {
-					exit(dr_json(0, lang('m-028'), 'username'));
+					exit(man_json(0, lang('m-028'), 'username'));
 				}
 			} elseif ($check['adminid'] > 0) { // 已经属于管理组
-				exit(dr_json(0, lang('023'), 'username'));
+				exit(man_json(0, lang('023'), 'username'));
 			}
 			
 			$menu = array();
@@ -115,10 +115,10 @@ class Root extends M_Controller {
 			$insert	= array(
 				'uid' => $uid,
 				'realname' => $data['realname'],
-				'usermenu' => dr_array2string($menu)
+				'usermenu' => man_array2string($menu)
 			);
 			$update	= array('adminid' => $data['adminid']);
-			exit(dr_json(1, lang('000'), $this->member_model->insert_admin($insert, $update, $uid)));
+			exit(man_json(1, lang('000'), $this->member_model->insert_admin($insert, $update, $uid)));
 		}
 		
 		$this->template->assign('role', $role);
@@ -142,7 +142,7 @@ class Root extends M_Controller {
 			$menu = array();
 			$data = $this->input->post('data', TRUE);
 			if (!$data['adminid'] || !isset($role[$data['adminid']])) {
-                exit(dr_json(0, lang('022'), 'adminid'));
+                exit(man_json(0, lang('022'), 'adminid'));
             }
 			if ($data['usermenu']) {
 				foreach ($data['usermenu']['name'] as $id => $v) {
@@ -154,10 +154,10 @@ class Root extends M_Controller {
 			$insert	= array(
 				'uid' => $uid,
 				'realname' => $data['realname'],
-				'usermenu' => dr_array2string($menu)
+				'usermenu' => man_array2string($menu)
 			);
 			$update	= array('adminid' => $data['adminid']);
-			exit(dr_json(1, lang('000'), $this->member_model->update_admin($insert, $update, $uid)));
+			exit(man_json(1, lang('000'), $this->member_model->update_admin($insert, $update, $uid)));
 		}
 		
 		$this->template->assign(array(
@@ -192,8 +192,8 @@ class Root extends M_Controller {
 			}
 			$this->db
 				 ->where('uid', $this->uid)
-				 ->update('admin', array( 'realname' => $data['realname'], 'usermenu' => dr_array2string($menu)));
-			$this->admin_msg(lang('000'), dr_url('root/my'), 1);
+				 ->update('admin', array( 'realname' => $data['realname'], 'usermenu' => man_array2string($menu)));
+			$this->admin_msg(lang('000'), man_url('root/my'), 1);
 		} else {
 			$this->template->display('admin_my.html');
 		}
@@ -221,7 +221,7 @@ class Root extends M_Controller {
 						    ->where('uid', $uid)
 						    ->get('admin')
 						    ->row_array(),
-			'pages'	=> $this->get_pagination(dr_url('admin/root/log', array(
+			'pages'	=> $this->get_pagination(man_url('admin/root/log', array(
 				'uid' => $uid,
 				'total' => $total,
 				'search' => IS_POST ? 1 : $this->input->get('search')
@@ -236,9 +236,9 @@ class Root extends M_Controller {
     public function del() {
 		$s=$this->member_model->del_admin((int)$this->input->get('id'));
 	if($s==1){
-	   exit(dr_json(0, lang('delme')));
+	   exit(man_json(0, lang('delme')));
 	}else{
-		exit(dr_json(1, lang('000')));
+		exit(man_json(1, lang('000')));
 	}
 	}
 	
@@ -253,12 +253,12 @@ class Root extends M_Controller {
                        ->get($this->db->dbprefix('member'))
                        ->row_array();
 		if (!$result) {
-            exit(dr_json(1, lang('024')));
+            exit(man_json(1, lang('024')));
         } // 不存在，注册新会员
 		if ($result['adminid'] > 0) {
-            exit(dr_json(2, lang('023')));
+            exit(man_json(2, lang('023')));
         } // 已经属于管理组
-		exit(dr_json(0, lang('025'), $result['uid'])); // 已经注册会员
+		exit(man_json(0, lang('025'), $result['uid'])); // 已经注册会员
 	}
 	
 	private function _where(&$select) {

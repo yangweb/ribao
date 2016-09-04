@@ -61,7 +61,7 @@ class D_Admin_Extend_Verify extends M_Controller {
         if (IS_POST && $this->input->post('action') != 'search') {
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 
             if ($this->admin['adminid'] > 1) {
@@ -92,32 +92,32 @@ class D_Admin_Extend_Verify extends M_Controller {
                             $this->attachment_model->delete_for_table($this->table.'-' . $id);
                         }
                     }
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                     break;
                 case 'flag': // 标记
                     $js = $error = array();
                     if (!$this->input->post('flagid')) {
-                        exit(dr_json(0, lang('013')));
+                        exit(man_json(0, lang('013')));
                     }
                     foreach ($ids as $id) {
                         $result = $this->_verify($id, NULL, $where ? $where.' AND `id`='.(int)$id : '`id`='.(int)$id);
                         if (is_array($result)) {
                             if (MODULE_HTML) {
-                                $js[] = dr_module_create_show_file($result['id'], 1);
-                                $js[] = dr_module_create_list_file($result['catid'], 1);
+                                $js[] = man_module_create_show_file($result['id'], 1);
+                                $js[] = man_module_create_list_file($result['catid'], 1);
                             }
                         } elseif ($result) {
                             $error[] = str_replace('<br>', '', $result);
                         }
                     }
                     if ($error) {
-                        exit(dr_json(1, $error, $js));
+                        exit(man_json(1, $error, $js));
                     } else {
-                        exit(dr_json(2, lang('000'), $js));
+                        exit(man_json(2, lang('000'), $js));
                     }
                     break;
                 default:
-                    exit(dr_json(0, lang('047')));
+                    exit(man_json(0, lang('047')));
                     break;
             }
         }
@@ -176,7 +176,7 @@ class D_Admin_Extend_Verify extends M_Controller {
             'list' => $data,
             'menu' => $this->get_menu($_menu),
             'param' => $param,
-            'pages' => $this->get_pagination(dr_url(APP_DIR . '/verify/index', $param), $param['total'])
+            'pages' => $this->get_pagination(man_url(APP_DIR . '/verify/index', $param), $param['total'])
         ));
         $this->template->display('content_extend_verify.html');
     }
@@ -217,7 +217,7 @@ class D_Admin_Extend_Verify extends M_Controller {
                 if (is_array($result)) {
                     $this->admin_msg(
                         lang('000').
-                        (MODULE_HTML ? dr_module_create_show_file($this->content['id']).dr_module_create_list_file($this->content['catid']) : ''),
+                        (MODULE_HTML ? man_module_create_show_file($this->content['id']).man_module_create_list_file($this->content['catid']) : ''),
                         $this->input->post('backurl'),
                         1,
                         0
@@ -282,7 +282,7 @@ class D_Admin_Extend_Verify extends M_Controller {
                               ->count_all_results('member_scorelog_'.(int)substr((string)$verify['uid'], -1, 1))) {
                         if ($rule['score'] + $member['score'] < 0) {
                             // 数量不足提示
-                            return dr_lang('m-118', $verify['name'],  $member['username'], SITE_SCORE, abs($rule['score']));
+                            return man_lang('m-118', $verify['name'],  $member['username'], SITE_SCORE, abs($rule['score']));
                         }
                         $this->member_model->update_score(1, $verify['uid'], $rule['score'], $mark, "lang,m-151,{$category['name']}", 1);
                     }
@@ -328,7 +328,7 @@ class D_Admin_Extend_Verify extends M_Controller {
                 $this->member_model->add_notice(
                     $data[1]['uid'],
                     3,
-                    dr_lang('m-084', $verify['title'].$data[1]['name'])
+                    man_lang('m-084', $verify['title'].$data[1]['name'])
                 );
                 return array('id' => $id, 'catid' => $data[1]['catid']);
             }
@@ -345,7 +345,7 @@ class D_Admin_Extend_Verify extends M_Controller {
                  ->update($this->content_model->prefix.'_extend_verify', array(
                     'status' => 0,
                     'backuid' => (int) $this->uid,
-                    'backinfo' => dr_array2string(array(
+                    'backinfo' => man_array2string(array(
                         'uid' => $this->uid,
                         'author' => $this->admin['username'],
                         'rolename' => $this->admin['role']['name'],
@@ -356,7 +356,7 @@ class D_Admin_Extend_Verify extends M_Controller {
             $this->member_model->add_notice(
                 $verify['uid'],
                 3,
-                dr_lang('m-124', $verify['name'], MEMBER_URL.'index.php?s='.APP_DIR.'&c=eback&m=edit&id='.$id)
+                man_lang('m-124', $verify['name'], MEMBER_URL.'index.php?s='.APP_DIR.'&c=eback&m=edit&id='.$id)
             );
         }
     }

@@ -47,7 +47,7 @@ class System extends M_Controller {
 			."	),".PHP_EOL
 			.");".PHP_EOL;
 			file_put_contents(FCPATH.'config/memcached.php', $memcache);
-			$this->admin_msg(lang('000'), dr_url('system/index', array('page' => (int)$this->input->post('page'))), 1);
+			$this->admin_msg(lang('000'), man_url('system/index', array('page' => (int)$this->input->post('page'))), 1);
 		}
 		
 		$this->config->load('memcached', TRUE);
@@ -93,7 +93,7 @@ class System extends M_Controller {
             'time' => $time,
             'list' => $list,
             'total' => $total,
-            'pages'	=> $this->get_pagination(dr_url('system/oplog', array('time' => $time)), $total)
+            'pages'	=> $this->get_pagination(man_url('system/oplog', array('time' => $time)), $total)
         ));
         $this->template->display('system_oplog.html');
 	}

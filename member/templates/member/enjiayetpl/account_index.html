@@ -2,15 +2,15 @@
 <script type="text/javascript">
 $(function(){
 	{if $result_error}
-	dr_tips('{$result_error.msg}', 3);
+	man_tips('{$result_error.msg}', 3);
 	{/if}
 });
-function dr_send_sms() {
-	$.post("{dr_member_url('account/sendsms')}&phone="+$("#dr_phone").val(), function(data){
+function man_send_sms() {
+	$.post("{man_member_url('account/sendsms')}&phone="+$("#man_phone").val(), function(data){
 		if (data.status == '1') {
-			dr_tips(data.code, 3, 1);
+			man_tips(data.code, 3, 1);
 		} else {
-			dr_tips(data.code);
+			man_tips(data.code);
 		}
 	}, 'json');
 }

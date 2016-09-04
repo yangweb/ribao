@@ -83,12 +83,12 @@
         <script type="text/javascript">
             (function () {
                 /*组件初始化js begin*/
-                var dr_page = 1; // 记录当前页数
+                var man_page = 1; // 记录当前页数
                 $('.ui-refresh').refresh({
                     load: function (dir, type) {
                         var me = this;
-                        dr_page++;
-                        $.get('{SITE_URL}index.php?c=so&module={$dirname}&id={$id}&name=solist_data.html&page='+dr_page, function (html) {
+                        man_page++;
+                        $.get('{SITE_URL}index.php?c=so&module={$dirname}&id={$id}&name=solist_data.html&page='+man_page, function (html) {
                             $('.data-list').append(html);
                             me.afterDataLoading();    //数据加载完成后改变状态
                         });

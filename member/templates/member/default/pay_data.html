@@ -6,8 +6,8 @@
 	<td class="algin_c">{if $t.type}{$type[$t.type]['name']}{else}自助{/if}</td>
 	<td class="algin_c">{if $t.status}<font color="#009933">付款成功</font>{else}<font color="#FF0000">未付款</font>{/if}</td>
 	<td class="algin_l">
-    {if !$t.status && $t.type}<a href="{dr_member_url('pay/go', array('id' => $t.id))}">付款</a>&nbsp;&nbsp;{/if}
-    {dr_lang_note($t.note)}
+    {if !$t.status && $t.type}<a href="{man_member_url('pay/go', array('id' => $t.id))}">付款</a>&nbsp;&nbsp;{/if}
+    {man_lang_note($t.note)}
     </td>
 </tr>
 {/loop}

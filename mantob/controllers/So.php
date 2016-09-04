@@ -32,7 +32,7 @@ class So extends D_Module {
         if ($mod) {
             // 搜索参数
             $get = $this->input->get(NULL, TRUE);
-            $get = isset($get['rewrite']) ? dr_rewrite_decode($get['rewrite']) : $get;
+            $get = isset($get['rewrite']) ? man_rewrite_decode($get['rewrite']) : $get;
             $dir = $get['module'];
             $module = array();
             foreach ($mod as $mdir => $t) {

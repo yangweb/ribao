@@ -72,7 +72,7 @@ class F_Color extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		$value = $value ? $value : $this->get_default_value($cfg['option']['value']);
 		$str = '';
@@ -83,13 +83,13 @@ class F_Color extends A_Field {
 			define('DAYRUI_COLOR_LD', 1);//防止重复加载JS
 		}
 		$str.= '
-		<input type="hidden" name="data['.$name.']" id="dr_'.$name.'" value="' . $value . '" />
+		<input type="hidden" name="data['.$name.']" id="man_'.$name.'" value="' . $value . '" />
 		<script type="text/javascript">
-			$("#dr_'.$name.'").spectrum({
+			$("#man_'.$name.'").spectrum({
 			preferredFormat: "hex",
 			showInput: true,
 			change: function(color) {
-				$("#dr_'.$name.'").val(color);
+				$("#man_'.$name.'").val(color);
 			}
 		});
 		</script>'.$tips;

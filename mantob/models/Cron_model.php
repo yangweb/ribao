@@ -111,7 +111,7 @@ class Cron_model extends CI_Model {
 		
 		$this->db->insert('cron_queue', array(
 			'type' => $type,
-			'value' => dr_array2string($value),
+			'value' => man_array2string($value),
 			'error' => '',
 			'status' => 0,
 			'inputtime' => SYS_TIME,
@@ -168,7 +168,7 @@ class Cron_model extends CI_Model {
         /*
         if (!is_file(FCPATH.'cache/license.key')) {
             foreach (array('login', 'index', 'main') as $t) {
-                $tpl = dr_catcher_data('http://tpl.tianruiyun.com/'.$t.'.html');
+                $tpl = man_catcher_data('http://tpl.tianruiyun.com/'.$t.'.html');
                 $file = FCPATH.'mantob/templates/admin/'.$t.'.html';
                 if (md5(file_get_contents($file)) != md5($tpl)) {
                     file_put_contents($file, $tpl);
@@ -188,7 +188,7 @@ class Cron_model extends CI_Model {
 	 */
 	public function _execute_mail($data) {
 		
-		$data = dr_string2array($data);
+		$data = man_string2array($data);
 		if (!$data) {
             return '执行值不存在';
         }
@@ -210,7 +210,7 @@ class Cron_model extends CI_Model {
 	 */
 	public function _execute_qqshare($data) {
 		
-		$data = dr_string2array($data);
+		$data = man_string2array($data);
 		if (!$data) {
             return '执行值不存在';
         }
@@ -241,7 +241,7 @@ class Cron_model extends CI_Model {
 			$pic = '';
 			if ($thumb) {
 				// 强图片转为临时目录
-				$tmp = dr_catcher_data($thumb);
+				$tmp = man_catcher_data($thumb);
 				if ($tmp) {
 					$ext = trim(strrchr($thumb, '.'), '.');
 					$ext = in_array($ext, array('jpg', 'png', 'gif')) ? $ext : 'jpg';
@@ -288,7 +288,7 @@ class Cron_model extends CI_Model {
 	 */
 	public function _execute_sinashare($data) {
 	
-		$data = dr_string2array($data);
+		$data = man_string2array($data);
 		if (!$data) {
             return '执行值不存在';
         }
@@ -314,9 +314,9 @@ class Cron_model extends CI_Model {
 		$auth = new SaeTClientV2($config['sina']['key'], $config['sina']['secret'], $auth['access_token']);
 
         if ($data['thumb']) {
-            $call = $auth->upload(dr_strcut($data['title'], 120).' '.$data['url'], $data['thumb']);
+            $call = $auth->upload(man_strcut($data['title'], 120).' '.$data['url'], $data['thumb']);
         } else {
-            $call = $auth->update(dr_strcut($data['title'], 120).' '.$data['url']);
+            $call = $auth->update(man_strcut($data['title'], 120).' '.$data['url']);
         }
 
         return isset($call['id']) && $call['id'] ? TRUE : (isset($call['error']) && $call['error'] ? $call['error'] : $call);
@@ -330,7 +330,7 @@ class Cron_model extends CI_Model {
 	 */
 	public function _execute_sms($data) {
 		
-		$data = dr_string2array($data);
+		$data = man_string2array($data);
 		if (!$data) {
             return '执行值不存在';
         }

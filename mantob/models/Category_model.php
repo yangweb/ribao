@@ -43,7 +43,7 @@ class Category_model extends CI_Model {
 					 ->get($this->tablename)
 					 ->row_array();
 
-		return dr_string2array($data['permission']);
+		return man_string2array($data['permission']);
 	}
 	
 	/**
@@ -61,10 +61,10 @@ class Category_model extends CI_Model {
 					 ->row_array();
 
 		if (isset($data['setting'])) {
-            $data['setting'] = dr_string2array($data['setting']);
+            $data['setting'] = man_string2array($data['setting']);
         }
 		if (isset($data['permission'])) {
-            $data['permission'] = dr_string2array($data['permission']);
+            $data['permission'] = man_string2array($data['permission']);
         }
 		
 		return $data;
@@ -87,8 +87,8 @@ class Category_model extends CI_Model {
         }
 		
 		foreach ($_data as $t) {
-            $t['setting'] = dr_string2array($t['setting']);
-            $t['permission'] = dr_string2array($t['permission']);
+            $t['setting'] = man_string2array($t['setting']);
+            $t['permission'] = man_string2array($t['permission']);
 			$data[$t['id']]	= $t;
 		}
 		
@@ -119,7 +119,7 @@ class Category_model extends CI_Model {
                 continue;
             }
 			if (!$dir) {
-                $dir = dr_word2pinyin($data['name']);
+                $dir = man_word2pinyin($data['name']);
             }
 			if ($this->dirname_exitsts($dir)) {
                 $dir.= rand(0,99);
@@ -134,7 +134,7 @@ class Category_model extends CI_Model {
 				'description' => $data['description'],
 				'letter' => $dir{0},
 				'dirname' => $dir,
-				'setting' => dr_array2string($data['setting']),
+				'setting' => man_array2string($data['setting']),
 				'pdirname' => '',
 				'childids' => '',
 				'displayorder' => 0
@@ -177,7 +177,7 @@ class Category_model extends CI_Model {
 			'description' => $data['description'],
 			'letter' => $data['letter'] ? $data['letter'] : $data['dirname']{0},
 			'dirname' => $data['dirname'],
-			'setting' => dr_array2string($data['setting']),
+			'setting' => man_array2string($data['setting']),
 			'pdirname' => '',
 			'childids' => '',
 			'displayorder' => 0
@@ -233,8 +233,8 @@ class Category_model extends CI_Model {
 			'description' => $data['description'],
 			'letter' => $data['letter'] ? $data['letter'] : $data['dirname']{0},
 			'dirname' => $data['dirname'],
-			'setting' => dr_array2string(array_merge($_data['setting'], $data['setting'])),
-			'permission' => dr_array2string($permission)
+			'setting' => man_array2string(array_merge($_data['setting'], $data['setting'])),
+			'permission' => man_array2string($permission)
 		));
 		$this->repair();
 
@@ -298,7 +298,7 @@ class Category_model extends CI_Model {
             }
 			// ͬ��4����ԱȨ��
 			if (in_array(4, $option)) {
-                $update['permission'] = dr_array2string($permission);
+                $update['permission'] = man_array2string($permission);
             }
 			// ͬ��5��URL����
 			if (in_array(5, $option)) {
@@ -309,7 +309,7 @@ class Category_model extends CI_Model {
 				$_setting['admin'] = '';
 				$update['permission'] = '';
 			}
-			$update['setting'] = dr_array2string($_setting);
+			$update['setting'] = man_array2string($_setting);
 			$this->link->where('id', $id)->update($this->tablename, $update);
 		}
 		

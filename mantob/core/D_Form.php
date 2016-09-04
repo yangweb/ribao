@@ -31,7 +31,7 @@ class D_Form extends M_Controller {
 			if (!IS_ADMIN) {
 				exit($this->call_msg(lang('m-304')));
 			} elseif (IS_AJAX) {
-				exit(dr_json(0, lang('247')));
+				exit(man_json(0, lang('247')));
 			} else {
 				$this->admin_msg(lang('247'));
 			}
@@ -66,7 +66,7 @@ class D_Form extends M_Controller {
                             'value' => $this->input->ip_address()
                         ),
                         'validate' => array(
-                            'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="dr_dialog_ip(\'inputip\')" name="ip"',
+                            'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="man_dialog_ip(\'inputip\')" name="ip"',
                         )
                     )
                 )
@@ -82,9 +82,9 @@ class D_Form extends M_Controller {
 		
 		if (!$this->is_auth('admin/form/listc')) {
 			if (IS_AJAX) {
-				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.dr_lang('049', 'admin/form/listc'));
+				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.man_lang('049', 'admin/form/listc'));
 			} else {
-				$this->admin_msg(dr_lang('049', 'admin/form/listc'));
+				$this->admin_msg(man_lang('049', 'admin/form/listc'));
 			}
 		}
 	
@@ -112,7 +112,7 @@ class D_Form extends M_Controller {
 				}
 				unset($_ids, $_data);
 			}
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 
         // 重置页数和统计
@@ -149,7 +149,7 @@ class D_Form extends M_Controller {
 			'list' => $data,
 			'form' => 'form_'.SITE_ID.'_'.$this->mid,
 			'param'	=> $param,
-			'pages'	=> $this->get_pagination(dr_url($this->router->class.'/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url($this->router->class.'/index', $param), $param['total']),
 		));
 
         $this->template->display(is_file($tpl) ? basename($tpl) : 'form_listc.html');
@@ -163,9 +163,9 @@ class D_Form extends M_Controller {
         
         if (!$this->is_auth('admin/form/listc')) {
             if (IS_AJAX) {
-                exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.dr_lang('049', 'admin/form/listc'));
+                exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.man_lang('049', 'admin/form/listc'));
             } else {
-                $this->admin_msg(dr_lang('049', 'admin/form/listc'));
+                $this->admin_msg(man_lang('049', 'admin/form/listc'));
             }
         }
     
@@ -193,7 +193,7 @@ class D_Form extends M_Controller {
                 }
                 unset($_ids, $_data);
             }
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         // 重置页数和统计
@@ -230,7 +230,7 @@ class D_Form extends M_Controller {
             'list' => $data,
             'form' => 'form_'.SITE_ID.'_'.$this->mid,
             'param' => $param,
-            'pages' => $this->get_pagination(dr_url($this->router->class.'/index', $param), $param['total']),
+            'pages' => $this->get_pagination(man_url($this->router->class.'/index', $param), $param['total']),
         ));
 
         $this->template->display(is_file($tpl) ? basename($tpl) : 'form_listshow.html');
@@ -243,9 +243,9 @@ class D_Form extends M_Controller {
 		
 		if (!$this->is_auth('admin/form/listc')) {
 			if (IS_AJAX) {
-				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.dr_lang('049', 'admin/form/listc'));
+				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.man_lang('049', 'admin/form/listc'));
 			} else {
-				$this->admin_msg(dr_lang('049', 'admin/form/listc'));
+				$this->admin_msg(man_lang('049', 'admin/form/listc'));
 			}
 		}
 		
@@ -264,7 +264,7 @@ class D_Form extends M_Controller {
 				if (($id = $this->form_model->addc($this->form['table'], $data[1])) != FALSE) {
 					// 附件归档到文档
 					$this->attachment_handle($this->uid, $this->form_model->prefix.'_'.$this->form['table'].'-'.$id, $this->form['field']);
-					$this->member_msg(lang('000'), dr_url($this->router->class.'/index'), 1);
+					$this->member_msg(lang('000'), man_url($this->router->class.'/index'), 1);
 				}
 			}
 			$data = $data[1];
@@ -293,9 +293,9 @@ class D_Form extends M_Controller {
 		
 		if (!$this->is_auth('admin/form/listc')) {
 			if (IS_AJAX) {
-				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.dr_lang('049', 'admin/form/listc'));
+				exit('<img src='.SITE_URL.'member/statics/js/skins/icons/error.png>'.man_lang('049', 'admin/form/listc'));
 			} else {
-				$this->admin_msg(dr_lang('049', 'admin/form/listc'));
+				$this->admin_msg(man_lang('049', 'admin/form/listc'));
 			}
 		}
 		
@@ -318,7 +318,7 @@ class D_Form extends M_Controller {
 					// 附件归档到文档
 					$this->attachment_handle($this->uid, $table.'-'.$id, $this->form['field']);
 					$this->attachment_replace($this->uid, $id, $table);
-					$this->member_msg(lang('000'), dr_url($this->router->class.'/index'), 1);
+					$this->member_msg(lang('000'), man_url($this->router->class.'/index'), 1);
 				}
 			}
 			$data = $data[1];
@@ -385,7 +385,7 @@ class D_Form extends M_Controller {
                     unset($data[1]);
 					$content = preg_replace("/{(.*)}/Ue", "\$\\1", $this->form['setting']['template']);
 				}
-				$this->sendmail_queue($this->form['setting']['send'], dr_lang('m-306', $this->form['name']), nl2br($content));
+				$this->sendmail_queue($this->form['setting']['send'], man_lang('m-306', $this->form['name']), nl2br($content));
 			}
 			
 			$this->call_msg(lang('m-305'), 1);
@@ -410,7 +410,7 @@ class D_Form extends M_Controller {
 		$url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
 		
 		if (IS_AJAX) {
-			exit(dr_json($code, $msg, $url)); // AJAX请求时返回json格式
+			exit(man_json($code, $msg, $url)); // AJAX请求时返回json格式
 		} else {
 			if ($code) {
               

@@ -54,13 +54,13 @@ class Register extends M_Controller {
 				if ($id > 0) {
 				    // 注册成功
                     $this->hooks->call_hook('member_register_after', $data); // 注册之后挂钩点
-					$this->member_msg(lang('m-020'), $back_url && strpos($back_url, 'register') === FALSE ? $back_url : dr_url('login/index'), 1);
+					$this->member_msg(lang('m-020'), $back_url && strpos($back_url, 'register') === FALSE ? $back_url : man_url('login/index'), 1);
 				} elseif ($id == -1) {
-					$error = array('name' => 'username', 'msg' => dr_lang('m-021', $data['username']));
+					$error = array('name' => 'username', 'msg' => man_lang('m-021', $data['username']));
 				} elseif ($id == -2) {
 					$error = array('name' => 'email', 'msg' => lang('m-011'));
 				} elseif ($id == -3) {
-					$error = array('name' => 'email', 'msg' => dr_lang('m-022', $data['email']));
+					$error = array('name' => 'email', 'msg' => man_lang('m-022', $data['email']));
 				} elseif ($id == -4) {
 					$error = array('name' => 'username', 'msg' => lang('m-023'));
 				} elseif ($id == -5) {

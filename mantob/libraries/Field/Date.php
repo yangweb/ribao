@@ -90,7 +90,7 @@ class F_Date extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		if (is_null($value)) {
 			$value = $cfg['option']['value'] === '0' ? 0 : SYS_TIME;
@@ -113,7 +113,7 @@ class F_Date extends A_Field {
 			define('DAYRUI_DATE_LD', 1);//防止重复加载JS
 		}
 		$str.= '
-		<input type="hidden" value="'.$value.'" name="data['.$name.']" id="dr_'.$name.'" '.$attr.' />
+		<input type="hidden" value="'.$value.'" name="data['.$name.']" id="man_'.$name.'" '.$attr.' />
 		<input type="text" readonly="" class="date input-text" style="width:' . $width . 'px;" value="' . $show . '" id="calendar_' . $name . '" />
 		<script type="text/javascript">
 			Calendar.setup({
@@ -127,7 +127,7 @@ class F_Date extends A_Field {
 				this.hide();
 				var time = $("#calendar_' . $name . '").val();
 				var date = (new Date(Date.parse(time.replace(/-/g,"/")))).getTime() / 1000;
-				$("#dr_' . $name . '").val(date);
+				$("#man_' . $name . '").val(date);
 			}
 			});
 		</script>';

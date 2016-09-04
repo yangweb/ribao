@@ -9,7 +9,7 @@ $(function(){
     <div class="article">
         <div class="section">
             <div class="title"><strong>{$meta_name}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
 				<table style="table-layout:fixed;">
 					<thead>
 						<tr>
@@ -38,10 +38,10 @@ $(function(){
 						{/if}
 						</td>
 						<td class="algin_l">
-						<a href="{dr_url('account/permission', array('groupid'=>$t.id))}">权限查看</a>
+						<a href="{man_url('account/permission', array('groupid'=>$t.id))}">权限查看</a>
 						{if $member.overdue < 2000000000 || $t.id!=$member.groupid}
 						&nbsp;&nbsp;
-						<a href="{dr_url('account/upgrade', array('id' => $t.id))}">{if $t.id==$member.groupid}<font color="green">立即续费</font>{else}<font color="blue">立即申请</font>{/if}</a>
+						<a href="{man_url('account/upgrade', array('id' => $t.id))}">{if $t.id==$member.groupid}<font color="green">立即续费</font>{else}<font color="blue">立即申请</font>{/if}</a>
 						{/if}
 						</td>
 					</tr>

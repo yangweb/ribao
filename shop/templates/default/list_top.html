@@ -65,28 +65,28 @@
     	{if $related}
         <li>
             <span>{lang('cat-00')}：</span>
-            <a {if !$catid || $catid==$parent.id}class="curr"{/if} href="{dr_search_url($params, 'catid', $parent ? $parent['id'] : NULL)}">不限</a>
+            <a {if !$catid || $catid==$parent.id}class="curr"{/if} href="{man_search_url($params, 'catid', $parent ? $parent['id'] : NULL)}">不限</a>
             {loop $related $t}
-            <a {if $t.id==$catid}class="curr"{/if} href="{dr_search_url($params, 'catid', $t.id)}">{$t.name}</a>
+            <a {if $t.id==$catid}class="curr"{/if} href="{man_search_url($params, 'catid', $t.id)}">{$t.name}</a>
             {/loop}
 		</li>
         {/if}
 		<li>
         	<span>价格范围：</span>
-            <a {if !$get.price}class="curr"{/if} href="{dr_search_url($params, 'price', 0)}">不限</a>
-            <a href="{dr_search_url($params, 'price', '0,1000')}" {if $get.price=='0,1000'}class="curr"{/if}>￥1000以下</a>
-            <a href="{dr_search_url($params, 'price', '1000,2000')}" {if $get.price=='1000,2000'}class="curr"{/if}>￥1000-2000</a>
-            <a href="{dr_search_url($params, 'price', '2000,3000')}" {if $get.price=='2000,3000'}class="curr"{/if}>￥2000-3000</a>
-            <a href="{dr_search_url($params, 'price', '3000,5000')}" {if $get.price=='3000,5000'}class="curr"{/if}>￥3000-5000</a>
-            <a href="{dr_search_url($params, 'price', '5000,8000')}" {if $get.price=='5000,8000'}class="curr"{/if}>￥5000-8000</a>
-            <a href="{dr_search_url($params, 'price', '8000,0')}" {if $get.price=='8000,0'}class="curr"{/if}>￥8000以上</a>
+            <a {if !$get.price}class="curr"{/if} href="{man_search_url($params, 'price', 0)}">不限</a>
+            <a href="{man_search_url($params, 'price', '0,1000')}" {if $get.price=='0,1000'}class="curr"{/if}>￥1000以下</a>
+            <a href="{man_search_url($params, 'price', '1000,2000')}" {if $get.price=='1000,2000'}class="curr"{/if}>￥1000-2000</a>
+            <a href="{man_search_url($params, 'price', '2000,3000')}" {if $get.price=='2000,3000'}class="curr"{/if}>￥2000-3000</a>
+            <a href="{man_search_url($params, 'price', '3000,5000')}" {if $get.price=='3000,5000'}class="curr"{/if}>￥3000-5000</a>
+            <a href="{man_search_url($params, 'price', '5000,8000')}" {if $get.price=='5000,8000'}class="curr"{/if}>￥5000-8000</a>
+            <a href="{man_search_url($params, 'price', '8000,0')}" {if $get.price=='8000,0'}class="curr"{/if}>￥8000以上</a>
 		</li>
         <li>
             <span>所在城市：</span>
-            <a {if !$get.city}class="curr"{/if} href="{dr_search_url($params, 'city', NULL)}">不限</a>
+            <a {if !$get.city}class="curr"{/if} href="{man_search_url($params, 'city', NULL)}">不限</a>
             <!--调用联动菜单hangye，pid为动态获取的行业id-->
             {list action=linkage code=address pid=$get.city}
-            <a {if $t.id==$get.city}class="curr"{/if} href="{dr_search_url($params, 'city', $t.id)}">{$t.name}</a>
+            <a {if $t.id==$get.city}class="curr"{/if} href="{man_search_url($params, 'city', $t.id)}">{$t.name}</a>
             {/list}{$error}
         </li>
 	</ul>
@@ -97,8 +97,8 @@
 <div class="shoppictitle">
 	<h4 class="l">商品列表</h4>
 	<div class="r">
-    	<a {if !$get.order || $get.order=='updatetime'}class="curr"{/if} href="{dr_search_url($params, 'order')}">默认</a>
-        <a {if $get.order=='volume'}class="curr"{/if} href="{dr_search_url($params, 'order', 'volume')}">销量</a>
-        <a {if $get.order=='price_asc'}class="curr"{/if} href="{dr_search_url($params, 'order', 'price_asc')}">价格</a>
+    	<a {if !$get.order || $get.order=='updatetime'}class="curr"{/if} href="{man_search_url($params, 'order')}">默认</a>
+        <a {if $get.order=='volume'}class="curr"{/if} href="{man_search_url($params, 'order', 'volume')}">销量</a>
+        <a {if $get.order=='price_asc'}class="curr"{/if} href="{man_search_url($params, 'order', 'price_asc')}">价格</a>
     </div>
 </div>

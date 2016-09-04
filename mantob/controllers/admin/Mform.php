@@ -30,7 +30,7 @@ class Mform extends M_Controller {
 		$this->link = $this->site[SITE_ID];
 		$this->table = $this->db->dbprefix(SITE_ID.'_'.$this->dir.'_form');
 		$this->template->assign('menu', $this->get_menu(array(
-		    dr_lang('330', $module['name']) => 'admin/mform/index/dir/'.$this->dir,
+		    man_lang('330', $module['name']) => 'admin/mform/index/dir/'.$this->dir,
 		    lang('add') => 'admin/mform/add/dir/'.$this->dir,
 		    lang('334') => 'admin/mform/export/dir/'.$this->dir,
 		    lang('333') => 'admin/mform/import/dir/'.$this->dir,
@@ -57,7 +57,7 @@ class Mform extends M_Controller {
 		if (IS_POST) {
 			$result = $this->mform_model->add($this->input->post('data', TRUE));
 			if ($result === FALSE) {
-				$this->admin_msg(lang('000'), dr_url('mform/index', array('dir' => $this->dir)), 1);
+				$this->admin_msg(lang('000'), man_url('mform/index', array('dir' => $this->dir)), 1);
 			} else {
 				$this->admin_msg($result);
 			}
@@ -88,14 +88,14 @@ class Mform extends M_Controller {
 			$data = $this->input->post('data', TRUE);
 			$this->link->where('id', $id)->update($this->table, array(
 				'name' => $data['name'],
-				'setting' => dr_array2string($data['setting']),
-				'permission' => dr_array2string($data['permission']),
+				'setting' => man_array2string($data['setting']),
+				'permission' => man_array2string($data['permission']),
 			));
-			$this->admin_msg(lang('000'), dr_url('mform/index', array('dir' => $this->dir)), 1);
+			$this->admin_msg(lang('000'), man_url('mform/index', array('dir' => $this->dir)), 1);
 		}
 		
-		$data['setting'] = dr_string2array($data['setting']);
-		$data['permission'] = dr_string2array($data['permission']);
+		$data['setting'] = man_string2array($data['setting']);
+		$data['permission'] = man_string2array($data['permission']);
 		
 		$this->template->assign(array(
 			'data' => $data,
@@ -120,7 +120,7 @@ class Mform extends M_Controller {
 				 ->where('id', $id)
 				 ->update($this->table, array('disabled' => $value));
 		}
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
     }
 	
 	// 导出表单
@@ -128,10 +128,10 @@ class Mform extends M_Controller {
 		if ($this->input->get('todo')) {
 			$this->load->model('module_model');
 			$this->module_model->export_form($this->dir);
-			$this->template->assign('size', dr_format_file_size(filesize(FCPATH.$this->dir.'/config/form.php')));
+			$this->template->assign('size', man_format_file_size(filesize(FCPATH.$this->dir.'/config/form.php')));
 			$this->template->display('mform_export.html');
 		} else {
-			$this->admin_msg(lang('332'), dr_url('mform/export', array('dir' => $this->dir, 'todo' => 1)), 2);
+			$this->admin_msg(lang('332'), man_url('mform/export', array('dir' => $this->dir, 'todo' => 1)), 2);
 		}
 	}
 	
@@ -140,16 +140,16 @@ class Mform extends M_Controller {
 		if (IS_POST) {
 			$file = FCPATH.$this->dir.'/config/form.php';
 			if (!is_file($file)) {
-                $this->admin_msg(dr_lang('335', $this->dir.'/config/form.php'));
+                $this->admin_msg(man_lang('335', $this->dir.'/config/form.php'));
             }
 			$this->load->model('module_model');
 			if ($this->module_model->import_form($this->dir)) {
-				$this->admin_msg(lang('014'), dr_url('mform/index', array('dir' => $this->dir)), 2);
+				$this->admin_msg(lang('014'), man_url('mform/index', array('dir' => $this->dir)), 2);
 			} else {
 				$this->admin_msg(lang('336'));
 			}
 		}
-		$this->template->assign('size', dr_format_file_size(@filesize(FCPATH.$this->dir.'/config/form.php')));
+		$this->template->assign('size', man_format_file_size(@filesize(FCPATH.$this->dir.'/config/form.php')));
 		$this->template->display('mform_import.html');
 	}
 	
@@ -158,7 +158,7 @@ class Mform extends M_Controller {
      */
     public function del() {
 		$this->mform_model->del((int)$this->input->get('id'));
-		$this->admin_msg(lang('000'), dr_url('mform/index', array('dir' => $this->dir)), 1);
+		$this->admin_msg(lang('000'), man_url('mform/index', array('dir' => $this->dir)), 1);
 	}
 
 }

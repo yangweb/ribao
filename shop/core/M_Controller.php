@@ -76,7 +76,7 @@ class M_Controller extends D_Module {
 		
 		// 组合商品规格
 		$merge = $this->_sku($total, $checked);
-		echo '<div class="dr_format_table" style="max-height:350px;overflow-x: hidden;overflow-y: auto;width: auto;">';
+		echo '<div class="man_format_table" style="max-height:350px;overflow-x: hidden;overflow-y: auto;width: auto;">';
 		echo '<table width="100%" border="1" cellspacing="0" cellpadding="0">';
 		echo '<tr>';
 		foreach ($checked as $pid => $v) {
@@ -181,16 +181,16 @@ class M_Controller extends D_Module {
 		$list = $format[$catid]['list'];
 		if (!$list) exit('0');
 		
-		$value = dr_string2array(dr_string2array($this->input->post('data')));
+		$value = man_string2array(man_string2array($this->input->post('data')));
 		
-		echo '<div class="dr_format_wrap">';
-		echo '	<div class="dr_format_group">';
+		echo '<div class="man_format_wrap">';
+		echo '	<div class="man_format_group">';
 		foreach ($list as $pid => $v) {
-			echo '<label class="dr_format_label">'.$data[$pid]['name'].'：</label>';
-			echo '<ul class="dr_format_list">';
+			echo '<label class="man_format_label">'.$data[$pid]['name'].'：</label>';
+			echo '<ul class="man_format_list">';
 			foreach ($v as $id) {
 				echo '<li>';
-				echo '	<input type="checkbox" '.(@in_array($id, $value['id']) ? 'checked' : '').' value="'.$id.'" pid="'.$pid.'" name="data[format][id][]" class="dr_format_checkbox" />';
+				echo '	<input type="checkbox" '.(@in_array($id, $value['id']) ? 'checked' : '').' value="'.$id.'" pid="'.$pid.'" name="data[format][id][]" class="man_format_checkbox" />';
 				echo '	<label title="'.$data[$id]['name'].'" class="labelname">'.$data[$id]['name'].'</label>';
 				echo '</li>';
 			}
@@ -198,33 +198,33 @@ class M_Controller extends D_Module {
 		}
 		echo '</div>';		
 		echo '</div>';
-		echo '<div class="dr_format_wrapper">
-				<div id="dr_format_value" class="dr_format_map">
+		echo '<div class="man_format_wrapper">
+				<div id="man_format_value" class="man_format_map">
 					<img src="'.SITE_URL.'mantob/statics/images/loading.gif" />
 				</div>
 			</div>
 			<script type="text/javascript">
 			$(function() {
-				dr_format_load_value();
-				$(".dr_format_checkbox").click(function(){
-					dr_format_load_value();
+				man_format_load_value();
+				$(".man_format_checkbox").click(function(){
+					man_format_load_value();
 				});
 				// 移除编号、价格与数量字段
-				$("#dr_row_price").hide();
-				$("#dr_price").attr("required", false);
-				$("#dr_row_number").hide();
-				$("#dr_quantity").attr("required", false);
-				$("#dr_row_quantity").hide();
+				$("#man_row_price").hide();
+				$("#man_price").attr("required", false);
+				$("#man_row_number").hide();
+				$("#man_quantity").attr("required", false);
+				$("#man_row_quantity").hide();
 			});
-			function dr_format_load_value() {
+			function man_format_load_value() {
 				var value = "";
-				$(".dr_format_checkbox").each(function(){
+				$(".man_format_checkbox").each(function(){
 					if ($(this).attr("checked")) {
 						value+= ","+$(this).attr("pid")+"|"+$(this).attr("value");
 					}
 				});
-				$.post("'.dr_url(APP_DIR.'/home/format_value').'&"+Math.random(),{ catid:'.$catid.', value:value, data:'.json_encode($value).' }, function(data){
-					$("#dr_format_value").html(data);
+				$.post("'.man_url(APP_DIR.'/home/format_value').'&"+Math.random(),{ catid:'.$catid.', value:value, data:'.json_encode($value).' }, function(data){
+					$("#man_format_value").html(data);
 				});
 			}
 			</script>

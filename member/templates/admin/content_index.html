@@ -20,9 +20,9 @@
         </select>
         &nbsp;
 		{lang('105')} ：
-		{dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
+		{man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
 		-&nbsp;
-		{dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
+		{man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
 		&nbsp;
 		<input type="submit" value="{lang('search')}" class="button" name="search" />
 		</form>
@@ -34,36 +34,36 @@
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="50" align="left">Id</th>
 			<th class="{ns_sorting('title')}" name="title" align="left">{$field.title.name}</th>
 			<th class="{ns_sorting('author')}" name="author" width="70" align="left">{lang('101')}</th>
 			<th class="{ns_sorting('status')}" name="status" width="70" align="left">{lang('html-322')}</th>
 			<th class="{ns_sorting('updatetime')}" name="updatetime" width="120" align="left">{lang('105')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
-		<tr id="dr_row_{$t.id}">
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
+		<tr id="man_row_{$t.id}">
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
 			<td align="left">{$t.id}</td>
-			<td align="left"><a href="{dr_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
-			<td align="left"><a href="javascript:;" onclick="dr_dialog_member('{$t.uid}')">{dr_strcut($t.author, 10)}</a></td>
+			<td align="left"><a href="{man_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{man_keyword_highlight($t.title, $param.keyword)}</a></td>
+			<td align="left"><a href="javascript:;" onclick="man_dialog_member('{$t.uid}')">{man_strcut($t.author, 10)}</a></td>
 			<td align="left">{if $t.status}<font color="#006600">{lang('html-529')}</font>{else}<font color="#FF0000">{lang('html-530')}</font>{/if}</td>
 			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
-			<td align="left" class="dr_option">
-			<a href="{dr_space_show_url($t.uid, $mid, $t.id)}" target="_blank">{lang('go')}</a>
-			{if $this->ci->is_auth('member/admin/content/edit')}<a href="{dr_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{lang('edit')}</a>{/if}
-			{loop $form $a}<a href="{dr_url('member/form_'.$mid.'_'.$a.id.'/index', array('cid' => $t.id))}">{$a.name}</a>{/loop}
+			<td align="left" class="man_option">
+			<a href="{man_space_show_url($t.uid, $mid, $t.id)}" target="_blank">{lang('go')}</a>
+			{if $this->ci->is_auth('member/admin/content/edit')}<a href="{man_url('member/content/edit',array('mid' => $mid, 'id' => $t.id))}">{lang('edit')}</a>{/if}
+			{loop $form $a}<a href="{man_url('member/form_'.$mid.'_'.$a.id.'/index', array('cid' => $t.id))}">{$a.name}</a>{/loop}
 			</td>
 		</tr>
 		{/loop}
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="8" align="left" style="border:none">
-			{if $this->ci->is_auth('member/admin/content/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('delete');dr_confirm_set_all('{lang('015')}', 1)" />{/if}
-            {if $this->ci->is_auth('member/admin/content/edit')}<input type="button" class="button" value="{lang('html-318')}" name="option" onClick="$('#action').val('verify');dr_confirm_set_all('{lang('015')}')" /><select name="status">
+			{if $this->ci->is_auth('member/admin/content/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('delete');man_confirm_set_all('{lang('015')}', 1)" />{/if}
+            {if $this->ci->is_auth('member/admin/content/edit')}<input type="button" class="button" value="{lang('html-318')}" name="option" onClick="$('#action').val('verify');man_confirm_set_all('{lang('015')}')" /><select name="status">
 			<option value="1">{lang('html-529')}</option>
 			<option value="0">{lang('html-530')}</option>
 			</select>
@@ -73,7 +73,7 @@
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param['total'])}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param['total'])}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

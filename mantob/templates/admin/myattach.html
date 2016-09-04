@@ -86,7 +86,7 @@ function album_cancel(obj){
 		var num = parent.window.$('#att-status').html().split('|').length;
 		var file_upload_limit = '{$fcount}';
 		if(num > {$fcount}) {
-		    alert("{dr_lang('m-141', $fcount)}");
+		    alert("{man_lang('m-141', $fcount)}");
 			return false;
 		}
 		$(obj).parent().addClass("on");

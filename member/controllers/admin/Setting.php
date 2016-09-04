@@ -35,7 +35,7 @@ class Setting extends M_Controller {
 			foreach ($post as $name => $value) {
 				$this->db->replace('member_setting', array(
 					'name' => $name,
-					'value' => is_array($value) ? dr_array2string($value) : $value
+					'value' => is_array($value) ? man_array2string($value) : $value
 				));
 			}
 			$data = $post;
@@ -158,7 +158,7 @@ class Setting extends M_Controller {
 			if ($post['open'] != $data['open']) {
                 $this->admin_msg(lang('339'), '', 1);
             } else {
-                $this->admin_msg(lang('000'), dr_url('member/setting/space', array('page' => $page)), 1);
+                $this->admin_msg(lang('000'), man_url('member/setting/space', array('page' => $page)), 1);
             }
 		}
 		

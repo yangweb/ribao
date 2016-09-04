@@ -64,15 +64,15 @@ $(document).ready(function(){
 			{if $notused}<li onclick="SwapTab(3);">{lang('m-134')}</li>{/if}
         </ul>
         <div class="content pad-10" style="clear:both">
-			<div id="cnt_0" style="display:block" class="dr_hide">
+			<div id="cnt_0" style="display:block" class="man_hide">
 				<div>
 					<div class="addnew" id="addnew">
 						<span id="buttonPlaceHolder"></span>
 					</div>
 					<input type="button" id="btupload" value="{lang('m-135')}" onClick="swfu.startUpload();" />
-					<div id="nameTip" class="onShow">{dr_lang('m-136', $fcount, $size/1024)}</div>
+					<div id="nameTip" class="onShow">{man_lang('m-136', $fcount, $size/1024)}</div>
 					<div class="bk3"></div>
-					<div class="lh24">{dr_lang('m-138', str_replace('|', '、', $ext))}</div>
+					<div class="lh24">{man_lang('m-138', str_replace('|', '、', $ext))}</div>
 				</div> 	
 				<div class="bk10"></div>
 				<fieldset class="blue pad-10" id="swfupload">
@@ -81,17 +81,17 @@ $(document).ready(function(){
 				</ul>
 				</fieldset>
 			</div>
-			<div id="cnt_1" style="display: none;" class="dr_hide">
+			<div id="cnt_1" style="display: none;" class="man_hide">
 				<input type="text" name="url" class="input-text" value="" style="width:99%;" onblur="addonlinefile(this)">
 				<br>{lang('m-139')}
 			</div>
 			{if $member.adminid}
-			<div id="cnt_2" style="display: none;" class="dr_hide">
+			<div id="cnt_2" style="display: none;" class="man_hide">
 				<iframe name="myfile" src="{SITE_URL}mantob/statics/images/loading.gif" frameborder="false" scrolling="auto" style="overflow-x:hidden;border:none" width="100%" height="330" allowtransparency="true" id="myattach"></iframe>
 			</div>
 			{/if}
 			{if $notused}
-			<div id="cnt_3" style="display: none;" class="dr_hide">
+			<div id="cnt_3" style="display: none;" class="man_hide">
 				<div class="explain-col">{lang('m-140')}</div>
 				<ul class="attachment-list" id="album">
 				{loop $notused $t}
@@ -99,7 +99,7 @@ $(document).ready(function(){
 					<div class="img-wrap">
 						<a id="a_notused_{$t.id}" href="javascript:;" class="off" title="{$t.filename}">
 							<div onclick="javascript:album_cancel({$t.id})" class="icon"></div>
-							<div onclick="dr_delete_file({$t.id})" class="delete"></div>
+							<div onclick="man_delete_file({$t.id})" class="delete"></div>
 							<img width="80" aid="{$t.id}" path="{$t.icon}" src="{$t.show}" size="{$t.size}" title="{$t.filename}" />
 						</a>
 					</div>
@@ -131,7 +131,7 @@ function addonlinefile(obj) {
 	var strs = $(obj).val() ? '|'+ $(obj).val()+',{SITE_URL}mantob/statics/images/ext/url.gif,' :'';
 	$('#att-status').html(strs);
 }
-function dr_delete_file(id) {
+function man_delete_file(id) {
 	$.post(memberpath+"index.php?c=api&m=swfdelete", {id: id}, function(data){
 		$('#notused_'+id).remove();
 	});
@@ -163,7 +163,7 @@ function album_cancel(id){
 		var num = $('#att-status').html().split('|').length;
 		var file_upload_limit = '{$fcount}';
 		if(num > {$fcount}) {
-		    dr_tips("{dr_lang('m-141', $fcount)}");
+		    man_tips("{man_lang('m-141', $fcount)}");
 			return false;
 		}
 		$(obj).attr("class", "on");

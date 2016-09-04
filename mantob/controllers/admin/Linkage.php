@@ -26,16 +26,16 @@ class linkage extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/linkage/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
 			$this->db->where_in('id', $ids)->delete('linkage');
 			foreach ($ids as $key) {
 				$this->db->query('DROP TABLE `'.$this->db->dbprefix('linkage_data_'.$key).'`');
 			}
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		}
 		$this->template->assign(array(
 			'menu' => $this->get_menu(array(
@@ -53,7 +53,7 @@ class linkage extends M_Controller {
     public function add() {
 		if (IS_POST) {
 			$result = $this->linkage_model->add($this->input->post('data', TRUE));
-			$result ? exit(dr_json(0, $result['error'], $result['name'])) : exit(dr_json(1, lang('000')));
+			$result ? exit(man_json(0, $result['error'], $result['name'])) : exit(man_json(1, lang('000')));
 		}
 		$this->template->display('linkage_add.html');
     }
@@ -69,7 +69,7 @@ class linkage extends M_Controller {
         }
 		if (IS_POST) {
 			$result	= $this->linkage_model->edit($id, $this->input->post('data', TRUE));
-			$result ? exit(dr_json(0, $result['error'], $result['name'])) : exit(dr_json(1, lang('000')));
+			$result ? exit(man_json(0, $result['error'], $result['name'])) : exit(man_json(1, lang('000')));
 		}
 		$this->template->assign(array(
 			'data' => $data,
@@ -92,7 +92,7 @@ class linkage extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if ($this->input->post('action') == 'order') {
 				$data = $this->input->post('data');
@@ -101,7 +101,7 @@ class linkage extends M_Controller {
 						 ->where('id', (int)$id)
 						 ->update('linkage_data_'.$key, $data[$id]);
 				}
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			} elseif ($this->input->post('action') == 'move') {
                 $pid = (int)$this->input->post('pid');
                 foreach ($ids as $id) {
@@ -109,10 +109,10 @@ class linkage extends M_Controller {
                          ->where('id', (int)$id)
                          ->update('linkage_data_'.$key, array('pid' => $pid));
                 }
-                exit(dr_json(1, lang('014')));
+                exit(man_json(1, lang('014')));
             } else {
 				if (!$this->is_auth(APP_DIR.'/admin/linkage/del')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$delete = '';
 				foreach ($ids as $id) {
@@ -130,7 +130,7 @@ class linkage extends M_Controller {
 					$this->db->query("delete from {$this->db->dbprefix('linkage_data_'.$key)} where id in ($delete)");
 					$this->linkage_model->repair($key);
 				}
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			}
 		}
 		$this->template->assign(array(
@@ -159,7 +159,7 @@ class linkage extends M_Controller {
         }
 		if (IS_POST) {
 			$result	= $this->linkage_model->adds($key, $this->input->post('data'));
-			$result ? exit(dr_json(0, $result['error'], $result['name'])) : exit(dr_json(1, lang('000')));
+			$result ? exit(man_json(0, $result['error'], $result['name'])) : exit(man_json(1, lang('000')));
 			exit;
 		}
 		$this->template->assign(array(
@@ -186,7 +186,7 @@ class linkage extends M_Controller {
 			$edit = $this->input->post('data');
 			$edit['pid'] = $edit['pid'] == $id ? $data['pid'] : $edit['pid'];
 			$result	= $this->linkage_model->edits($key, $id, $edit);
-			$result ? exit(dr_json(0, $result['error'], $result['name'])) : exit(dr_json(1, lang('000')));
+			$result ? exit(man_json(0, $result['error'], $result['name'])) : exit(man_json(1, lang('000')));
 			exit;
 		}
 		$this->template->assign(array(
@@ -207,9 +207,9 @@ class linkage extends M_Controller {
 				$this->db->dbprefix,
 				file_get_contents(FCPATH.'cache/install/linkage.sql')
 			));
-			$this->admin_msg(lang('014'), dr_url('linkage/index'), 1);
+			$this->admin_msg(lang('014'), man_url('linkage/index'), 1);
 		} else {
-			$this->admin_msg('Import ... ', dr_url('linkage/import', array('admin' => 1)), 2);
+			$this->admin_msg('Import ... ', man_url('linkage/import', array('admin' => 1)), 2);
 		}
 	}
 	

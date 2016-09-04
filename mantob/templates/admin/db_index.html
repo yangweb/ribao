@@ -21,7 +21,7 @@ $(function() {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="200" align="left">{lang('html-453')}</th>
 			<th width="140" align="left">&nbsp;</th>
 			<th width="80" align="center">{lang('html-454')}</th>
@@ -34,18 +34,18 @@ $(function() {
 		<tbody>
 		{loop $list $t}
 		<tr>
-		  <td align="right"><input name="select[]" class="dr_select" type="checkbox" value="{$t.name}" />&nbsp;</td>
-		  <td align="left"><a href="javascript:;" onClick="dr_dialog_show('{lang('html-452')}', '{dr_url('db/tableshow', array('name'=>$t['name']))}')">{$t['name']}</a></td> 
+		  <td align="right"><input name="select[]" class="man_select" type="checkbox" value="{$t.name}" />&nbsp;</td>
+		  <td align="left"><a href="javascript:;" onClick="man_dialog_show('{lang('html-452')}', '{man_url('db/tableshow', array('name'=>$t['name']))}')">{$t['name']}</a></td> 
 		  <td align="left">{$t['note']}</td>
 		  <td align="center">{$t['rows']}</td>
-		  <td hide="1" align="center">{dr_format_file_size($t['freesize'])}</td>
-		  <td hide="1" align="center">{dr_format_file_size($t['filesize'])}</td>
+		  <td hide="1" align="center">{man_format_file_size($t['freesize'])}</td>
+		  <td hide="1" align="center">{man_format_file_size($t['filesize'])}</td>
 		  <td hide="1" align="left">{$t['update']}</td>
 		  <td align="left">{$t['collation']}</td>
 		</tr>
 		{/loop}
 		<tr >
-			<td align="right" style="border:none"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</td>
+			<td align="right" style="border:none"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</td>
 			<td colspan="7" align="left">
 			<input type="submit" class="button" value="{lang('html-458')}" name="submit" onClick="$('#action').val('1')" />&nbsp;
 			<input type="submit" class="button" value="{lang('html-459')}" name="submit" onClick="$('#action').val('2')" />&nbsp;

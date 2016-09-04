@@ -57,9 +57,9 @@ class Check extends M_Controller {
      * 版本检测
      */
     private function _version() {
-		$id = (int)dr_catcher_data('http://www.mantob.com/index.php?c=sys&m=now');
+		$id = (int)man_catcher_data('http://www.mantob.com/index.php?c=sys&m=now');
 		if ($id && MAN_VERSION_ID < $id) {
-			return $this->halt("您的当前版本过低，为了您网站的安全性，请立即升级到官方最新版本，<a style='color:red' href='".dr_url('upgrade/index')."'><b>这里升级</b></a>", 0);
+			return $this->halt("您的当前版本过低，为了您网站的安全性，请立即升级到官方最新版本，<a style='color:red' href='".man_url('upgrade/index')."'><b>这里升级</b></a>", 0);
 		}
 	}
 	

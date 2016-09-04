@@ -20,7 +20,7 @@
   line-height:20px;
   vertical-align: middle;
 }
-.user #dr_member {
+.user #man_member {
 	max-width:160px;
 }
 .dropdown-menu {
@@ -1109,7 +1109,7 @@ body.login .wrapper {
 }#navigation #brand:hover {
 	text-decoration:none
 }
-.dr_hr {
+.man_hr {
 	padding:6px 15px;
 	background: url("../images/uline.gif") repeat-x scroll center center rgba(0, 0, 0, 0);
 }

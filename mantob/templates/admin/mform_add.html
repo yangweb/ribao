@@ -17,7 +17,7 @@ $(function() {
 			<li onclick="SwapTab(1)">{lang('html-218')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th>{lang('html-566')}：</th>
@@ -65,14 +65,14 @@ $(function() {
 				</tr>
 				</table>
 			</div>
-			<div id="cnt_1" style="display:none" class="dr_hide">
+			<div id="cnt_1" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;</th>
 					<td align="center" width="60" style="color:#777777">{lang('html-672')}</td>
 					<td align="center" width="60" style="color:#777777">{lang('html-220')}</td>
-					<td align="center" width="60" style="color:#777777">{dr_lang('html-256', SITE_EXPERIENCE)}</td>
-					<td align="center" width="60" style="color:#777777">{dr_lang('html-256', SITE_SCORE)}</td>
+					<td align="center" width="60" style="color:#777777">{man_lang('html-256', SITE_EXPERIENCE)}</td>
+					<td align="center" width="60" style="color:#777777">{man_lang('html-256', SITE_SCORE)}</td>
 					<td align="center" width="30" style="color:#777777">{lang('html-667')}</td>
 					<td align="center" width="30" style="color:#777777">{lang('html-668')}</td>
 					<td align="center"></td>
@@ -112,7 +112,7 @@ $(function() {
 				{loop $group['level'] $level}
 				<tr>
 					{php $id=$group['id'].'_'.$level['id'];}
-					<th>{$level.name}&nbsp;&nbsp;{dr_show_stars($level.stars)}&nbsp;：</th>
+					<th>{$level.name}&nbsp;&nbsp;{man_show_stars($level.stars)}&nbsp;：</th>
 					<td align="center">
 						<input type="checkbox" name="data[permission][{$id}][disabled]" {if $data['permission'][$id]['disabled']}checked="checked"{/if} value="1" />
 					</td>

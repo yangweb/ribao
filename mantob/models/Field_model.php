@@ -41,7 +41,7 @@ class Field_model extends CI_Model {
         }
 
 		foreach ($data as $i => $t) {
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['setting'] = man_string2array($t['setting']);
 			$data[$i] = $t;
 		}
 
@@ -67,7 +67,7 @@ class Field_model extends CI_Model {
             return NULL;
         }
 
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['setting'] = man_string2array($data['setting']);
 
 		return $data;
 	}
@@ -80,7 +80,7 @@ class Field_model extends CI_Model {
 	 * @return	void
 	 */
 	public function add($data, $sql) {
-		$data['setting'] = dr_array2string($data['setting']);
+		$data['setting'] = man_array2string($data['setting']);
 		$data['issystem'] = 0;
 		$data['issearch'] = (int)$data['issearch'];
 		$data['ismember'] = (int)$data['ismember'];
@@ -114,7 +114,7 @@ class Field_model extends CI_Model {
 			$this->update_table($sql, $_data['ismain']);
 		}
 
-		$data['setting'] = dr_array2string($data['setting']);
+		$data['setting'] = man_array2string($data['setting']);
 		$data['issearch'] = (int)$data['issearch'];
 		$this->db // 更新字段表
 			 ->where('id', $_data['id'])

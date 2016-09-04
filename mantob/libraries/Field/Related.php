@@ -92,18 +92,18 @@ class F_Related extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
 		// 模块名称
 		$module = isset($cfg['option']['module']) ? $cfg['option']['module'] : '';
 		//
-		$tpl = '<li id="files_'.$name.'_{id}" style="padding-right:10px;cursor:move;border-bottom: 1px solid #EEEEEE;"><a href="javascript:;" onclick="dr_remove_file(\''.$name.'\',\'{id}\')"><img align="absmiddle" src="'.SITE_URL.'mantob/statics/images/b_drop.png"></a>&nbsp;{value}<input type="hidden" name="data['.$name.'][]" value="{id}"></li>';
+		$tpl = '<li id="files_'.$name.'_{id}" style="padding-right:10px;cursor:move;border-bottom: 1px solid #EEEEEE;"><a href="javascript:;" onclick="man_remove_file(\''.$name.'\',\'{id}\')"><img align="absmiddle" src="'.SITE_URL.'mantob/statics/images/b_drop.png"></a>&nbsp;{value}<input type="hidden" name="data['.$name.'][]" value="{id}"></li>';
 		//
 		$str = '<fieldset class="blue pad-10" style="width:'.$width.(is_numeric($width) ? 'px' : '').';">';
 		$str.= '<legend>'.$cname.'</legend>';
 		$str.= '<div class="picList">';
-		$str.= '<ul class="'.$name.'-sort-items" id="dr_list_'.$name.'" style="max-height: 400px;overflow-y: auto;">';
+		$str.= '<ul class="'.$name.'-sort-items" id="man_list_'.$name.'" style="max-height: 400px;overflow-y: auto;">';
 		if ($value) {
 			$value = trim($value, ',');
 			$query = $this->ci->site[SITE_ID]->query('select id,title,url from '.$this->ci->db->dbprefix(SITE_ID.'_'.$module).' where id IN ('.$value.') order by instr("'.$value.'", id)')->result_array();
@@ -122,7 +122,7 @@ class F_Related extends A_Field {
 		}
 		$str.= '
 		<script type="text/javascript">
-		function dr_add_related_'.$name.'() {
+		function man_add_related_'.$name.'() {
 			art.dialog.open("'. MEMBER_PATH.'index.php?c=api&m=related&site='.SITE_ID.'&module='.$module.'", {
 				title: "'.$cname.'",
 				opacity: 0.1,
@@ -141,19 +141,19 @@ class F_Related extends A_Field {
 					for (var i=0; i < select.length; i++) {
 						if (select[i].checked) {
 							id = select[i].value;
-							value = iframe.document.getElementById("dr_row_"+id).innerHTML;
+							value = iframe.document.getElementById("man_row_"+id).innerHTML;
 							if ($("#files_'.$name.'_"+id).size() == 0) {
 								var html = \''.addslashes(str_replace(array("\r", "\n", "\t", chr(13)), '', $tpl)).'\';
 								html = html.replace(/{id}/g, id);
 								html = html.replace(/{value}/g, value);
-								$("#dr_list_'.$name.'").append(html);
+								$("#man_list_'.$name.'").append(html);
 							} else {
 								err ++;
 							}
 						}
 					}
 					if (err > 0) {
-						dr_tips("有"+err+"条记录已经存在了");
+						man_tips("有"+err+"条记录已经存在了");
 					}
 				},
 				cancel: true
@@ -163,7 +163,7 @@ class F_Related extends A_Field {
 		</script>
 		</fieldset>';
 		$str.= '<div class="bk10"></div>';
-		$str.= '<div class="picBut"><a href="javascript:;" onClick="dr_add_related_'.$name.'()">添加</a></div>'.$tips;
+		$str.= '<div class="picBut"><a href="javascript:;" onClick="man_add_related_'.$name.'()">添加</a></div>'.$tips;
 		
 		return $this->input_format($name, $text, $str);
 	}

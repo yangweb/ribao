@@ -31,14 +31,14 @@ class Downservers extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/downservers/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
             $this->db->where_in('id', $ids)->delete('downservers');
 			$this->cache(1);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		$this->template->assign(array(
 			'list' => $this->db->order_by('displayorder asc')->get('downservers')->result_array(),
@@ -53,12 +53,12 @@ class Downservers extends M_Controller {
 		if (IS_POST) {
 			$data = $this->input->post('data');
 			if (!$data['name'] || !$data['server']) {
-                exit(dr_json(0, lang('342'), 'name'));
+                exit(man_json(0, lang('342'), 'name'));
             }
             $data['displayorder'] = (int)$data['displayorder'];
 			$this->db->insert('downservers', $data);
 			$this->cache(1);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		$this->template->display('downservers_add.html');
     }
@@ -79,12 +79,12 @@ class Downservers extends M_Controller {
 		if (IS_POST) {
 			$data = $this->input->post('data');
 			if (!$data['name'] || !$data['server']) {
-                exit(dr_json(0, lang('342'), 'name'));
+                exit(man_json(0, lang('342'), 'name'));
             }
             $data['displayorder'] = (int)$data['displayorder'];
 			$this->db->where('id', $id)->update('downservers', $data);
 			$this->cache(1);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		$this->template->assign(array(
 			'data' => $data,

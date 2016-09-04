@@ -4,7 +4,7 @@
         	<!--底部循环栏目开始-->
             {loop $category $c}
             {if !$c.pid && ($c.showid == 2 || $c.showid == 3)}<!--这里表示循环显示顶部栏目，你就这样写就行了-->
-            <a href='{dr_space_list_url($spaceid, $c.id)}'>{$c.name}</a><span>|</span>
+            <a href='{man_space_list_url($spaceid, $c.id)}'>{$c.name}</a><span>|</span>
             {/if}
             {/loop}
             <!--底部循环栏目结束-->
@@ -18,11 +18,11 @@
 </footer>
 <script type="text/javascript">
 $(function(){
-	$(".dr_category").attr('class', 'dr_category');
-	$(".dr_category").each(function(){
-		var dr_select = $(this).attr('select');
-		if (dr_select == {$selected}) {
-			$(this).attr('class', 'dr_category navdown');
+	$(".man_category").attr('class', 'man_category');
+	$(".man_category").each(function(){
+		var man_select = $(this).attr('select');
+		if (man_select == {$selected}) {
+			$(this).attr('class', 'man_category navdown');
 		}
 	});
 });

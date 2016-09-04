@@ -28,7 +28,7 @@
 			<th width="130" align="left">{lang('html-213')}</th>
 			<th width="130" align="left">{lang('html-531')}</th>
 			<th width="50" align="left">{lang('html-322')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -37,10 +37,10 @@
 			<td align="left">{$type[$t.type]}</td>
 			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
 			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
-			<td align="left">{if $t.status}<font color=red>{dr_lang('html-222', $t.status)}</font>{else}{lang('html-221')}{/if}</td>
-			<td align="left" class="dr_option">
-            <a href="javascript:;" onclick="dr_dialog_show('{lang('html-224')}', '{dr_url('cron/show', array('id'=>$t.id))}')">{lang('html-224')}</a>
-            <a href="{dr_url('cron/execute', array('id'=>$t.id))}" onclick="art.dialog.tips('执行中..', 9999, 2)">{lang('html-223')}</a>
+			<td align="left">{if $t.status}<font color=red>{man_lang('html-222', $t.status)}</font>{else}{lang('html-221')}{/if}</td>
+			<td align="left" class="man_option">
+            <a href="javascript:;" onclick="man_dialog_show('{lang('html-224')}', '{man_url('cron/show', array('id'=>$t.id))}')">{lang('html-224')}</a>
+            <a href="{man_url('cron/execute', array('id'=>$t.id))}" onclick="art.dialog.tips('执行中..', 9999, 2)">{lang('html-223')}</a>
             {if $t.error}({$t.error}){/if}
             </td>
 		</tr>
@@ -48,7 +48,7 @@
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

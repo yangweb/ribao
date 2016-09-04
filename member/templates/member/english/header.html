@@ -37,13 +37,13 @@ $(function(){
 		$('body,html').animate({scrollTop:0},1000);
 		return false;
 	});
-	$.ajax({type: "GET", url:dr_url, dataType:'jsonp', jsonp:"callback", async: false,
+	$.ajax({type: "GET", url:man_url, dataType:'jsonp', jsonp:"callback", async: false,
 		success: function (data) {
 			if (data.status) {
-				$("#dr_notece_img").show();
-				dr_flash_title();
+				$("#man_notece_img").show();
+				man_flash_title();
 			} else {
-				$("#dr_notece_img").hide();
+				$("#man_notece_img").hide();
 			}
 		},
 		error: function(HttpRequest, ajaxOptions, thrownError) {
@@ -52,23 +52,23 @@ $(function(){
 	});
 });
 
-var dr_url = "{MEMBER_URL}index.php?c=api&m=notice&"+Math.random();
-var dr_step = 0;
-var dr_caltitle = "【　　　】"+document.title;
-var dr_callbacktitle = "【新提醒】"+document.title;
+var man_url = "{MEMBER_URL}index.php?c=api&m=notice&"+Math.random();
+var man_step = 0;
+var man_caltitle = "【　　　】"+document.title;
+var man_callbacktitle = "【新提醒】"+document.title;
 
-function dr_flash_title() {
-	dr_step++;
-	if (dr_step==3) {
-		dr_step=1;
+function man_flash_title() {
+	man_step++;
+	if (man_step==3) {
+		man_step=1;
 	}
-	if (dr_step==1) {
-		document.title=dr_callbacktitle;
+	if (man_step==1) {
+		document.title=man_callbacktitle;
 	}
-	if (dr_step==2) {
-		document.title=dr_caltitle;	
+	if (man_step==2) {
+		document.title=man_caltitle;	
 	}
-	setTimeout("dr_flash_title()", 500);
+	setTimeout("man_flash_title()", 500);
 }
 </script>
 </head>
@@ -77,22 +77,22 @@ function dr_flash_title() {
     <div class="topnav">
     	<a target="_blank" href="{SITE_URL}" class="site">网站首页</a>
 		{if $member}
-    	<a target="_blank" href="{dr_space_url($uid)}" class="site">我的空间</a>
+    	<a target="_blank" href="{man_space_url($uid)}" class="site">我的空间</a>
 		{/if}
         <div class="login">
         {if $member}
-            <strong>欢迎回来，{$member.username}，{$member.group.name}，{$member.level.name}，<a href="{MEMBER_URL}index.php?c=pm">{if $newpm}<img src="{MEMBER_THEME_PATH}images/new_pm.gif" align="absmiddle" style="margin-right:3px;" />{/if}短消息</a>，<a href="{MEMBER_URL}index.php?c=notice"><img id="dr_notece_img" src="{MEMBER_THEME_PATH}images/notice.gif" align="absmiddle" style="margin-right:3px;display:none" />提醒</a></strong>
+            <strong>欢迎回来，{$member.username}，{$member.group.name}，{$member.level.name}，<a href="{MEMBER_URL}index.php?c=pm">{if $newpm}<img src="{MEMBER_THEME_PATH}images/new_pm.gif" align="absmiddle" style="margin-right:3px;" />{/if}短消息</a>，<a href="{MEMBER_URL}index.php?c=notice"><img id="man_notece_img" src="{MEMBER_THEME_PATH}images/notice.gif" align="absmiddle" style="margin-right:3px;display:none" />提醒</a></strong>
             <div class="account"><span>账户</span> 
                 <ul>
-                    <li><a href="{dr_member_url('account/index')}">基本资料</a></li>
-                    <li><a href="{dr_member_url('account/password')}">修改密码</a></li>
-                    <li><a href="{dr_member_url('account/avatar')}">上传头像</a></li>
-                    <li><a href="{dr_member_url('login/out')}">退出</a></li>
+                    <li><a href="{man_member_url('account/index')}">基本资料</a></li>
+                    <li><a href="{man_member_url('account/password')}">修改密码</a></li>
+                    <li><a href="{man_member_url('account/avatar')}">上传头像</a></li>
+                    <li><a href="{man_member_url('login/out')}">退出</a></li>
                 </ul>
             </div>
         {else}
-        	<a class="bt_l" href="{dr_member_url('login/index')}">登录</a>
-       		<a class="bt_r" href="{dr_member_url('register/index')}">注册</a>
+        	<a class="bt_l" href="{man_member_url('login/index')}">登录</a>
+       		<a class="bt_r" href="{man_member_url('register/index')}">注册</a>
         {/if}
         </div>
     </div>
@@ -102,9 +102,9 @@ function dr_flash_title() {
 <div class="nav_wrapper">
     <div class="nav drop_downs">
         <ul class="nav_list">
-            <li><a href="{dr_member_url('home/index')}">首页</a></li>
+            <li><a href="{man_member_url('home/index')}">首页</a></li>
             {loop $menu $m}
-            <li><a href="{if $m.url}{$m.url}{else}{dr_member_url($m.uri)}{/if}" {if $menu_tid==$m.id}class="cur" style="color:#D5D5D5"{/if}>{$m.name}</a></li>
+            <li><a href="{if $m.url}{$m.url}{else}{man_member_url($m.uri)}{/if}" {if $menu_tid==$m.id}class="cur" style="color:#D5D5D5"{/if}>{$m.name}</a></li>
 			{/loop}
         </ul>
     </div>

@@ -116,7 +116,7 @@ class Sns extends M_Controller {
                 $this->member_msg(lang('m-204'));
             }
             $this->template->assign('topic', $topic);
-            $this->template->assign('meta_name', dr_lang('m-205', $topic['name']));
+            $this->template->assign('meta_name', man_lang('m-205', $topic['name']));
             $this->db->where('id IN (select fid from '.$this->db->dbprefix('sns_topic_index').' where tid='.$topic['id'].')');
         } else {
             // 全站
@@ -156,7 +156,7 @@ class Sns extends M_Controller {
                                 ->get('sns_follow_group')
                                 ->result_array(),
                 'notused' => $this->attachment_model->get_unused($this->uid, 'jpg,png,gif', 9),
-                'moreurl' => $topic ? dr_member_url('sns/topic', array('id'=>$id)) : dr_member_url('sns/index', array('type'=>$type, 'uid'=>$uid)),
+                'moreurl' => $topic ? man_member_url('sns/topic', array('id'=>$id)) : man_member_url('sns/index', array('type'=>$type, 'uid'=>$uid)),
             ));
             $this->template->display('sns_index.html');
         } else {
@@ -174,7 +174,7 @@ class Sns extends M_Controller {
     public function feed() {
 
         $id = (int)$this->input->get('id');
-        $data = dr_sns_feed($id);
+        $data = man_sns_feed($id);
         if (!$data) {
             $this->member_msg(lang('m-249'));
         }
@@ -253,7 +253,7 @@ class Sns extends M_Controller {
             $this->template->assign(array(
                 'list' => $data,
                 'group' => $g,
-                'moreurl' => dr_member_url('sns/follow', array('gid' => $gid, 'uid' => $uid, 'kw' => $kw))
+                'moreurl' => man_member_url('sns/follow', array('gid' => $gid, 'uid' => $uid, 'kw' => $kw))
             ));
             $this->template->display('sns_follow.html');
         } else {
@@ -295,7 +295,7 @@ class Sns extends M_Controller {
         if ($page == 1) {
             $this->template->assign(array(
                 'list' => $data,
-                'moreurl' => dr_member_url('sns/fans', array('uid' => $uid))
+                'moreurl' => man_member_url('sns/fans', array('uid' => $uid))
             ));
             $this->template->display('sns_fans.html');
         } else {
@@ -322,7 +322,7 @@ class Sns extends M_Controller {
         $this->template->assign(array(
             'uid' => $uid,
             'follow' => $row ? $row['isdouble'] : -1,
-            'membersns' => dr_sns_info($uid),
+            'membersns' => man_sns_info($uid),
             'memberinfo' => man_member_info($uid),
         ));
         $this->template->display('sns_member.html');
@@ -361,9 +361,9 @@ class Sns extends M_Controller {
         $id = (int)$this->input->get('id');
         if ($this->member['adminid'] || $this->db->where('uid', $this->uid)->where('id', $id)->count_all_results('sns_feed')) {
             $this->sns_model->delete($id);
-            exit(dr_json(1, lang('m-077')));
+            exit(man_json(1, lang('m-077')));
         } else {
-            exit(dr_json(0, lang('m-203')));
+            exit(man_json(0, lang('m-203')));
         }
     }
 
@@ -374,9 +374,9 @@ class Sns extends M_Controller {
         $data = $this->db->where('id', $id)->get('sns_comment')->row_array();
         if ($this->member['adminid'] || $data['uid'] == $this->uid) {
             $this->sns_model->delete_comment($id, $data['fid']);
-            exit(dr_json(1, lang('m-077')));
+            exit(man_json(1, lang('m-077')));
         } else {
-            exit(dr_json(0, lang('m-203')));
+            exit(man_json(0, lang('m-203')));
         }
 
     }
@@ -438,7 +438,7 @@ class Sns extends M_Controller {
         $page = max((int)$this->input->get('page'), 1);
 
         // 动态详情
-        $data = dr_sns_feed($fid);
+        $data = man_sns_feed($fid);
         if (!$data) {
             exit('');
         }
@@ -465,10 +465,10 @@ class Sns extends M_Controller {
     public function comment() {
 
         $id = (int)$this->input->get('id');
-        $content = trim(dr_safe_replace($this->input->post('content')));
+        $content = trim(man_safe_replace($this->input->post('content')));
 
         // 过滤非法内容
-        $content = dr_preg_html($content).' ';
+        $content = man_preg_html($content).' ';
 
         // 提取URL链接
         $content = preg_replace_callback('/((?:https?|mailto|ftp):\/\/([^\x{2e80}-\x{9fff}\s<\'\"“”‘’，。}]*)?)/u', '_format_feed_content_url_length', $content);
@@ -489,12 +489,12 @@ class Sns extends M_Controller {
 
         $content = trim($content);
         if (!$content) {
-            exit(dr_json(0, lang('m-250')));
+            exit(man_json(0, lang('m-250')));
         }
 
-        $data = dr_sns_feed($id);
+        $data = man_sns_feed($id);
         if (!$data) {
-            exit(dr_json(0, lang('m-249')));
+            exit(man_json(0, lang('m-249')));
         }
 
         // 写入评论
@@ -508,17 +508,17 @@ class Sns extends M_Controller {
         ));
 
         // @给作者
-        $this->member_model->add_notice($data['uid'], 2, dr_lang('m-253', $this->member['username'], dr_sns_feed_url($id)));
+        $this->member_model->add_notice($data['uid'], 2, man_lang('m-253', $this->member['username'], man_sns_feed_url($id)));
 
         // 给@的人发送提醒
         if ($user) {
-            $this->member_model->add_notice($user, 2, dr_lang('m-289', $this->member['username'], dr_sns_feed_url($id)));
+            $this->member_model->add_notice($user, 2, man_lang('m-289', $this->member['username'], man_sns_feed_url($id)));
         }
 
         // 更新动态表
         $this->db->where('id', $id)->set('comment', 'comment+1', FALSE)->update('sns_feed');
 
-        exit(dr_json(1, lang('m-254')));
+        exit(man_json(1, lang('m-254')));
     }
 
     // 转发
@@ -528,21 +528,21 @@ class Sns extends M_Controller {
 
         if (IS_POST) {
             // 执行转发操作
-            $content = trim(dr_safe_replace($this->input->post('content')));
+            $content = trim(man_safe_replace($this->input->post('content')));
             if (!$content) {
-                exit(dr_json(0, lang('m-250')));
+                exit(man_json(0, lang('m-250')));
             }
             $this->member_model->add_sns($this->uid, $content, '', 0, $id);
-            exit(dr_json(1, lang('m-251')));
+            exit(man_json(1, lang('m-251')));
             exit;
         }
 
         // 转发数据
-        $data = dr_sns_feed($id);
+        $data = man_sns_feed($id);
         if (!$data) {
             exit(lang('m-249'));
         }
-        $data = $data['repost_id'] ? dr_sns_feed($data['repost_id']) : $data;
+        $data = $data['repost_id'] ? man_sns_feed($data['repost_id']) : $data;
 
         // 表情符号
         $this->load->helper('directory');
@@ -565,13 +565,13 @@ class Sns extends M_Controller {
         // 验证间隔
         if (($time = (int)$this->get_cache('member', 'setting', 'sns_post_time'))
             && get_cookie('sns_post_'.$this->uid)) {
-            exit(dr_json(0, lang('m-206')));
+            exit(man_json(0, lang('m-206')));
         }
 
         // 发布
         $this->member_model->add_sns(
             $this->uid,
-            trim(dr_safe_replace($this->input->post('content'))),
+            trim(man_safe_replace($this->input->post('content'))),
             $this->input->post('attach'),
             0,
             0
@@ -582,7 +582,7 @@ class Sns extends M_Controller {
             set_cookie('sns_post_'.$this->uid, SYSTIME, $time);
         }
 
-        exit(dr_json(1, lang('000')));
+        exit(man_json(1, lang('000')));
     }
 
     // 查询分组下的好友
@@ -592,9 +592,9 @@ class Sns extends M_Controller {
         $result = '';
         if ($data) {
             foreach ($data as $t) {
-                $result.= '<li onclick="dr_insert_user(\''.$t['username'].'\')">
+                $result.= '<li onclick="man_insert_user(\''.$t['username'].'\')">
                 <a href="javascript:void(0);">
-                <img src="'.dr_avatar($t['uid']).'" />'.($t['remark'] ? $t['remark'] : $t['username']).'</a></li>';
+                <img src="'.man_avatar($t['uid']).'" />'.($t['remark'] ? $t['remark'] : $t['username']).'</a></li>';
             }
         }
         exit($result);
@@ -614,7 +614,7 @@ class Sns extends M_Controller {
     public function remark() {
         $id = (int)$this->input->get('id');
         if (IS_POST) {
-            $name = trim(dr_safe_replace($this->input->post('name')));
+            $name = trim(man_safe_replace($this->input->post('name')));
             $this->db->where('id', $id)->where('uid', $this->uid)->update('sns_follow', array('remark'=>$name));
             echo $name;exit;
         } else {
@@ -629,7 +629,7 @@ class Sns extends M_Controller {
         $group = $this->db->where('id', $gid)->get('sns_follow_group')->row_array();
         if ($group) {
             $this->db->where('id', $id)->update('sns_follow', array('gid'=>$gid));
-            exit(dr_strcut($group['title'],15));
+            exit(man_strcut($group['title'],15));
         }
         exit;
     }
@@ -638,16 +638,16 @@ class Sns extends M_Controller {
      * 添加分组
      */
     public function group_add() {
-        $title = trim(dr_safe_replace($this->input->post('title')));
+        $title = trim(man_safe_replace($this->input->post('title')));
         if (!$title) {
-            exit(dr_json(0, lang('m-245')));
+            exit(man_json(0, lang('m-245')));
         }
         $this->db->insert('sns_follow_group', array(
             'uid' => $this->uid,
             'title' => $title,
             'ctime' => SYS_TIME,
         ));
-        exit(dr_json(1, '', $this->db->insert_id()));
+        exit(man_json(1, '', $this->db->insert_id()));
     }
 
     /**
@@ -655,15 +655,15 @@ class Sns extends M_Controller {
      */
     public function group_save() {
         $gid = intval($this->input->post('gid'));
-        $title = trim(dr_safe_replace($this->input->post('title')));
+        $title = trim(man_safe_replace($this->input->post('title')));
         if (!$title) {
-            exit(dr_json(0, lang('m-245')));
+            exit(man_json(0, lang('m-245')));
         }
         $this->db
              ->where('id', $gid)
              ->where('uid', $this->uid)
              ->update('sns_follow_group', array('title' => $title));
-        exit(dr_json(1, ''));
+        exit(man_json(1, ''));
     }
 
     /**
@@ -680,7 +680,7 @@ class Sns extends M_Controller {
              ->where('uid', $this->uid)
              ->where('gid', $gid)
              ->update('sns_follow', array('gid'=>0));
-        exit(dr_json(1, ''));
+        exit(man_json(1, ''));
     }
 
     /**

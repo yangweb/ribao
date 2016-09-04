@@ -204,7 +204,7 @@ class D_Page extends M_Controller {
         // 当前单页的数据
         $data = $page[$id];
         if (!$data || !$data['show']) {
-            $this->goto_404_page(dr_lang('m-196', $id));
+            $this->goto_404_page(man_lang('m-196', $id));
         }
 
         // 单页验证是否存在子栏目
@@ -220,7 +220,7 @@ class D_Page extends M_Controller {
         $my = $my ? array_merge($this->field, $my) : $this->field;
         $data = $this->field_format_value($my, $data, $pid); // 格式化输出自定义字段
         $join = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
-        $title = $data['title'] ? $data['title'] : dr_get_page_pname($id, $join);
+        $title = $data['title'] ? $data['title'] : man_get_page_pname($id, $join);
         if (isset($data['content_title']) && $data['content_title']) {
             $title = $data['content_title'].$join.$title;
         }
@@ -264,7 +264,7 @@ class D_Page extends M_Controller {
         }
 
         // 格式化配置
-        $data['setting'] = dr_string2array($data['setting']);
+        $data['setting'] = man_string2array($data['setting']);
 
         // 存储id和缓存参数
         $this->_id = $data['id'];
@@ -274,7 +274,7 @@ class D_Page extends M_Controller {
         $this->template->assign(array(
             'parent' => $parent,
             'related' => $related,
-            'urlrule' => $this->mobile ? dr_mobile_page_url($data['module'], $data['id'], '{page}') : dr_page_url($data, '{page}'),
+            'urlrule' => $this->mobile ? man_mobile_page_url($data['module'], $data['id'], '{page}') : man_page_url($data, '{page}'),
             'meta_title' => $title,
             'meta_keywords' => trim($data['keywords'].','.SITE_KEYWORDS, ','),
             'meta_description' => $data['description']
@@ -367,7 +367,7 @@ class D_Page extends M_Controller {
 			
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			
 			if ($this->input->post('action') == 'order') {
@@ -376,13 +376,13 @@ class D_Page extends M_Controller {
 					$this->page_model->link->where('id', $id)->update($this->page_model->tablename, $data[$id]);
 				}
 				$this->page_model->cache(SITE_ID);
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				if (!$this->is_auth(APP_DIR.'/admin/page/index')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$this->admin_delete($ids);
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}
 		}
 		
@@ -398,10 +398,10 @@ class D_Page extends M_Controller {
 			foreach($data as $t) {
 				$t['option'] = '<a href="'.$t['url'].'" target="_blank">'.lang('go').'</a>&nbsp;&nbsp;&nbsp;';
 				if ($this->is_auth(APP_DIR.'/admin/page/add')) {
-					$t['option'].= '<a href='.dr_url(APP_DIR.'/page/add', array('id' => $t['id'])).'>'.lang('252').'</a>&nbsp;&nbsp;&nbsp;';
+					$t['option'].= '<a href='.man_url(APP_DIR.'/page/add', array('id' => $t['id'])).'>'.lang('252').'</a>&nbsp;&nbsp;&nbsp;';
 				}
 				if ($this->is_auth(APP_DIR.'/admin/page/edit')) {
-					$t['option'].= '<a href='.dr_url(APP_DIR.'/page/edit', array('id' => $t['id'])).'>'.lang('253').'</a>&nbsp;&nbsp;&nbsp;';
+					$t['option'].= '<a href='.man_url(APP_DIR.'/page/edit', array('id' => $t['id'])).'>'.lang('253').'</a>&nbsp;&nbsp;&nbsp;';
 				}
                 $t['cache'] = $t['setting']['nocache'] ? '<img src="/mantob/statics/images/0.gif">' : '<img src="/mantob/statics/images/1.gif">';
 				$tree[$t['id']] = $t;
@@ -409,11 +409,11 @@ class D_Page extends M_Controller {
 		}
 		
 		$str = "<tr class='\$class'>";
-		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>";
+		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>";
 		$str.= "<td align='left'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>";
 		$str.= "<td align='left'>\$id</td>";
 		if ($this->is_auth(APP_DIR.'/admin/page/edit')) {
-			$str.= "<td>\$spacer<a href='".dr_url(APP_DIR.'/page/edit')."&id=\$id'>\$name</a>  \$parent</td>";
+			$str.= "<td>\$spacer<a href='".man_url(APP_DIR.'/page/edit')."&id=\$id'>\$name</a>  \$parent</td>";
 		} else {
 			$str.= "<td>\$spacer\$name  \$parent</td>";
 		}
@@ -456,7 +456,7 @@ class D_Page extends M_Controller {
                     $this->page_model->cache(SITE_ID);
                     $this->attachment_handle($this->uid, $this->page_model->tablename.'-'.$page, $my);
                     if ($this->input->post('action') == 'back') {
-                        $this->admin_msg(lang('000'), dr_url(APP_DIR.'/page/index'), 1, 0);
+                        $this->admin_msg(lang('000'), man_url(APP_DIR.'/page/index'), 1, 0);
                     } else {
                         $pid = $data[1]['pid'];
                         unset($data);
@@ -471,7 +471,7 @@ class D_Page extends M_Controller {
             // 调用父属性
             if ($pid && ($row = $this->db->where('id', $pid)->get(SITE_ID.'_page')->row_array())) {
                 $data['urlrule'] = $row['urlrule'];
-                $data['setting'] = dr_string2array($row['setting']);
+                $data['setting'] = man_string2array($row['setting']);
                 $data['template'] = $row['template'];
             }
         }
@@ -501,7 +501,7 @@ class D_Page extends M_Controller {
 
         $error = $result = NULL;
         $field = $this->dcache->get('page-field-'.SITE_ID);
-        $data['setting'] = dr_string2array($data['setting']);
+        $data['setting'] = man_string2array($data['setting']);
 
 		if (IS_POST) {
             $my = $field ? array_merge($this->field, $field) : $this->field;
@@ -521,7 +521,7 @@ class D_Page extends M_Controller {
                     $this->page_model->syn($this->input->post('synid'), $post[1]['urlrule']);
                     $this->attachment_handle($this->uid, $this->page_model->tablename.'-'.$page, $field);
                     $this->page_model->cache(SITE_ID);
-                    $this->admin_msg(lang('000'), dr_url(APP_DIR.'/page/index'), 1, 0);
+                    $this->admin_msg(lang('000'), man_url(APP_DIR.'/page/index'), 1, 0);
                 } else {
                     $error = array('msg' => $page);
                 }
@@ -539,7 +539,7 @@ class D_Page extends M_Controller {
             'select' => $this->_select($page, $data['pid'], 'name=\'pid\'', lang('150')),
             'myfile' => is_file(APPPATH.'templates/admin/page_'.SITE_ID.'_'.$id.'.html') ? 'page_'.SITE_ID.'_'.$id.'.html' : '',
             'myfield' => $this->field_input($field, $data, FALSE),
-			'select_syn' => $this->_select($page, 0, 'id="dr_synid" name=\'synid[]\' multiple style="height:200px;"', '')
+			'select_syn' => $this->_select($page, 0, 'id="man_synid" name=\'synid[]\' multiple style="height:200px;"', '')
 		));
 		$this->template->display('page_add.html');
 	}

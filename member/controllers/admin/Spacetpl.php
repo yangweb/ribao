@@ -43,11 +43,11 @@ class Spacetpl extends D_File {
 		$file = $this->path.$dir.'/rule.php';
 		
 		if (IS_POST) {
-			file_put_contents($file, dr_array2string($this->input->post('data')));
-			echo dr_json(1, lang('000'));exit;
+			file_put_contents($file, man_array2string($this->input->post('data')));
+			echo man_json(1, lang('000'));exit;
 		}
 		
-		$this->template->assign('data', is_file($file) ? dr_string2array(file_get_contents($file)) : array());
+		$this->template->assign('data', is_file($file) ? man_string2array(file_get_contents($file)) : array());
 		$this->template->assign('space', $dir);
 		$this->template->display('space_permission.html');
 	}

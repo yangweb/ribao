@@ -33,7 +33,7 @@ class Menu extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			
 			if ($this->input->post('action') == 'order') {
@@ -44,13 +44,13 @@ class Menu extends M_Controller {
 						 ->update('member_menu',  array('displayorder' => (int)$_data[$id]['displayorder']));
 				}
 				$this->member_menu_model->cache();
-				exit(dr_json(1, lang('339')));
+				exit(man_json(1, lang('339')));
 			} else {
 				$this->db
 					 ->where_in('id', $ids)
 					 ->delete('member_menu');
 				$this->member_menu_model->cache();
-				exit(dr_json(1, lang('339')));
+				exit(man_json(1, lang('339')));
 			}
 		}
 		
@@ -68,25 +68,25 @@ class Menu extends M_Controller {
 			foreach($data as $t) {
 				$t['option'] = '';
 				if ($this->is_auth('member/admin/menu/add') && !@in_array($t['pid'], $left)) {
-					$t['option'].= '<a class="add" title="'.lang('add').'" href="'.dr_dialog_url(dr_url('member/menu/add', array('pid' => $t['id'])), 'add').'"></a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="add" title="'.lang('add').'" href="'.man_dialog_url(man_url('member/menu/add', array('pid' => $t['id'])), 'add').'"></a>&nbsp;&nbsp;';
 					$t['target'] = '';
 				} else {
 					$t['option'].= '<a class="add" style="background:none" href="javascript:;"></a>&nbsp;&nbsp;';
 					$t['target'] = '<img src="'.SITE_URL.'mantob/statics/images/'.$t['target'].'.gif" />';
 				}
 				if ($this->is_auth('member/admin/menu/edit')) {
-					$t['option'].= '<a class="edit" title="'.lang('edit').'" href="'.dr_dialog_url(dr_url('member/menu/edit', array('id' => $t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
-                    $t['name'] = '<a title="'.lang('edit').'" href="'.dr_dialog_url(dr_url('member/menu/edit', array('id' => $t['id'])), 'edit').'">'.$t['name'].'</a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="edit" title="'.lang('edit').'" href="'.man_dialog_url(man_url('member/menu/edit', array('id' => $t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
+                    $t['name'] = '<a title="'.lang('edit').'" href="'.man_dialog_url(man_url('member/menu/edit', array('id' => $t['id'])), 'edit').'">'.$t['name'].'</a>&nbsp;&nbsp;';
                 }
 				if ($this->is_auth('member/admin/menu/del')) {
-					$t['option'].= '<a class="del" title="'.lang('del').'" href="javascript:;" onClick="return dr_dialog_del(\''.lang('015').'\',\''.dr_url('member/menu/del',array('id' => $t['id'])).'\');"></a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="del" title="'.lang('del').'" href="javascript:;" onClick="return man_dialog_del(\''.lang('015').'\',\''.man_url('member/menu/del',array('id' => $t['id'])).'\');"></a>&nbsp;&nbsp;';
 				}
 				$tree[$t['id']] = $t;
 			}
 		}
 		
 		$str = "<tr>
-					<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>
+					<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>
 					<td align='center'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>
 					<td>\$spacer\$name</td>
 					<td align='center'>\$target</td>
@@ -106,7 +106,7 @@ class Menu extends M_Controller {
     public function add() {
 	
 		if (IS_POST) {
-			exit(dr_json(1, lang('014'), $this->member_menu_model->add($this->input->post('data', TRUE))));
+			exit(man_json(1, lang('014'), $this->member_menu_model->add($this->input->post('data', TRUE))));
 		}
 		
 		$top = $this->member_menu_model->get_top_id();
@@ -148,7 +148,7 @@ class Menu extends M_Controller {
 		if (!$data) exit(lang('019'));
 		
 		if (IS_POST) {
-			exit(dr_json(1, lang('014'), $this->member_menu_model->edit($id, $this->input->post('data', TRUE))));
+			exit(man_json(1, lang('014'), $this->member_menu_model->edit($id, $this->input->post('data', TRUE))));
 		}
 		
 		$top = $this->member_menu_model->get_top_id();
@@ -188,7 +188,7 @@ class Menu extends M_Controller {
     public function del() {
         $this->member_menu_model->delete((int)$this->input->get('id'));
         $this->member_menu_model->cache();
-        exit(dr_json(1, lang('339')));
+        exit(man_json(1, lang('339')));
 	}
 	
 	/**
@@ -197,7 +197,7 @@ class Menu extends M_Controller {
     public function init() {
 		$this->member_menu_model->init();
 		$this->member_menu_model->cache();
-		$this->admin_msg(lang('000'), dr_url('member/menu/index'), 1);
+		$this->admin_msg(lang('000'), man_url('member/menu/index'), 1);
 	}
 	
 	

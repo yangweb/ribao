@@ -206,7 +206,7 @@ class System_model extends CI_Model {
         $cache = array();
         if ($data) {
             foreach ($data as $t) {
-                $t['value'] = dr_string2array($t['value']);
+                $t['value'] = man_string2array($t['value']);
                 $cache[$t['id']] = $t;
             }
             $this->ci->dcache->set('urlrule', $cache);
@@ -241,7 +241,7 @@ class System_model extends CI_Model {
         if ($_data) {
             foreach ($_data as $t) {
                 $t['num'] = count($t['verify']);
-                $t['verify'] = dr_string2array($t['verify']);
+                $t['verify'] = man_string2array($t['verify']);
                 $data[$t['id']] = $t;
             }
             $this->ci->dcache->set('verify', $data);

@@ -47,16 +47,16 @@
         })
 })(jQuery);
 // 插入表情
-function dr_emotion(value) {
-    $("#dr_content").insertContent(' ['+value+'] ');
+function man_emotion(value) {
+    $("#man_content").insertContent(' ['+value+'] ');
 }
 // 显示表情
-function dr_get_face() {
+function man_get_face() {
     $("#emotions").show(200);
 }
 // 插入@
-function dr_insert_user(value) {
-    $("#dr_content").insertContent(' @'+value+' ');
+function man_insert_user(value) {
+    $("#man_content").insertContent(' @'+value+' ');
 }
 //过滤html标签
 function strip_tags (input, allowed) {
@@ -68,21 +68,21 @@ function strip_tags (input, allowed) {
     });
 }
 // 添加话题
-function dr_huati_add(){
+function man_huati_add(){
     var name = strip_tags($('#huati_name').val());
     if (!name || name=='') {
-        dr_tips('话题不能为空！');
+        man_tips('话题不能为空！');
         $('#huati_name').focus();
         return;
     }
-    $("#dr_content").insertContent(' #'+name+'# ');
+    $("#man_content").insertContent(' #'+name+'# ');
     $('#huati_name').val('');
 }
 
 /**
  * 微博多图插入Js核心插件
  */
-dr_multimage = {
+man_multimage = {
     /**
      * 工厂模式调用初始化
      * @param object attrs 初始化参数对象
@@ -152,13 +152,13 @@ dr_multimage = {
      */
     removeImage: function (unid, index, attachId) {
         // 移除附件ID数据
-        dr_multimage.upAttachVal('del', attachId);
+        man_multimage.upAttachVal('del', attachId);
         // 移除图像
         $('#li_'+unid+'_'+index).remove();
         // 移除附件ID项
         ($('#ul_'+unid).find('li').length - 1 === 0) && $('#attach_ids').remove();
         // 动态设置数目
-        dr_multimage.upNumVal(unid, 'dec');
+        man_multimage.upNumVal(unid, 'dec');
     },
     /**
      * 更新附件表单值
@@ -218,10 +218,10 @@ dr_multimage = {
 };
 
 // 搜索好友
-function dr_find_user(gid) {
+function man_find_user(gid) {
     $("#group-2").html('加载中...');
     $("#groups li").attr('class', '');
-    $("#dr_group_"+gid).attr('class', 'current');
+    $("#man_group_"+gid).attr('class', 'current');
     $.get(memberpath+"index.php?c=sns&m=select_user&gid="+gid, function(data){
         if (data) {
             $("#group-2").html(data);
@@ -232,37 +232,37 @@ function dr_find_user(gid) {
 }
 
 // 发布微博
-function dr_post() {
-    var content = $('#dr_content').val();
+function man_post() {
+    var content = $('#man_content').val();
     if (!content || content == '') {
-        dr_tips('请填写内容');
-        $('#dr_content').focus();
+        man_tips('请填写内容');
+        $('#man_content').focus();
         return false;
     }
     $.post(memberpath+"index.php?c=sns&m=post", {content:content, attach: $('#attach_ids').val()}, function(data){
         if (data.status == 1) {
-            dr_tips('发布成功', 2, 1);
-            $('#dr_content').val('');
+            man_tips('发布成功', 2, 1);
+            $('#man_content').val('');
             $('#upload_num_weibo').html('0');
             $('#total_num_weibo').html('9');
             $('#attach_ids').val('');
-            $('.dr_row_li').remove();
+            $('.man_row_li').remove();
             $.get(moreurl+'&more=1', function(data){
                 $("#feed-lists").html(data);
-                $("#dr_page").val(2);
+                $("#man_page").val(2);
             });
         } else {
-            dr_tips(data.code);
-            $('#dr_content').focus();
+            man_tips(data.code);
+            $('#man_content').focus();
         }
     }, 'json');
 }
 
 // 转发
-function dr_sns_repost(id) {
+function man_sns_repost(id) {
     // 创建窗口
     var throughBox = $.dialog.through;
-    var dr_Dialog = throughBox({
+    var man_Dialog = throughBox({
         title: '转发',
         opacity: 0.1
     });
@@ -270,20 +270,20 @@ function dr_sns_repost(id) {
     // ajax调用窗口内容
     $.ajax({type: "GET", url:url, dataType:'text', success: function (text) {
         var win = $.dialog.top;
-        dr_Dialog.content(text);
+        man_Dialog.content(text);
         // 添加按钮
-        dr_Dialog.button({name: '转发', callback:function() {
-            var content = win.$("#dr_content").val();
+        man_Dialog.button({name: '转发', callback:function() {
+            var content = win.$("#man_content").val();
             $.ajax({type: "POST",dataType:"json", url: url, data: {content: content}, success: function(data) {
                     if (data.status == 1) {
-                        dr_tips(data.code, 3, 1);
+                        man_tips(data.code, 3, 1);
                         $.get(moreurl+'&more=1', function(data){
                             $("#feed-lists").html(data);
-                            $("#dr_page").val(2);
+                            $("#man_page").val(2);
                         });
                     } else {
-                        dr_tips(data.code);
-                        win.$('#dr_content').focus();
+                        man_tips(data.code);
+                        win.$('#man_content').focus();
                     }
                 },
                 error: function(HttpRequest, ajaxOptions, thrownError) {
@@ -302,26 +302,26 @@ function dr_sns_repost(id) {
 }
 
 // 提交评论
-function dr_sns_comment_post(id) {
+function man_sns_comment_post(id) {
     var content = strip_tags($('#comment_content_'+id).val());
     if (!content || content == '') {
-        dr_tips('请填写评论内容');
+        man_tips('请填写评论内容');
         return false;
     }
     $.post(memberpath+"index.php?c=sns&m=comment&id="+id, {content:content}, function(data){
         if (data.status == 1) {
-            dr_tips('评论成功', 2, 1);
-            dr_sns_list_comment(id, 1);
-            $("#dr_comment_"+id).toggle();
+            man_tips('评论成功', 2, 1);
+            man_sns_list_comment(id, 1);
+            $("#man_comment_"+id).toggle();
         } else {
-            dr_tips(data.code);
+            man_tips(data.code);
         }
     }, 'json');
 }
 
 // 列表评论
-function dr_sns_list_comment(id, page) {
-    $("#dr_comment_"+id).toggle();
+function man_sns_list_comment(id, page) {
+    $("#man_comment_"+id).toggle();
     $('#comment_content_'+id).val('');
     $.get(memberpath+'index.php?c=sns&m=comment_list&more=1&id='+id+'&page='+page, function(data){
         $('#commentlist_'+id).html(data);
@@ -330,34 +330,34 @@ function dr_sns_list_comment(id, page) {
 
 
 // 回复评论
-function dr_recomment(id, username) {
+function man_recomment(id, username) {
     $('#comment_content_'+id).focus();
     $('#comment_content_'+id).val('@'+username+' ');
 }
 
 // 赞
-function dr_sns_digg(id) {
+function man_sns_digg(id) {
     $.get(memberpath+'index.php?c=sns&m=digg&id='+id, function(data){
-        $('#dr_digg_'+id).html(data);
+        $('#man_digg_'+id).html(data);
     });
 }
 
 // 收藏
-function dr_sns_favorite(id) {
+function man_sns_favorite(id) {
     $.get(memberpath+'index.php?c=sns&m=favorite&id='+id, function(data){
-        $('#dr_favorite_'+id).html(data);
+        $('#man_favorite_'+id).html(data);
     });
 }
 
 // 删除动态
-function dr_sns_delete(id) {
+function man_sns_delete(id) {
     art.dialog.confirm("<font color=red><b>你确认要删除吗？</b></font>", function(){
         $.ajax({type: "POST",dataType:"json", url: memberpath+'index.php?c=sns&m=delete&id='+id, success: function(data) {
             if (data.status == 1) {
-                dr_tips(data.code, 3, 1);
-                $("#dr_row_"+id).remove();
+                man_tips(data.code, 3, 1);
+                $("#man_row_"+id).remove();
             } else {
-                dr_tips(data.code);
+                man_tips(data.code);
             }
             art.dialog.close();
             return false;
@@ -372,14 +372,14 @@ function dr_sns_delete(id) {
 }
 
 // 删除动态
-function dr_sns_delete(id) {
+function man_sns_delete(id) {
     art.dialog.confirm("<font color=red><b>你确认要删除吗？</b></font>", function(){
         $.ajax({type: "POST",dataType:"json", url: memberpath+'index.php?c=sns&m=delete&id='+id, success: function(data) {
             if (data.status == 1) {
-                dr_tips(data.code, 3, 1);
-                $("#dr_row_"+id).remove();
+                man_tips(data.code, 3, 1);
+                $("#man_row_"+id).remove();
             } else {
-                dr_tips(data.code);
+                man_tips(data.code);
             }
             art.dialog.close();
             return false;
@@ -394,14 +394,14 @@ function dr_sns_delete(id) {
 }
 
 // 删除动态2
-function dr_sns_delete2(id) {
+function man_sns_delete2(id) {
     art.dialog.confirm("<font color=red><b>你确认要删除吗？</b></font>", function(){
         $.ajax({type: "POST",dataType:"json", url: memberpath+'index.php?c=sns&m=delete&id='+id, success: function(data) {
             if (data.status == 1) {
-                dr_tips(data.code, 3, 1);
+                man_tips(data.code, 3, 1);
                 setTimeout('window.location.href="'+memberpath+'index.php?c=sns&m=index"', 2000);
             } else {
-                dr_tips(data.code);
+                man_tips(data.code);
             }
             art.dialog.close();
             return false;
@@ -416,14 +416,14 @@ function dr_sns_delete2(id) {
 }
 
 // 删除评论
-function dr_sns_delete_comment(id) {
+function man_sns_delete_comment(id) {
     art.dialog.confirm("<font color=red><b>你确认要删除吗？</b></font>", function(){
         $.ajax({type: "POST",dataType:"json", url: memberpath+'index.php?c=sns&m=delete_comment&id='+id, success: function(data) {
             if (data.status == 1) {
-                dr_tips(data.code, 3, 1);
-                $("#dr_row_comment_"+id).remove();
+                man_tips(data.code, 3, 1);
+                $("#man_row_comment_"+id).remove();
             } else {
-                dr_tips(data.code);
+                man_tips(data.code);
             }
             art.dialog.close();
             return false;
@@ -443,14 +443,14 @@ $(function(){
         $('.face_card').hide();
         var uid = $(this).attr('uid');
         var obj = $(this);
-        dr_facecard.init();
-        dr_facecard.show(obj, uid);
+        man_facecard.init();
+        man_facecard.show(obj, uid);
     });
     $('a[event-node="face_card"]').mouseleave(function(){
-        dr_facecard.hide();
+        man_facecard.hide();
     });
     $('a[event-node="face_card"]').blur(function(){
-        dr_facecard.hide();
+        man_facecard.hide();
     });
     //
 });
@@ -458,7 +458,7 @@ $(function(){
 /**
  * 小名片JS模型
  */
-dr_facecard ={
+man_facecard ={
     //给工厂调用的接口
     _init:function(attrs){
         this.init();

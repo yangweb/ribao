@@ -209,11 +209,11 @@ class Order_model extends CI_Model {
 					   ->limit(1)
 					   ->get(SITE_ID.'_'.APP_DIR.'_config')
 					   ->row_array();
-		$config = dr_string2array($config['value']);
+		$config = man_string2array($config['value']);
 		return str_replace(
 			array('ickd_return', '<tr><th>时间</th><th>记录</th></tr>', '</table>'), 
 			array('table_form', '', '<tr><td colspan="2" style="border:none;text-align:center;color:red;">以上部分信息来自于第三方</td></tr></table>'), 
-			dr_catcher_data('http://api.ickd.cn/?id='.$config['id'].'&secret='.$config['secret'].'&com='.$id.'&nu='.$sn.'&type=html&encode=utf8&ord=asc')
+			man_catcher_data('http://api.ickd.cn/?id='.$config['id'].'&secret='.$config['secret'].'&com='.$id.'&nu='.$sn.'&type=html&encode=utf8&ord=asc')
 		);
 	}
 	
@@ -267,7 +267,7 @@ class Order_model extends CI_Model {
 						->limit(1)
 						->get(SITE_ID.'_'.APP_DIR.'_config')
 						->row_array();
-		$paytype = dr_string2array($paytype['value']);
+		$paytype = man_string2array($paytype['value']);
 		
 		if (isset($paytype[1]) && $paytype[1]['use']) {
             $paytype[1]['color'] = 'green';
@@ -300,7 +300,7 @@ class Order_model extends CI_Model {
 					 ->limit(1)
 					 ->get(SITE_ID.'_'.APP_DIR.'_config')
 					 ->row_array();
-		$data = dr_string2array($data['value']);
+		$data = man_string2array($data['value']);
 		
 		return $data;
 	}
@@ -360,7 +360,7 @@ class Order_model extends CI_Model {
             return NULL;
         }
 		
-		$data['items'] = dr_string2array($data['items']);
+		$data['items'] = man_string2array($data['items']);
 		
 		return $data;
 	}
@@ -408,7 +408,7 @@ class Order_model extends CI_Model {
 				$_format['quantity'][$item['fid']] -= $item['num'];
 				$this->link
 					 ->where('id', $item['id'])
-					 ->update(SITE_ID.'_'.APP_DIR.'_data_'.$item['tableid'], array('format' => dr_array2string($_format)));
+					 ->update(SITE_ID.'_'.APP_DIR.'_data_'.$item['tableid'], array('format' => man_array2string($_format)));
 			} else {
 				$this->link
 					 ->where('id', $item['id'])
@@ -517,7 +517,7 @@ class Order_model extends CI_Model {
 				$this->ci->sendmail_queue(
                     $this->member['email'],
                     lang('my-29'),
-                    dr_lang('my-30', strtoupper($module).'-'.$id, $url, $url)
+                    man_lang('my-30', strtoupper($module).'-'.$id, $url, $url)
                 );
 				break;
 				// 订单退款
@@ -590,7 +590,7 @@ class Order_model extends CI_Model {
         }
 		
 		$data = array();
-		$items = dr_string2array($order['items']);
+		$items = man_string2array($order['items']);
 		foreach ($items as $t) {
 			// 查询对应的评论数据
 			$index = $this->link
@@ -617,7 +617,7 @@ class Order_model extends CI_Model {
 					'title' => $t['title'],
 					'format' => $t['format'],
 					'index' => $index['id'],
-					'value' => dr_string2array($review['value']),
+					'value' => man_string2array($review['value']),
 					'review' => $index['review'],
 					'avgsort' => $review['avgsort'],
 					'content' => $review['content'],

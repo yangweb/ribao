@@ -100,7 +100,7 @@ class Dconfig {
 			}
 		}
 		$body .= PHP_EOL.');';
-		if (!is_dir(dirname($this->file))) dr_mkdirs(dirname($this->file));
+		if (!is_dir(dirname($this->file))) man_mkdirs(dirname($this->file));
 		return file_put_contents($this->file, $body);
 	}
 	
@@ -116,7 +116,7 @@ class Dconfig {
 		$body .= str_replace(array('  ', ' 
     '), array('    ', ' '), var_export($data, TRUE));
 		$body .= ';';
-		if (!is_dir(dirname($this->file))) dr_mkdirs(dirname($this->file));
+		if (!is_dir(dirname($this->file))) man_mkdirs(dirname($this->file));
 		return file_put_contents($this->file, $body);
 	}
 	

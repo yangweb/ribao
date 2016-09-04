@@ -19,7 +19,7 @@
 {if $login}
 <script type="text/javascript">
 $(function(){
-    dr_tips("{lang('m-002')}", 3, 1);
+    man_tips("{lang('m-002')}", 3, 1);
     setTimeout('parent.location.reload()', 3000);
 });
 </script>
@@ -29,7 +29,7 @@ $(function(){
 <script type="text/javascript">
 $(function(){
 	{if $error}
-	dr_tips("<font color=red>{$error}</font>", 3);
+	man_tips("<font color=red>{$error}</font>", 3);
 	{/if}
 });
 </script>
@@ -38,17 +38,17 @@ $(function(){
     <ul>
         <li>
             <strong>会员：</strong>
-            <input class="input_text" type="text" maxlength="64" autofocus="autofocus"  id="dr_username" name="data[username]" />
+            <input class="input_text" type="text" maxlength="64" autofocus="autofocus"  id="man_username" name="data[username]" />
         </li>
         <li>
             <strong>密码：</strong>
-            <input class="input_text" type="password" id="dr_password" name="data[password]" />
+            <input class="input_text" type="password" id="man_password" name="data[password]" />
         </li>
         {if $code}
-        <li class="check_code" id="dr_code">
+        <li class="check_code" id="man_code">
             <strong>验证：</strong>
             <input class="input_text" type="text" maxlength="30" id="code"  name="code"  value="" />
-            <span style="float:left"><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{dr_member_url('api/captcha', array('width' => 90, 'height' => 32))}&'+Math.random();" src="{dr_member_url('api/captcha', array('width' => 90, 'height' => 32))}" /></span>
+            <span style="float:left"><img align="absmiddle" style="cursor:pointer;" onclick="this.src='{man_member_url('api/captcha', array('width' => 90, 'height' => 32))}&'+Math.random();" src="{man_member_url('api/captcha', array('width' => 90, 'height' => 32))}" /></span>
         </li>
         {/if}
         <li class="auto_login">
@@ -59,14 +59,14 @@ $(function(){
             <button type="submit" value="">
                  登录
             </button>
-            <a href="{dr_member_url('login/find')}">忘记密码？</a>
+            <a href="{man_member_url('login/find')}">忘记密码？</a>
         </li>
     </ul>
     </form>      
     <div class="login_other"> 
         <strong>使用合作网站帐号登录：</strong> 
         {list action=cache name=OAUTH} 
-        <span class="dr_oauth_style dr_oauth_{$t.icon}" title="{$t.name}" onclick="window.location.href='{SITE_URL}member/index.php?c=api&m=oauth&id={$t.id}'"></span>
+        <span class="man_oauth_style man_oauth_{$t.icon}" title="{$t.name}" onclick="window.location.href='{SITE_URL}member/index.php?c=api&m=oauth&id={$t.id}'"></span>
         {/list}
     </div>
 </div>

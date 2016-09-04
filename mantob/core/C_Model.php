@@ -313,7 +313,7 @@ class C_Model extends CI_Model {
             if ($this->is_category) {
                 $data = $this->replace_category_data($id, $data);
             }
-            $data[1]['url'] = dr_show_url($this->ci->get_cache('module-'.SITE_ID.'-'.APP_DIR), $data[1]);
+            $data[1]['url'] = man_show_url($this->ci->get_cache('module-'.SITE_ID.'-'.APP_DIR), $data[1]);
             if (!$this->link->query("SHOW TABLES LIKE '".$this->prefix.'_data_'.$data[1]['tableid']."'")->row_array()) {
                 // 附表不存在时创建附表
                 $sql = $this->link->query("SHOW CREATE TABLE `{$this->prefix}_data_0`")->row_array();
@@ -337,7 +337,7 @@ class C_Model extends CI_Model {
                 'catid' => $data[1]['catid'],
                 'author' => $data[1]['author'],
                 'status' => $data[1]['status'],
-                'content' => dr_array2string(array_merge($data[0], $data[1])),
+                'content' => man_array2string(array_merge($data[0], $data[1])),
                 'backuid' => 0,
                 'backinfo' => '',
                 'inputtime' => $data[1]['inputtime']
@@ -379,7 +379,7 @@ class C_Model extends CI_Model {
             $data = $this->replace_category_data($_data['id'], $data);
         }
         // 生成url地址
-        $data[1]['url'] = dr_show_url($this->ci->get_cache('MODULE-'.SITE_ID.'-'.APP_DIR), array_merge($_data, $data[1]));
+        $data[1]['url'] = man_show_url($this->ci->get_cache('MODULE-'.SITE_ID.'-'.APP_DIR), array_merge($_data, $data[1]));
         // 更新索引表
         $this->link
              ->where('id', $_data['id'])
@@ -437,9 +437,9 @@ class C_Model extends CI_Model {
                 'catid' => $data[1]['catid'],
                 'author' => $data[1]['author'],
                 'status' => $data[1]['status'],
-                'content' => dr_array2string($content),
+                'content' => man_array2string($content),
                 'backuid' => (int) $this->uid,
-                'backinfo' => $this->admin ? dr_array2string($backinfo) : '',
+                'backinfo' => $this->admin ? man_array2string($backinfo) : '',
                 'inputtime' => SYS_TIME
             ));
         }
@@ -495,7 +495,7 @@ class C_Model extends CI_Model {
         // 格式化字段值
         $data = $this->get_content_extend_data($data);
         if ($data[1]['status'] == 9) { // 审核通过]
-            $data[1]['url'] = dr_extend_url($this->ci->get_cache('module-'.SITE_ID.'-'.APP_DIR), $data[1]);
+            $data[1]['url'] = man_extend_url($this->ci->get_cache('module-'.SITE_ID.'-'.APP_DIR), $data[1]);
             if (!$this->link->query("SHOW TABLES LIKE '".$this->prefix.'_extend_data_'.$data[1]['tableid']."'")->row_array()) {
                 // 附表不存在时创建附表
                 $sql = $this->link->query("SHOW CREATE TABLE `{$this->prefix}_extend_data_0`")->row_array();
@@ -528,7 +528,7 @@ class C_Model extends CI_Model {
                 'catid' => $data[1]['catid'],
                 'author' => $data[1]['author'],
                 'status' => $data[1]['status'],
-                'content' => dr_array2string($content),
+                'content' => man_array2string($content),
                 'backuid' => 0,
                 'backinfo' => '',
                 'inputtime' => $data[1]['inputtime']
@@ -565,7 +565,7 @@ class C_Model extends CI_Model {
         // 格式化字段值
         $data = $this->get_content_extend_data($data, $_data);
         // 生成url地址
-        $data[1]['url'] = dr_extend_url($this->ci->get_cache('MODULE-'.SITE_ID.'-'.APP_DIR), array_merge($_data, $data[1]));
+        $data[1]['url'] = man_extend_url($this->ci->get_cache('MODULE-'.SITE_ID.'-'.APP_DIR), array_merge($_data, $data[1]));
         // 更新索引表
         $this->link
              ->where('id', $_data['id'])
@@ -629,9 +629,9 @@ class C_Model extends CI_Model {
                 'catid' => $data[1]['catid'],
                 'author' => $data[1]['author'],
                 'status' => $data[1]['status'],
-                'content' => dr_array2string($content),
+                'content' => man_array2string($content),
                 'backuid' => (int) $this->uid,
-                'backinfo' => $this->admin ? dr_array2string($backinfo) : '',
+                'backinfo' => $this->admin ? man_array2string($backinfo) : '',
                 'inputtime' => SYS_TIME
             ));
         }
@@ -791,8 +791,8 @@ class C_Model extends CI_Model {
             return NULL;
         }
 
-        $content = dr_string2array($data['content']);
-        $data['backinfo'] = dr_string2array($data['backinfo']);
+        $content = man_string2array($data['content']);
+        $data['backinfo'] = man_string2array($data['backinfo']);
         unset($content['status'], $content['catid'], $content['uid']);
 
         return $content + $data;
@@ -815,8 +815,8 @@ class C_Model extends CI_Model {
             return NULL;
         }
 
-        $content = dr_string2array($data['content']);
-        $data['backinfo'] = dr_string2array($data['backinfo']);
+        $content = man_string2array($data['content']);
+        $data['backinfo'] = man_string2array($data['backinfo']);
         unset($content['status'], $content['catid'], $content['uid']);
 
         return $content + $data;
@@ -858,7 +858,7 @@ class C_Model extends CI_Model {
 
     // 审核后执行的操作
     public function verify_notice($id, $data) {
-        $this->member_model->add_notice($data[1]['uid'], 3, dr_lang('m-084', $data[1]['title']));
+        $this->member_model->add_notice($data[1]['uid'], 3, man_lang('m-084', $data[1]['title']));
     }
 
     /**
@@ -874,12 +874,12 @@ class C_Model extends CI_Model {
         }
 
         foreach ($data as $t) {
-            $filepath = dr_string2array($t['filepath']);
+            $filepath = man_string2array($t['filepath']);
             $this->link->where('id', (int)$t['id'])->delete($this->prefix.'_html');
             if ($filepath) {
                 foreach ($filepath as $file) {
                     unlink($file);
-                    dr_rmdir(dirname($file));
+                    man_rmdir(dirname($file));
                 }
             }
         }
@@ -1265,7 +1265,7 @@ class C_Model extends CI_Model {
                 && !$this->link->where('name', $name)->count_all_results($this->prefix.'_tag')) {
                 $this->link->replace($this->prefix.'_tag', array(
                     'name' => $name,
-                    'code' => dr_word2pinyin($name),
+                    'code' => man_word2pinyin($name),
                     'hits' => 0
                 ));
             }
@@ -1280,7 +1280,7 @@ class C_Model extends CI_Model {
     // 格式化字段值，模块可重写
     protected function get_content_data($data, $_data = NULL) {
         if (!$data[1]['description']) {
-            $data[1]['description'] = trim(dr_strcut(dr_clearhtml($data[0]['content']), 200));
+            $data[1]['description'] = trim(man_strcut(man_clearhtml($data[0]['content']), 200));
         }
         return $data;
     }
@@ -1304,7 +1304,7 @@ class C_Model extends CI_Model {
                     'uid' => $uid,
                     'type' => $type,
                     'catid' => $catid,
-                    'filepath' => dr_array2string($filepath)
+                    'filepath' => man_array2string($filepath)
                  )
             );
         } else {
@@ -1314,7 +1314,7 @@ class C_Model extends CI_Model {
                 'uid' => $uid,
                 'type' => $type,
                 'catid' => $catid,
-                'filepath' => dr_array2string($filepath),
+                'filepath' => man_array2string($filepath),
             ));
         }
     }

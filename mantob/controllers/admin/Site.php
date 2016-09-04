@@ -38,18 +38,18 @@ class Site extends M_Controller {
 	
 		$id	= (int)$this->input->post('id');
 		if (!isset($this->SITE[$id])) {
-            exit(dr_json(0, dr_lang('062', $id)));
+            exit(man_json(0, man_lang('062', $id)));
         }
 
 		$this->session->set_userdata('siteid', $id); // 保存Session
 		$data = array(
-			'msg' => dr_lang('063', $this->SITE[$id]['SITE_NAME']),
+			'msg' => man_lang('063', $this->SITE[$id]['SITE_NAME']),
 			'url' => $this->SITE[$id]['SITE_URL'],
 			'site' => $this->SITE[$id]['SITE_NAME'],
-			'title'	=> dr_lang('html-001', $this->SITE[$id]['SITE_NAME'])
+			'title'	=> man_lang('html-001', $this->SITE[$id]['SITE_NAME'])
 		);
 		
-		exit(dr_json(1, $data, $id));
+		exit(man_json(1, $data, $id));
 	}
 
     /**
@@ -60,7 +60,7 @@ class Site extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			$_data = $this->input->post('data');
 			foreach ($ids as $id) {
@@ -68,12 +68,12 @@ class Site extends M_Controller {
                          ->where('id<>', (int)$id)
                          ->where('domain', $_data[$id]['domain'])
                          ->count_all_results('site')) {
-                    exit(dr_json(0, dr_lang('249', $_data[$id]['domain'])));
+                    exit(man_json(0, man_lang('249', $_data[$id]['domain'])));
                 }
 				$this->db->where('id', (int)$id)->update('site', $_data[$id]);
 			}
             $this->site_model->cache();
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		}
 
 		$this->template->assign('list', $this->site_model->get_site_data());
@@ -90,16 +90,16 @@ class Site extends M_Controller {
 			$data = $this->input->post('data', TRUE);
 			$domain	= require FCPATH.'config/domain.php';
 			if (!$data['name']) {
-                exit(dr_json(0, '', 'name'));
+                exit(man_json(0, '', 'name'));
             }
 			if (!preg_match('/[\w-_\.]+\.[\w-_\.]+/i', $data['domain'])) {
-                exit(dr_json(0, '', 'domain'));
+                exit(man_json(0, '', 'domain'));
             }
 			if (in_array($data['domain'], $domain)) {
-                exit(dr_json(0, dr_lang('064', $data['domain']), 'domain'));
+                exit(man_json(0, man_lang('064', $data['domain']), 'domain'));
             }
 			if ($this->db->where('domain', $data['domain'])->count_all_results('site')) {
-                exit(dr_json(0, dr_lang('249', $data['domain']), 'domain'));
+                exit(man_json(0, man_lang('249', $data['domain']), 'domain'));
             }
 			// 初始化网站配置
 			$cfg['SITE_NAME'] = $data['name'];
@@ -112,7 +112,7 @@ class Site extends M_Controller {
 			$data['setting'] = $cfg;
 			$id	= $this->site_model->add_site($data);
 			if (!$id) {
-                exit(dr_json(0, dr_lang('065')));
+                exit(man_json(0, man_lang('065')));
             }
 			$domain[$data['domain']] = $id;
 			$size = $this->dconfig
@@ -121,7 +121,7 @@ class Site extends M_Controller {
 						 ->space(32)
 						 ->to_require_one($this->site_model->config, $cfg);
 			if (!$size) {
-                exit(dr_json(0, lang('066')));
+                exit(man_json(0, lang('066')));
             }
 			$size = $this->dconfig
 						 ->file(FCPATH.'config/domain.php')
@@ -129,10 +129,10 @@ class Site extends M_Controller {
 						 ->space(32)
 						 ->to_require_one($domain);
 			if (!$size) {
-                exit(dr_json(0, lang('067')));
+                exit(man_json(0, lang('067')));
             }
             $this->site_model->cache();
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		} else {
 			$this->template->display('site_add.html');
 		}
@@ -147,7 +147,7 @@ class Site extends M_Controller {
 		$data = $this->site_model->get_site_info($id);
 
 		if (!$data) {
-            $this->admin_msg(dr_lang('062', $id));
+            $this->admin_msg(man_lang('062', $id));
         }
         
 		if (IS_POST) {
@@ -160,7 +160,7 @@ class Site extends M_Controller {
                      ->where('id<>', $id)
                      ->where('domain', $cfg['SITE_DOMAIN'])
                      ->count_all_results('site')) {
-                $result = dr_lang('249', $cfg['SITE_DOMAIN']);
+                $result = man_lang('249', $cfg['SITE_DOMAIN']);
             } else {
 
                 $cfg['SITE_NAVIGATOR'] = @implode(',', $this->input->post('navigator', TRUE));
@@ -213,14 +213,14 @@ class Site extends M_Controller {
             'ip' => $this->_get_server_ip(),
             'data' => $data,
 			'page' => max((int)$this->input->post('page'), 0),
-			'lang' => dr_dir_map(FCPATH.'mantob/language/', 1),
-			'theme' => array_diff(dr_dir_map(FCPATH.'mantob/statics/', 1), array('css', 'images', 'watermark')),
+			'lang' => man_dir_map(FCPATH.'mantob/language/', 1),
+			'theme' => array_diff(man_dir_map(FCPATH.'mantob/statics/', 1), array('css', 'images', 'watermark')),
 			'result' => $result,
 			'navigator' => @explode(',', $data['SITE_NAVIGATOR']),
 			'wm_opacity' => $opacity,
             'remote_type' => array(0 => lang('close'), 1 => 'FTP', 2 => '百度云存储BCS', 3 => '阿里云存储OSS'),
 			'wm_font_path' => $font,
-			'template_path' => array_diff(dr_dir_map(FCPATH.'mantob/templates/', 1), array('api', 'admin')),
+			'template_path' => array_diff(man_dir_map(FCPATH.'mantob/templates/', 1), array('api', 'admin')),
 			'wm_vrt_alignment' => array('top', 'middle', 'bottom'),
 			'wm_hor_alignment' => array('left', 'center', 'right'),
 		));
@@ -245,7 +245,7 @@ class Site extends M_Controller {
 		if ($module) {
 			$this->load->model('module_model');
 			foreach ($module as $t) {
-				$site = dr_string2array($t['site']);
+				$site = man_string2array($t['site']);
 				if (isset($site[$id])) {
 					$this->module_model->uninstall($t['id'], $t['dirname'], $id, count($site));
 				}
@@ -268,7 +268,7 @@ class Site extends M_Controller {
 		// 删除该站附件
 		$this->load->model('attachment_model');
 		$this->attachment_model->delete_for_site($id);
-		$this->admin_msg(lang('000'), dr_url('site/index'), 1);
+		$this->admin_msg(lang('000'), man_url('site/index'), 1);
     }
 	
 	/**

@@ -18,8 +18,8 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @param	intval	$id
  * @return	string
  */
-function dr_sns_feed_url($id) {
-    return dr_member_url('sns/feed', array('id'=>$id));
+function man_sns_feed_url($id) {
+    return man_member_url('sns/feed', array('id'=>$id));
 }
 
 /**
@@ -30,7 +30,7 @@ function dr_sns_feed_url($id) {
  * @param	intval	$page
  * @return	string
  */
-function dr_mobile_show_url($dir, $id, $page = NULL) {
+function man_mobile_show_url($dir, $id, $page = NULL) {
     return SITE_URL.$dir.'/index.php?c=show&id='.$id.($page ? '&page='.$page : '');
 }
 
@@ -42,7 +42,7 @@ function dr_mobile_show_url($dir, $id, $page = NULL) {
  * @param	intval	$page
  * @return	string
  */
-function dr_mobile_extend_url($dir, $id, $page = NULL) {
+function man_mobile_extend_url($dir, $id, $page = NULL) {
     return SITE_URL.$dir.'/index.php?c=extend&id='.$id.($page ? '&page='.$page : '');
 }
 
@@ -54,7 +54,7 @@ function dr_mobile_extend_url($dir, $id, $page = NULL) {
  * @param	intval	$page
  * @return	string
  */
-function dr_mobile_category_url($dir, $id, $page = NULL) {
+function man_mobile_category_url($dir, $id, $page = NULL) {
     return SITE_URL.$dir.'/index.php?c=category&id='.$id.($page ? '&page='.$page : '');
 }
 
@@ -66,7 +66,7 @@ function dr_mobile_category_url($dir, $id, $page = NULL) {
  * @param	intval	$page
  * @return	string
  */
-function dr_mobile_page_url($dir, $id, $page = NULL) {
+function man_mobile_page_url($dir, $id, $page = NULL) {
     return SITE_URL.($dir ? $dir.'/' : '').'index.php?c=page&id='.$id.($page ? '&page='.$page : '');
 }
 
@@ -76,7 +76,7 @@ function dr_mobile_page_url($dir, $id, $page = NULL) {
  * @param	array	$params	参数数组
  * @return	string
  */
-function dr_rewrite_encode($params) {
+function man_rewrite_encode($params) {
 	
 	if (!$params) {
         return '';
@@ -96,7 +96,7 @@ function dr_rewrite_encode($params) {
  * @param	string	$params	参数字符串
  * @return	array
  */
-function dr_rewrite_decode($params) {
+function man_rewrite_decode($params) {
 	
 	if (!$params) {
         return NULL;
@@ -125,7 +125,7 @@ function dr_rewrite_decode($params) {
  * @param	string	$urlrule	搜索url规则
  * @return	string
  */
-function dr_space_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL) {
+function man_space_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL) {
 	
 	$params = $params ? $params : array();
 	
@@ -147,7 +147,7 @@ function dr_space_search_url($params = NULL, $name = NULL, $value = NULL, $urlru
 	$ci	= &get_instance();
 	$space = $ci->get_cache('member', 'setting', 'space');
 	if ($params && $space['rewrite']) {
-		return ($space['domain'] ? $space['domain'] : '').'search-'.dr_rewrite_encode($params).'.html';
+		return ($space['domain'] ? $space['domain'] : '').'search-'.man_rewrite_encode($params).'.html';
 	} else {
 		return 'index.php?'.http_build_query($params);
 	}
@@ -188,7 +188,7 @@ function dir_so_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL
         $dir = $params['module'];
         $mod = $ci->get_cache('module-'.SITE_ID.'-'.$dir);
         if ($params && $mod['setting']['search']['rewrite']) {
-            return SITE_URL.'so-'.dr_rewrite_encode($params).'.html';
+            return SITE_URL.'so-'.man_rewrite_encode($params).'.html';
         } else {
             return SITE_URL.'index.php?c=so&'.http_build_query($params);
         }
@@ -206,7 +206,7 @@ function dir_so_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL
  * @param	string	$moddir		强制定位到模块
  * @return	string
  */
-function dr_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL, $moddir = NULL) {
+function man_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = NULL, $moddir = NULL) {
 	
 	$dir = APP_DIR;
 	if (!is_array($params) && $params && is_dir(FCPATH.$params)) {
@@ -238,7 +238,7 @@ function dr_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = N
         $ci	= &get_instance();
         $mod = $ci->get_cache('module-'.SITE_ID.'-'.$dir);
         if ($params && $mod['setting']['search']['rewrite']) {
-            return $mod['url'].'search-'.dr_rewrite_encode($params).'.html';
+            return $mod['url'].'search-'.man_rewrite_encode($params).'.html';
         } else {
             return $mod['url'].'index.php?c=search&'.http_build_query($params);
         }
@@ -253,7 +253,7 @@ function dr_search_url($params = NULL, $name = NULL, $value = NULL, $urlrule = N
  * @param	string	关键字
  * @return	string	地址
  */
-function dr_tag_url($module, $name) {
+function man_tag_url($module, $name) {
 
 	if (!$name) {
         return '?name参数为空';
@@ -263,7 +263,7 @@ function dr_tag_url($module, $name) {
         return '?module参数为空';
     }
 	
-	$name = dr_word2pinyin($name);
+	$name = man_word2pinyin($name);
 
     if (SITE_MOBILE === TRUE) {
         // 移动端
@@ -284,7 +284,7 @@ function dr_tag_url($module, $name) {
  * @param	intval	$uid
  * @return	string	地址
  */
-function dr_space_url($uid) {
+function man_space_url($uid) {
 
 	$ci	= &get_instance();
 	if ($ci->get_cache('member', 'setting', 'space', 'rewrite')) {
@@ -294,7 +294,7 @@ function dr_space_url($uid) {
 	}
 }
 
-function dr_space_list_url($uid, $id, $page = FALSE) {
+function man_space_list_url($uid, $id, $page = FALSE) {
 
 	$ci	= &get_instance();
 	if ($ci->get_cache('member', 'setting', 'space', 'rewrite')) {
@@ -310,7 +310,7 @@ function dr_space_list_url($uid, $id, $page = FALSE) {
 	}
 }
 
-function dr_space_show_url($uid, $mid, $id, $page = FALSE) {
+function man_space_show_url($uid, $mid, $id, $page = FALSE) {
 
 	$ci	= &get_instance();
 	if ($ci->get_cache('member', 'setting', 'space', 'rewrite')) {
@@ -333,7 +333,7 @@ function dr_space_show_url($uid, $mid, $id, $page = FALSE) {
  * @param	intval	$page
  * @return	string	地址
  */
-function dr_content_page_url($urlrule, $page) {
+function man_content_page_url($urlrule, $page) {
 	return str_replace('{page}', $page, $urlrule);
 }
 
@@ -346,7 +346,7 @@ function dr_content_page_url($urlrule, $page) {
  * @param	string	$url	url地址格式，必须存在{linkage}，否则返回不带url的字符串
  * @return	string
  */
-function dr_linkagepos($code, $id, $symbol = ' > ', $url = NULL) {
+function man_linkagepos($code, $id, $symbol = ' > ', $url = NULL) {
 
 	if (!$code || !$id) {
         return NULL;
@@ -377,7 +377,7 @@ function dr_linkagepos($code, $id, $symbol = ' > ', $url = NULL) {
  * @param	string	$url	是否显示URL
  * @return	string
  */
-function dr_catpos($catid, $symbol = ' > ', $url = TRUE) {
+function man_catpos($catid, $symbol = ' > ', $url = TRUE) {
 
 	if (!$catid) {
         return NULL;
@@ -413,7 +413,7 @@ function dr_catpos($catid, $symbol = ' > ', $url = TRUE) {
  * @param	string	$symbol
  * @return	string
  */
-function dr_get_cat_pname($mod, $cat, $symbol = '_') {
+function man_get_cat_pname($mod, $cat, $symbol = '_') {
 
 	if (!$cat['pids']) {
         return $cat['name'];
@@ -440,7 +440,7 @@ function dr_get_cat_pname($mod, $cat, $symbol = '_') {
  * @param	string	$symbol
  * @return	string
  */
-function dr_page_catpos($id, $symbol = ' > ') {
+function man_page_catpos($id, $symbol = ' > ') {
 
 	if (!$id) {
         return NULL;
@@ -475,7 +475,7 @@ function dr_page_catpos($id, $symbol = ' > ') {
  * @param	string	$symbol
  * @return	string
  */
-function dr_get_page_pname($id, $symbol = '_') {
+function man_get_page_pname($id, $symbol = '_') {
 
 	$ci	= &get_instance();
 	$page = $ci->get_cache('page-'.SITE_ID, 'data');
@@ -508,7 +508,7 @@ function dr_get_page_pname($id, $symbol = '_') {
  * @param	string	$url	是否显示URL
  * @return	string
  */
-function dr_space_catpos($uid, $catid, $symbol = ' > ', $url = TRUE) {
+function man_space_catpos($uid, $catid, $symbol = ' > ', $url = TRUE) {
 
 	if (!$uid || !$catid) {
         return NULL;
@@ -526,11 +526,11 @@ function dr_space_catpos($uid, $catid, $symbol = ' > ', $url = TRUE) {
 	
 	foreach ($array as $id) {
 		if ($id && $cat[$id]) {
-			$name[] = $url ? "<a href=\"".dr_space_list_url($uid, $id)."\">{$cat[$id]['name']}</a>" : $cat[$id]['name'];
+			$name[] = $url ? "<a href=\"".man_space_list_url($uid, $id)."\">{$cat[$id]['name']}</a>" : $cat[$id]['name'];
 		}
 	}
 	
-	$name[] = $url ? "<a href=\"".dr_space_list_url($uid, $catid)."\">{$cat[$catid]['name']}</a>" : $cat[$catid]['name'];
+	$name[] = $url ? "<a href=\"".man_space_list_url($uid, $catid)."\">{$cat[$catid]['name']}</a>" : $cat[$catid]['name'];
 	
 	return implode($symbol, $name);
 }
@@ -543,14 +543,14 @@ function dr_space_catpos($uid, $catid, $symbol = ' > ', $url = TRUE) {
  * @param	intval	$page
  * @return	array
  */
-function dr_show_seo($mod, $data, $page = 1) {
+function man_show_seo($mod, $data, $page = 1) {
 
 	$seo = array();
 	
 	$cat = $mod['category'][$data['catid']];
     $data['page'] = $page;
 	$data['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
-	$data['name'] = $data['catname'] = dr_get_cat_pname($mod, $cat, $data['join']);
+	$data['name'] = $data['catname'] = man_get_cat_pname($mod, $cat, $data['join']);
 	$data['modulename'] = $data['modname'] = $mod['name'];
 	
 	$meta_title = $cat['setting']['seo']['show_title'] ? $cat['setting']['seo']['show_title'] : '[第{page}页{join}]{title}{join}{name}{join}{modulename}{join}{SITE_NAME}';
@@ -581,7 +581,7 @@ function dr_show_seo($mod, $data, $page = 1) {
 	} else {
 		$seo['meta_keywords'] = $data['keywords'];
 	}
-	$seo['meta_description'] = dr_clearhtml($data['description']);
+	$seo['meta_description'] = man_clearhtml($data['description']);
 	
 	return $seo;
 }
@@ -594,12 +594,12 @@ function dr_show_seo($mod, $data, $page = 1) {
  * @param	intval	$page
  * @return	array
  */
-function dr_category_seo($mod, $cat, $page = 1) {
+function man_category_seo($mod, $cat, $page = 1) {
 
 	$seo = array();
 	$cat['page'] = $page;
 	$cat['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
-	$cat['name'] = $cat['catname'] = dr_get_cat_pname($mod, $cat, $cat['join']);
+	$cat['name'] = $cat['catname'] = man_get_cat_pname($mod, $cat, $cat['join']);
 	$cat['modulename'] = $cat['modname'] = $mod['name'];
 	
 	$meta_title = $cat['setting']['seo']['list_title'] ? $cat['setting']['seo']['list_title'] : '[第{page}页{join}]{modulename}{join}{SITE_NAME}';
@@ -638,7 +638,7 @@ function dr_category_seo($mod, $cat, $page = 1) {
  * @param	array	$mod
  * @return	array
  */
-function dr_module_seo($mod) {
+function man_module_seo($mod) {
 
 	$seo = array();
 	$mod['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
@@ -675,7 +675,7 @@ function dr_module_seo($mod) {
  * @param	mod	$page
  * @return	string
  */
-function dr_show_url($mod, $data, $page = NULL) {
+function man_show_url($mod, $data, $page = NULL) {
 
 	if (!$mod || !$data) {
         return SITE_URL;
@@ -706,7 +706,7 @@ function dr_show_url($mod, $data, $page = NULL) {
             unset($rep);
 		} else {
 			$url = preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $url);
-			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(dr_safe_replace('\\2'))", $url);
+			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(man_safe_replace('\\2'))", $url);
 		}
 		return $mod['url'].$url;
 	}
@@ -721,14 +721,14 @@ function dr_show_url($mod, $data, $page = NULL) {
  * @param	array	$cat
  * @return	array
  */
-function dr_extend_seo($mod, $data) {
+function man_extend_seo($mod, $data) {
 
 	$seo = array();
 	
 	$cat = $mod['category'][$data['catid']];
 	$data['extend'] = $data['name'];
 	$data['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
-	$data['name'] = $data['catname'] = dr_get_cat_pname($mod, $cat, $data['join']);
+	$data['name'] = $data['catname'] = man_get_cat_pname($mod, $cat, $data['join']);
 	$data['modulename'] = $data['modname'] = $mod['name'];
 	
 	$meta_title = $cat['setting']['seo']['extend_title'] ? $cat['setting']['seo']['extend_title'] : '{extend}{join}{title}{join}{name}{join}{modulename}{join}{SITE_NAME}';
@@ -752,7 +752,7 @@ function dr_extend_seo($mod, $data) {
 	}
 	
 	$seo['meta_keywords'] = $data['keywords'];
-	$seo['meta_description'] = dr_clearhtml($data['description']);
+	$seo['meta_description'] = man_clearhtml($data['description']);
 	
 	return $seo;
 }
@@ -764,7 +764,7 @@ function dr_extend_seo($mod, $data) {
  * @param	array	$data
  * @return	string
  */
-function dr_extend_url($mod, $data) {
+function man_extend_url($mod, $data) {
 
 	if (!$mod || !$data) {
         return SITE_URL;
@@ -791,7 +791,7 @@ function dr_extend_url($mod, $data) {
             unset($rep);
 		} else {
 			$url = preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $url);
-			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(dr_safe_replace('\\2'))", $url);
+			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(man_safe_replace('\\2'))", $url);
 		}
 		return $mod['url'].$url;
 	}
@@ -807,7 +807,7 @@ function dr_extend_url($mod, $data) {
  * @param	intval	$page
  * @return	string
  */
-function dr_category_url($mod, $data, $page = NULL) {
+function man_category_url($mod, $data, $page = NULL) {
 
 	if (!$mod || !$data) {
         return SITE_URL;
@@ -833,7 +833,7 @@ function dr_category_url($mod, $data, $page = NULL) {
             unset($rep);
 		} else {
 			$url = preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $url);
-			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(dr_safe_replace('\\2'))", $url);
+			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(man_safe_replace('\\2'))", $url);
 		}
 		return $mod['url'].$url;
 	}
@@ -848,7 +848,7 @@ function dr_category_url($mod, $data, $page = NULL) {
  * @param	intval	$page
  * @return	string
  */
-function dr_page_url($data, $page = NULL) {
+function man_page_url($data, $page = NULL) {
 
 	if (!$data) {
         return SITE_URL;
@@ -880,7 +880,7 @@ function dr_page_url($data, $page = NULL) {
             unset($rep);
 		} else {
 			$url = preg_replace('#{([a-z_0-9]+)}#Uei', "\$data[\\1]", $url);
-			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(dr_safe_replace('\\2'))", $url);
+			$url = preg_replace('#{([a-z_0-9]+)\((.*)\)}#Uie', "\\1(man_safe_replace('\\2'))", $url);
 		}
 		return $path.$url;
 	}
@@ -894,7 +894,7 @@ function dr_page_url($data, $page = NULL) {
  * @param	string	$value
  * @return	string	
  */
-function dr_url_encode($value) {
+function man_url_encode($value) {
 	if (0) {
 		$ci	= &get_instance();
 		$ci->encrypt->set_cipher(MCRYPT_BLOWFISH);
@@ -910,7 +910,7 @@ function dr_url_encode($value) {
  * @param	string	$value
  * @return	string	
  */
-function dr_url_decode($value) {
+function man_url_decode($value) {
 	if (0) {
 		$ci	= &get_instance();
 		$ci->encrypt->set_cipher(MCRYPT_BLOWFISH);
@@ -928,7 +928,7 @@ function dr_url_decode($value) {
  * @param	array	$query		相关参数
  * @return	string	项目入口文件.php?参数
  */
-function dr_url($url, $query = array(), $self = SELF) {
+function man_url($url, $query = array(), $self = SELF) {
 
 	if (!$url) return $self;
 	
@@ -965,14 +965,14 @@ function dr_url($url, $query = array(), $self = SELF) {
  * @param	array	$query	相关参数
  * @return	string	地址
  */
-function dr_member_url($url, $query = array()) {
-	return MEMBER_URL.dr_url($url, $query, 'index.php');
+function man_member_url($url, $query = array()) {
+	return MEMBER_URL.man_url($url, $query, 'index.php');
 }
 
 /**
  * 当前URL
  */
-function dr_now_url() {
+function man_now_url() {
 
     $pageURL = 'http';
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') $pageURL.= 's';
@@ -995,8 +995,8 @@ function dr_now_url() {
  * @param	string	$cache	更新缓存地址
  * @return	string
  */
-function dr_dialog_url($url, $func) {
-	return "javascript:dr_dialog('{$url}', '{$func}');";
+function man_dialog_url($url, $func) {
+	return "javascript:man_dialog('{$url}', '{$func}');";
 }
 
 // php 5.5 以上版本的正则替换方法

@@ -9,7 +9,7 @@ $(function() {
 </script>
 <div class="content clearfix">
 	<div class="page_url">
-    	<a href="{SITE_URL}">首页</a> <span>&gt;</span> <a href="{dr_member_url('home/index')}">会员中心</a> <span>&gt;</span> {$meta_name}
+    	<a href="{SITE_URL}">首页</a> <span>&gt;</span> <a href="{man_member_url('home/index')}">会员中心</a> <span>&gt;</span> {$meta_name}
     </div>
     <div class="section_wp drbox" style="width:auto;float:none">
         <div class="section_title">
@@ -17,8 +17,8 @@ $(function() {
         </div>
         <div class="section_main">
             <form action="" method="post">
-            <input name="dr_id" id="dr_id" type="hidden" value="{$data.id}" />
-            <input name="dr_module" id="dr_module" type="hidden" value="{APP_DIR}" />
+            <input name="man_id" id="man_id" type="hidden" value="{$data.id}" />
+            <input name="man_module" id="man_module" type="hidden" value="{APP_DIR}" />
                 <table width="100%" class="table_form">
 				{$myfield}
 				<tr>

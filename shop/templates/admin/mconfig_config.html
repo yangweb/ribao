@@ -56,7 +56,7 @@ art.dialog.tips("{lang('000')}", 3, 1);
                     <div class="onShow">已天为单位，0为不过期，过期之后自动关闭订单</div>
                 </td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>{lang('cat-24')}：</th> 
                 <td>
                 <select name="data[status]">
@@ -80,12 +80,12 @@ art.dialog.tips("{lang('000')}", 3, 1);
 					<input type="radio" {if !$data.isreview}checked=""{/if} value="0" name="data[isreview]">&nbsp;<label>关闭</label>
 				</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>评价选项：</th> 
                 <td>
 					<textarea name="data[review]" style="width:330px; height:100px;margin-top:10px;">{$data.review}</textarea>
                     <br>
-                    <font color="#999999" id="dr_names_tips">格式: 选项名称 [回车换行]</font>
+                    <font color="#999999" id="man_names_tips">格式: 选项名称 [回车换行]</font>
 				</td>
             </tr>
         </table>
@@ -93,7 +93,7 @@ art.dialog.tips("{lang('000')}", 3, 1);
 	<div class="bk10"></div>
     <fieldset style="border:none;">
         <table width="100%" class="table_form">
-		<tr class="dr_border_none">
+		<tr class="man_border_none">
 			<th width="200"> </th>
 			<td><input value="{lang('save')}" type="submit" name="submit" class="button" /></td>
 		</tr>

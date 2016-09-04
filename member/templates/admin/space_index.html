@@ -29,7 +29,7 @@
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="10" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="10" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="30" align="center">{lang('order')}</th>
 			<th width="40" align="left">Uid</th>
 			<th class="{ns_sorting('name')}" name="name" width="200" align="left">{$name}</th>
@@ -38,43 +38,43 @@
 			<th class="{ns_sorting('hits')}" name="hits" width="70" align="center">{lang('html-535')}</th>
 			<th class="{ns_sorting('status')}" name="status" width="70" align="center">{lang('html-322')}</th>
 			<th class="{ns_sorting('regtime')}" name="regtime" width="130" align="left">{lang('html-351')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
-		<tr id="dr_row_{$t.uid}">
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.uid}" />&nbsp;</td>
+		<tr id="man_row_{$t.uid}">
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.uid}" />&nbsp;</td>
 			<td align="center"><input class="input-text displayorder" type="text" name="data[{$t.uid}][displayorder]" value="{$t.displayorder}" /></td>
 			<td align="left">{$t.uid}</td>
-			<td align="left">{dr_keyword_highlight($t.name, $param.keyword)}</td>
-			<td align="left"><a onclick="dr_dialog_member('{$t.uid}')" href="javascript:;">{dr_strcut($t.username, 10)}</a></td>
+			<td align="left">{man_keyword_highlight($t.name, $param.keyword)}</td>
+			<td align="left"><a onclick="man_dialog_member('{$t.uid}')" href="javascript:;">{man_strcut($t.username, 10)}</a></td>
 			<td hide="1" align="left"><font {if $t.groupid==1}color="#FF0000"{/if}>{MEMBER.group.$t[groupid].name}</font></td>
 			<td hide="1" align="center">{$t.hits}</td>
 			<td align="center">{php echo $t.status ? '<font color="green">'.lang('html-529').'</font>' : '<font color="#FF0000">'.lang('html-530').'</font>';}</td>
 			<td align="left">{man_date($t.regtime, NULL, 'red')}</td>
-			<td align="left" class="dr_option">
+			<td align="left" class="man_option">
             <a href="{MEMBER_URL}index.php?uid={$t.uid}" target="_blank">{lang('go')}</a>
-			{if $this->ci->is_auth('member/admin/space/edit')}<a href="{dr_url('member/space/edit',array('uid'=>$t.uid))}">{lang('edit')}</a>{/if}
+			{if $this->ci->is_auth('member/admin/space/edit')}<a href="{man_url('member/space/edit',array('uid'=>$t.uid))}">{lang('edit')}</a>{/if}
 			</td>
 		</tr> 
 		{/loop}
 		<tr>
-        	<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+        	<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="11" align="left" style="border:none"> 
             {if $this->ci->is_auth('member/admin/space/del')}
-			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}', 1)" />
+			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}', 1)" />
             {/if}
             {if $this->ci->is_auth('member/admin/space/edit')}
-			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('order')}" name="option" onClick="$('#action').val('order');man_confirm_set_all('{lang('015')}')" />
             <div class="onShow">{lang('html-565')}</div>
-			<input type="button" class="button" value="{lang('html-394')}" name="option" onClick="$('#action').val('update');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('html-394')}" name="option" onClick="$('#action').val('update');man_confirm_set_all('{lang('015')}')" />
             <select name="status">
             <option value="1"> {lang('html-529')} </option>
             <option value="0"> {lang('html-530')} </option>
         	</select>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" class="button" value="{lang('html-266')}" name="option" onClick="$('#action').val('flag');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('html-266')}" name="option" onClick="$('#action').val('flag');man_confirm_set_all('{lang('015')}')" />
 			<select name="flagid">
             <option value=""> --- </option>
             {if $get.flag}<option value="-{$get['flag']}">{lang('html-391')}</option>{/if}
@@ -88,7 +88,7 @@
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param['total'])}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param['total'])}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(function() {
 		{if $result}
-		dr_tips('{$result.msg}');
+		man_tips('{$result.msg}');
 		{/if}
 	});
 </script>
@@ -40,7 +40,7 @@
 												<tr>
 													<th><font color="red">*</font> 验证码： </th>
 													<td>
-														<input type="text" required="required" style="width:70px;" value="" name="code" class="input-text" />{dr_code(90, 24)}
+														<input type="text" required="required" style="width:70px;" value="" name="code" class="input-text" />{man_code(90, 24)}
 													</td>
 												</tr>
 												{/if}

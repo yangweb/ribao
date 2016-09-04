@@ -19,10 +19,10 @@
                 {loop $address $t}
                 <li>
 				<input type="radio" {if $t.default}checked="checked"{/if} name="data[address]" value="{$t.id}" />
-				<label>{dr_linkagepos('address', $t.city, ' ', NULL)}&nbsp;&nbsp;{$t.address}&nbsp;&nbsp;({$t.name})&nbsp;&nbsp;{$t.phone}</label>
+				<label>{man_linkagepos('address', $t.city, ' ', NULL)}&nbsp;&nbsp;{$t.address}&nbsp;&nbsp;({$t.name})&nbsp;&nbsp;{$t.phone}</label>
                 </li>
                 {/loop}
-                <li style="margin-top:10px;"><a href="{dr_member_url('address/add')}" target="_blank"><img src="{MODULE_THEME_PATH}address.png" /></a></li>
+                <li style="margin-top:10px;"><a href="{man_member_url('address/add')}" target="_blank"><img src="{MODULE_THEME_PATH}address.png" /></a></li>
             </ul>
 		</div>
 		<!--支付方式开始-->
@@ -31,13 +31,13 @@
             <ul>
                 {loop $paytype $i $t}
                 <li>
-				<input onclick="dr_select_pay({$i})" type="radio" {if $i == 3}checked="checked"{/if} name="data[ptid]" value="{$i}" />
+				<input onclick="man_select_pay({$i})" type="radio" {if $i == 3}checked="checked"{/if} name="data[ptid]" value="{$i}" />
 				<label>{$t.name}{if $t.text}（{$t.text}）{/if}</label>
                 {if $i == 2}
-                    <ul id="dr_pay_{$i}" class="dr_pay_list">
+                    <ul id="man_pay_{$i}" class="man_pay_list">
                         {loop $online $name $t}
                         <li>
-                            <input class="dr_pay_select" name="pay" type="radio" value="{$name}" />
+                            <input class="man_pay_select" name="pay" type="radio" value="{$name}" />
                             <img src="{MEMBER_URL}pay/{$name}/logo.png" align="middle" width="100" height="35" />
                         </li>
                         {/loop}
@@ -97,19 +97,19 @@
                 <td colspan="2" style='text-align:right;'>
                 总运费：
                 </td>
-                <td style='text-align:center;' class="price">￥<span id="dr_freight_price"></span></td>
+                <td style='text-align:center;' class="price">￥<span id="man_freight_price"></span></td>
             </tr>
             <tr class='tdbg'>
                 <td colspan="5" style='text-align:right;'>总价格：</td>
-                <td style='text-align:center;' class="price">￥<span class="price" id="dr_total_price"></span></td>
+                <td style='text-align:center;' class="price">￥<span class="price" id="man_total_price"></span></td>
             </tr>
             <tr class='tdbg'>
                 <td colspan="5" style='text-align:right;'>
 				当前账户余额：￥{$member.money}元；
-                使用{SITE_SCORE}（可用<span id="dr_score_total">{$member.score}</span>）：<input type="text" style="border: 1px solid #D5D5D5;height:23px;" name="data[score]" onblur="dr_set_score(this.value)" class="input-text" size="10" id="dr_score" />
+                使用{SITE_SCORE}（可用<span id="man_score_total">{$member.score}</span>）：<input type="text" style="border: 1px solid #D5D5D5;height:23px;" name="data[score]" onblur="man_set_score(this.value)" class="input-text" size="10" id="man_score" />
                 &nbsp;&nbsp;&nbsp;
                 实际付款：</td>
-                <td style='text-align:center;' class="price">￥<span id="dr_pay_price" price=""></span></td>
+                <td style='text-align:center;' class="price">￥<span id="man_pay_price" price=""></span></td>
             </tr>
             <tr>
                 <td class='Tfoot' colspan='6' style='text-align:right;height:30px'>
@@ -118,7 +118,7 @@
 				</div>
                 {if $iscode}
 				<div style="float:right;padding-top:5px;">
-                 验证码：<input type="text" style="border: 1px solid #D5D5D5;height:23px;" name="code" class="input-text" size="6" />&nbsp;{dr_code(90,26)}&nbsp;&nbsp;
+                 验证码：<input type="text" style="border: 1px solid #D5D5D5;height:23px;" name="code" class="input-text" size="6" />&nbsp;{man_code(90,26)}&nbsp;&nbsp;
 				</div>
                 {/if}
                 </td>
@@ -131,27 +131,27 @@
 </div>	
 <div class="clear"></div>
 <script type="text/javascript">
-function dr_select_pay(i) {
-    $('#dr_pay_'+i).show();
+function man_select_pay(i) {
+    $('#man_pay_'+i).show();
 }
-function dr_set_score(value) {
+function man_set_score(value) {
 	value = parseInt(value);
 	var score = parseInt({$member.score});
 	if (score - value < 0) {
 		value = score;
 	}
 	value = isNaN(value) ? 0 : value;
-	$("#dr_score_total").html(parseInt(score-value));
-	$("#dr_score").val(value);
-	dr_update_price(value);
+	$("#man_score_total").html(parseInt(score-value));
+	$("#man_score").val(value);
+	man_update_price(value);
 }
-dr_update_price(0);
-function dr_update_price(score) {
+man_update_price(0);
+function man_update_price(score) {
 	$.ajax({type: "GET", url:"{MODULE_URL}index.php?c=order&m=price&data={$jsonp}&score="+score, dataType:'jsonp',jsonp:"callback",async: false,
 	    success: function (data) {
-			$("#dr_pay_price").html(data.total);
-			$("#dr_total_price").html(data.price);
-			$("#dr_freight_price").html(data.freight);
+			$("#man_pay_price").html(data.total);
+			$("#man_total_price").html(data.price);
+			$("#man_freight_price").html(data.freight);
 	    },
 	    error: function(HttpRequest, ajaxOptions, thrownError) {
 			

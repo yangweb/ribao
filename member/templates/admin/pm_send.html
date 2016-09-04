@@ -24,14 +24,14 @@
 				<tr>
 					<th>会员组： </th>
 					<td>
-					<input class="input-text" type="text" name="data[url]" value="{dr_set_value('url', $data['url'])}" size="40" />
+					<input class="input-text" type="text" name="data[url]" value="{man_set_value('url', $data['url'])}" size="40" />
 					<div class="onShow">设置允许参与搜索的会员组，可以按住 CTRL 多选</div>
 					</td>
 				</tr>
 				<tr>
 					<th>会员等级： </th>
 					<td>
-					<input class="input-text" type="text" name="data[url]" value="{dr_set_value('url', $data['url'])}" size="40" />
+					<input class="input-text" type="text" name="data[url]" value="{man_set_value('url', $data['url'])}" size="40" />
 					<div class="onShow">设置允许参与搜索的会员等级，可以按住 CTRL 多选</div>
 					</td>
 				</tr>
@@ -43,7 +43,7 @@
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;选取结果： </th>
-					<td><div class="onError">{$error}</div> <a href="{dr_admin_url('pm/send', '', 'member')}">重新搜索</a> </td>
+					<td><div class="onError">{$error}</div> <a href="{man_admin_url('pm/send', '', 'member')}">重新搜索</a> </td>
 				</tr>
 				</table>
 				{else}
@@ -51,7 +51,7 @@
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;选取结果： </th>
-					<td>共搜索到 {$total} 名符合条件的用户 <a href="{dr_admin_url('pm/send', '', 'member')}">重新搜索</a> </td>
+					<td>共搜索到 {$total} 名符合条件的用户 <a href="{man_admin_url('pm/send', '', 'member')}">重新搜索</a> </td>
 				</tr>
 				<tr>
 					<th>短信标题： </th>

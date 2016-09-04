@@ -40,7 +40,7 @@ class D_Home_Form extends M_Controller {
             $this->cdata = $this->content_model->get($this->cid);
         }
         if (!$this->cdata) {
-            $this->msg(dr_lang('mod-30', $this->cid));
+            $this->msg(man_lang('mod-30', $this->cid));
         }
         $this->table = SITE_ID.'_'.APP_DIR.'_form_'.$this->fid;
         // 投稿权限验证
@@ -56,7 +56,7 @@ class D_Home_Form extends M_Controller {
                           ->where('DATEDIFF(from_unixtime(inputtime),now())=0')
                           ->count_all_results($this->table);
             if ($total >= $rule['postnum']) {
-                $this->msg(dr_lang('mod-102', $rule['postnum']));
+                $this->msg(man_lang('mod-102', $rule['postnum']));
             }
         }
         // 投稿总数检查
@@ -66,11 +66,11 @@ class D_Home_Form extends M_Controller {
                           ->count_all_results($this->table);
             if ($total >= $rule['postcount']) {
 
-            } $this->msg(dr_lang('mod-103', $rule['postcount']));
+            } $this->msg(man_lang('mod-103', $rule['postcount']));
         }
         // 虚拟币检查
         if ($rule['score'] + $this->member['score'] < 0) {
-            $this->msg(dr_lang('mod-104', abs($rule['score']), $this->member['score']));
+            $this->msg(man_lang('mod-104', abs($rule['score']), $this->member['score']));
         }
         $this->load->model('mform_model');
     }
@@ -147,11 +147,11 @@ class D_Home_Form extends M_Controller {
         // 入库
         $this->link->insert($this->table, $data);
         if (($id = $this->link->insert_id()) && ($user = man_member_info($this->cdata['uid']))) {
-            $murl = dr_member_url(APP_DIR.'/'.$this->router->class.'/listc', array('cid' => $this->cdata['id']));
-            $title = dr_lang('mod-106', $this->cdata['title'], $this->form['name']);
+            $murl = man_member_url(APP_DIR.'/'.$this->router->class.'/listc', array('cid' => $this->cdata['id']));
+            $title = man_lang('mod-106', $this->cdata['title'], $this->form['name']);
             // 邮件提醒
             if ($this->form['setting']['email']) {
-                $this->sendmail_queue($user['email'], $title, dr_lang('mod-107', $this->cdata['title'], $this->form['name'], $murl, $murl));
+                $this->sendmail_queue($user['email'], $title, man_lang('mod-107', $this->cdata['title'], $this->form['name'], $murl, $murl));
             }
             // 短信提醒
             if ($this->form['setting']['sms'] && $user['phone']) {

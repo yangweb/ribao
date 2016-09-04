@@ -1,7 +1,7 @@
 {template header.html}
 <script type="text/javascript">
-function dr_get_block(id) {
-	var body = '<div style="padding:20px;font-size:14px">{'+'om_block('+id+')'+'}</div>';
+function man_get_block(id) {
+	var body = '<div style="padding:20px;font-size:14px">{'+'man_block('+id+')'+'}</div>';
 	var throughBox = art.dialog.through;
 	throughBox({
 		content: body,
@@ -23,26 +23,26 @@ function dr_get_block(id) {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="200" align="left">{lang('html-026')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
 		<tr>
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t['id']}" />&nbsp;</td>
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t['id']}" />&nbsp;</td>
 			<td align="left">{$t['name']}</td>
-			<td align="left" class="dr_option">
-			{if $this->ci->is_auth('admin/block/edit')}<a href="{dr_dialog_url(dr_url('block/edit',array('id'=>$t['id'])), 'edit')}">{lang('edit')}</a>{/if}
-            <a href="javascript:;" onclick="dr_get_block('{$t['id']}')">{lang('html-472')}</a>
+			<td align="left" class="man_option">
+			{if $this->ci->is_auth('admin/block/edit')}<a href="{man_dialog_url(man_url('block/edit',array('id'=>$t['id'])), 'edit')}">{lang('edit')}</a>{/if}
+            <a href="javascript:;" onclick="man_get_block('{$t['id']}')">{lang('html-472')}</a>
 			</td>
 		</tr>
 		{/loop}
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="5" align="left" style="border:none"> 
-			{if $this->ci->is_auth('admin/block/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="dr_confirm_set_all('{lang('015')}')" />{/if}
+			{if $this->ci->is_auth('admin/block/del')}<input type="button" class="button" value="{lang('del')}" name="option" onClick="man_confirm_set_all('{lang('015')}')" />{/if}
 			</td>
 		</tr>
 		</tbody>

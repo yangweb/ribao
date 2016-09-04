@@ -95,14 +95,14 @@ class F_Text extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = ($name == 'title' && APP_DIR) || (isset($cfg['validate']['tips']) && $cfg['validate']['tips']) ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = ($name == 'title' && APP_DIR) || (isset($cfg['validate']['tips']) && $cfg['validate']['tips']) ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		$value = htmlspecialchars_decode($value ? $value : $this->get_default_value($cfg['option']['value']));
 		// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? ' disabled' : '';
 		// 当字段必填时，加入html5验证标签
 		$required = isset($cfg['validate']['required']) && $cfg['validate']['required'] == 1 ? ' required="required"' : '';
-		return $this->input_format($name, $text, '<input class="input-text" type="text" name="data['.$name.']" id="dr_'.$name.'" value="'.$value.'" '.$width.$disabled.$required.' '.$attr.' />'.$tips);
+		return $this->input_format($name, $text, '<input class="input-text" type="text" name="data['.$name.']" id="man_'.$name.'" value="'.$value.'" '.$width.$disabled.$required.' '.$attr.' />'.$tips);
 	}
 	
 }

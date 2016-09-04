@@ -42,7 +42,7 @@ class Upgrade extends M_Controller {
             $this->admin_msg('对不起，您的系统版本不满足升级条件');
         }
     	
-    	$data = dr_catcher_data(urldecode($this->input->get('fid')));
+    	$data = man_catcher_data(urldecode($this->input->get('fid')));
     	if (!$data) {
             $this->admin_msg('对不起，您的服务器不支持远程下载');
         }
@@ -95,9 +95,9 @@ class Upgrade extends M_Controller {
     	
     	//检查update控制器
 		if (is_file(FCPATH.'mantob/controllers/admin/Update.php')) {
-            $this->admin_msg('正在升级数据，请稍候...', dr_url('update/index'), 2);
+            $this->admin_msg('正在升级数据，请稍候...', man_url('update/index'), 2);
         }
 		
-		$this->admin_msg('升级完成，请按F5刷新整个页面<script src="http://www.mantob.com/index.php?c=sys&m=updated&site='.SITE_URL.'&vid='.$config['MAN_VERSION_ID'].'"></script>', dr_url('home/main'), 1);
+		$this->admin_msg('升级完成，请按F5刷新整个页面<script src="http://www.mantob.com/index.php?c=sys&m=updated&site='.SITE_URL.'&vid='.$config['MAN_VERSION_ID'].'"></script>', man_url('home/main'), 1);
     }
 }

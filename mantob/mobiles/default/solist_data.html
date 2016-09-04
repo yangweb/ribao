@@ -2,11 +2,11 @@
 {if $contentid}
 {list action=module module=$dirname IN_id=$contentid page=1 pagesize=10 urlrule=$urlrule}
 <li>
-    <a href="{dr_mobile_show_url($module, $t.id)}">
+    <a href="{man_mobile_show_url($module, $t.id)}">
         <img src="{man_thumb($t.thumb,57,72)}" />
         <dl>
-            <dt>{dr_keyword_highlight($t.title, $keyword)}</dt>
-            <dd class="content">{dr_keyword_highlight($t.description, $keyword)}</dd>
+            <dt>{man_keyword_highlight($t.title, $keyword)}</dt>
+            <dd class="content">{man_keyword_highlight($t.description, $keyword)}</dd>
             <dd class="source">作者：{$t.author} &nbsp;&nbsp;{$t.updatetime}</dd>
         </dl>
     </a>

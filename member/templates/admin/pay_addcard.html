@@ -7,7 +7,7 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
+function man_form_check() {
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -15,19 +15,19 @@ function dr_form_check() {
 	}
 }
 </script>
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table class="table_form" width="320">
 <tr>
     <th width="100"><font color="red">*</font>&nbsp;{lang('html-408')}： </th>
     <td>
     <input class="input-text" type="text" name="data[money]"  style="width:97px" />
-    <div class="onShow" id="dr_money_tips"></div>
+    <div class="onShow" id="man_money_tips"></div>
     </td>
 </tr>
 <tr>
     <th><font color="red">*</font>&nbsp;{lang('html-409')}： </th>
-    <td>{dr_field_input('endtime', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80,)), strtotime('+1 year'))}
+    <td>{man_field_input('endtime', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80,)), strtotime('+1 year'))}
     </td>
 </tr>
 <tr>

@@ -512,11 +512,11 @@ class Attachment_model extends CI_Model {
 	
 		$path = FCPATH.'member/uploadfile/'.date('Ym', SYS_TIME).'/';
 		if (!is_dir($path)) {
-            dr_mkdirs($path);
+            man_mkdirs($path);
         }
 		
 		$filename = substr(md5(time()), 0, 7).rand(100, 999);
-		$data = dr_catcher_data($url);
+		$data = man_catcher_data($url);
 		if (!$data) {
             return NULL;
         }
@@ -697,7 +697,7 @@ class Attachment_model extends CI_Model {
                 $config = $this->ci->get_cache('siteinfo', SITE_ID, 'remote', $t['remote']);
                 $data[$i]['attachment'] = $config['SITE_ATTACH_URL'].'/'.$t['attachment'];
             } else {
-                $data[$i]['attachment'] = dr_file($t['attachment']);
+                $data[$i]['attachment'] = man_file($t['attachment']);
             }
 			$data[$i]['ext'] = $t['fileext'];
 			if (in_array($t['fileext'], array('jpg', 'gif', 'png'))) {
@@ -707,7 +707,7 @@ class Attachment_model extends CI_Model {
 				$data[$i]['show'] = is_file(FCPATH.'mantob/statics/images/ext/'.$t['fileext'].'.png') ? SITE_URL.'mantob/statics/images/ext/'.$t['fileext'].'.png' : SITE_URL.'mantob/statics/images/ext/blank.png';
 				$data[$i]['icon'] = is_file(FCPATH.'mantob/statics/images/ext/'.$t['fileext'].'.gif') ? SITE_URL.'mantob/statics/images/ext/'.$t['fileext'].'.gif' : SITE_URL.'mantob/statics/images/ext/blank.gif';
 			}
-			$data[$i]['size'] = dr_format_file_size($t['filesize']);
+			$data[$i]['size'] = man_format_file_size($t['filesize']);
 		}
 		
 		return $data;

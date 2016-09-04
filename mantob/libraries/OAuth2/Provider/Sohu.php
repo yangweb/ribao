@@ -37,7 +37,7 @@ class OAuth2_Provider_Sohu extends OAuth2_Provider {
 		$url = 'http://api.t.sohu.com/users/show/id.json?'.http_build_query(array(
 			'access_token' => $token->access_token
 		));
-		$return	= dr_catcher_data($url);
+		$return	= man_catcher_data($url);
 		$user = json_decode($return);
 		if (array_key_exists('error', $user)) {
             throw new OAuth2_Exception($return);

@@ -7,7 +7,7 @@
 	<div class="explain-col">
         <form method="post" action="" name="searchform" id="searchform">
 		{lang('html-484')} ：
-		{dr_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$time)}
+		{man_field_input('time', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$time)}
 		&nbsp;
 		<input type="submit" value="{lang('search')}" class="button" name="search" />
 			<font color="gray">{lang('html-483')}</font>
@@ -30,11 +30,11 @@
 		</thead>
 		<tbody>
 		{loop $list $id $t}
-		{php $t=dr_string2array($t);}
+		{php $t=man_string2array($t);}
 		<tr>
 			<td align="left">{man_date($t['time'], null, 'red')}</td>
-			<td align="left"><input id="dr_{$id}_ip" type="hidden" value="{$t['ip']}" /><a href="javascript:dr_dialog_ip('{$id}_ip');">{$t['ip']}</a></td>
-			<td align="left"><input id="dr_{$id}_user" type="hidden" value="{$t['admin']}" /><a href="javascript:dr_dialog_member('{$id}_user');">{$t['admin']}</a></td>
+			<td align="left"><input id="man_{$id}_ip" type="hidden" value="{$t['ip']}" /><a href="javascript:man_dialog_ip('{$id}_ip');">{$t['ip']}</a></td>
+			<td align="left"><input id="man_{$id}_user" type="hidden" value="{$t['admin']}" /><a href="javascript:man_dialog_member('{$id}_user');">{$t['admin']}</a></td>
 			<td align="center">{php echo $t['app'] ? $t['app'] : '';}</td>
 			<td align="center">{php echo $t['module'] ? $t['module'] : '';}</td>
 			<td align="center">{$t['class']}</td>
@@ -48,7 +48,7 @@
 		</tr>
 		</tbody>
 		</table>
-        <div id="pages"><a>{dr_lang('html-346', $total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

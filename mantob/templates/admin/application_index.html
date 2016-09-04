@@ -6,7 +6,7 @@ $(function() {
 }); 
 </script>
 <style>
-.dr_none td {background-color: infobackground;}
+.man_none td {background-color: infobackground;}
 </style>
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
@@ -32,24 +32,24 @@ $(function() {
 		<tbody>
 		{loop $list[1] $dir $t}
 		<tr>
-			<td align="center">{if $this->ci->is_auth('application/config')}<a href="javascript:;" onClick="return dr_dialog_set('{php echo $t.disabled ? lang('html-161') : lang('html-162');}','{dr_url('application/disabled',array('id'=>$t.id))}');"><img src="{SITE_PATH}mantob/statics/images/{php echo $t.disabled ? 0 : 1}.gif"></a>{else}<img src="{SITE_PATH}mantob/statics/images/{php echo $t.disabled ? 0 : 1}.gif"></a>{/if}</td>
+			<td align="center">{if $this->ci->is_auth('application/config')}<a href="javascript:;" onClick="return man_dialog_set('{php echo $t.disabled ? lang('html-161') : lang('html-162');}','{man_url('application/disabled',array('id'=>$t.id))}');"><img src="{SITE_PATH}mantob/statics/images/{php echo $t.disabled ? 0 : 1}.gif"></a>{else}<img src="{SITE_PATH}mantob/statics/images/{php echo $t.disabled ? 0 : 1}.gif"></a>{/if}</td>
 			<td align="left">{$t.name}</td>
 			<td align="left">{$dir}</td>
             <td align="left">{$t.version}</td>
 			<td align="left">{$t.author}</a></td>
 			<td align="left">
-			{if $this->ci->is_auth('application/config')}<a style="color:#00F" href="{dr_url($dir.'/home/index')}">{lang('061')}</a>&nbsp;&nbsp;{/if}
-            {if $this->ci->is_auth('application/uninstall')}<a href="javascript:;" onClick="return dr_confirm_url('{lang('015')}','{dr_url($dir.'/home/uninstall')}');">{lang('html-164')}</a>&nbsp;&nbsp;{/if}
-			{if $this->ci->is_auth('application/update')}<a class="dr_update_{$t.key}" style="display:none; color:#090" href="{dr_url('application/update',array('id'=>$dir))}">{lang('html-167')}</a>&nbsp;&nbsp;{/if}
-            {if $t.key}<span class="dr_check_{$t.key}">正在云端检查版本...</span>{/if}
+			{if $this->ci->is_auth('application/config')}<a style="color:#00F" href="{man_url($dir.'/home/index')}">{lang('061')}</a>&nbsp;&nbsp;{/if}
+            {if $this->ci->is_auth('application/uninstall')}<a href="javascript:;" onClick="return man_confirm_url('{lang('015')}','{man_url($dir.'/home/uninstall')}');">{lang('html-164')}</a>&nbsp;&nbsp;{/if}
+			{if $this->ci->is_auth('application/update')}<a class="man_update_{$t.key}" style="display:none; color:#090" href="{man_url('application/update',array('id'=>$dir))}">{lang('html-167')}</a>&nbsp;&nbsp;{/if}
+            {if $t.key}<span class="man_check_{$t.key}">正在云端检查版本...</span>{/if}
 			</td>
 		</tr>
 		{/loop}
 		{loop $list[0] $dir $t}
-		<tr class="dr_none">
+		<tr class="man_none">
 			<td align="center">
 				{if $this->ci->is_auth('application/install')}
-				<a href="javascript:void(0);" onclick="dr_install('{lang('html-000')}', '{dr_url($dir.'/home/install')}')" style="color:#00F">
+				<a href="javascript:void(0);" onclick="man_install('{lang('html-000')}', '{man_url($dir.'/home/install')}')" style="color:#00F">
 				{else}
 				<a href="javascript:;" style="color:#999">
 				{/if}{lang('html-163')}</a>
@@ -59,7 +59,7 @@ $(function() {
             <td align="left">{$t.version}</td>
 			<td align="left">{$t.author}</td>
 			<td align="left">
-            {if $this->ci->is_auth('application/delete')}<a href="javascript:;" onClick="return dr_confirm_url('{lang('html-246')}','{dr_url('application/delete',array('dir'=>$dir))}');" style="color:#F00">{lang('del')}</a>&nbsp;&nbsp;{/if}
+            {if $this->ci->is_auth('application/delete')}<a href="javascript:;" onClick="return man_confirm_url('{lang('html-246')}','{man_url('application/delete',array('dir'=>$dir))}');" style="color:#F00">{lang('del')}</a>&nbsp;&nbsp;{/if}
 			</td>
 		</tr>
 		{/loop}

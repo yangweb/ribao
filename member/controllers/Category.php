@@ -46,7 +46,7 @@ class Category extends M_Controller {
 			$ids = $this->input->post('ids', TRUE);
 			if ($this->input->post('action') == 'order') {
 				if (!$ids) {
-                    exit(dr_json(0, lang('013')));
+                    exit(man_json(0, lang('013')));
                 }
 				$data = $this->input->post('data');
 				foreach ($ids as $id) {
@@ -55,13 +55,13 @@ class Category extends M_Controller {
 						 ->where('uid', (int)$this->uid)
 						 ->update($this->space_category_model->tablename, $data[$id]);
 				}
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} elseif ($this->input->post('action') == 'del' && $is_edit) {
 				if (!$ids) {
-                    exit(dr_json(0, lang('013')));
+                    exit(man_json(0, lang('013')));
                 }
 				$this->space_category_model->del($ids);
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}
 		}
 	
@@ -103,17 +103,17 @@ class Category extends M_Controller {
 						break;
 				}
 				
-				$t['option'] = '<a href="'.dr_space_list_url($this->uid, $t['id']).'" target="_blank">'.lang('m-345').'</a>';
-				$t['add'] = $t['type'] ? "&nbsp;&nbsp;<a href='".dr_member_url('category/add')."&pid=".$t['id']."&type=".$t['type']."&mid=".$t['modelid']."'>[ ".lang('m-298')." ]</a>" : '';
+				$t['option'] = '<a href="'.man_space_list_url($this->uid, $t['id']).'" target="_blank">'.lang('m-345').'</a>';
+				$t['add'] = $t['type'] ? "&nbsp;&nbsp;<a href='".man_member_url('category/add')."&pid=".$t['id']."&type=".$t['type']."&mid=".$t['modelid']."'>[ ".lang('m-298')." ]</a>" : '';
 				$t['add'] = $is_edit ? $t['add'] : '';
                 $tree[$t['id']] = $t;
 			}
 		}
 		
 		$str = "<tr class='' style='height:35px;'>";
-		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' /></td>";
+		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' /></td>";
 		$str.= "<td align='center'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>";
-		$str.= "<td class='ajax'>\$spacer<a href='".dr_member_url('category/edit')."&id=\$id'>\$name</a>  \$add</td>";
+		$str.= "<td class='ajax'>\$spacer<a href='".man_member_url('category/edit')."&id=\$id'>\$name</a>  \$add</td>";
 		$str.= "<td align='center'>\$model</td>";
 		$str.= "<td align='center'>\$show</td>";
 		$str.= "<td align='center'>\$option</td>";
@@ -150,7 +150,7 @@ class Category extends M_Controller {
             $post['modelid'] = $post['modelid'] ? $post['modelid'] : $data['modelid'];
 			$result = $this->space_category_model->add($post);
 			if ($result === TRUE) {
-				$this->member_msg(lang('000'), dr_member_url('category/index'), 1);
+				$this->member_msg(lang('000'), man_member_url('category/index'), 1);
 			}
             $data = $post;
 		} else {
@@ -187,7 +187,7 @@ class Category extends M_Controller {
             $post['modelid'] = $data['modelid'];
 			$result	= $this->space_category_model->edit($id, $post);
 			if ($result === TRUE) {
-                $this->member_msg(lang('000'), dr_member_url('category/index'), 1);
+                $this->member_msg(lang('000'), man_member_url('category/index'), 1);
             }
 			$post['id'] = $id;
 			$data = $post;

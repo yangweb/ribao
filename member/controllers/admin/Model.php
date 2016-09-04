@@ -54,7 +54,7 @@ class Model extends M_Controller {
 				$this->load->model('member_model');
 				$this->member_model->cache();
 				/* 更新相关缓存 */
-				$this->admin_msg(lang('000'), dr_url('member/model/index'), 1);
+				$this->admin_msg(lang('000'), man_url('member/model/index'), 1);
 			}
 			
 		}
@@ -89,10 +89,10 @@ class Model extends M_Controller {
             $this->load->model('member_model');
             $this->member_model->cache();
             /* 更新相关缓存 */
-			$this->admin_msg(lang('000'), dr_url('member/model/index'), 1);
+			$this->admin_msg(lang('000'), man_url('member/model/index'), 1);
 		}
 		
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['setting'] = man_string2array($data['setting']);
 		
 		$this->template->assign(array(
 			'data' => $data,
@@ -113,7 +113,7 @@ class Model extends M_Controller {
         $this->load->model('member_model');
         $this->member_model->cache();
         /* 更新相关缓存 */
-		$this->admin_msg(lang('000'), dr_url('member/model/index'), 1);
+		$this->admin_msg(lang('000'), man_url('member/model/index'), 1);
 	}
 	
 	/**

@@ -40,7 +40,7 @@ class OAuth2_Provider_Baidu extends OAuth2_Provider {
 			'access_token' => $token->access_token,
 			'uid' => $token->uid,
 		));
-		$return	= dr_catcher_data($url);
+		$return	= man_catcher_data($url);
 		$user = json_decode($return);
       	if (array_key_exists('error', $user)) {
             throw new OAuth2_Exception($return);

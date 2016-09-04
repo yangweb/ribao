@@ -34,16 +34,16 @@ class Sns extends M_Controller {
             // ID格式判断
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
             // 删除
             if (!$this->is_auth('member/admin/sns/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
             foreach ($ids as $id) {
                 $this->sns_model->delete($id);
             }
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         // 重置页数和统计
@@ -73,7 +73,7 @@ class Sns extends M_Controller {
             'list' => $data,
             'field' => $field,
             'param' => $search,
-            'pages'	=> $this->get_pagination(dr_url('member/sns/index', $param), $param['total']),
+            'pages'	=> $this->get_pagination(man_url('member/sns/index', $param), $param['total']),
         ));
         $this->template->display('sns_index.html');
     }
@@ -87,16 +87,16 @@ class Sns extends M_Controller {
             // ID格式判断
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
             // 删除
             if (!$this->is_auth('member/admin/sns/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
             foreach ($ids as $id) {
                 $this->sns_model->delete_topic($id);
             }
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         // 重置页数和统计
@@ -126,7 +126,7 @@ class Sns extends M_Controller {
             'list' => $data,
             'field' => $field,
             'param' => $search,
-            'pages'	=> $this->get_pagination(dr_url('member/topic/index', $param), $param['total']),
+            'pages'	=> $this->get_pagination(man_url('member/topic/index', $param), $param['total']),
         ));
         $this->template->display('sns_topic.html');
     }

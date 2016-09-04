@@ -58,7 +58,7 @@ class Page_model extends CI_Model {
         }
 
         foreach ($_data as $t) {
-            $t['setting'] = dr_string2array($t['setting']);
+            $t['setting'] = man_string2array($t['setting']);
             $data[$t['id']]	= $t;
         }
 
@@ -82,7 +82,7 @@ class Page_model extends CI_Model {
         }
 
         foreach ($_data as $t) {
-            $t['setting'] = dr_string2array($t['setting']);
+            $t['setting'] = man_string2array($t['setting']);
             $data[$t['id']]	= $t;
         }
 
@@ -101,7 +101,7 @@ class Page_model extends CI_Model {
 		if ($data['urllink']) {
 			$url = $data['urllink'];
 		} elseif ($data['urlrule']) {
-			$url = dr_page_url($data);
+			$url = man_page_url($data);
 		} else {
 			if ($data['module']) {
 				$mod = $this->ci->get_cache('module-'.SITE_ID.'-'.$data['module']);
@@ -119,7 +119,7 @@ class Page_model extends CI_Model {
         if ($data['urllink']) {
             $url = $data['urllink'];
         } elseif ($data['urlrule']) {
-            $url = dr_page_url($data);
+            $url = man_page_url($data);
         } else {
             if ($data['module']) {
                 $mod = $this->ci->get_cache('module-'.SITE_ID.'-'.$data['module']);
@@ -153,7 +153,7 @@ class Page_model extends CI_Model {
             'pids' => '',
             'child' => 0,
             'module' => APP_DIR,
-            'setting' => dr_array2string($this->input->post('setting')),
+            'setting' => man_array2string($this->input->post('setting')),
             'pdirname' => '',
             'childids' => '',
             'displayorder' => 0
@@ -188,7 +188,7 @@ class Page_model extends CI_Model {
         $update = array(
             'pid' => (int)$data['pid'],
             'module' => APP_DIR,
-            'setting' => dr_array2string($this->input->post('setting'))
+            'setting' => man_array2string($this->input->post('setting'))
         );
         $update = array_merge($update, $data);
 		$this->link->where('id', $id)->update($this->tablename, $update);
@@ -394,7 +394,7 @@ class Page_model extends CI_Model {
 		
 		$cache = array();
 		foreach ($data as $t) {
-			$attachment = dr_string2array($t['attachment']);
+			$attachment = man_string2array($t['attachment']);
 			$t['attachment'] = NULL;
 			if ($attachment) {
 				foreach ($attachment['file'] as $i => $file) {
@@ -410,7 +410,7 @@ class Page_model extends CI_Model {
 				$cache['data']['index'][$t['id']] = $t;
 			}
 			$this->_update_url($t['id']);
-            $t['setting'] = dr_string2array($t['setting']);
+            $t['setting'] = man_string2array($t['setting']);
 			$cache['dir'][$t['dirname']] = $t['id'];
 		}
         $this->dcache->set('page-'.$siteid, $cache);
@@ -426,7 +426,7 @@ class Page_model extends CI_Model {
                       ->result_array();
         if ($field) {
             foreach ($field as $f) {
-                $f['setting'] = dr_string2array($f['setting']);
+                $f['setting'] = man_string2array($f['setting']);
                 $cache[$f['fieldname']] = $f;
             }
         }

@@ -7,12 +7,12 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
-	if ($("#dr_value").val() == '') {
-		dr_form_tips('value', false, '{dr_lang("020", lang('html-353'))}');
+function man_form_check() {
+	if ($("#man_value").val() == '') {
+		man_form_tips('value', false, '{man_lang("020", lang('html-353'))}');
 		return false;
 	} else {
-		dr_form_tips('value', true, '&nbsp;');
+		man_form_tips('value', true, '&nbsp;');
 	}
 	if ($("#mark").val() == 0) { 
 		return true;
@@ -21,7 +21,7 @@ function dr_form_check() {
 	}
 }
 </script>
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table class="table_form" width="520">
 <tr>
@@ -31,14 +31,14 @@ function dr_form_check() {
 <tr>
     <th><font color="red">*</font>&nbsp;{lang('html-353')}： </th>
     <td>
-    <input class="input-text" type="text" name="data[value]" id="dr_value" size="20" />
-    <div class="onShow" id="dr_value_tips">{lang('html-354')}</div>
+    <input class="input-text" type="text" name="data[value]" id="man_value" size="20" />
+    <div class="onShow" id="man_value_tips">{lang('html-354')}</div>
     </td>
 </tr>
 <tr>
     <th>{lang('html-352')}： </th>
     <td>
-    <textarea name="data[note]" style="width:300px;height:80px">{dr_lang('html-355', $admin['username'].'('.$admin['realname'].')')}</textarea>
+    <textarea name="data[note]" style="width:300px;height:80px">{man_lang('html-355', $admin['username'].'('.$admin['realname'].')')}</textarea>
     </td>
 </tr>
 </table>

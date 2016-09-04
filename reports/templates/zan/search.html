@@ -15,7 +15,7 @@
                         <a href="{MODULE_URL}">{MODULE_NAME}</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    {dr_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
+                    {man_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
                     <li>
                         <span>搜索：{$keyword}</span>
                     </li>
@@ -27,18 +27,18 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <input type="text" onkeypress="if(event.keyCode==13) {searchByClass();return false;}"name='keyword' value='{$keyword}' id='dr_search_keyword'  class="form-control" placeholder="输入关键字搜索">
+                                        <input type="text" onkeypress="if(event.keyCode==13) {searchByClass();return false;}"name='keyword' value='{$keyword}' id='man_search_keyword'  class="form-control" placeholder="输入关键字搜索">
                                         <span class="input-group-btn">
                                             <button class="btn blue uppercase bold" onclick="searchByClass()" type="button">搜索</button>
                                         </span>
                                         <script type="text/javascript">
                                             function searchByClass(){
-                                                var url="{dr_search_url($params, 'keyword', 'mantobcom')}";
-                                                var value=$("#dr_search_keyword").val();
+                                                var url="{man_search_url($params, 'keyword', 'mantobcom')}";
+                                                var value=$("#man_search_keyword").val();
                                                 if (value) {
                                                     location.href=url.replace('mantobcom', value);
                                                 } else {
-                                                    dr_tips("输入关键字");
+                                                    man_tips("输入关键字");
                                                 }
                                             }
                                         </script>
@@ -55,16 +55,16 @@
                                         <li class="search-item clearfix">
                                             <div class="search-content text-left">
                                                 <h4 class="search-title">
-                                                    <a title="{$t.title}" href="{$t.url}">{dr_keyword_highlight($t.title, $keyword)}</a>
+                                                    <a title="{$t.title}" href="{$t.url}">{man_keyword_highlight($t.title, $keyword)}</a>
                                                 </h4>
-                                                <p class="search-desc">{dr_keyword_highlight($t.description, $keyword)}</p>
+                                                <p class="search-desc">{man_keyword_highlight($t.description, $keyword)}</p>
                                                 <div class="search-post-foot">
                                                     <ul class="search-post-tags">
                                                         {php $kw=@explode(',', $t.keywords);}
                                                         {loop $kw $a}
                                                         {if $a}
                                                         <li class="uppercase">
-                                                            <a href="{dr_tag_url(APP_DIR, $a)}" target="_blank">{$a}</a>
+                                                            <a href="{man_tag_url(APP_DIR, $a)}" target="_blank">{$a}</a>
                                                         </li>
                                                         {/if}
                                                         {/loop}

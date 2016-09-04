@@ -94,11 +94,11 @@ class Mconfig extends M_Controller {
 					   ->limit(1)
 					   ->get($table)
 					   ->row_array();
-		$config = dr_string2array($config['value']);
+		$config = man_string2array($config['value']);
 		
 		if ($data) { // 修改数据
 			$config = $data;
-			$this->link->replace($table, array('name' => $name, 'value' => dr_array2string($data)));
+			$this->link->replace($table, array('name' => $name, 'value' => man_array2string($data)));
 		}
 		
 		return $config;

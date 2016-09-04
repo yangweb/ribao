@@ -44,12 +44,12 @@ class Address extends M_Controller {
 			$data = $this->validate_filter($this->address_model->get_address_field());
 			if (isset($data['error'])) {
 				if (IS_AJAX) {
-                    exit(dr_json(0, $data['msg'], $data['error']));
+                    exit(man_json(0, $data['msg'], $data['error']));
                 }
 				$error = $data['error'];
 			} else {
 				$this->address_model->add_address($data[1]);
-				$this->member_msg(lang('000'), dr_url('address/index'), 1);
+				$this->member_msg(lang('000'), man_url('address/index'), 1);
 			}
 		}
 		
@@ -74,7 +74,7 @@ class Address extends M_Controller {
 				$error = $data['error'];
 			} else {
 				$this->address_model->edit_address($id, $data[1]);
-				$this->member_msg(lang('000'), dr_url('address/index'), 1);
+				$this->member_msg(lang('000'), man_url('address/index'), 1);
 			}
 		}
 		
@@ -94,6 +94,6 @@ class Address extends M_Controller {
 			 ->where('id', $id)
 			 ->where('uid', $this->uid)
 			 ->delete('member_address');
-		$this->member_msg(lang('000'), dr_url('address/index'), 1);
+		$this->member_msg(lang('000'), man_url('address/index'), 1);
 	}
 }

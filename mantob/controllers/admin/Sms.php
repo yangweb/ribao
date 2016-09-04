@@ -53,7 +53,7 @@ class Sms extends M_Controller {
 			if (!$size) {
                 $this->admin_msg(lang('066'));
             }
-			$this->admin_msg(lang('000'), dr_url('sms/index'), 1);
+			$this->admin_msg(lang('000'), man_url('sms/index'), 1);
 		}
 		
 		$data = is_file($file) ? require $file : array();
@@ -85,12 +85,12 @@ class Sms extends M_Controller {
 	
 		$file = FCPATH.'config/sms.php';
 		if (!is_file($file)) {
-            exit(dr_json(0, lang('321')));
+            exit(man_json(0, lang('321')));
         }
 		
 		$data = $this->input->post('data', true);
 		if (strlen($data['content']) > 150) {
-            exit(dr_json(0, lang('322')));
+            exit(man_json(0, lang('322')));
         }
 		
 		$mobile = $data['mobile'];
@@ -100,14 +100,14 @@ class Sms extends M_Controller {
 			$mobile = trim($mobile, ',');
 		}
 		if (substr_count($mobile, ',') > 40) {
-            exit(dr_json(0, lang('326')));
+            exit(man_json(0, lang('326')));
         }
 		
 		$result = $this->member_model->sendsms($mobile, $data['content']);
 		if ($result === FALSE) {
-			 exit(dr_json(0, '#0'.lang('323')));
+			 exit(man_json(0, '#0'.lang('323')));
 		} else {
-			 exit(dr_json($result['status'], $result['msg']));
+			 exit(man_json($result['status'], $result['msg']));
 		}
     }
 	
@@ -118,7 +118,7 @@ class Sms extends M_Controller {
 	
 		if (IS_POST) {
 			@unlink(FCPATH.'cache/sms_error.log');
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$data = $list = array();
@@ -143,7 +143,7 @@ class Sms extends M_Controller {
 		$this->template->assign(array(
 			'list' => $list,
 			'total' => $total,
-			'pages'	=> $this->get_pagination(dr_url('sms/log'), $total)
+			'pages'	=> $this->get_pagination(man_url('sms/log'), $total)
 		));
 		$this->template->display('sms_log.html');
     }

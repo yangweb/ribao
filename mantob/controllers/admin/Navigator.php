@@ -217,7 +217,7 @@ class Navigator extends M_Controller {
 				$this->cache(1);
 				unset($_ids, $_data);
 			}
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->load->library('dtree');
@@ -229,8 +229,8 @@ class Navigator extends M_Controller {
 		
 		if ($data) {
 			foreach($data as $t) {
-				$add = dr_url('navigator/add', array('pid' => $t['id'], 'type' => $this->type));
-				$edit = dr_url('navigator/edit', array('id' => $t['id'], 'type' => $this->type));
+				$add = man_url('navigator/add', array('pid' => $t['id'], 'type' => $this->type));
+				$edit = man_url('navigator/edit', array('id' => $t['id'], 'type' => $this->type));
 				$t['option'] = '';
 				if ($this->is_auth('admin/navigator/add')) {
 					$t['option'].= '<a class="add" style="margin-top:3px;" title="'.lang('add').'" href="'.$add.'"></a>';
@@ -247,8 +247,8 @@ class Navigator extends M_Controller {
                     list($a, $dir, $catid) = explode('-', $t['mark']);
                     $t['ntype'] = '<font color=green>'.lang('html-010').'</font>';
                     if ($catid) {
-                        $t['option'].= '&nbsp;&nbsp;<a href="'.dr_url($dir.'/category/add', array('id' => $catid)).'">'.lang('355').'</a>';
-                        $t['option'].= '&nbsp;&nbsp;<a href="'.dr_url($dir.'/category/edit', array('id' => $catid)).'">'.lang('356').'</a>';
+                        $t['option'].= '&nbsp;&nbsp;<a href="'.man_url($dir.'/category/add', array('id' => $catid)).'">'.lang('355').'</a>';
+                        $t['option'].= '&nbsp;&nbsp;<a href="'.man_url($dir.'/category/edit', array('id' => $catid)).'">'.lang('356').'</a>';
                     }
                 } else {
                     //0
@@ -259,25 +259,25 @@ class Navigator extends M_Controller {
 		}
 		
 		$str = "<tr class='\$class'>";
-		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>";
+		$str.= "<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>";
 		$str.= "<td align='left'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>";
 		$str.= "<td align='left'>\$id</td>";
 		if ($this->is_auth('admin/navigator/edit')) {
-			$str.= "<td>\$spacer<a href='".dr_url(APP_DIR.'/navigator/edit')."&id=\$id&type=".$this->type."'>\$name</a>  \$parent</td>";
+			$str.= "<td>\$spacer<a href='".man_url(APP_DIR.'/navigator/edit')."&id=\$id&type=".$this->type."'>\$name</a>  \$parent</td>";
 		} else {
 			$str.= "<td>\$spacer\$name  \$parent</td>";
 		}
         $str.= "<td align='center'>\$ntype</td>";
 		$str.= "<td align='center'>";
 		if ($this->is_auth('admin/navigator/edit')) {
-			$str.= "<a href='".dr_url('navigator/target')."&id=\$id'><img src='".SITE_URL."mantob/statics/images/\$target.gif' /></a>";
+			$str.= "<a href='".man_url('navigator/target')."&id=\$id'><img src='".SITE_URL."mantob/statics/images/\$target.gif' /></a>";
 		} else {
 			$str.= "<img src='".SITE_URL."mantob/statics/images/\$target.gif' />";
 		}
 		$str.= "</td>";
 		$str.= "<td align='center'>";
 		if ($this->is_auth('admin/navigator/edit')) {
-			$str.= "<a href='".dr_url('navigator/show')."&id=\$id'><img src='".SITE_URL."mantob/statics/images/\$show.gif' /></a>";
+			$str.= "<a href='".man_url('navigator/show')."&id=\$id'><img src='".SITE_URL."mantob/statics/images/\$show.gif' /></a>";
 		} else {
 			$str.= "<img src='".SITE_URL."mantob/statics/images/\$show.gif' />";
 		}
@@ -410,7 +410,7 @@ class Navigator extends M_Controller {
 				$id = (int)$this->navigator_model->add($data[1]);
 				$this->cache(1);
 				$this->attachment_handle($this->uid, $this->navigator_model->tablename.'-'.$id, $this->field);
-				$this->admin_msg(lang('000'), dr_url('navigator/index', array('type' => $this->type)), 1);
+				$this->admin_msg(lang('000'), man_url('navigator/index', array('type' => $this->type)), 1);
 			}
 		} else {
             $error = '';
@@ -521,7 +521,7 @@ class Navigator extends M_Controller {
                 }
 				$this->cache(1);
 				$this->attachment_handle($this->uid, $this->navigator_model->tablename.'-'.$id, $this->field, $data);
-				$this->admin_msg(lang('000'), dr_url('navigator/index', array('type' => $this->type)), 1);
+				$this->admin_msg(lang('000'), man_url('navigator/index', array('type' => $this->type)), 1);
 			}
 		}
 		
@@ -555,7 +555,7 @@ class Navigator extends M_Controller {
 				 ->update(SITE_ID.'_navigator', array('target' => ($data['target'] == 1 ? 0 : 1)));
 			$this->cache(1);
 			
-			$this->admin_msg(lang('000'), dr_url('navigator/index', array('type' => $data['type'])), 1);
+			$this->admin_msg(lang('000'), man_url('navigator/index', array('type' => $data['type'])), 1);
 		} else {
 			$this->admin_msg(lang('160'));
 		}
@@ -578,7 +578,7 @@ class Navigator extends M_Controller {
 				 ->update(SITE_ID.'_navigator', array('show' => ($data['show'] == 1 ? 0 : 1)));
 			$this->cache(1);	 
 				 
-			$this->admin_msg(lang('000'), dr_url('navigator/index', array('type' => $data['type'])), 1);
+			$this->admin_msg(lang('000'), man_url('navigator/index', array('type' => $data['type'])), 1);
 		} else {
 			$this->admin_msg(lang('160'));
 		}

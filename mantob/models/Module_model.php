@@ -292,8 +292,8 @@ class Module_model extends CI_Model {
 
 		$data = array();
 		foreach ($_data as $t) {
-			$t['site'] = dr_string2array($t['site']);
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['site'] = man_string2array($t['site']);
+			$t['setting'] = man_string2array($t['setting']);
 			$data[$t['dirname']] = $t;
 		}
 
@@ -317,8 +317,8 @@ class Module_model extends CI_Model {
             return NULL;
         }
 
-		$data['site'] = dr_string2array($data['site']);
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['site'] = man_string2array($data['site']);
+		$data['setting'] = man_string2array($data['setting']);
 
 		return $data;
 	}
@@ -477,7 +477,7 @@ class Module_model extends CI_Model {
 		if (!$module) {
             return '模块不存在或者尚未安装';
         }
-        $site = dr_string2array($module['site']);
+        $site = man_string2array($module['site']);
         if (!isset($site[SITE_ID]) || !$site[SITE_ID]['use']) {
             return '当前站点尚未安装此模块，无法生成';
         }
@@ -525,7 +525,7 @@ class Module_model extends CI_Model {
 			$t['textname'] = $t['name'];
 			unset($t['id'], $t['name']);
 			$t['issystem'] = 1;
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['setting'] = man_string2array($t['setting']);
 			$table['field'][] = $t;
 		}
 		file_put_contents($file, $header.PHP_EOL.'return '.var_export($table, true).';?>');
@@ -550,7 +550,7 @@ class Module_model extends CI_Model {
 				$t['textname'] = $t['name'];
 				unset($t['id'], $t['name']);
 				$t['issystem'] = 1;
-				$t['setting'] = dr_string2array($t['setting']);
+				$t['setting'] = man_string2array($t['setting']);
 				$table['field'][] = $t;
 			}
 		}
@@ -576,7 +576,7 @@ class Module_model extends CI_Model {
 					$t['textname'] = $t['name'];
 					unset($t['id'], $t['name']);
 					$t['issystem'] = 1;
-					$t['setting'] = dr_string2array($t['setting']);
+					$t['setting'] = man_string2array($t['setting']);
 					$table['field'][] = $t;
 				}
 			}
@@ -601,7 +601,7 @@ class Module_model extends CI_Model {
                     $t['textname'] = $t['name'];
                     unset($t['id'], $t['name']);
                     $t['issystem'] = 0;
-                    $t['setting'] = dr_string2array($t['setting']);
+                    $t['setting'] = man_string2array($t['setting']);
                     $table['field'][] = $t;
                 }
             }
@@ -742,7 +742,7 @@ class Module_model extends CI_Model {
 		$this->db->insert('field', array(
 			'name' => $field['textname'],
 			'ismain' => $ismain,
-			'setting' => dr_array2string($field['setting']),
+			'setting' => man_array2string($field['setting']),
 			'issystem' => isset($field['issystem']) ? (int)$field['issystem'] : 1,
 			'ismember' => isset($field['ismember']) ? (int)$field['ismember'] : 1,
 			'disabled' => isset($field['disabled']) ? (int)$field['disabled'] : 0,
@@ -1107,9 +1107,9 @@ class Module_model extends CI_Model {
 		$this->db
              ->where('id', $_data['id'])
              ->update('module', array(
-				'site' => dr_array2string($data['site']),
+				'site' => man_array2string($data['site']),
 				'sitemap' => (int)$data['sitemap'],
-				'setting' => dr_array2string($data['setting'])
+				'setting' => man_array2string($data['setting'])
 			 ));
         // 站点无变动时不处理
 		if ($data['site'] === $_data['site']) {
@@ -1187,7 +1187,7 @@ class Module_model extends CI_Model {
 		if (!$data) {
             return NULL;
         }
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['setting'] = man_string2array($data['setting']);
 		return $data;
 	}
 	
@@ -1216,8 +1216,8 @@ class Module_model extends CI_Model {
 
         $config = require FCPATH.$dirname.'/config/module.php'; // 配置信息
 		$site_domain = require FCPATH.'config/domain.php'; // 加载站点域名配置文件
-		$data['site'] = dr_string2array($data['site']);
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['site'] = man_string2array($data['site']);
+		$data['setting'] = man_string2array($data['setting']);
 		
 		// 按站点生成缓存
 		foreach ($this->SITE as $siteid => $t) {
@@ -1243,7 +1243,7 @@ class Module_model extends CI_Model {
 				if ($cache['html'] && $siteid > 1) {
 					$path = FCPATH.$cache['dirname'].'/html/'.$siteid;
 					if (!file_exists($path)) {
-                        dr_mkdirs($path, TRUE);
+                        man_mkdirs($path, TRUE);
                     }
 					copy(FCPATH.$cache['dirname'].'/html.php', $path.'/index.php');
 				}
@@ -1308,8 +1308,8 @@ class Module_model extends CI_Model {
                                     $t['field'][$f['fieldname']] = $this->get_field_value($f);
                                 }
                             }
-                            $t['setting'] = dr_string2array($t['setting']);
-                            $t['permission'] = dr_string2array($t['permission']);
+                            $t['setting'] = man_string2array($t['setting']);
+                            $t['permission'] = man_string2array($t['permission']);
                             $cache['form'][$t['id']] = $t;
                         }
                     } else {
@@ -1340,9 +1340,9 @@ class Module_model extends CI_Model {
                             $level[] = substr_count($c['pids'], ',');
                             $c['topid'] = isset($pid[1]) ? $pid[1] : $c['id'];
                             $c['catids'] = explode(',', $c['childids']);
-                            $c['setting'] = dr_string2array($c['setting']);
-                            $c['permission'] = $c['child'] ? '' : dr_string2array($c['permission']);
-                            $c['url'] = isset($c['setting']['linkurl']) && $c['setting']['linkurl'] ? $c['setting']['linkurl'] : dr_category_url($cache, $c);
+                            $c['setting'] = man_string2array($c['setting']);
+                            $c['permission'] = $c['child'] ? '' : man_string2array($c['permission']);
+                            $c['url'] = isset($c['setting']['linkurl']) && $c['setting']['linkurl'] ? $c['setting']['linkurl'] : man_category_url($cache, $c);
                             $CAT[$c['id']] = $c;
                             $CAT_DIR[$c['dirname']] = $c['id'];
                         }

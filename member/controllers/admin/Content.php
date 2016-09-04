@@ -71,7 +71,7 @@ class Content extends M_Controller {
 						}
 					}
 				}
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				if ($ids) {
 					$status = (int)$this->input->post('status');
@@ -100,7 +100,7 @@ class Content extends M_Controller {
 						}
 					}
 				}
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}
 		}
         // 重置页数和统计
@@ -124,7 +124,7 @@ class Content extends M_Controller {
 			'list' => $data,
 			'param'	=> $_param,
 			'field' => $this->model['field'],
-			'pages'	=> $this->get_pagination(dr_url('member/content/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url('member/content/index', $param), $param['total']),
 		));
 		$this->template->display(is_file(FCPATH.'member/templates/admin/content_'.$this->mid.'.html') ? 'content_'.$this->mid.'.html' : 'content_index.html');
     }
@@ -189,7 +189,7 @@ class Content extends M_Controller {
 						}
 					}
 					$this->attachment_handle($data['uid'], $mark, $this->model['field'], $data, $post[1]['status'] ? TRUE : FALSE);
-					$this->member_msg(lang('000'), dr_url('member/content/index', array('mid' => $this->mid, 'tid' => $this->tid)), 1);
+					$this->member_msg(lang('000'), man_url('member/content/index', array('mid' => $this->mid, 'tid' => $this->tid)), 1);
 				}
 			}
 			$data = $data[1];

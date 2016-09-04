@@ -1,4 +1,4 @@
-.dr_oauth_style {
+.man_oauth_style {
     cursor: pointer;
     display: block !important;
     height: 24px !important;
@@ -10,7 +10,7 @@
 	width:24px;
 	float:left;
 }
-.dr_oauth_more {
+.man_oauth_more {
     background: url("more.gif") no-repeat scroll 0 0 transparent;
     font-family: sans-serif;
 	color: #565656;
@@ -21,34 +21,34 @@
 	width: 54px;
 	text-align:center;
 }
-.dr_oauth_more:hover {
+.man_oauth_more:hover {
     background-position: 0 -24px !important;
     color: #000000;
 }
-.dr_oauth_style:hover {
+.man_oauth_style:hover {
     opacity: 0.8;
 }
-.dr_oauth_qq {
+.man_oauth_qq {
 	background:url(qq.png) no-repeat;	
 }
-.dr_oauth_sina {
+.man_oauth_sina {
 	background:url(sina.png) no-repeat;	
 }
-.dr_oauth_baidu {
+.man_oauth_baidu {
 	background:url(baidu.png) no-repeat;	
 }
-.dr_oauth_163 {
+.man_oauth_163 {
 	background:url(163.png) no-repeat;	
 }
-.dr_oauth_360 {
+.man_oauth_360 {
 	background:url(360.png) no-repeat;	
 }
-.dr_oauth_google {
+.man_oauth_google {
 	background:url(google.png) no-repeat;	
 }
-.dr_oauth_sohu {
+.man_oauth_sohu {
 	background:url(sohu.png) no-repeat;	
 }
-.dr_oauth_taobao {
+.man_oauth_taobao {
 	background:url(taobao.png) no-repeat;	
 }

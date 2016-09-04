@@ -18,14 +18,14 @@ if (!$this->member['adminid'] && $this->member_rule['attachsize']) {
                  ->row_array();
     $filesize = (int)$data['filesize'];
     if ($filesize > $this->member_rule['attachsize'] * 1024 * 1024) {
-        echo json_encode(array('state'=> dr_lang('m-147', $this->member_rule['attachsize'].'MB', dr_format_file_size($filesize))));exit;
+        echo json_encode(array('state'=> man_lang('m-147', $this->member_rule['attachsize'].'MB', man_format_file_size($filesize))));exit;
     }
 }
 
 // 上传目录
 define('DR_UE_PATH', 'member/uploadfile/ueditor/'.date('Ym', SYS_TIME).'/');
 if (!is_dir(FCPATH.DR_UE_PATH)) {
-    dr_mkdirs(FCPATH.DR_UE_PATH);
+    man_mkdirs(FCPATH.DR_UE_PATH);
 }
 
 $CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents("config.json")), true);

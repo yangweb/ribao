@@ -54,7 +54,7 @@ class F_Syn extends A_Field {
         if (!$data['use']) {
             $data = array();
         }
-        $this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($data);
+        $this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($data);
 	}
 	
 	/**
@@ -77,22 +77,22 @@ class F_Syn extends A_Field {
 		$text = (isset($cfg['validate']['required']) && $cfg['validate']['required'] == 1 ? '<font color="red">*</font>' : '').'&nbsp;'.$cname.'：';
 
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 
         // 显示框宽度设置
         $width = isset($cfg['option']['width']) && $cfg['option']['width'] ? $cfg['option']['width'] : '80%';
 
         // 默认值
-        $value = IS_POST ? $_POST['data']['syn'] : dr_string2array($value);
+        $value = IS_POST ? $_POST['data']['syn'] : man_string2array($value);
 
         // 查询当前模块是否在其他站点中出现
         $site = $this->ci->get_cache('module');
         unset($site[SITE_ID]);
 
         //
-        $str = '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#dr_div_syn\').hide()" value="0" '.(!$value['use'] ? 'checked' : '').' />&nbsp;关闭&nbsp;&nbsp;&nbsp;&nbsp;';
-        $str.= '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#dr_div_syn\').show()" value="1" '.($value['use'] ? 'checked' : '').' />&nbsp;开启';
-        $str.= '<div class="dr_format_wrap" id="dr_div_syn" style="margin-top:5px;'.($value['use'] ? '' : 'display:none').';width:'.$width.'">';
+        $str = '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#man_div_syn\').hide()" value="0" '.(!$value['use'] ? 'checked' : '').' />&nbsp;关闭&nbsp;&nbsp;&nbsp;&nbsp;';
+        $str.= '<input type="radio" name="data['.$name.'][use]" onclick="$(\'#man_div_syn\').show()" value="1" '.($value['use'] ? 'checked' : '').' />&nbsp;开启';
+        $str.= '<div class="man_format_wrap" id="man_div_syn" style="margin-top:5px;'.($value['use'] ? '' : 'display:none').';width:'.$width.'">';
         $str.= '<table width="100%">';
 
         // 查询当前模块是否在其他站点中出现
@@ -100,7 +100,7 @@ class F_Syn extends A_Field {
             foreach ($site as $sid => $dirs) {
                 if (in_array(APP_DIR, $dirs)) {
                     $str.= '<tr>';
-                    $str.= '	<td width=150 align=right>'.dr_strcut($this->ci->SITE[$sid]['SITE_NAME'], 15).'：</td>';
+                    $str.= '	<td width=150 align=right>'.man_strcut($this->ci->SITE[$sid]['SITE_NAME'], 15).'：</td>';
                     $str.= '	<td>'.$this->ci->select_category($this->ci->get_cache('module-'.$sid.'-'.APP_DIR, 'category'), $value[$sid], ' name=\'data['.$name.']['.$sid.']\'', ' -- ', 1, 1).'</td>';
                     $str.= '</tr>';
                 }

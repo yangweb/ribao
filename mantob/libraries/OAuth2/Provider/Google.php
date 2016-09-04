@@ -42,7 +42,7 @@ class OAuth2_Provider_Google extends OAuth2_Provider {
 		$url = 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&'.http_build_query(array(
 			'access_token' => $token->access_token,
 		));
-		$user = json_decode(dr_catcher_data($url), true);
+		$user = json_decode(man_catcher_data($url), true);
 		// ����ͳһ����ݸ�ʽ
 		return array(
 			'oid' => $user['id'],

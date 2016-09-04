@@ -19,7 +19,7 @@ $reqHandler->setParameter("out_trade_no", $sn); // 支付订单id必须由订单
 $reqHandler->setParameter("total_fee", $money * 100);  //总金额,单位分，所有扩大100倍
 $reqHandler->setParameter("return_url",  $return_url);
 $reqHandler->setParameter("notify_url", $notify_url);
-$reqHandler->setParameter("body", dr_lang('m-178', $this->member['username'], $id));
+$reqHandler->setParameter("body", man_lang('m-178', $this->member['username'], $id));
 $reqHandler->setParameter("bank_type", "DEFAULT"); //银行类型，默认为财付通
 
 //用户ip

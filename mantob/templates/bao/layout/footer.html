@@ -22,39 +22,14 @@
         <div class="footer__list-group">
             <div class="list-group">
                 <div class="list-group__header">
-                    <span>关于</span>
+                    <span>{$ci->get_cache('page-1', 'data', 'index', 1, 'name')}</span>
                 </div>
                 <div class="list-group__items">
+                    {list action=page module=index pid=1}
                     <div class="list-group__item">
-                        <a href="">我们的使命</a>
+                        <a href="{$t.url}">{$t.name}</a>
                     </div>
-                    <div class="list-group__item">
-                        <a href="">我们的社区</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">我们的会员与伙伴</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">领导团队</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">我们的历史</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">联系我们 </a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">媒体</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">职业机会</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">声明</a>
-                    </div>
-                    <div class="list-group__item">
-                        <a href="">隐私和使用条款</a>
-                    </div>
+                    {/list}
                 </div>
             </div>
         </div>

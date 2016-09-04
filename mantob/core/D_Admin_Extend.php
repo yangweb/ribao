@@ -38,7 +38,7 @@ class D_Admin_Extend extends M_Controller {
 			$this->catrule['show'] = $this->catrule['add'] = $this->catrule['edit'] = $this->catrule['del'] = 1;
 		}
 		$this->load->library('Dfield', array(APP_DIR));
-		$this->content['type'] = dr_string2array($this->content['type']);
+		$this->content['type'] = man_string2array($this->content['type']);
 		$this->sysfield = array(
 			'inputtime' => array(
 				'name' => lang('104'),
@@ -79,7 +79,7 @@ class D_Admin_Extend extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 
 			switch($this->input->post('action')) {
@@ -88,14 +88,14 @@ class D_Admin_Extend extends M_Controller {
 					if ($this->catrule['del']) {
 						$this->content_model->delete_extend_for_ids($ids);
 					} else {
-						exit(dr_json(0, lang('160')));
+						exit(man_json(0, lang('160')));
 					}
-					exit(dr_json(1, lang('000')));
+					exit(man_json(1, lang('000')));
 					break;
 					
 				case 'order':
 					if (!$this->catrule['edit']) {
-                        exit(dr_json(0, lang('160')));
+                        exit(man_json(0, lang('160')));
                     }
 					$_data = $this->input->post('data');
 					foreach ($ids as $id) {
@@ -103,25 +103,25 @@ class D_Admin_Extend extends M_Controller {
 							 ->where('id', $id)
 							 ->update($this->content_model->prefix.'_extend', $_data[$id]);
 					}
-					exit(dr_json(1, lang('000')));
+					exit(man_json(1, lang('000')));
 					break;
 					
 				case 'move':
 					
 					$type = $this->input->post('type');
 					if (!$type) {
-                        exit(dr_json(0, lang('160')));
+                        exit(man_json(0, lang('160')));
                     }
 					if (!$this->catrule['edit']) {
-                        exit(dr_json(0, lang('160')));
+                        exit(man_json(0, lang('160')));
                     }
 					$this->content_model->extend_move($ids, $type);
-					exit(dr_json(1, lang('000')));
+					exit(man_json(1, lang('000')));
 					break;
 					
 				default :
 				
-					exit(dr_json(0, lang('000')));
+					exit(man_json(0, lang('000')));
 					break;
 			}
 		}
@@ -152,7 +152,7 @@ class D_Admin_Extend extends M_Controller {
 			'app' => $app,
 			'list' => $list,
 			'param'	=> $_param,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/extend/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/extend/index', $param), $param['total']),
 		));
 		$this->template->display('content_extend_index.html');
     }
@@ -200,12 +200,12 @@ class D_Admin_Extend extends M_Controller {
 					}
 					// 操作成功处理附件
 					$this->attachment_handle($this->content['uid'], $mark, $this->field);
-					$create = MODULE_HTML ? dr_module_create_show_file($this->content['id'], 1) : '';
+					$create = MODULE_HTML ? man_module_create_show_file($this->content['id'], 1) : '';
 					if ($this->input->post('action') == 'back') {
 						$this->admin_msg(
                             lang('000').
-                            ($create ? "<script src='".$create."'></script>".dr_module_create_list_file($this->content['catid'])  : ''),
-                            dr_url(APP_DIR.'/extend/index', array(
+                            ($create ? "<script src='".$create."'></script>".man_module_create_list_file($this->content['catid'])  : ''),
+                            man_url(APP_DIR.'/extend/index', array(
                                 'cid' => $this->content['id'],
                                 'catid' => (int)$_GET['catid'],
                                 'type' => (int)$_GET['type'])
@@ -274,8 +274,8 @@ class D_Admin_Extend extends M_Controller {
 					$this->attachment_handle($this->content['uid'], $mark, $this->field, $_data);
 					$this->admin_msg(
                         lang('000').
-                        (MODULE_HTML ? dr_module_create_show_file($this->content['id']).dr_module_create_list_file($this->content['catid']) : ''),
-                        dr_url(APP_DIR.'/extend/index', array(
+                        (MODULE_HTML ? man_module_create_show_file($this->content['id']).man_module_create_list_file($this->content['catid']) : ''),
+                        man_url(APP_DIR.'/extend/index', array(
                             'cid' => $this->content['id'],
                             'catid' => (int)$_GET['catid'],
                             'type' => (int)$_GET['type'])

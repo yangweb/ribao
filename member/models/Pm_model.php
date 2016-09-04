@@ -55,7 +55,7 @@ class Pm_model extends CI_Model{
 				$data['founddateline'] = $data['dateline'];
 				$data['dateline'] = $data['lastdateline'];
 				$data['pmid'] = $data['plid'];
-				$lastmessage = dr_string2array($data['lastmessage']);
+				$lastmessage = man_string2array($data['lastmessage']);
 				if ($lastmessage['firstauthorid']) {
 					$data['firstauthorid'] = $lastmessage['firstauthorid'];
 					$data['firstauthor'] = $lastmessage['firstauthor'];
@@ -242,8 +242,8 @@ class Pm_model extends CI_Model{
 			return lang('m-062');
 		}
 		
-		$subject = dr_safe_replace(htmlspecialchars($data['subject']));
-		$message = dr_safe_replace(htmlspecialchars($data['message']));
+		$subject = man_safe_replace(htmlspecialchars($data['subject']));
+		$message = man_safe_replace(htmlspecialchars($data['message']));
 		
 		// 查询会员数据
 		$member = array();
@@ -271,9 +271,9 @@ class Pm_model extends CI_Model{
 		}
 		
 		// 处理标题
-		$subject = !$subject ? dr_strcut(dr_clearhtml($message), 80) : $subject;
+		$subject = !$subject ? man_strcut(man_clearhtml($message), 80) : $subject;
 		// 作为最后一条消息内容
-		$lastsummary = dr_strcut(dr_clearhtml($message), 150);
+		$lastsummary = man_strcut(man_clearhtml($message), 150);
 		
 		// 短消息会话表中按“对应关系”来查询
 		$list = $this->db->select('plid, min_max')->where_in('min_max', $relationship)->get('pm_lists')->result_array();
@@ -285,7 +285,7 @@ class Pm_model extends CI_Model{
 		
 		// 最后一条消息的数据组装
 		$lastmessage = array('lastauthorid' => $fromuid, 'lastauthor' => $fromusername, 'lastsummary' => $lastsummary);
-		$lastmessage = dr_array2string($lastmessage);
+		$lastmessage = man_array2string($lastmessage);
 		 
 		// 按照对应关系来插入消息表中，当对应关系在库中不存在时，重新创建一个对应关系表
 		foreach($relationship as $key => $value) {

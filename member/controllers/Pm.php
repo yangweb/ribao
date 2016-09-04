@@ -29,10 +29,10 @@ class Pm extends M_Controller {
 		if (IS_POST) {
 			if ($this->input->post('action') == 'read') {
 				$this->pm_model->set_read($this->uid, $this->input->post('ids'));
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				$this->pm_model->deletes($this->uid, $this->input->post('ids'));
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}
 		}
 		
@@ -69,7 +69,7 @@ class Pm extends M_Controller {
 			$data = $this->input->post('data', TRUE);
 			$error = $this->pm_model->send($this->uid, $this->member['username'], $data);
 			if ($error === NULL) {
-				$this->member_msg(lang('000'), dr_url('pm/index'), 1);
+				$this->member_msg(lang('000'), man_url('pm/index'), 1);
 			}
 		}
 	
@@ -108,7 +108,7 @@ class Pm extends M_Controller {
 			$data['username'] = $username;
 			$error = $this->pm_model->send($this->uid, $this->member['username'], $data);
 			if ($error === NULL) {
-				$this->member_msg(lang('000'), dr_url('pm/read', array('uid' => $uid)), 1);
+				$this->member_msg(lang('000'), man_url('pm/read', array('uid' => $uid)), 1);
 			}
 		}
 		

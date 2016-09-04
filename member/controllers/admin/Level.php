@@ -42,7 +42,7 @@ class Level extends M_Controller {
 			if ($this->input->post('action') == 'del') { // 删除
 				$this->level_model->del($this->input->post('ids'));
                 $this->clear_cache('member');
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			} elseif ($this->input->post('action') == 'edit') { // 修改
 				$_ids = $this->input->post('ids');
 				$_data = $this->input->post('data');
@@ -51,7 +51,7 @@ class Level extends M_Controller {
 				}
 				unset($_ids, $_data);
                 $this->clear_cache('member');
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			}
 		}
 		$this->template->assign(array(
@@ -74,7 +74,7 @@ class Level extends M_Controller {
 			} else {
 				$this->level_model->add($data);
                 $this->clear_cache('member');
-				$this->admin_msg(lang('014'), dr_url('member/level/index', array('gid' => $this->groupid)), 1);
+				$this->admin_msg(lang('014'), man_url('member/level/index', array('gid' => $this->groupid)), 1);
 			}
 		}
 		$this->template->assign(array(
@@ -102,7 +102,7 @@ class Level extends M_Controller {
 			} else {
 				$this->level_model->edit($_data, $data);
                 $this->clear_cache('member');
-				$this->admin_msg(lang('014'), dr_url('member/level/index', array('gid' => $this->groupid)), 1);
+				$this->admin_msg(lang('014'), man_url('member/level/index', array('gid' => $this->groupid)), 1);
 			}
 		}
 		$this->template->assign(array(
@@ -119,6 +119,6 @@ class Level extends M_Controller {
     public function del() {
 		$this->level_model->del((int)$this->input->get('id'));
         $this->clear_cache('member');
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
 	}
 }

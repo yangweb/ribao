@@ -11,10 +11,10 @@
             <ul>
                 <li><a href="{MEMBER_URL}">会员</a></li>
                 {loop $related $t}
-                <li {if $catid==$t.id}class="ui-state-active"{/if}><a href="{dr_mobile_category_url(APP_DIR, $t.id)}">{$t.name}</a></li>
+                <li {if $catid==$t.id}class="ui-state-active"{/if}><a href="{man_mobile_category_url(APP_DIR, $t.id)}">{$t.name}</a></li>
                 {/loop}
                 {loop $menu $m}
-                <li {if $menu_tid==$m.id}class="ui-state-active"{/if}><a href="{if $m.url}{$m.url}{else}{dr_member_url($m.uri)}{/if}">{$m.name}</a></li>
+                <li {if $menu_tid==$m.id}class="ui-state-active"{/if}><a href="{if $m.url}{$m.url}{else}{man_member_url($m.uri)}{/if}">{$m.name}</a></li>
                 {/loop}
             </ul>
             <span class="bar"></span>

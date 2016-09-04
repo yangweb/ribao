@@ -14,24 +14,24 @@
 		<table width="100%">
 		<thead>
 		<tr>
-			<th align="left" class="dr_option">{lang('html-431')}</th>
+			<th align="left" class="man_option">{lang('html-431')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
 		<tr>
-			<td align="left" class="dr_option">{$t}</td>
+			<td align="left" class="man_option">{$t}</td>
 		</tr>
 		{/loop}
 		<tr>
 			<th align="left" style="padding-top:5px;">
-			<input type="button" class="button" value="{lang('html-432')}" name="option" onClick="dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('html-432')}" name="option" onClick="man_confirm_set_all('{lang('015')}')" />
 			</td>
 		</tr>
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

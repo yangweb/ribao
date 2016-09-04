@@ -62,7 +62,7 @@ class Experience extends M_Controller {
 			'list' => $data,
 			'name' => SITE_EXPERIENCE,
 			'param'	=> $_param,
-			'pages'	=> $this->get_pagination(dr_url('member/experience/index', $param), $param['total'])
+			'pages'	=> $this->get_pagination(man_url('member/experience/index', $param), $param['total'])
 		));
 		$this->template->display('score_index.html');
     }
@@ -76,11 +76,11 @@ class Experience extends M_Controller {
 			$data = $this->input->post('data');
 			$value = intval($data['value']);
 			if (!$value) {
-				exit(dr_json(0, lang('131'), 'value'));
+				exit(man_json(0, lang('131'), 'value'));
 			}
 			$this->member_model->update_score(0, $this->userinfo['uid'], $value, '', $data['note']);
-			$this->member_model->add_notice($this->userinfo['uid'], 1, dr_lang('m-080', SITE_EXPERIENCE, $value, $this->member['username']));
-			exit(dr_json(1, lang('000')));
+			$this->member_model->add_notice($this->userinfo['uid'], 1, man_lang('m-080', SITE_EXPERIENCE, $value, $this->member['username']));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->template->display('score_add.html');

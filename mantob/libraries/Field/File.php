@@ -146,7 +146,7 @@ class F_File extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 当字段必填时，加入html5验证标签
 		if (isset($cfg['validate']['required'])
             && $cfg['validate']['required'] == 1) {
@@ -160,17 +160,17 @@ class F_File extends A_Field {
 		$file = $info = '';
 		if ($value) {
 			$file = $value;
-			$data = dr_file_info($file);
+			$data = man_file_info($file);
 			if ($data) {
 				$size = $data['size'] ? ' ('.$data['size'].')' : '';
-				$info = '<a href="javascript:;" onclick="dr_show_file_info(\''.$file.'\')"><img align="absmiddle" src="'.$data['icon'].'"><div class="onCorrect">'.$data['filename'].$size.'&nbsp;</div></a>';
+				$info = '<a href="javascript:;" onclick="man_show_file_info(\''.$file.'\')"><img align="absmiddle" src="'.$data['icon'].'"><div class="onCorrect">'.$data['filename'].$size.'&nbsp;</div></a>';
 			}
 			unset($data);
 		}
 		// 上传按钮与表单值
-		$tool = '<input type="hidden" id="dr_'.$name.'" name="data['.$name.']" value="'.$file.'" '.$attr.' />
-		<input type="button" style="cursor:pointer;" '.$disabled.' class="button" onclick="dr_upload_file(\''.$name.'\', \''.$url.'\')" value="' . lang('m-119') . '" />
-		<input type="button" style="cursor:pointer;" class="button" onclick="dr_delete_file(\''.$name.'\')" value="' . lang('m-346') . '" />
+		$tool = '<input type="hidden" id="man_'.$name.'" name="data['.$name.']" value="'.$file.'" '.$attr.' />
+		<input type="button" style="cursor:pointer;" '.$disabled.' class="button" onclick="man_upload_file(\''.$name.'\', \''.$url.'\')" value="' . lang('m-119') . '" />
+		<input type="button" style="cursor:pointer;" class="button" onclick="man_delete_file(\''.$name.'\')" value="' . lang('m-346') . '" />
 		';
 		// 文件信息查看
 		$finfo = '<span id="show_'.$name.'" />'.$info.'</span>'.$tips;

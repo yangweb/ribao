@@ -206,7 +206,7 @@ button.aui_state_highlight:active {
 	width:8px;
 	height:8px;
 }
-.dr_tips .aui_nw,.dr_tips .aui_n,.dr_tips .aui_ne,.dr_tips .aui_w,.dr_tips .aui_e,.dr_tips .aui_sw,.dr_tips .aui_s,.dr_tips .aui_se {
+.man_tips .aui_nw,.man_tips .aui_n,.man_tips .aui_ne,.man_tips .aui_w,.man_tips .aui_e,.man_tips .aui_sw,.man_tips .aui_s,.man_tips .aui_se {
 	background: none;
     opacity: 0.2;
     overflow: hidden;
@@ -273,7 +273,7 @@ button.aui_state_highlight:active {
 	width:3px;
 	height:3px;
 }
-.dr_tips .aui_inner {
+.man_tips .aui_inner {
 	background-color:transparent !important;
 }
 .aui_state_noTitle .aui_outer {
@@ -307,10 +307,10 @@ button.aui_state_highlight:active {
 .aui_state_noTitle .aui_dialog {
 	box-shadow:none;
 }
-.dr_tips {
+.man_tips {
 	padding-bottom:5px!important;
 }
-.dr_tipbox {
+.man_tipbox {
     height: 54px;
     line-height: 54px;
 	font-family:WEIRUANYAHEI;
@@ -319,7 +319,7 @@ button.aui_state_highlight:active {
 	background-color: #219805;
 	text-align: center;
 }
-.dr_tipbox .tip-l {
+.man_tipbox .tip-l {
     background-image: url("icons/tip_layer.png");
     background-position: -5px 0;
     background-repeat: no-repeat;
@@ -327,7 +327,7 @@ button.aui_state_highlight:active {
     height: 54px;
     width: 45px;
 }
-.dr_tipbox .tip-c {
+.man_tipbox .tip-c {
    /* background-image: url("icons/tip_layer.png");
     background-position: 0 -161px;*/
     color: #fff;
@@ -337,7 +337,7 @@ button.aui_state_highlight:active {
     line-height: 52px;
     padding: 0 10px 0 5px;
 }
-.dr_tipbox .tip-r {
+.man_tipbox .tip-r {
     /*background-image: url("icons/tip_layer.png");
     background-position: 0 0;*/
     /*background-repeat: no-repeat;*/

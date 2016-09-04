@@ -33,7 +33,7 @@ class Menu extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			// 可以不用判断权限
 			if ($this->input->post('action') == 'order') {
@@ -42,11 +42,11 @@ class Menu extends M_Controller {
 					$this->db->where('id', $id)->update('admin_menu',  array('displayorder' => (int)$_data[$id]['displayorder']));
 				}
 				$this->menu_model->cache();
-				exit(dr_json(1, lang('339')));
+				exit(man_json(1, lang('339')));
 			} else {
 				$this->menu_model->delete($ids);
 				$this->menu_model->cache();
-				exit(dr_json(1, lang('339')));
+				exit(man_json(1, lang('339')));
 			}
 		}
 		
@@ -64,23 +64,23 @@ class Menu extends M_Controller {
 			foreach($data as $t) {
 				$t['option'] = '';
 				if ($this->is_auth('admin/menu/add') && !in_array($t['pid'], $left)) {
-					$t['option'].= '<a class="add" title="'.lang('add').'" href="'.dr_dialog_url(dr_url('menu/add', array('pid' => $t['id'])), 'add').'"></a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="add" title="'.lang('add').'" href="'.man_dialog_url(man_url('menu/add', array('pid' => $t['id'])), 'add').'"></a>&nbsp;&nbsp;';
 				} else {
 					$t['option'].= '<a class="add" style="background:none" href="javascript:;"></a>&nbsp;&nbsp;';
 				}
 				if ($this->is_auth('admin/menu/edit')) {
-					$t['option'].= '<a class="edit" title="'.lang('edit').'" href="'.dr_dialog_url(dr_url('menu/edit', array('id' => $t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
-					$t['name'] = '<a title="'.lang('edit').'" href="'.dr_dialog_url(dr_url('menu/edit', array('id' => $t['id'])), 'edit').'">'.$t['name'].'</a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="edit" title="'.lang('edit').'" href="'.man_dialog_url(man_url('menu/edit', array('id' => $t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
+					$t['name'] = '<a title="'.lang('edit').'" href="'.man_dialog_url(man_url('menu/edit', array('id' => $t['id'])), 'edit').'">'.$t['name'].'</a>&nbsp;&nbsp;';
 				}
 				if ($this->is_auth('admin/menu/del')) {
-					$t['option'].= '<a class="del" title="'.lang('del').'" href="javascript:;" onClick="return dr_dialog_del(\''.lang('015').'\',\''.dr_url('menu/del',array('id' => $t['id'])).'\');"></a>&nbsp;&nbsp;';
+					$t['option'].= '<a class="del" title="'.lang('del').'" href="javascript:;" onClick="return man_dialog_del(\''.lang('015').'\',\''.man_url('menu/del',array('id' => $t['id'])).'\');"></a>&nbsp;&nbsp;';
 				}
 				$tree[$t['id']] = $t;
 			}
 		}
 
 		$str = "<tr>
-					<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>
+					<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>
 					<td align='center'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>
 					<td align='left'>&nbsp;</td>
 					<td>\$spacer\$name</td>
@@ -106,7 +106,7 @@ class Menu extends M_Controller {
 			} else {
 				$_data['directory'] = $_data['dir'] = $_data['class'] = $_data['method'] = $_data['param'] = '';
 			}
-			exit(dr_json(1, lang('014'), $this->menu_model->add($_data)));
+			exit(man_json(1, lang('014'), $this->menu_model->add($_data)));
 		}
 		
 		$top = $this->menu_model->get_top_id();
@@ -156,7 +156,7 @@ class Menu extends M_Controller {
 			} else {
 				$_data['directory'] = $_data['dir'] = $_data['class'] = $_data['method'] = $_data['param'] = '';
 			}
-			exit(dr_json(1, lang('014'), $this->menu_model->edit($data, $_data)));
+			exit(man_json(1, lang('014'), $this->menu_model->edit($data, $_data)));
 		}
 		
 		$top = $this->menu_model->get_top_id();
@@ -196,7 +196,7 @@ class Menu extends M_Controller {
     public function del() {
 		$this->menu_model->delete((int)$this->input->get('id'));
 		$this->menu_model->cache();
-		exit(dr_json(1, lang('339')));
+		exit(man_json(1, lang('339')));
 	}
 	
 	/**

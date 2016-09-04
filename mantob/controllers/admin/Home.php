@@ -194,12 +194,12 @@ class Home extends M_Controller {
 
         // 首次安装系统判断
         if (!$this->dcache->get('install')) {
-            $this->admin_msg('本系统已经被初始化了', dr_url('home/main'), 0);
+            $this->admin_msg('本系统已经被初始化了', man_url('home/main'), 0);
             exit;
         }
 
         // 搜索本地模块
-        $local = @array_diff(dr_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player','book','fang','down','weixin','special','video'));
+        $local = @array_diff(man_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player','book','fang','down','weixin','special','video'));
         $module = array();
         if ($local) {
             foreach ($local as $dir) {
@@ -228,14 +228,14 @@ class Home extends M_Controller {
 
         // 首次安装系统-跳转到欢迎界面-并安装默认模块
         if ($this->dcache->get('install')) {
-            $this->admin_msg('首次安装系统，正在为您安装模块初始化数据', dr_url('home/init'), 2);
+            $this->admin_msg('首次安装系统，正在为您安装模块初始化数据', man_url('home/init'), 2);
             exit;
         }
 		
 		$store = array();
 		
 		// 搜索本地模块
-		$local = @array_diff(dr_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); 
+		$local = @array_diff(man_dir_map(FCPATH, 1), array('app', 'cache', 'config', 'mantob', 'member', 'space', 'player')); 
 		if ($local) {
 			foreach ($local as $dir) {
 				if (is_file(FCPATH.$dir.'/config/module.php')) {
@@ -254,7 +254,7 @@ class Home extends M_Controller {
 		}
 		
 		// 搜索本地应用
-		$local = dr_dir_map(FCPATH.'app/', 1); 
+		$local = man_dir_map(FCPATH.'app/', 1); 
 		if ($local) {
 			foreach ($local as $dir) {
 				if (is_file(FCPATH.'app/'.$dir.'/config/app.php')) {
@@ -283,7 +283,7 @@ class Home extends M_Controller {
 			if (@strpos($now, $last) === FALSE
                 && @strpos($last, $now) === FALSE) {
 				// Ip异常判断
-				$ip = dr_lang('html-022', $login[1]['loginip'], $last, dr_url('root/log', array('uid' => $this->uid)));
+				$ip = man_lang('html-022', $login[1]['loginip'], $last, man_url('root/log', array('uid' => $this->uid)));
 			}
 		}
 
@@ -320,24 +320,24 @@ class Home extends M_Controller {
                 $topid = intval($top[$dir]);
                 $total[$dir] = array(
                     'name' => $mod['name'],
-                    'today' => $this->_set_k_url($topid, dr_url($dir.'/home/index')),
-                    'content' => $this->_set_k_url($topid, dr_url($dir.'/home/index')),
-                    'content_verify' => $this->_set_k_url($topid, dr_url($dir.'/home/verify')),
+                    'today' => $this->_set_k_url($topid, man_url($dir.'/home/index')),
+                    'content' => $this->_set_k_url($topid, man_url($dir.'/home/index')),
+                    'content_verify' => $this->_set_k_url($topid, man_url($dir.'/home/verify')),
                     'extend_verify' => 'javascript:;',
-                    'add' => $this->_set_k_url($topid, dr_url($dir.'/home/add')),
+                    'add' => $this->_set_k_url($topid, man_url($dir.'/home/add')),
                     'url' => $mod['url'],
                 );
                 if ($this->admin['adminid'] == 1) {
                     // 扩展审核数据
                     if (is_file(FCPATH.$dir.'/config/extend.main.table.php')) {
-                        $total[$dir]['extend_verify'] = $this->_set_k_url($topid, dr_url($dir.'/verify/index'));
+                        $total[$dir]['extend_verify'] = $this->_set_k_url($topid, man_url($dir.'/verify/index'));
                     }
                 } else {
                     if (!$my) {
                         continue;
                     }
                     if (is_file(FCPATH.$dir.'/config/extend.main.table.php')) {
-                        $total[$dir]['extend_verify'] = $this->_set_k_url($topid, dr_url($dir.'/verify/index'));
+                        $total[$dir]['extend_verify'] = $this->_set_k_url($topid, man_url($dir.'/verify/index'));
                     }
                 }
             }
@@ -346,7 +346,7 @@ class Home extends M_Controller {
 		$this->template->assign(array(
 			'ip' => $ip,
             'sip' => $this->_get_server_ip(),
-			'store' => dr_base64_encode(dr_array2string($store)),
+			'store' => man_base64_encode(man_array2string($store)),
             'mtotal' => $total,
 			'sqlversion' => $this->db->version(),
 		));
@@ -360,47 +360,47 @@ class Home extends M_Controller {
 	
 		$url = array(
 			array(
-				'url' => dr_url('site/cache', array('admin' => 1)),
+				'url' => man_url('site/cache', array('admin' => 1)),
 				'name' => lang('006'),
 			),
             array(
-                'url' => dr_url('application/cache', array('admin' => 1)),
+                'url' => man_url('application/cache', array('admin' => 1)),
                 'name' => lang('032'),
             ),
 			array(
-				'url' => dr_url('role/cache', array('admin' => 1)),
+				'url' => man_url('role/cache', array('admin' => 1)),
 				'name' => lang('002'),
 			),
 			array(
-				'url' => dr_url('menu/cache', array('admin' => 1)),
+				'url' => man_url('menu/cache', array('admin' => 1)),
 				'name' => lang('003'),
 			),
 			array(
-				'url' => dr_url('mail/cache', array('admin' => 1)),
+				'url' => man_url('mail/cache', array('admin' => 1)),
 				'name' => lang('191'),
 			),
 			array(
-				'url' => dr_url('verify/cache', array('admin' => 1)),
+				'url' => man_url('verify/cache', array('admin' => 1)),
 				'name' => lang('005'),
 			),
 			array(
-				'url' => dr_url('urlrule/cache', array('admin' => 1)),
+				'url' => man_url('urlrule/cache', array('admin' => 1)),
 				'name' => lang('129'),
 			),
             array(
-                'url' => dr_url('downservers/cache', array('admin' => 1)),
+                'url' => man_url('downservers/cache', array('admin' => 1)),
                 'name' => lang('341'),
             ),
 			array(
-				'url' => dr_url('member/menu/cache', array('admin' => 1)),
+				'url' => man_url('member/menu/cache', array('admin' => 1)),
 				'name' => lang('235'),
 			),
 			array(
-				'url' => dr_url('member/model/cache', array('admin' => 1)),
+				'url' => man_url('member/model/cache', array('admin' => 1)),
 				'name' => lang('241'),
 			),
 			array(
-				'url' => dr_url('member/setting/cache', array('admin' => 1)),
+				'url' => man_url('member/setting/cache', array('admin' => 1)),
 				'name' => lang('010'),
 			),
 		);
@@ -414,8 +414,8 @@ class Home extends M_Controller {
 			foreach ($module as $mod) {
 				if ($mod['disabled'] == 0) {
 					$url[] = array(
-						'url' => dr_url('module/cache', array('dir' => $mod['dirname'], 'admin' => 1)),
-						'name' => dr_lang('009', $mod['dirname'])
+						'url' => man_url('module/cache', array('dir' => $mod['dirname'], 'admin' => 1)),
+						'name' => man_lang('009', $mod['dirname'])
 					);
 				}
 			}
@@ -425,23 +425,23 @@ class Home extends M_Controller {
 		$count = count($this->SITE);
 		foreach ($this->SITE as $sid => $t) { // 分站点缓存
 			$url[] = array(
-				'url' => dr_url('form/cache', array('site' => $sid, 'admin' => 1)),
+				'url' => man_url('form/cache', array('site' => $sid, 'admin' => 1)),
 				'name' => lang('248')."($i/$count)"
 			);
 			$url[] = array(
-				'url' => dr_url('block/cache', array('site' => $sid, 'admin' => 1)),
+				'url' => man_url('block/cache', array('site' => $sid, 'admin' => 1)),
 				'name' => lang('204')."($i/$count)"
 			);
 			$url[] = array(
-				'url' => dr_url('page/cache', array('site' => $sid, 'admin' => 1)),
+				'url' => man_url('page/cache', array('site' => $sid, 'admin' => 1)),
 				'name' => lang('164')."($i/$count)"
 			);
 			$url[] = array(
-				'url' => dr_url('linkage/cache', array('site' => $sid, 'admin' => 1)),
+				'url' => man_url('linkage/cache', array('site' => $sid, 'admin' => 1)),
 				'name' => lang('189')."($i/$count)"
 			);
 			$url[] = array(
-				'url' => dr_url('navigator/cache', array('site' => $sid, 'admin' => 1)),
+				'url' => man_url('navigator/cache', array('site' => $sid, 'admin' => 1)),
 				'name' => lang('007')."($i/$count)"
 			);
 			$i ++;
@@ -456,7 +456,7 @@ class Home extends M_Controller {
 		if ($app) {
 			foreach ($app as $a) {
 				if ($a['disabled'] == 0) {
-					$aurl[] = dr_url($a['dirname'].'/home/cache', array('admin' => 1));
+					$aurl[] = man_url($a['dirname'].'/home/cache', array('admin' => 1));
 				}
 			}
 		}
@@ -483,7 +483,7 @@ class Home extends M_Controller {
                 $this->admin_msg(lang('html-572'), '', 1);
             }
 		} else {
-			$this->admin_msg('Clear ... ', dr_url('home/clear', array('todo' => 1)), 2);
+			$this->admin_msg('Clear ... ', man_url('home/clear', array('todo' => 1)), 2);
 		}
 	}
 
@@ -492,7 +492,7 @@ class Home extends M_Controller {
         $ip = $this->_get_server_ip();
         $domain = $this->input->get('domain');
         if (gethostbyname($domain) != $ip) {
-            exit(dr_lang('html-731', $domain, $ip));
+            exit(man_lang('html-731', $domain, $ip));
         }
         exit('');
     }
@@ -522,7 +522,7 @@ class Home extends M_Controller {
 					   ->result_array();
 		if ($module) {
 			foreach ($module as $mod) {
-				$site = dr_string2array($mod['site']);
+				$site = man_string2array($mod['site']);
 				if ($site[SITE_ID]) {
                     $this->site[SITE_ID]
                          ->where('inputtime<>', 0)

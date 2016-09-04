@@ -7,19 +7,19 @@ $(function() { //防止回车提交表单
 	$(".table_form th").last().css('border','none');
 	$(".table_form td").last().css('border','none');
 });
-function dr_form_check() {
-	if ($("#dr_username").val() == '') {
-		dr_form_tips('username', false, '{dr_lang("020", lang("html-055"))}');
+function man_form_check() {
+	if ($("#man_username").val() == '') {
+		man_form_tips('username', false, '{man_lang("020", lang("html-055"))}');
 		return false;
 	} else {
-		dr_form_tips('username', true, '&nbsp;');
+		man_form_tips('username', true, '&nbsp;');
 	}
 	{if !$data}
 	if (_check_username() == false) {
 		return false;
 	}
 	{/if}
-	dr_form_tips('adminid', true, '&nbsp;');
+	man_form_tips('adminid', true, '&nbsp;');
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -27,24 +27,24 @@ function dr_form_check() {
 	}
 }
 function _check_username() {
-	var username = $("#dr_username").val();
+	var username = $("#man_username").val();
 	if (username == '') {
-		dr_form_tips('username', false, '{dr_lang("020", lang("html-055"))}');
+		man_form_tips('username', false, '{man_lang("020", lang("html-055"))}');
 		return false;
 	} else {
-		$.ajax({type: "POST",dataType:"json", url: "{dr_url("root/check_username")}", data: {username:username},
+		$.ajax({type: "POST",dataType:"json", url: "{man_url("root/check_username")}", data: {username:username},
 			success: function(data) {
 				//验证成功,显示注册新用户
 				if (data.status == 1) {
-					dr_form_tips('username', true, data.code);
+					man_form_tips('username', true, data.code);
 					$(".reg").show();
 					return true;
 				} else if (data.status == 2) {
-					dr_form_tips('username', false, data.code);
+					man_form_tips('username', false, data.code);
 					return false;
 				} else {
 					//验证失败,隐藏注册新用户 data.id
-					dr_form_tips('username', true, data.code);
+					man_form_tips('username', true, data.code);
 					$(".reg").hide();
 					return true;
 				}
@@ -57,12 +57,12 @@ function _check_username() {
 }
 </script>
 <div class="table-list" style="width:530px;">
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table width="100%" class="table_form">
 <tr>
     <th width="100"><font color="red">*</font>&nbsp;{lang('html-055')}： </th>
-    <td>{if $data['username']}{$data['username']}<div class="onShow" id="dr_username_tips">{lang('html-058')}</div>{else}<input class="input-text" type="text" name="data[username]" id="dr_username" onblur="_check_username()" value="{$data['username']}" size="20" /><div class="onShow" id="dr_username_tips">{lang('html-059')}</div>{/if}</td>
+    <td>{if $data['username']}{$data['username']}<div class="onShow" id="man_username_tips">{lang('html-058')}</div>{else}<input class="input-text" type="text" name="data[username]" id="man_username" onblur="_check_username()" value="{$data['username']}" size="20" /><div class="onShow" id="man_username_tips">{lang('html-059')}</div>{/if}</td>
 </tr>
 <tr>
     <th><font color="red">*</font>&nbsp;{lang('html-056')}： </th>
@@ -76,15 +76,15 @@ function _check_username() {
 </tr>
 <tr>
     <th>&nbsp;{lang('html-060')}： </th>
-    <td><input class="input-text" type="text" name="data[realname]" id="dr_realname" value="{$data['realname']}" size="20" /></td>
+    <td><input class="input-text" type="text" name="data[realname]" id="man_realname" value="{$data['realname']}" size="20" /></td>
 </tr>
 <tr class="reg" style="display:none">
     <th><font color="red">*</font>&nbsp;{lang('html-061')}： </th>
-    <td><input class="input-text" type="text" name="data[password]" id="dr_password" value="{$data['password']}" size="20" /><div class="onShow" id="dr_password_tips">&nbsp;</div></td>
+    <td><input class="input-text" type="text" name="data[password]" id="man_password" value="{$data['password']}" size="20" /><div class="onShow" id="man_password_tips">&nbsp;</div></td>
 </tr>
 <tr class="reg" style="display:none">
     <th><font color="red">*</font>&nbsp;{lang('html-062')}： </th>
-    <td><input class="input-text" type="text" name="data[email]" id="dr_email" value="{$data['email']}" size="30" /><div class="onShow" id="dr_email_tips">&nbsp;</div></td>
+    <td><input class="input-text" type="text" name="data[email]" id="man_email" value="{$data['email']}" size="30" /><div class="onShow" id="man_email_tips">&nbsp;</div></td>
 </tr>
 <tr>
     <th>&nbsp;{lang('html-063')}： </th>

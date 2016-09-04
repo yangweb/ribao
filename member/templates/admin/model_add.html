@@ -19,25 +19,25 @@ $(function() {
 			<li onclick="SwapTab(1)">{lang('html-218')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 <tr>
 					<th width="200"><font color="red">*</font>&nbsp;{lang('html-026')}：</th>
 					<td>
-						<input class="input-text" type="text" name="data[name]" value="{$data['name']}" id="dr_name" onblur="d_topinyin('table','name');" size="20" />
+						<input class="input-text" type="text" name="data[name]" value="{$data['name']}" id="man_name" onblur="d_topinyin('table','name');" size="20" />
 						<div class="onShow">{lang('html-027')}</div>
 					</td>
 				</tr>
 				<tr>
 					<th><font color="red">*</font>&nbsp;{lang('html-453')}：</th>
 					<td>
-						<input class="input-text" type="text" name="data[table]" value="{$data['table']}" {if $data['id']}disabled{/if} id="dr_table" size="20" />
-						<div class="onShow" id="dr_table_tips">{lang('html-187')}</div>
+						<input class="input-text" type="text" name="data[table]" value="{$data['table']}" {if $data['id']}disabled{/if} id="man_table" size="20" />
+						<div class="onShow" id="man_table_tips">{lang('html-187')}</div>
 					</td>
 				</tr>
                 </table>
 			</div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 <tr>
 					<th width="200">&nbsp;{lang('028')}：</th>
@@ -49,8 +49,8 @@ $(function() {
 					<th>{$group.name}：</th>
 					<td width="60" style="color:#777777;text-align:center">{lang('html-337')}</td>
 					<td width="60" style="color:#777777;text-align:center">{lang('html-338')}</td>
-					<td width="100" style="color:#777777;text-align:center">{dr_lang('html-256', SITE_EXPERIENCE)}</td>
-					<td width="100" style="color:#777777;text-align:center">{dr_lang('html-256', SITE_SCORE)}</td>
+					<td width="100" style="color:#777777;text-align:center">{man_lang('html-256', SITE_EXPERIENCE)}</td>
+					<td width="100" style="color:#777777;text-align:center">{man_lang('html-256', SITE_SCORE)}</td>
 					<td width="70" style="color:#777777;text-align:">{lang('html-667')}</td>
 					<td width="50" style="color:#777777;text-align:">{lang('html-668')}</td>
 					<td align="center"></td>
@@ -58,7 +58,7 @@ $(function() {
 				{loop $group.level $level}
 				<tr>
 					{php $id=$group['id'].'_'.$level['id'];}
-					<th><label>{$level.name}</label>&nbsp;&nbsp;{dr_show_stars($level.stars)}&nbsp;：</th>
+					<th><label>{$level.name}</label>&nbsp;&nbsp;{man_show_stars($level.stars)}&nbsp;：</th>
 					<td style="text-align:center">
 						<input type="checkbox" {if $data['setting'][$id]['use']}checked="checked"{/if} value="1"  name="data[setting][{$id}][use]" />
 					</td>

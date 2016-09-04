@@ -7,12 +7,12 @@
 	<div class="explain-col">
         <form method="post" action="" name="searchform" id="searchform">
 		<input name="search" id="search" type="hidden" value="1" />
-		{dr_lang('021', $auser.realname)}
+		{man_lang('021', $auser.realname)}
 		&nbsp;
 		{lang('html-019')} ：
-		{dr_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
+		{man_field_input('start', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.start)}
 		-&nbsp;
-		{dr_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
+		{man_field_input('end', 'Date', array('option'=>array('format'=>'Y-m-d','width'=>80)), (int)$param.end)}
 		&nbsp;
 		<input type="submit" value="{lang('search')}" class="button" name="search" />
 		</form>
@@ -40,7 +40,7 @@
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $total)}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $total)}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

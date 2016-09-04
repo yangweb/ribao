@@ -1,7 +1,7 @@
 {template header.html}
 <script language="javascript">
-function dr_select_all() {
-    $("#dr_synid").find("option").attr("selected", "selected");
+function man_select_all() {
+    $("#man_synid").find("option").attr("selected", "selected");
 }
 </script>
 <div class="subnav">
@@ -21,7 +21,7 @@ function dr_select_all() {
 				<th width="200">&nbsp;{lang('cat-19')}： </th>
 				<td>
                     {$select}
-                    <input value="{lang('html-605')}" type="button" onclick="dr_select_all()" name="button" class="button" />
+                    <input value="{lang('html-605')}" type="button" onclick="man_select_all()" name="button" class="button" />
                 </td>
 			</tr>
 			<tr>

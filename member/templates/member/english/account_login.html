@@ -10,7 +10,7 @@ $(function(){
         <div class="message message_info">仅记录最近的10次登录记录</div>
         <div class="section">
             <div class="title"><strong>{$meta_name}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
 				<table style="table-layout:fixed;">
 					<thead>
 						<tr>
@@ -24,7 +24,7 @@ $(function(){
 					<tr>
 						<td class="algin_l">{man_date($t.logintime, NULL, 'red')}</td>
 						<td class="algin_l"><a href="http://www.baidu.com/baidu?wd={$t.loginip}" target="_blank">{if $t.oauthid}【{$t.oauthid}】{/if}{$t.loginip}</a></td>
-						<td class="algin_l">{dr_strcut($t.useragent, 60)}</td>
+						<td class="algin_l">{man_strcut($t.useragent, 60)}</td>
 					</tr>
 					{/list}
 					</tbody>

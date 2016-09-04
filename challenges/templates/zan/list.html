@@ -15,7 +15,7 @@
                         <a href="{MODULE_URL}">{MODULE_NAME}</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    {dr_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
+                    {man_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
                     <li>
                         <span>列表</span>
                     </li>
@@ -41,7 +41,7 @@
                                                         {loop $kw $a}
                                                         {if $a}
                                                         <li class="uppercase">
-                                                            <a href="{dr_tag_url(APP_DIR, $a)}" target="_blank">{$a}</a>
+                                                            <a href="{man_tag_url(APP_DIR, $a)}" target="_blank">{$a}</a>
                                                         </li>
                                                         {/if}
                                                         {/loop}
@@ -104,7 +104,7 @@
                                                 <!--我们按点击排序-->
                                                 {list action=module catid=$catid field=title,url order=hits num=9}
                                                 <li><a href="{$t.url}" title="{$t.title}"><span class="badge {$a[array_rand($a)]}" style="float: left"> {$key+1} </span>
-                                                     {dr_strcut($t.title, 33)}</a></li>
+                                                     {man_strcut($t.title, 33)}</a></li>
                                                 {/list}
                                             </ul>
                                         </div>

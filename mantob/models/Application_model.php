@@ -37,8 +37,8 @@ class Application_model extends CI_Model {
 		
 		$app = array();
 		foreach ($data as $t) {
-			$t['module'] = dr_string2array($t['module']);
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['module'] = man_string2array($t['module']);
+			$t['setting'] = man_string2array($t['setting']);
 			$app[$t['dirname']] = $t;
 		}
 		
@@ -62,8 +62,8 @@ class Application_model extends CI_Model {
             return NULL;
         }
 		
-		$data['module'] = dr_string2array($data['module']);
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['module'] = man_string2array($data['module']);
+		$data['setting'] = man_string2array($data['setting']);
 		
 		return $data;
 	}
@@ -145,7 +145,7 @@ class Application_model extends CI_Model {
 		$this->dcache->delete('app');
 
         // 搜索本地应用
-        $local = dr_dir_map(FCPATH.'app/', 1);
+        $local = man_dir_map(FCPATH.'app/', 1);
         if ($local) {
             foreach ($local as $dir) {
                 if (is_file(FCPATH.'app/'.$dir.'/config/app.php')

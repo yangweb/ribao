@@ -7,34 +7,34 @@ $(function() {
 	art.dialog.tips('<font color=red>{$error['msg']}</font>', 3);
 	d_tips('{$error['error']}', 0);
 	{/if}
-	var catid = $("#dr_catid").val();
+	var catid = $("#man_catid").val();
 	if (catid) {
 		show_category_field(catid);
-		dr_show_format(catid);
+		man_show_format(catid);
 	}
-	$("#dr_catid").change(function(){
-		dr_show_format($(this).val());
+	$("#man_catid").change(function(){
+		man_show_format($(this).val());
 	});
 });
 function show_category_field(catid) {
-	$.post(siteurl+'?s={APP_DIR}&c=category&m=field&rand='+Math.random(),{ catid:catid, data:{json_encode(dr_array2string($data))} }, function(data){
-		$('#dr_category_field').html(data);
+	$.post(siteurl+'?s={APP_DIR}&c=category&m=field&rand='+Math.random(),{ catid:catid, data:{json_encode(man_array2string($data))} }, function(data){
+		$('#man_category_field').html(data);
 	});
 }
 // 动态调用规格字段
-function dr_show_format(catid) {
-	$('#dr_format_show').html('<img src="{SITE_URL}mantob/statics/images/loading.gif" />');
-	$.post(siteurl+'?s={APP_DIR}&c=home&m=format&rand='+Math.random(),{ catid:catid, data:{json_encode(dr_array2string($data['format']))} }, function(data){
+function man_show_format(catid) {
+	$('#man_format_show').html('<img src="{SITE_URL}mantob/statics/images/loading.gif" />');
+	$.post(siteurl+'?s={APP_DIR}&c=home&m=format&rand='+Math.random(),{ catid:catid, data:{json_encode(man_array2string($data['format']))} }, function(data){
 		if (data == '0') {
-			$("#dr_row_price").show();
-			$("#dr_price").attr("required", true);
-			$("#dr_row_number").show();
-			$("#dr_quantity").attr("required", true);
-			$("#dr_row_quantity").show();
-			$("#dr_row_format").hide();
+			$("#man_row_price").show();
+			$("#man_price").attr("required", true);
+			$("#man_row_number").show();
+			$("#man_quantity").attr("required", true);
+			$("#man_row_quantity").show();
+			$("#man_row_format").hide();
 		} else {
-			$("#dr_row_format").show();
-			$('#dr_format_show').html(data);
+			$("#man_row_format").show();
+			$('#man_format_show').html(data);
 		}
 	});
 }
@@ -47,17 +47,17 @@ function setflag(i) {
 }
 </script>
 <form action="" method="post" name="myform" id="myform">
-<input name="action" id="dr_action" type="hidden" value="back" />
+<input name="action" id="man_action" type="hidden" value="back" />
 <input name="page" id="page" type="hidden" value="{$page}" />
 <input name="backurl" type="hidden" value="{$backurl}" />
-<input name="dr_id" id="dr_id" type="hidden" value="{$data.id}" />
-<input name="dr_module" id="dr_module" type="hidden" value="{APP_DIR}" />
+<input name="man_id" id="man_id" type="hidden" value="{$data.id}" />
+<input name="man_module" id="man_module" type="hidden" value="{APP_DIR}" />
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
 		{$menu}
 	</div>
 	<div class="bk10"></div>
-	<div class="table-list contentList dr_table">
+	<div class="table-list contentList man_table">
         <table width="100%" class="table_form">
         <tr>
             <th width="200"><font color="red">*</font>&nbsp;{lang('cat-00')}： </th>
@@ -79,8 +79,8 @@ function setflag(i) {
 </div>
 <div class="fixed-bottom">
     <div class="fixed-but text-c">
-        <div class="button"><input value="{lang('html-362')}" type="submit" name="submit" class="cu" onclick="$('#dr_action').val('back')" style="width:100px;" /></div>
-        <div class="button"><input value="{lang('html-363')}" type="submit" name="submit" class="cu" onclick="$('#dr_action').val('continue')" style="width:100px;" /></div>
+        <div class="button"><input value="{lang('html-362')}" type="submit" name="submit" class="cu" onclick="$('#man_action').val('back')" style="width:100px;" /></div>
+        <div class="button"><input value="{lang('html-363')}" type="submit" name="submit" class="cu" onclick="$('#man_action').val('continue')" style="width:100px;" /></div>
     </div>
 </div>
 </form>

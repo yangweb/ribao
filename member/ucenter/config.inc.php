@@ -20,9 +20,9 @@ $dbuser    = 'root';
 $dbpw      = '';
 $dbname    = 'v2rc';
 $pconnect  = 0;
-$tablepre  = 'dr_';
+$tablepre  = 'man_';
 $dbcharset = 'utf8';
 /* 同步登录Cookie */
 define('SITE_KEY', 'mantob');
-define('SITE_PREFIX', 'dr_');
+define('SITE_PREFIX', 'man_');
 ?>

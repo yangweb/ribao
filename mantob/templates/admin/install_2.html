@@ -53,7 +53,7 @@
 <?php if (true ==  $currentEnvironment['mysql_ischeck']) {?><span class="correct_span">&radic;</span>
 <?php }else{?><span class="error_span">&times;</span>
 <?php }
- echo dr_strcut($currentEnvironment[mysql], 18);?></td>
+ echo man_strcut($currentEnvironment[mysql], 18);?></td>
 				<td><?php echo $lowestEnvironment['mysql'];?></td>
 			</tr>
 			<tr>
@@ -105,8 +105,8 @@
 		</table>
 	</div>
 	<div class="bottom tac">   
-		<a href="{dr_url('install/index', array('step'=>$step))}" class="btn">重新检测</a>
-        <a href="{dr_url('install/index', array('step'=>$step+1))}" class="btn">下一步</a>
+		<a href="{man_url('install/index', array('step'=>$step))}" class="btn">重新检测</a>
+        <a href="{man_url('install/index', array('step'=>$step+1))}" class="btn">下一步</a>
 	</div>
 </section>
 {template "install_footer.html", "admin" }

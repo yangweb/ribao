@@ -55,7 +55,7 @@ class Order extends D_Order {
      */
     public function price() {
 	
-        $data = dr_string2array($this->input->get('data'));
+        $data = man_string2array($this->input->get('data'));
 		$score = (int)$this->input->get('score'); // 虚拟币抵消
 		
 		if ($data) {

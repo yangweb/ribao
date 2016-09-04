@@ -3,13 +3,13 @@
 $(function() {
 	SwapTab(0);
 });
-function dr_to_code(name) {
+function man_to_code(name) {
 	var throughBox	= $.dialog.through;
-	var dr_Dialog = throughBox({title: "生成结果"});
+	var man_Dialog = throughBox({title: "生成结果"});
 	var _data = $("#"+name).serialize();
-	$.ajax({type: "POST", url:"{dr_url($furi.'tag')}", dataType:'text', data:_data,
+	$.ajax({type: "POST", url:"{man_url($furi.'tag')}", dataType:'text', data:_data,
 	    success: function (text) {
-			dr_Dialog.content(text);
+			man_Dialog.content(text);
 	    },
 	    error: function(HttpRequest, ajaxOptions, thrownError) {
 			alert(thrownError + "\r\n" + HttpRequest.statusText + "\r\n" + HttpRequest.responseText);
@@ -31,7 +31,7 @@ function dr_to_code(name) {
 			<li onclick="SwapTab(4)">表单列表循环</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<form action="" id="navigator" name="navigator" method="post">
        			<input name="action" type="hidden" value="navigator" />
 				<table width="100%" class="table_form">
@@ -65,12 +65,12 @@ function dr_to_code(name) {
 				</tr>
                 <tr>
                     <th style="border:none;">&nbsp;</th>
-                    <td><input class="button" type="button" name="button" onclick="dr_to_code('navigator')" value="生成代码" /></td>
+                    <td><input class="button" type="button" name="button" onclick="man_to_code('navigator')" value="生成代码" /></td>
                 </tr>
 				</table>
 				</form>
 			</div>
-			<div id="cnt_1" style="display:none" class="dr_hide">
+			<div id="cnt_1" style="display:none" class="man_hide">
 				<form action="" id="page_list" name="page_list" method="post">
        			<input name="action" type="hidden" value="page_list" />
        			<input name="data[module]" type="hidden" value="index" />
@@ -113,12 +113,12 @@ function dr_to_code(name) {
 				</tr>
                 <tr>
                     <th style="border:none;">&nbsp;</th>
-                    <td><input class="button" type="button" name="button" onclick="dr_to_code('page_list')" value="生成代码" /></td>
+                    <td><input class="button" type="button" name="button" onclick="man_to_code('page_list')" value="生成代码" /></td>
                 </tr>
 				</table>
 				</form>
 			</div>
-			<div id="cnt_2" style="display:none" class="dr_hide">
+			<div id="cnt_2" style="display:none" class="man_hide">
 				<form action="" id="page_show" name="page_show" method="post">
        			<input name="action" type="hidden" value="page_show" />
        			<input name="data[module]" type="hidden" value="index" />
@@ -147,12 +147,12 @@ function dr_to_code(name) {
 				</tr>
                 <tr>
                     <th style="border:none;">&nbsp;</th>
-                    <td><input class="button" type="button" name="button" onclick="dr_to_code('page_show')" value="生成代码" /></td>
+                    <td><input class="button" type="button" name="button" onclick="man_to_code('page_show')" value="生成代码" /></td>
                 </tr>
 				</table>
 				</form>
 			</div>
-			<div id="cnt_3" style="display:none" class="dr_hide">
+			<div id="cnt_3" style="display:none" class="man_hide">
 				<form action="" id="linkage_list" name="linkage_list" method="post">
        			<input name="action" type="hidden" value="linkage_list" />
 				<table width="100%" class="table_form">
@@ -186,12 +186,12 @@ function dr_to_code(name) {
 				</tr>
                 <tr>
                     <th style="border:none;">&nbsp;</th>
-                    <td><input class="button" type="button" name="button" onclick="dr_to_code('linkage_list')" value="生成代码" /></td>
+                    <td><input class="button" type="button" name="button" onclick="man_to_code('linkage_list')" value="生成代码" /></td>
                 </tr>
 				</table>
 				</form>
 			</div>
-			<div id="cnt_4" style="display:none" class="dr_hide">
+			<div id="cnt_4" style="display:none" class="man_hide">
 				<form action="" id="form_list" name="form_list" method="post">
        			<input name="action" type="hidden" value="form_list" />
 				<table width="100%" class="table_form">
@@ -225,21 +225,21 @@ function dr_to_code(name) {
 				</tr>
                 <tr>
                     <th style="border:none;">&nbsp;</th>
-                    <td><input class="button" type="button" name="button" onclick="dr_to_code('form_list')" value="生成代码" /></td>
+                    <td><input class="button" type="button" name="button" onclick="man_to_code('form_list')" value="生成代码" /></td>
                 </tr>
 				</table>
 				</form>
 			</div>
-			<div id="cnt_5" style="display:none" class="dr_hide">
+			<div id="cnt_5" style="display:none" class="man_hide">
 				
 			</div>
-			<div id="cnt_6" style="display:none" class="dr_hide">
+			<div id="cnt_6" style="display:none" class="man_hide">
 				
 			</div>
-			<div id="cnt_7" style="display:none" class="dr_hide">
+			<div id="cnt_7" style="display:none" class="man_hide">
 				
 			</div>
-			<div id="cnt_8" style="display:none" class="dr_hide">
+			<div id="cnt_8" style="display:none" class="man_hide">
 				
 			</div>
 		</div>

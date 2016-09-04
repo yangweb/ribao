@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	$(function() {
 		{if $result}
-			dr_tips('{$result.msg}');
+			man_tips('{$result.msg}');
 			{/if}
 			});
 </script>
@@ -22,7 +22,7 @@
 						<a href="{MODULE_URL}">{MODULE_NAME}</a>
 						<i class="fa fa-circle"></i>
 					</li>
-					{dr_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
+					{man_catpos($catid, '', true, '<li><a href="{url}">{name}</a><i class="fa fa-circle"></i></li>')}
 					<li>
 						<a href="{$url}">{$title}</a>
 						<i class="fa fa-circle"></i>
@@ -52,7 +52,7 @@
 														<input type="text" class="form-control" name="code" placeholder="验证码">
 													</div>
 													<div class="col-md-7">
-														{dr_code(110, 32)}
+														{man_code(110, 32)}
 													</div>
 												</div>
 											</div>

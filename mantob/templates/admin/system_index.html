@@ -3,8 +3,8 @@
 $(function() {
 	SwapTab({$page});
 });
-function dr_to_key() {
-	$.post("{dr_url('system/syskey')}", function(data){
+function man_to_key() {
+	$.post("{man_url('system/syskey')}", function(data){
 		$("#sys_key").val(data);
 	});
 }
@@ -24,7 +24,7 @@ function dr_to_key() {
 			<li onclick="SwapTab(3)">{lang('html-550')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-435')}： </th>
@@ -39,7 +39,7 @@ function dr_to_key() {
                     <th>{lang('html-436')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[SYS_KEY]" id="sys_key" value="{if $data['SYS_KEY']}***{/if}" size="20" />
-					<input class="button" type="button" name="button" onclick="dr_to_key()" value="{lang('html-438')}" />
+					<input class="button" type="button" name="button" onclick="man_to_key()" value="{lang('html-438')}" />
 					<div class="onShow">{lang('html-437')}</div>
                     </td>
                 </tr>
@@ -81,12 +81,12 @@ function dr_to_key() {
 				<tr class="">
                     <th>{lang('html-477')}： </th>
                     <td>
-					{dr_lang('html-478', '<input class="input-text" type="text" name="data[SITE_CONVERT]" value="'.$data['SITE_CONVERT'].'" size="10" />')}
+					{man_lang('html-478', '<input class="input-text" type="text" name="data[SITE_CONVERT]" value="'.$data['SITE_CONVERT'].'" size="10" />')}
                     </td>
                 </tr>
 				</table>
 			</div>
-			<div id="cnt_1" style="display:none" class="dr_hide">
+			<div id="cnt_1" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-444')}： </th>
@@ -114,7 +114,7 @@ function dr_to_key() {
                 </tr>
                 </table>
             </div>
-			<div id="cnt_2" style="display:none" class="dr_hide">
+			<div id="cnt_2" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-522')}： </th>
@@ -139,7 +139,7 @@ function dr_to_key() {
                 </tr>
                 </table>
             </div>
-			<div id="cnt_3" style="display:none" class="dr_hide">
+			<div id="cnt_3" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-609')}： </th>
@@ -182,7 +182,7 @@ function dr_to_key() {
 <!--
 function memcache_test() {
 	$("#memcache").val('Loading');
-	$.get("{dr_url('system/memcache')}&"+Math.random(),function(data){
+	$.get("{man_url('system/memcache')}&"+Math.random(),function(data){
 		alert(data);
 		$("#memcache").val('{lang('html-127')}');
 	})

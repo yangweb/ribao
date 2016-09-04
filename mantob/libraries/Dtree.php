@@ -122,7 +122,7 @@ class Dtree {
 			foreach ($child as $id => $value) {
 			
 				$j = $k = '';
-                $class = 'dr_catid_'.$value['id'];
+                $class = 'man_catid_'.$value['id'];
                 $parent = !$value['child'] ? '' : '<a href="javascript:void();" class="blue select-cat" childs="'.$value['childids'].'" action="open" catid='.$id.'>[-]</a>&nbsp;';
 				if ($number == $total) {
 					$j.= $this->icon[2];

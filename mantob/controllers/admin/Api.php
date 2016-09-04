@@ -90,7 +90,7 @@ class Api extends M_Controller {
             exit(lang('037'));
         }
 
-        if (strpos(dr_catcher_data($rurl.'/test.ftp'), 'mantob.com') === FALSE) {
+        if (strpos(man_catcher_data($rurl.'/test.ftp'), 'mantob.com') === FALSE) {
             exit(lang('200'));
         }
 
@@ -126,7 +126,7 @@ class Api extends M_Controller {
 
         if ($response->status == 200) {
             $oss->delete_object($bucket, 'test.txt');
-            if (strpos(dr_catcher_data($rurl.'/test.txt'), 'mantob.com') === FALSE) {
+            if (strpos(man_catcher_data($rurl.'/test.txt'), 'mantob.com') === FALSE) {
                 exit(lang('200'));
             }
             exit('ok');
@@ -161,7 +161,7 @@ class Api extends M_Controller {
         $response = $bcs->create_object($bucket, '/test.txt', FCPATH.'index.php', $opt);
 
         if ($response->status == 200) {
-            if (strpos(dr_catcher_data($rurl.'/test.txt'), 'mantob.com') === FALSE) {
+            if (strpos(man_catcher_data($rurl.'/test.txt'), 'mantob.com') === FALSE) {
                 exit(lang('200'));
             }
             $bcs->delete_object($bucket, '/test.txt');

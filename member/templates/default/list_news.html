@@ -13,7 +13,7 @@
     <div class="sb_box">
 	    <h3 class="title">
 			<div class="position">
-            	当前位置：<a href="{dr_space_url($uid)}">网站首页</a> &gt; {dr_space_catpos($spaceid, $catid, ' > ')}
+            	当前位置：<a href="{man_space_url($uid)}">网站首页</a> &gt; {man_space_catpos($spaceid, $catid, ' > ')}
             </div>
 			<span>{$cat.name}</span>
 		</h3>
@@ -23,7 +23,7 @@
             	{list action=model modelid=$modelid space=$spaceid IN_catid=$cat.childids field=id,title,updatetime page=1 pagesize=10 urlrule=$urlrule}
             	<li class='list'>
                 	<span>[{$t.updatetime}]</span>
-                    <a href='{dr_space_show_url($spaceid, $modelid, $t.id)}'>{$t.title}</a>
+                    <a href='{man_space_show_url($spaceid, $modelid, $t.id)}'>{$t.title}</a>
                 </li>
                 {/list}{$error}
             </ul>

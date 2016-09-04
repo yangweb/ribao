@@ -56,7 +56,7 @@ class Site_model extends CI_Model {
 		$this->db->insert('site', array(
 			'name' => $data['name'],
 			'domain' => $data['domain'],
-			'setting' => dr_array2string($data['setting'])
+			'setting' => man_array2string($data['setting'])
 		));
 		
 		$id = $this->db->insert_id();
@@ -163,7 +163,7 @@ class Site_model extends CI_Model {
 		$this->db->where('id', $id)->update('site', array(
 			'name' => $data['name'],
 			'domain' => $data['domain'],
-			'setting' => dr_array2string($data['setting'])
+			'setting' => man_array2string($data['setting'])
 		));
 	}
 	
@@ -184,7 +184,7 @@ class Site_model extends CI_Model {
 		
 		$data = array();
 		foreach ($_data as $t) {
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['setting'] = man_string2array($t['setting']);
 			$t['setting']['SITE_NAME'] = $t['name'];
 			$t['setting']['SITE_DOMAIN'] = $t['domain'];
 			$data[$t['id']]	= $t;
@@ -208,7 +208,7 @@ class Site_model extends CI_Model {
             return NULL;
         }
 
-        $data['setting'] = dr_string2array($data['setting']);
+        $data['setting'] = man_string2array($data['setting']);
         $data['setting']['SITE_NAME'] = $data['name'];
         $data['setting']['SITE_DOMAIN'] = $data['domain'];
 
@@ -269,7 +269,7 @@ class Site_model extends CI_Model {
                     continue;
                 }
                 // 模块域名归类
-                $site = dr_string2array($t['site']);
+                $site = man_string2array($t['site']);
                 foreach ($site as $sid => $s) {
                     if ($s['use']) {
                         if ($s['domain']) {
@@ -291,7 +291,7 @@ class Site_model extends CI_Model {
                      ->get('member_setting')
                      ->row_array();
         if ($data) {
-            $data = dr_string2array($data['value']);
+            $data = man_string2array($data['value']);
             foreach ($data as $sid => $url) {
                 $domain[$url] = $sid;
             }

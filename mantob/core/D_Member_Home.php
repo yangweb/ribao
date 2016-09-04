@@ -30,14 +30,14 @@ class D_Member_Home extends M_Controller {
             // 判断id是否为空
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             if ($this->input->post('action') == 'update') {
 
                 // 虚拟币检查
                 if ($this->member_rule['update_score'] + $this->member['score'] < 0) {
-                    exit(dr_json(0, dr_lang('mod-08', abs($this->member_rule['update_score']), $this->member['score'])));
+                    exit(man_json(0, man_lang('mod-08', abs($this->member_rule['update_score']), $this->member['score'])));
                 }
 
                 // 积分检查
@@ -48,12 +48,12 @@ class D_Member_Home extends M_Controller {
                 // 更新文档时间
                 $this->content_model->updatetime($ids);
 
-                exit(dr_json(1, lang('mod-12')));
+                exit(man_json(1, lang('mod-12')));
             } else {
 
                 $i = (int) $this->input->post('flag');
                 if (!isset($this->flag[$i])) {
-                    exit(dr_json(0, lang('mod-14')));
+                    exit(man_json(0, lang('mod-14')));
                 }
 
                 $count = count($ids);
@@ -61,7 +61,7 @@ class D_Member_Home extends M_Controller {
 
                 // 虚拟币检查
                 if ($this->member['score'] - $value < 0) {
-                    exit(dr_json(0, dr_lang('mod-11', $value, $this->member['score'])));
+                    exit(man_json(0, man_lang('mod-11', $value, $this->member['score'])));
                 }
 
                 $total = $this->content_model->flag($ids, $i);
@@ -69,10 +69,10 @@ class D_Member_Home extends M_Controller {
                     // 虚拟币
                     $value = abs($this->flag[$i][$this->markrule] * $total);
                     $this->member_model->update_score(1, $this->uid, -$value, '', "lang,m-181," . $total);
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                 }
 
-                exit(dr_json(0, lang('mod-13')));
+                exit(man_json(0, lang('mod-13')));
             }
         }
 
@@ -91,7 +91,7 @@ class D_Member_Home extends M_Controller {
             foreach ($data as $t) {
                 if (!$t['permission'][$this->markrule]['disabled']) {
                     $form[] = array(
-                        'url' => dr_url(APP_DIR.'/form_'.SITE_ID.'_'.$t['id'].'/listc'),
+                        'url' => man_url(APP_DIR.'/form_'.SITE_ID.'_'.$t['id'].'/listc'),
                         'name' => $t['name'],
                     );
                 }
@@ -134,7 +134,7 @@ class D_Member_Home extends M_Controller {
                 'form' => $form,
                 'order' => $order,
                 'extend' => $this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'extend'),
-                'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $catid, 'id=\'dr_catid\' name=\'catid\'', ' -- ', 1, 1),
+                'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $catid, 'id=\'man_catid\' name=\'catid\'', ' -- ', 1, 1),
                 'moreurl' => $url,
                 'flagdata' => $this->flag,
                 'meta_name' => lang('mod-01'),
@@ -175,13 +175,13 @@ class D_Member_Home extends M_Controller {
             // 判断id是否为空
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             if ($this->input->post('action') == 'update') {
                 // 虚拟币检查
                 if ($this->member_rule['update_score'] + $this->member['score'] < 0) {
-                    exit(dr_json(0, dr_lang('mod-08', abs($this->member_rule['update_score']), $this->member['score'])));
+                    exit(man_json(0, man_lang('mod-08', abs($this->member_rule['update_score']), $this->member['score'])));
                 }
                 // 积分检查
                 $this->member_model->update_score(0, $this->uid, (int) $this->member_rule['update_experience'], '', "lang,m-150");
@@ -189,14 +189,14 @@ class D_Member_Home extends M_Controller {
                 $this->member_model->update_score(1, $this->uid, (int) $this->member_rule['update_score'], '', "lang,m-150");
                 // 更新文档时间
                 $this->content_model->updatetime($ids);
-                exit(dr_json(1, lang('mod-12')));
+                exit(man_json(1, lang('mod-12')));
             } else {
                 $this->link
                      ->where_in('id', $ids)
                      ->where('flag', $id)
                      ->where('uid', $this->uid)
                      ->delete($this->content_model->prefix.'_flag');
-                exit(dr_json(1, lang('000')));
+                exit(man_json(1, lang('000')));
                 exit;
             }
         }
@@ -255,7 +255,7 @@ class D_Member_Home extends M_Controller {
 			</script>';
             $this->template->assign(array(
                 'select' => $select,
-                'category' => $this->select_category($module['category'], $catid, 'id=\'dr_catid\' name=\'catid\'', '', 1, 1),
+                'category' => $this->select_category($module['category'], $catid, 'id=\'man_catid\' name=\'catid\'', '', 1, 1),
                 'meta_name' => lang('cat-00')
             ));
             $this->template->display('content_select.html');
@@ -281,7 +281,7 @@ class D_Member_Home extends M_Controller {
                               ->where('catid', $catid)
                               ->count_all_results($this->content_model->prefix.'_index');
                 if ($total >= $this->module_rule[$catid]['postnum']) {
-                    $this->member_msg(dr_lang('mod-16', $this->module_rule[$catid]['postnum']));
+                    $this->member_msg(man_lang('mod-16', $this->module_rule[$catid]['postnum']));
                 }
             }
             // 投稿总数检查
@@ -291,12 +291,12 @@ class D_Member_Home extends M_Controller {
                               ->where('catid', $catid)
                               ->count_all_results($this->content_model->prefix.'_index');
                 if ($total >= $this->module_rule[$catid]['postcount']) {
-                    $this->member_msg(dr_lang('mod-17', $this->module_rule[$catid]['postcount']));
+                    $this->member_msg(man_lang('mod-17', $this->module_rule[$catid]['postcount']));
                 }
             }
             // 虚拟币检查
             if ($this->uid && $this->module_rule[$catid]['score'] + $this->member['score'] < 0) {
-                $this->member_msg(dr_lang('mod-09', abs($this->module_rule[$catid]['score']), $this->member['score']));
+                $this->member_msg(man_lang('mod-09', abs($this->module_rule[$catid]['score']), $this->member['score']));
             }
             // 字段验证与过滤
             $cat = $module['category'][$catid];
@@ -347,14 +347,14 @@ class D_Member_Home extends M_Controller {
                         $this->attachment_handle($this->uid, $mark, $field);
                         $this->attachment_replace($this->uid, $id, $this->content_model->prefix);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-340'), dr_member_url(APP_DIR.'/home/index')));
+                            exit(man_json(1, lang('m-340'), man_member_url(APP_DIR.'/home/index')));
                         }
                         $this->template->assign(array(
                             'url' => SITE_URL.APP_DIR.'/index.php?c=show&id='.$id,
-                            'add' => dr_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
+                            'add' => man_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
                             'edit' => 0,
-                            'html' => MODULE_HTML ? dr_module_create_show_file($id).dr_module_create_list_file($catid) : '',
-                            'list' => $this->member['uid'] ? dr_member_url(APP_DIR . '/home/index') : SITE_URL.APP_DIR.'/index.php?c=category&id='.$catid,
+                            'html' => MODULE_HTML ? man_module_create_show_file($id).man_module_create_list_file($catid) : '',
+                            'list' => $this->member['uid'] ? man_member_url(APP_DIR . '/home/index') : SITE_URL.APP_DIR.'/index.php?c=category&id='.$catid,
                             'catid' => $catid,
                             'meta_name' => lang('mod-19')
                         ));
@@ -362,13 +362,13 @@ class D_Member_Home extends M_Controller {
                     } else {
                         $this->attachment_handle($this->uid, $this->content_model->prefix.'_verify-'.$id, $field);
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR.'/verify/index')));
+                            exit(man_json(1, lang('m-341'), man_member_url(APP_DIR.'/verify/index')));
                         }
                         $this->template->assign(array(
-                            'url' => dr_member_url(APP_DIR.'/verify/index'),
-                            'add' => dr_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
+                            'url' => man_member_url(APP_DIR.'/verify/index'),
+                            'add' => man_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
                             'edit' => 0,
-                            'list' => $this->member['uid'] ? dr_member_url(APP_DIR.'/home/index') : SITE_URL.APP_DIR.'/index.php?c=category&id='.$catid,
+                            'list' => $this->member['uid'] ? man_member_url(APP_DIR.'/home/index') : SITE_URL.APP_DIR.'/index.php?c=category&id='.$catid,
                             'catid' => $catid,
                             'meta_name' => lang('mod-19')
                         ));
@@ -378,20 +378,20 @@ class D_Member_Home extends M_Controller {
                 }
             }
             if (IS_AJAX) {
-                exit(dr_json(0, $error['msg'], $error['error']));
+                exit(man_json(0, $error['msg'], $error['error']));
             }
             unset($data['id']);
         }
 
         $backurl = str_replace(MEMBER_URL, '', $_SERVER['HTTP_REFERER']);
         $this->template->assign(array(
-            'purl' => dr_url(APP_DIR . '/home/add', array('id' => $id)),
+            'purl' => man_url(APP_DIR . '/home/add', array('id' => $id)),
             'catid' => $catid,
             'error' => $error,
             'verify' => 0,
-            'select' => $this->select_category($module['category'], $catid, 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', ' -- ', 1, 1),
+            'select' => $this->select_category($module['category'], $catid, 'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"', ' -- ', 1, 1),
             'myfield' => $this->field_input($field, $data, TRUE),
-            'listurl' => $backurl ? $backurl : dr_url(APP_DIR . '/home/index'),
+            'listurl' => $backurl ? $backurl : man_url(APP_DIR . '/home/index'),
             'isselect' => $isselect,
             'meta_name' => lang('mod-02'),
             'result_error' => $error,
@@ -458,27 +458,27 @@ class D_Member_Home extends M_Controller {
                     $this->attachment_handle($this->uid, $this->content_model->prefix.'-'.$id, $field, $_data, $data[1]['status'] == 9 ? TRUE : FALSE);
                     if ($data[1]['status'] == 9) { // 审核通过
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-340'), dr_member_url(APP_DIR.'/home/index')));
+                            exit(man_json(1, lang('m-340'), man_member_url(APP_DIR.'/home/index')));
                         }
                         $this->template->assign(array(
                             'url' => SITE_URL.APP_DIR.'/index.php?c=show&id='.$id,
-                            'add' => dr_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
+                            'add' => man_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
                             'edit' => 1,
-                            'list' => dr_member_url(APP_DIR.'/home/index'),
-                            'html' => MODULE_HTML ? dr_module_create_show_file($id).dr_module_create_list_file($catid) : '',
+                            'list' => man_member_url(APP_DIR.'/home/index'),
+                            'html' => MODULE_HTML ? man_module_create_show_file($id).man_module_create_list_file($catid) : '',
                             'catid' => $catid,
                             'meta_name' => lang('mod-03')
                         ));
                         $this->template->display('success.html');
                     } else {
                         if (IS_AJAX) {
-                            exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR.'/verify/index')));
+                            exit(man_json(1, lang('m-341'), man_member_url(APP_DIR.'/verify/index')));
                         }
                         $this->template->assign(array(
-                            'url' => dr_member_url(APP_DIR.'/verify/index'),
-                            'add' => dr_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
+                            'url' => man_member_url(APP_DIR.'/verify/index'),
+                            'add' => man_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
                             'edit' => 1,
-                            'list' => dr_member_url(APP_DIR.'/home/index'),
+                            'list' => man_member_url(APP_DIR.'/home/index'),
                             'catid' => $catid,
                             'meta_name' => lang('mod-03')
                         ));
@@ -490,21 +490,21 @@ class D_Member_Home extends M_Controller {
                 exit;
             }
             if (IS_AJAX) {
-                exit(dr_json(0, $error['msg'], $error['error']));
+                exit(man_json(0, $error['msg'], $error['error']));
             }
         }
 
         $backurl = str_replace(MEMBER_URL, '', $_SERVER['HTTP_REFERER']);
         $this->template->assign(array(
-            'purl' => dr_url(APP_DIR.'/home/add', array('id' => $id)),
+            'purl' => man_url(APP_DIR.'/home/add', array('id' => $id)),
             'data' => $data,
             'catid' => $catid,
             'error' => $error,
             'isedit' => $isedit,
-            'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1),
+            'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1),
             'backurl' => $_SERVER['HTTP_REFERER'],
             'myfield' => $this->field_input($field, $data, TRUE),
-            'listurl' => $backurl ? $backurl : dr_url(APP_DIR.'/home/index'),
+            'listurl' => $backurl ? $backurl : man_url(APP_DIR.'/home/index'),
             'meta_name' => lang('mod-21'),
             'result_error' => $error,
         ));
@@ -528,12 +528,12 @@ class D_Member_Home extends M_Controller {
 
         // 删除权限判断
         if (!$data || !$this->module_rule[$data['catid']]['del']) {
-            exit(dr_json(0, lang('mod-22')));
+            exit(man_json(0, lang('mod-22')));
         }
 
         $this->content_model->delete_for_id($id, (int)$data['tableid']);
 
-        exit(dr_json(1, lang('000')));
+        exit(man_json(1, lang('000')));
     }
 
     /**
@@ -548,7 +548,7 @@ class D_Member_Home extends M_Controller {
             // 判断id是否为空
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             $this->link
@@ -556,7 +556,7 @@ class D_Member_Home extends M_Controller {
                  ->where('uid', $this->uid)
                  ->delete($table);
 
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         $page = max((int) $this->input->get('page'), 1);
@@ -596,7 +596,7 @@ class D_Member_Home extends M_Controller {
             // 判断id是否为空
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             $this->link
@@ -604,7 +604,7 @@ class D_Member_Home extends M_Controller {
                  ->where('uid', $this->uid)
                  ->delete($table);
 
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         }
 
         $page = max((int) $this->input->get('page'), 1);
@@ -638,7 +638,7 @@ class D_Member_Home extends M_Controller {
      * @return void
      */
     public function field() {
-        $data = dr_string2array($this->input->post('data'));
+        $data = man_string2array($this->input->post('data'));
         $field = $this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category', (int) $this->input->post('catid'), 'field');
         if (!$field) {
             exit('');

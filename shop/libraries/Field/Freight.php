@@ -37,7 +37,7 @@ class F_Freight extends A_Field {
 	 * 字段输出
 	 */
 	public function output($value) {
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ class F_Freight extends A_Field {
 	public function insert_value($field) {
 		$value = $this->ci->post[$field['fieldname']];
 		if ((float)$value['price'] > 0) {
-			$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($value);
+			$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($value);
 		} else {
 			$this->ci->data[$field['ismain']][$field['fieldname']] = 0;
 		}
@@ -67,9 +67,9 @@ class F_Freight extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="dr_'.$name.'_tips"></div>';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '<div class="onTime" id="man_'.$name.'_tips"></div>';
 		// 字段默认值
-		$value = is_array($value) ? $value : dr_string2array($value);
+		$value = is_array($value) ? $value : man_string2array($value);
 		$str = '
 		<select name="data[freight][type]">
 		<option value="0" '.(isset($value['type']) && $value['type'] == 0 ? 'selected' : '').'> 按订单 </option>

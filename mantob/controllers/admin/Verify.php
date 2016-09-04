@@ -33,10 +33,10 @@ class Verify extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
             $this->db->where_in('id', $ids)->delete($this->db->dbprefix('admin_verify'));
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		}
 		
 		$this->template->assign('list', $this->auth_model->get_verify_all());
@@ -52,12 +52,12 @@ class Verify extends M_Controller {
 		
 			$data = $this->input->post('data', TRUE);
             if (count($data['role']) > 8) {
-                exit(dr_json(0, lang('119')));
+                exit(man_json(0, lang('119')));
             }
 			
-			exit(dr_json(1, lang('014'), $this->db->insert('admin_verify', array(
+			exit(man_json(1, lang('014'), $this->db->insert('admin_verify', array(
 				'name' => $data['name'],
-				'verify' => dr_array2string($data['role'])
+				'verify' => man_array2string($data['role'])
 			))));
 		}
 		
@@ -91,12 +91,12 @@ class Verify extends M_Controller {
 		
 			$data = $this->input->post('data', TRUE);
 		    if (count($data['role']) > 8) {
-                exit(dr_json(0, lang('119')));
+                exit(man_json(0, lang('119')));
             }
 			
-			exit(dr_json(1, lang('014'), $this->db->where('id', $id)->update('admin_verify', array(
+			exit(man_json(1, lang('014'), $this->db->where('id', $id)->update('admin_verify', array(
 				'name' => $data['name'],
-				'verify' => dr_array2string($data['role'])
+				'verify' => man_array2string($data['role'])
 			))));
 		}
 		
@@ -123,7 +123,7 @@ class Verify extends M_Controller {
         $this->db
              ->where('id', (int)$this->input->get('id'))
              ->delete($this->db->dbprefix('admin_verify'));
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
 	}
     
     /**

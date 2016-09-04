@@ -45,7 +45,7 @@ $files = array();
 foreach ($data as $t) {
     $files[] = array(
         'id' => 'mantob_img_'.$t['id'],
-        'url'=> dr_file($t['attachment']),
+        'url'=> man_file($t['attachment']),
         'mtime'=> $t['inputtime']
     );
 }

@@ -1,6 +1,6 @@
 {template header.html}
 <script type="text/javascript">
-function dr_remove() {
+function man_remove() {
     $("#action").val('flag');
 	var _data = $("#myform").serialize();
 	var _url = window.location.href;
@@ -27,7 +27,7 @@ function dr_remove() {
 	});
 	return false;
 }
-function dr_update() {
+function man_update() {
     $("#action").val('update');
 	var _data = $("#myform").serialize();
 	var _url = window.location.href;
@@ -54,14 +54,14 @@ function dr_update() {
 	});
 	return false;
 }
-function dr_delete(catid, id) {
+function man_delete(catid, id) {
     art.dialog.confirm("你确认要删除吗？", function(){
 		// 将表单数据ajax提交验证
-		$.ajax({type: "POST",dataType:"json", url: "{dr_member_url(APP_DIR.'/home/del')}",data: {catid:catid,id:id}, success: function(data) {
+		$.ajax({type: "POST",dataType:"json", url: "{man_member_url(APP_DIR.'/home/del')}",data: {catid:catid,id:id}, success: function(data) {
 				//验证成功
 				if (data.status == 1) {
 					$.dialog.tips(data.code, 3, 1);
-					$("#dr_row_"+id).hide();
+					$("#man_row_"+id).hide();
 				} else {
 					$.dialog.tips(data.code, 3, 0);
 				}
@@ -77,16 +77,16 @@ function dr_delete(catid, id) {
 	return false;
 }
 </script>
-<input name="page" id="dr_page" type="hidden" value="2" />
+<input name="page" id="man_page" type="hidden" value="2" />
 <div class="content clearfix">
 	{template navigator.html}
     <div class="article">
         <div class="section">
             <div class="title"><strong>{$meta_name}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
             	<div class="msearch mbutton">
                 	{loop $flag $i $t}
-                    <a href="{dr_member_url(APP_DIR.'/home/flag', array('id' => $i))}" {if $i==$id}class="cur"{/if}>{$t.name}</a>
+                    <a href="{man_member_url(APP_DIR.'/home/flag', array('id' => $i))}" {if $i==$id}class="cur"{/if}>{$t.name}</a>
                     {/loop}
 				</div>
                 <div class="bk10"></div>
@@ -102,16 +102,16 @@ function dr_delete(catid, id) {
 						<th style="width:70px;" class="algin_l">操作</th>
 					</tr>
 				</thead>
-				<tbody id="dr_body">
+				<tbody id="man_body">
 				{template content_data.html}
 				</tbody>
 				</table>
                 <table style="table-layout:fixed;" class="mbutton">
                 <tr>
-                    <td style="width:20px;border:none" class="algin_r"><input type="checkbox" onclick="dr_selected()" id="dr_select" name="dr_select"></td>
+                    <td style="width:20px;border:none" class="algin_r"><input type="checkbox" onclick="man_selected()" id="man_select" name="man_select"></td>
 					<td class="algin_l" style="padding-top:8px;border:none">
-                    <button type="button" class="red_button" onClick="dr_remove()">移出</button>
-                    <button type="button" class="blue_button" onClick="dr_update()">更新</button>
+                    <button type="button" class="red_button" onClick="man_remove()">移出</button>
+                    <button type="button" class="blue_button" onClick="man_update()">更新</button>
                     <div class="onShow">
                     {if $member_rule['update_score'] > 0}
                     更新一次增加<font color="#0000FF"><b>{$member_rule['update_score']}</b></font>{SITE_SCORE}

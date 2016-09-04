@@ -81,11 +81,11 @@ class Home extends M_Controller {
 				$site = $this->db->get('site')->result_array();
 				foreach ($site as $t) {
 					$domain = $data[$t['id']];
-					$setting = dr_string2array($t['setting']);
+					$setting = man_string2array($t['setting']);
 					$setting['SITE_DOMAIN'] = $domain;
 					$this->db->where('id', $t['id'])->update('site', array(
 						'domain' => $domain,
-						'setting' => dr_array2string($setting),
+						'setting' => man_array2string($setting),
 					));
 					$this->dconfig
 						 ->file(FCPATH.'config/site/'.$t['id'].'.php')
@@ -114,7 +114,7 @@ class Home extends M_Controller {
 							'id' => $t['id'],
 							'name' => $t['name'],
 							'domain' => $t['domain'],
-							'setting' => dr_string2array($t['setting']),
+							'setting' => man_string2array($t['setting']),
 						);
 					}
 				}

@@ -128,7 +128,7 @@ class Api extends M_Controller {
 		// 页面输出
 		if ($format == 'xml') {
 			header('Content-Type: text/xml');
-			echo dr_array2xml($data, FALSE);
+			echo man_array2xml($data, FALSE);
 		} else {
 			echo json_encode($data);
 		}
@@ -162,13 +162,13 @@ class Api extends M_Controller {
 			if($description){
 					$s[$k][description]=mb_substr($data[$k][description],0,$description);
 			}
-			$s[$k][newthumb]=dr_file_info($data[$k][thumb]);
+			$s[$k][newthumb]=man_file_info($data[$k][thumb]);
 			$s[$k][newthumb]=$s[$k][newthumb][attachment];
 		}
 		// 页面输出
 		if ($format == 'xml') {
 			header('Content-Type: text/xml');
-			echo dr_array2xml($data, FALSE);
+			echo man_array2xml($data, FALSE);
 		} elseif ($format == 'jsonp') {
 			echo $this->input->get('callback').'('.json_encode($s).')';
 		} else {

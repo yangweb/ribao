@@ -7,7 +7,7 @@
 			<li><em>3</em>完成安装</li>
 		</ul>
 	</div>
-	<form id="J_install_form" action="{dr_url('install/index', array('step'=>$step))}" method="post" onsubmit="return installSubmit()">
+	<form id="J_install_form" action="{man_url('install/index', array('step'=>$step))}" method="post" onsubmit="return installSubmit()">
 	<div class="server">
 		<table width="100%">
 			<tr>
@@ -67,7 +67,7 @@
 		<div id="J_response_tips" style="display:none;"></div>
 	</div>
 	<div class="bottom tac">
-		<a href="{dr_url('install/index', array('step'=>$step-1))}" class="btn">上一步</a>
+		<a href="{man_url('install/index', array('step'=>$step-1))}" class="btn">上一步</a>
         <button type="submit" class="btn btn_submit J_install_btn">创建数据</button>
 	</div>
 </form>
@@ -83,7 +83,7 @@ function installSubmit() {
 	response_tips.html('<div class="loading"><span>请稍后...</span></div>').show();
 	$.ajax({
 		type: "POST",
-		url: "{dr_url('install/index', array('step'=>$step))}",
+		url: "{man_url('install/index', array('step'=>$step))}",
 		data: _data,
 		dataType: "json",
 		success: function (data) {

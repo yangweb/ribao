@@ -29,7 +29,7 @@ class D_Member_Back extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 			
 			$this->load->model('attachment_model');
@@ -48,7 +48,7 @@ class D_Member_Back extends M_Controller {
 				}
 			}
 			
-			exit(dr_json(1, lang('mod-03')));
+			exit(man_json(1, lang('mod-03')));
 		}
 		
 		$this->link
@@ -134,13 +134,13 @@ class D_Member_Back extends M_Controller {
 				// 修改数据
 				if ($this->content_model->edit($_data, $data)) {
 					if (IS_AJAX) {
-                        exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR.'/verify/index')));
+                        exit(man_json(1, lang('m-341'), man_member_url(APP_DIR.'/verify/index')));
                     }
 					$this->template->assign(array(
-						'url' => dr_member_url(APP_DIR.'/verify/index'),
-						'add' => dr_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
+						'url' => man_member_url(APP_DIR.'/verify/index'),
+						'add' => man_member_url(APP_DIR.'/home/add', array('catid' => $catid)),
 						'edit' => 1,
-						'list' => dr_member_url(APP_DIR.'/home/index'),
+						'list' => man_member_url(APP_DIR.'/home/index'),
 						'catid' => $catid,
 						'meta_name' => lang('mod-03')
 					));
@@ -154,15 +154,15 @@ class D_Member_Back extends M_Controller {
 		
 		$backurl = str_replace(MEMBER_URL, '', $_SERVER['HTTP_REFERER']);
 		$this->template->assign(array(
-			'purl' => dr_url(APP_DIR.'/back/edit', array('id' => $id)),
+			'purl' => man_url(APP_DIR.'/back/edit', array('id' => $id)),
 			'data' => $data,
 			'catid' => $catid,
 			'error' => $error,
 			'isedit' => $isedit,
-			'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'),$data['catid'],'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"','',1),
+			'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'),$data['catid'],'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"','',1),
             'myfield' => $this->field_input($field, $data, TRUE),
-            'listurl' => $backurl ? $backurl : dr_url(APP_DIR.'/back/index'),
-			'listurl' => $backurl ? $backurl : dr_url(APP_DIR.'/back/index'),
+            'listurl' => $backurl ? $backurl : man_url(APP_DIR.'/back/index'),
+			'listurl' => $backurl ? $backurl : man_url(APP_DIR.'/back/index'),
             'meta_name' => lang('mod-07'),
             'result_error' => $error,
 		));

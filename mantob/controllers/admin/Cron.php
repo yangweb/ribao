@@ -39,7 +39,7 @@ class Cron extends M_Controller {
 			'list' => $list,
 			'total' => (int)$param['total'],
 			'type' => $this->cron_model->get_type(),
-			'pages'	=> $this->get_pagination(dr_url('cron/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url('cron/index', $param), $param['total']),
 		));
 		$this->template->display('cron_index.html');
     }
@@ -59,7 +59,7 @@ class Cron extends M_Controller {
             exit(lang('019'));
         }
 		echo '<pre style="width:500px;max-height:400px;overflow:auto;margin-bottom:10px;">';
-		print_r(dr_string2array($data['value']));
+		print_r(man_string2array($data['value']));
 		echo '</pre>';
     }
 
@@ -79,6 +79,6 @@ class Cron extends M_Controller {
         }
 		
 		$this->cron_model->execute($data);
-		$this->admin_msg(lang('000'), dr_url('cron/index'), 1);
+		$this->admin_msg(lang('000'), man_url('cron/index'), 1);
 	}
 }

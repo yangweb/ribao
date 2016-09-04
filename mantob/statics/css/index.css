@@ -209,7 +209,7 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
 #pages a:hover { background:#f1f1f1; color:#000; text-decoration:none; }
 #pages span { display:inline-block; height:22px;padding:0 10px; line-height:22px; background:#219805; border:1px solid #219805; color:#fff; text-align:center;margin: 0 -6px 0 1px; }
 .page .noPage { display:inline-block; height:22px; line-height:22px; background:url(../img/icu/titleBg.png) repeat-x 0 -55px ; border:1px solid #e3e3e3; text-align:center; color:#a4a4a4; }
-.dr_footer{ text-align:center;}
+.man_footer{ text-align:center;}
 .fillet {
     background: none repeat scroll 0 0 #F6F9FB;
     font-size: 16px;
@@ -229,12 +229,12 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
     width: 100px;
 	color: #4C5A5F
 }
-.dr_store_update li {
+.man_store_update li {
 	line-height:25px;
 	color:#F00;
 	font-weight:bold;
 }
-.dr_store_update a {
+.man_store_update a {
 	color:#F00;
 	font-weight:bold;
 }

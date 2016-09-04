@@ -44,7 +44,7 @@ class Form_model extends CI_Model {
             return lang('239');
         }
 		
-		$data['setting'] = dr_array2string($data['setting']);
+		$data['setting'] = man_array2string($data['setting']);
 		
 		if ($this->link->insert($this->prefix, $data)) {
 			
@@ -69,7 +69,7 @@ class Form_model extends CI_Model {
 			.'	}'.PHP_EOL.PHP_EOL
 			.'}')) {
 				$this->db->where('id', $id)->delete($this->prefix);
-				return dr_lang('243', '/mantob/controllers/admin/');
+				return man_lang('243', '/mantob/controllers/admin/');
 			}
 			
 			$file = FCPATH.'mantob/controllers/'.$name.'.php';
@@ -84,7 +84,7 @@ class Form_model extends CI_Model {
 			.'	}'.PHP_EOL.PHP_EOL
 			.'}')) {
 				$this->db->where('id', $id)->delete($this->prefix);
-				return dr_lang('243', '/mantob/controllers/');
+				return man_lang('243', '/mantob/controllers/');
 			}
 			
 			$sql = "
@@ -112,7 +112,7 @@ class Form_model extends CI_Model {
 				'issystem' => 1,
 				'issearch' => 1,
 				'disabled' => 0,
-				'setting' => dr_array2string(array(
+				'setting' => man_array2string(array(
 					'option' => array(
 						'width' => 400, // 表单宽度
 						'fieldtype' => 'VARCHAR', // 字段类型
@@ -140,7 +140,7 @@ class Form_model extends CI_Model {
 	public function edit($id, $data) {
 		$this->db->where('id', (int)$id)->update($this->prefix, array(
 			'name' => $data['name'],
-			'setting' => dr_array2string($data['setting']),
+			'setting' => man_array2string($data['setting']),
 		));
 	}
 	
@@ -226,12 +226,12 @@ class Form_model extends CI_Model {
 						 ->result_array();
 			if ($data) {
 				foreach ($data as $field) {
-					$field['setting'] = dr_string2array($field['setting']);
+					$field['setting'] = man_string2array($field['setting']);
 					$t['field'][$field['fieldname']] = $field;
 				}
 			}
 			
-			$t['setting'] = dr_string2array($t['setting']);
+			$t['setting'] = man_string2array($t['setting']);
 			$cache[$t['id']] = $t;
 		}
 

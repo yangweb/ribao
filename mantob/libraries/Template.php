@@ -525,7 +525,7 @@ class Template {
                 // 缓存查询结果
                 $data = $db->get($param['id']);
                 $page = max(1, (int)$_GET['page']);
-                $name = 'list-action-content-' . md5(dr_array2string($param)) . '-' . $page;
+                $name = 'list-action-content-' . md5(man_array2string($param)) . '-' . $page;
                 $cache = $this->ci->get_cache_data($name);
                 if (!$cache) {
                     $fields = $module['field'];
@@ -745,7 +745,7 @@ class Template {
                     if (isset($param['id']) && !in_array($t['id'], explode(',', $param['id']))) {
                         continue;
                     }
-                    $t['setting'] = dr_string2array($t['setting']);
+                    $t['setting'] = man_string2array($t['setting']);
                     $return[] = $this->ci->field_format_value($field, $t, 1);
                     $i ++;
                 }
@@ -823,7 +823,7 @@ class Template {
                 $cache = $this->ci->get_cache_data($name);
                 if (!$cache) {
                     foreach ($data as $i => $t) {
-                        $data[$i]['url'] = dr_tag_url($module, $t['name'], 1, $module['dirname']);
+                        $data[$i]['url'] = man_tag_url($module, $t['name'], 1, $module['dirname']);
                     }
                     $cache = $this->ci->set_cache_data($name, $data, $system['cache']);
                 }
@@ -1472,7 +1472,7 @@ class Template {
                 if ($system['page']) {
                     $page = max(1, (int)$_GET['page']);
                     if (is_numeric($system['catid'])) {
-                        $urlrule = dr_category_url($module, $module['category'][$system['catid']], '{page}');
+                        $urlrule = man_category_url($module, $module['category'][$system['catid']], '{page}');
                         $pagesize = $system['pagesize'] ? (int)$system['pagesize'] : (int)$module['category'][$system['catid']]['setting']['template']['pagesize'];
                     } else {
                         $urlrule = str_replace('[page]', '{page}', urldecode($system['urlrule']));

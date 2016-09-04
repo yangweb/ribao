@@ -3,13 +3,13 @@
 $(function(){
 	$(".section_main table tr:last td").css('border-bottom','none');
 });
-function dr_show_more(id) {
-	$(".dr_clear").hide();
-	$(".dr_hide_"+id).show();
+function man_show_more(id) {
+	$(".man_clear").hide();
+	$(".man_hide_"+id).show();
 }
 </script>
 <style type="text/css">
-.dr_table td {
+.man_table td {
     border-bottom: 1px solid #EEEEEE;
     height: 25px;
     line-height: 25px;
@@ -25,13 +25,13 @@ function dr_show_more(id) {
 		</div>
         <div class="section_title">
         	{loop $category $p $name}
-        	<a href="{dr_member_url('account/permission', array('groupid' => $groupid, 'levelid' => $levelid, 'page' => $p))}" {if $page==$p}class="cur"{/if}>{$name}</a>
+        	<a href="{man_member_url('account/permission', array('groupid' => $groupid, 'levelid' => $levelid, 'page' => $p))}" {if $page==$p}class="cur"{/if}>{$name}</a>
 			{/loop}
         </div>
         <div class="section_main">
             <div class="msearch mbutton">
             {loop $group.level $lid $t}
-            <a href="{dr_member_url('account/permission', array('groupid' => $groupid, 'levelid' => $lid, 'page' => $page))}" {if $lid==$levelid}class="cur"{/if}>{$t.name}</a>
+            <a href="{man_member_url('account/permission', array('groupid' => $groupid, 'levelid' => $lid, 'page' => $page))}" {if $lid==$levelid}class="cur"{/if}>{$t.name}</a>
             {/loop}
             </div>
             <div style="margin-bottom:10px;height:20px"></div>

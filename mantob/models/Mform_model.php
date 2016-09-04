@@ -30,9 +30,9 @@ class Mform_model extends CI_Model {
 	
 		$this->link->insert($this->table, array(
 			'name' => $data['name'] ? $data['name'] : 'form',
-			'setting' => dr_array2string($data['setting']),
+			'setting' => man_array2string($data['setting']),
 			'disabled' => 0,
-			'permission' => dr_array2string($data['permission']),
+			'permission' => man_array2string($data['permission']),
 		));
 		
 		if ($id = $this->link->insert_id()) {
@@ -48,7 +48,7 @@ class Mform_model extends CI_Model {
 			.'	}'.PHP_EOL
 			.'}')) {
 				$this->link->where('id', $id)->delete($this->table);
-				return dr_lang('243', FCPATH.$this->dir.'/controllers/admin/');
+				return man_lang('243', FCPATH.$this->dir.'/controllers/admin/');
 			}
 			// 会员控制器
 			$file = FCPATH.$this->dir.'/controllers/member/'.$name.'.php';
@@ -60,7 +60,7 @@ class Mform_model extends CI_Model {
 			.'	}'.PHP_EOL
 			.'}')) {
 				$this->link->where('id', $id)->delete($this->table);
-				return dr_lang('243', FCPATH.$this->dir.'/controllers/member/');
+				return man_lang('243', FCPATH.$this->dir.'/controllers/member/');
 			}
 			// 前端发布控制器
 			$file = FCPATH.$this->dir.'/controllers/'.$name.'.php';
@@ -72,7 +72,7 @@ class Mform_model extends CI_Model {
 			.'	}'.PHP_EOL
 			.'}')) {
 				$this->link->where('id', $id)->delete($this->table);
-				return dr_lang('243', APPPATH.'controllers/');
+				return man_lang('243', APPPATH.'controllers/');
 			}
 			// 主表sql
             $this->link->query("DROP TABLE IF EXISTS `".$this->table.'_'.$id."`");
@@ -106,7 +106,7 @@ class Mform_model extends CI_Model {
 				'issystem' => 1,
 				'issearch' => 1,
 				'disabled' => 0,
-				'setting' => dr_array2string(array(
+				'setting' => man_array2string(array(
 					'option' => array(
 						'width' => 300, // 表单宽度
 						'fieldtype' => 'VARCHAR', // 字段类型

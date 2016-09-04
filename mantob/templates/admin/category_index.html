@@ -8,22 +8,22 @@ $(function() {
 		var catids= new Array(); //定义一数组
 		catids = childs.split(","); //字符分割
 		if (action == 'close') {
-			$.cookie('dr_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid, null,{path:"/",expires: -1});
+			$.cookie('man_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid, null,{path:"/",expires: -1});
 			$(this).attr("action", "open");
 			$(this).html("[-]");
 			for (i=0;i<catids.length ;i++ ) {   
 				if (catids[i] != catid) {
-					$(".dr_catid_"+catids[i]).show();
+					$(".man_catid_"+catids[i]).show();
 				}
 			}
 		} else {
 			// 关闭状态存储cookie
-			$.cookie('dr_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid, 1);
+			$.cookie('man_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid, 1);
 			$(this).attr("action", "close");
 			$(this).html("[+]");
 			for (i=0;i<catids.length ;i++ ) {   
 				if (catids[i] != catid) {
-					$(".dr_catid_"+catids[i]).hide();
+					$(".man_catid_"+catids[i]).hide();
 				}
 			}
 		}
@@ -31,7 +31,7 @@ $(function() {
 	$(".select-cat").each(function(){
 		var childs = $(this).attr("childs");
 		var catid = $(this).attr("catid");
-		var cache = $.cookie('dr_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid);
+		var cache = $.cookie('man_{SITE_ID}_{APP_DIR}_{$this->ci->router->class}_'+catid);
 		if (cache) {
 			$(this).attr("action", "close");
 			$(this).html("[+]");
@@ -39,7 +39,7 @@ $(function() {
 			catids = childs.split(","); //字符分割
 			for (i=0;i<catids.length ;i++ ) {   
 				if (catids[i] != catid) {
-					$(".dr_catid_"+catids[i]).hide();
+					$(".man_catid_"+catids[i]).hide();
 				}
 			}
 		} 
@@ -61,7 +61,7 @@ $(function() {
 		<table width="100%">
 		<thead>
         <tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="30" align="center">{lang('order')}</th>
 			<th width="40" align="left">Id</th>
             <th align="left" width="200">{lang('cat-00')}</th>
@@ -74,10 +74,10 @@ $(function() {
 		<tbody>
 		{$list}
 		<tr>
-			<th align="right"><input name="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th align="right"><input name="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="7" align="left"> 
-            {if $this->ci->is_auth('category/del')}<input type="button" class="button" value="{lang('del')}" name="button" onClick="$('#action').val('del');return dr_confirm_set_all('{lang('015')}')" />&nbsp;{/if}
-			{if $this->ci->is_auth('model/edit')}<input type="button" class="button" value="{lang('order')}" name="button" onclick="$('#action').val('order');return dr_confirm_set_all('{lang('015')}')" />&nbsp;<div class="onShow">{lang('html-182')}</div>{/if}
+            {if $this->ci->is_auth('category/del')}<input type="button" class="button" value="{lang('del')}" name="button" onClick="$('#action').val('del');return man_confirm_set_all('{lang('015')}')" />&nbsp;{/if}
+			{if $this->ci->is_auth('model/edit')}<input type="button" class="button" value="{lang('order')}" name="button" onclick="$('#action').val('order');return man_confirm_set_all('{lang('015')}')" />&nbsp;<div class="onShow">{lang('html-182')}</div>{/if}
 			</td>
 		</tr>
 		</tbody>

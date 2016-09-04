@@ -37,7 +37,7 @@ class Auth_model extends CI_Model{
             return NULL;
         }
 		
-        $data['verify'] = dr_string2array($data['verify']);
+        $data['verify'] = man_string2array($data['verify']);
 		
         return $data;
 	}
@@ -58,7 +58,7 @@ class Auth_model extends CI_Model{
         }
 		
         foreach ($data as $i => $t) {
-            $t['verify'] = dr_string2array($t['verify']);
+            $t['verify'] = man_string2array($t['verify']);
             $t['num'] = count($t['verify']);
             $data[$i] = $t;
         }
@@ -93,7 +93,7 @@ class Auth_model extends CI_Model{
 		
 		$this->db->insert('admin_role', array(
 			'name' => $data['name'],
-			'site' => dr_array2string($data['site']),
+			'site' => man_array2string($data['site']),
 			'system' => '',
 			'module' => '',
 			'application' => '',
@@ -118,7 +118,7 @@ class Auth_model extends CI_Model{
 		$this->db
 			 ->where('id', $_data['id'])
 			 ->update('admin_role', array(
-				'site' => dr_array2string($data['site']),
+				'site' => man_array2string($data['site']),
 				'name' => $data['name'],
 			 )
 		);
@@ -142,7 +142,7 @@ class Auth_model extends CI_Model{
 		
 		$this->db
 			 ->where('id', $id)
-			 ->update('admin_role', array($name => dr_array2string($data)));
+			 ->update('admin_role', array($name => man_array2string($data)));
 		$this->role_cache();
 	}
 	
@@ -167,10 +167,10 @@ class Auth_model extends CI_Model{
             return NULL;
         }
 		
-		$data['site'] = dr_string2array($data['site']);
-		$data['system'] = dr_string2array($data['system']);
-		$data['module'] = dr_string2array($data['module']);
-		$data['application'] = dr_string2array($data['application']);
+		$data['site'] = man_string2array($data['site']);
+		$data['system'] = man_string2array($data['system']);
+		$data['module'] = man_string2array($data['module']);
+		$data['application'] = man_string2array($data['application']);
 		
 		return $data;
 	}
@@ -282,10 +282,10 @@ class Auth_model extends CI_Model{
 		
 		$cahce = array();
 		foreach ($data as $t) {
-			$t['site'] = dr_string2array($t['site']);
-			$t['system'] = dr_string2array($t['system']);
-			$t['module'] = dr_string2array($t['module']);
-			$t['application'] = dr_string2array($t['application']);
+			$t['site'] = man_string2array($t['site']);
+			$t['system'] = man_string2array($t['system']);
+			$t['module'] = man_string2array($t['module']);
+			$t['application'] = man_string2array($t['application']);
 			$cache[$t['id']] = $t;
 		}
 		

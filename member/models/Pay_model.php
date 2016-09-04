@@ -351,7 +351,7 @@ class Pay_model extends CI_Model{
 
         if ($order) {
             $sn = 'FC-'.$id.'-'.$this->uid.'-'.strtoupper($module).'-'.$order;
-            $title = dr_lang('m-180', strtoupper($module).'-'.$order);
+            $title = man_lang('m-180', strtoupper($module).'-'.$order);
         } else {
             $sn= 'FC-'.$id.'-'.$this->uid;
             $title = lang('m-179');
@@ -385,7 +385,7 @@ class Pay_model extends CI_Model{
 		// 判断订单是否支付过，否则作废
 		if ($data['order']) {
             $sn = 'FC-'.$id.'-'.$this->uid.'-'.strtoupper($data['module']).'-'.$data['order'];
-			$title = dr_lang('m-180', strtoupper($data['module']).'-'.$data['order']);
+			$title = man_lang('m-180', strtoupper($data['module']).'-'.$data['order']);
 		} else {
             $sn= 'FC-'.$id.'-'.$this->uid;
 			$title = lang('m-179');

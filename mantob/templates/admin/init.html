@@ -32,44 +32,44 @@ tr { height:23px;}
 </style>
 <script type="text/javascript">
 $(function(){
-    $("#dr_result").html("");
-    $("#dr_module").html('<tr><td align="left"><font color="green"><img width="16" src="/mantob/statics/images/ok.png">&nbsp;&nbsp;正在开始安装模块...</font></td></tr>');
+    $("#man_result").html("");
+    $("#man_module").html('<tr><td align="left"><font color="green"><img width="16" src="/mantob/statics/images/ok.png">&nbsp;&nbsp;正在开始安装模块...</font></td></tr>');
     {loop $step $id $name}
     $.ajax({
         type: "GET",
-        url: "{dr_url('check/todo', array('step'=>$id))}&"+Math.random(),
+        url: "{man_url('check/todo', array('step'=>$id))}&"+Math.random(),
         contentType: "application/json; charset=utf-8",
         dataType: "text",
         success: function (data) {
-            $("#dr_result").append(data);
+            $("#man_result").append(data);
         }
     });
     {/loop}
     {loop $module $dir $name}
     $.ajax({
         type: "GET",
-        url: "{dr_url('module/install', array('dir' => $dir, 'admin' => 1))}&"+Math.random(),
+        url: "{man_url('module/install', array('dir' => $dir, 'admin' => 1))}&"+Math.random(),
         contentType: "application/json; charset=utf-8",
         dataType: "text",
         success: function (data) {
             if (data == 'ok') {
-                $("#dr_module").append('<tr><td align="left"><font color="green"><img width="16" src="/mantob/statics/images/ok.png">&nbsp;&nbsp;模块【{$name}】安装成功</font></td></tr>');
+                $("#man_module").append('<tr><td align="left"><font color="green"><img width="16" src="/mantob/statics/images/ok.png">&nbsp;&nbsp;模块【{$name}】安装成功</font></td></tr>');
             } else {
-                $("#dr_module").append('<tr><td align="left"><font color="red"><img width="16" src="/mantob/statics/images/b_drop.png">&nbsp;&nbsp;模块【{$name}】已被安装</font></td></tr>');
+                $("#man_module").append('<tr><td align="left"><font color="red"><img width="16" src="/mantob/statics/images/b_drop.png">&nbsp;&nbsp;模块【{$name}】已被安装</font></td></tr>');
             }
         }
     });
     {/loop}
     $.ajax({
         type: "GET",
-        url: "{dr_url('linkage/import', array('admin'=>1))}&"+Math.random(),
+        url: "{man_url('linkage/import', array('admin'=>1))}&"+Math.random(),
         contentType: "application/json; charset=utf-8",
         dataType: "text",
         success: function (data) {
 
         }
     });
-    art.dialog.notice({ title: '系统提醒', content: "<p style='padding:10px 10px 0px 10px;font-size:14px;'><a href='{dr_url("home/cache")}' style=\"color:red\" target='right'><b>{lang('html-543')}</b></a></p><p style='padding:5px 10px 20px 10px;font-size:14px;'><a href='http://www.mantob.com/help/list-341.html' style=\"color:blue\" target='_blank'><b>{lang('html-627')}</b></a></p><p style='padding:5px 10px 20px 10px;font-size:14px;'><font color='red'><b>为了您系统的稳定性和安全性，请修复体检中的红色提示</b></font></p>",
+    art.dialog.notice({ title: '系统提醒', content: "<p style='padding:10px 10px 0px 10px;font-size:14px;'><a href='{man_url("home/cache")}' style=\"color:red\" target='right'><b>{lang('html-543')}</b></a></p><p style='padding:5px 10px 20px 10px;font-size:14px;'><a href='http://www.mantob.com/help/list-341.html' style=\"color:blue\" target='_blank'><b>{lang('html-627')}</b></a></p><p style='padding:5px 10px 20px 10px;font-size:14px;'><font color='red'><b>为了您系统的稳定性和安全性，请修复体检中的红色提示</b></font></p>",
         time: 100
     });
 });
@@ -82,7 +82,7 @@ $(function(){
 			<div class="clear"></div>
 		</div>
         <div class="table-list">
-            <table width="100%" id="dr_module">
+            <table width="100%" id="man_module">
                 
             </table>
         </div>
@@ -94,7 +94,7 @@ $(function(){
 			<div class="clear"></div>
 		</div>
         <div class="table-list">
-            <table width="100%" id="dr_result">
+            <table width="100%" id="man_result">
             </table>
         </div>
     </div>

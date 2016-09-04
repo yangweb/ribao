@@ -36,8 +36,8 @@
 		<div class="active dl-jqrun contour-1">
         <table width="270" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="50"><div class="memberinfo_avatar"><img src="{dr_avatar($space.uid)}"></a></div></td>
-            <td style="padding-bottom:10px;"><b>{$space.username}</b><br><div class="dr_stars">{dr_show_stars($space.level.stars)}</div></td> 
+            <td width="50"><div class="memberinfo_avatar"><img src="{man_avatar($space.uid)}"></a></div></td>
+            <td style="padding-bottom:10px;"><b>{$space.username}</b><br><div class="man_stars">{man_show_stars($space.level.stars)}</div></td> 
           </tr>
           <tr height="20">
             <td colspan="2">
@@ -74,14 +74,14 @@
 	<div class="{if $i==2}index-conts style-2{else}index-news style-1{/if}">
 		<h3 class="title">
 			<span class='myCorner' data-corner='top 5px'>{$c.name}</span>
-			<a href="{dr_space_list_url($spaceid, $c.id)}" class="more">更多>></a>
+			<a href="{man_space_list_url($spaceid, $c.id)}" class="more">更多>></a>
 		</h3>
 		<div class="active clear listel contour-2">
         <ol class='list-none metlist'>
         	<!--查询当前栏目下的数据，智商太低的就不必掌握它了，复制就行-->
         	{list action=model modelid=$c.modelid space=$spaceid field=id,title,updatetime IN_catid=$c.childids order=updatetime num=5}
         	<li class='list'>
-            	<span class='time'>{$t.updatetime}</span><a href='{dr_space_show_url($spaceid, $c.modelid, $t.id)}' title='{$t.title}'>{dr_strcut($t.title,30)}</a>
+            	<span class='time'>{$t.updatetime}</span><a href='{man_space_show_url($spaceid, $c.modelid, $t.id)}' title='{$t.title}'>{man_strcut($t.title,30)}</a>
             </li>
             {/list}{$error}<!--错误信息显示变量-->
         </ol>
@@ -109,8 +109,8 @@
                 {loop $t.image $i $img}
                 {php if ($i>5) break;}<!--每个相册只显示5张图片吧-->
 				<li class='list'>
-                	<a href='{dr_space_show_url($spaceid, 4, $t.id)}' class='img'><img src='{man_thumb($img.file, 160, 130)}' width='160' height='130' /></a>
-                    <h3 style='width:160px;'><a href='{dr_space_show_url($spaceid, 4, $t.id)}'>{$img.title}</a></h3></li>
+                	<a href='{man_space_show_url($spaceid, 4, $t.id)}' class='img'><img src='{man_thumb($img.file, 160, 130)}' width='160' height='130' /></a>
+                    <h3 style='width:160px;'><a href='{man_space_show_url($spaceid, 4, $t.id)}'>{$img.title}</a></h3></li>
                 {/loop}
 				{/list}{$error}<!--error变量返回错误信息，上线时可以去掉它-->
             	</ol>

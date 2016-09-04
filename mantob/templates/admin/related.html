@@ -39,7 +39,7 @@
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th width="50" align="center">Id</th>
 			<th align="left">{lang('html-214')}</th>
 			<th width="120" align="left">{lang('105')}</th>
@@ -48,9 +48,9 @@
 		<tbody>
 		{loop $list $t}
 		<tr>
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
 			<td align="center">{$t.id}</td>
-			<td align="left" id="dr_row_{$t.id}"><a href="{$t.url}" target="_blank">{dr_keyword_highlight($t.title, $param.keyword)}</a></td>
+			<td align="left" id="man_row_{$t.id}"><a href="{$t.url}" target="_blank">{man_keyword_highlight($t.title, $param.keyword)}</a></td>
 			<td align="left">{man_date($t.updatetime, NULL, 'red')}</td>
 		</tr>
 		{/loop}

@@ -7,7 +7,7 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
+function man_form_check() {
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -16,7 +16,7 @@ function dr_form_check() {
 }
 </script>
 <div style="max-height:400px;overflow-x:hidden;overflow-y:auto">
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table width="550" border="0" cellspacing="0" cellpadding="0" class="table-list">
 {if $get.id}
@@ -25,57 +25,57 @@ function dr_form_check() {
     <td colspan="2"><b>{SITE_SCORE}</b></td>
   </tr>
   <tr>
-    <td width="160" align="right">{dr_lang('m-269', SITE_EXPERIENCE)}：</td>
+    <td width="160" align="right">{man_lang('m-269', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[login_experience]" value="{abs(intval($data['login_experience']))}" size="5" class="input-text" /></td>
-    <td width="160" align="right">{dr_lang('m-269', SITE_SCORE)}：</td>
+    <td width="160" align="right">{man_lang('m-269', SITE_SCORE)}：</td>
     <td width=""><input type="text" name="data[login_score]" value="{abs(intval($data['login_score']))}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-270', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-270', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[avatar_experience]" value="{abs(intval($data['avatar_experience']))}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-270', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-270', SITE_SCORE)}：</td>
     <td><input type="text" name="data[avatar_score]" value="{abs(intval($data['avatar_score']))}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-271', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-271', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[complete_experience]" value="{abs(intval($data['complete_experience']))}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-271', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-271', SITE_SCORE)}：</td>
     <td><input type="text" name="data[complete_score]" value="{abs(intval($data['complete_score']))}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-272', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-272', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[bang_experience]" value="{intval($data['bang_experience'])}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-272', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-272', SITE_SCORE)}：</td>
     <td><input type="text" name="data[bang_score]" value="{intval($data['bang_score'])}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-273', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-273', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[jie_experience]" value="{intval($data['jie_experience'])}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-273', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-273', SITE_SCORE)}：</td>
     <td><input type="text" name="data[jie_score]" value="{intval($data['jie_score'])}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-274', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-274', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[update_experience]" value="{intval($data['update_experience'])}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-274', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-274', SITE_SCORE)}：</td>
     <td><input type="text" name="data[update_score]" value="{intval($data['update_score'])}" size="5" class="input-text" /></td>
   </tr>
   <tr>
-    <td align="right">{dr_lang('m-323', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('m-323', SITE_EXPERIENCE)}：</td>
     <td><input type="text" name="data[download_experience]" value="{intval($data['download_experience'])}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('m-323', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('m-323', SITE_SCORE)}：</td>
     <td><input type="text" name="data[download_score]" value="{intval($data['download_score'])}" size="5" class="input-text" /></td>
   </tr>
     <tr>
-        <td align="right">{dr_lang('m-208', SITE_EXPERIENCE)}：</td>
+        <td align="right">{man_lang('m-208', SITE_EXPERIENCE)}：</td>
         <td><input type="text" name="data[invite_experience]" value="{abs(intval($data['invite_experience']))}" size="5" class="input-text" /></td>
-        <td align="right">{dr_lang('m-208', SITE_SCORE)}：</td>
+        <td align="right">{man_lang('m-208', SITE_SCORE)}：</td>
         <td><input type="text" name="data[invite_score]" value="{abs(intval($data['invite_score']))}" size="5" class="input-text" /></td>
     </tr>
     <tr>
-        <td align="right">{dr_lang('m-209', SITE_EXPERIENCE)}：</td>
+        <td align="right">{man_lang('m-209', SITE_EXPERIENCE)}：</td>
         <td><input type="text" name="data[feed_experience]" value="{abs(intval($data['feed_experience']))}" size="5" class="input-text" /></td>
-        <td align="right">{dr_lang('m-209', SITE_SCORE)}：</td>
+        <td align="right">{man_lang('m-209', SITE_SCORE)}：</td>
         <td><input type="text" name="data[feed_score]" value="{abs(intval($data['feed_score']))}" size="5" class="input-text" /></td>
     </tr>
   <tr>

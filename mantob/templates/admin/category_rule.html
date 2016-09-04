@@ -7,7 +7,7 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
+function man_form_check() {
 	if ($("#mark").val() == 0) { 
 		return true;
 	} else {
@@ -15,7 +15,7 @@ function dr_form_check() {
 	}
 }
 </script>
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table width="530" border="0" cellspacing="0" cellpadding="0" class="table-list">
   <tr>
@@ -23,23 +23,23 @@ function dr_form_check() {
     <td colspan="2"><b>{SITE_SCORE}</b></td>
   </tr>
   <tr>
-    <td width="140" align="right">{dr_lang('html-256', SITE_EXPERIENCE)}：</td>
+    <td width="140" align="right">{man_lang('html-256', SITE_EXPERIENCE)}：</td>
     <td width=""><input type="text" name="data[experience]" value="{intval($data['experience'])}" size="5" class="input-text" /></td>
-    <td width="140" align="right">{dr_lang('html-256', SITE_SCORE)}：</td>
+    <td width="140" align="right">{man_lang('html-256', SITE_SCORE)}：</td>
     <td width=""><input type="text" name="data[score]" value="{intval($data['score'])}" size="5" class="input-text" /></td>
   </tr>
   {if $extend}
   <tr>
-    <td align="right">{dr_lang('mod-43', SITE_EXPERIENCE)}：</td>
+    <td align="right">{man_lang('mod-43', SITE_EXPERIENCE)}：</td>
     <td width=""><input type="text" name="data[extend_experience]" value="{intval($data['extend_experience'])}" size="5" class="input-text" /></td>
-    <td align="right">{dr_lang('mod-43', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('mod-43', SITE_SCORE)}：</td>
     <td width=""><input type="text" name="data[extend_score]" value="{intval($data['extend_score'])}" size="5" class="input-text" /></td>
   </tr>
   {/if}
   <tr>
     <td align="right"></td>
     <td width=""></td>
-    <td align="right">{dr_lang('html-630', SITE_SCORE)}：</td>
+    <td align="right">{man_lang('html-630', SITE_SCORE)}：</td>
     <td width=""><input type="text" name="data[read_score]" value="{intval($data['read_score'])}" size="5" class="input-text" /></td>
   </tr>
   <tr>

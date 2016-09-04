@@ -7,7 +7,7 @@ $(function() {
 	{/if}
 });
 function import_ucenter() {
-	window.location.href="{dr_url('member/setting/importuc')}";
+	window.location.href="{man_url('member/setting/importuc')}";
 }
 </script>
 <div class="subnav">
@@ -27,48 +27,48 @@ function import_ucenter() {
 			<li onclick="SwapTab(5)">{lang('html-034')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;{lang('html-292')}： </th>
 					<td>
-					<input type="radio" name="data[logincode]" value="1" {dr_set_radio('logincode', $data['logincode'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[logincode]" value="1" {man_set_radio('logincode', $data['logincode'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[logincode]" value="0" {dr_set_radio('logincode', $data['logincode'], '0')} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[logincode]" value="0" {man_set_radio('logincode', $data['logincode'], '0')} />&nbsp;<label>{lang('close')}</label>
 					</td>
 				</tr>
                 <tr>
 					<th>&nbsp;{lang('html-340')}： </th>
 					<td>
-					<input type="radio" name="data[avatar]" value="1" {dr_set_radio('avatar', $data['avatar'], '1')} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[avatar]" value="1" {man_set_radio('avatar', $data['avatar'], '1')} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[avatar]" value="0" {dr_set_radio('avatar', $data['avatar'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[avatar]" value="0" {man_set_radio('avatar', $data['avatar'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
 					</td>
 				</tr>
                 <tr>
 					<th>&nbsp;{lang('html-339')}： </th>
 					<td>
-					<input type="radio" name="data[complete]" value="1" {dr_set_radio('complete', $data['complete'], '1')} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[complete]" value="1" {man_set_radio('complete', $data['complete'], '1')} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[complete]" value="0" {dr_set_radio('complete', $data['complete'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
+					<input type="radio" name="data[complete]" value="0" {man_set_radio('complete', $data['complete'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
                     <div class="onShow">{lang('html-148')}</div>
 					</td>
 				</tr>
                 <tr>
 					<th>&nbsp;{lang('html-658')}： </th>
 					<td>
-					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[ismobile]" value="1" {dr_set_radio('ismobile', $data['ismobile'], '1')} />&nbsp;<label>{lang('open')}</label>
+					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[ismobile]" value="1" {man_set_radio('ismobile', $data['ismobile'], '1')} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[ismobile]" value="0" {dr_set_radio('ismobile', $data['ismobile'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
+					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[ismobile]" value="0" {man_set_radio('ismobile', $data['ismobile'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
                     <div class="onShow">{lang('html-657')}</div>
 					</td>
 				</tr>
                 <tr>
 					<th>&nbsp;{lang('html-656')}： </th>
 					<td>
-					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[mobile]" value="1" {dr_set_radio('mobile', $data['mobile'], '1')} />&nbsp;<label>{lang('open')}</label>
+					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[mobile]" value="1" {man_set_radio('mobile', $data['mobile'], '1')} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[mobile]" value="0" {dr_set_radio('mobile', $data['mobile'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
+					<input {if !$mobile}disabled="disabled"{/if} type="radio" name="data[mobile]" value="0" {man_set_radio('mobile', $data['mobile'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>&nbsp;&nbsp;
                     <div class="onShow">{lang('html-657')}</div>
 					</td>
 				</tr>
@@ -80,27 +80,27 @@ function import_ucenter() {
 				</tr>
 				</table>
 			</div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                     {loop $SITE $sid $t}
                     <tr>
-                        <th>{dr_strcut($t['SITE_NAME'], 25)}： </th>
+                        <th>{man_strcut($t['SITE_NAME'], 25)}： </th>
                         <td>
                             <input class="input-text" type="text" name="data[domain][{$sid}]" value="{$data['domain'][$sid]}" size="30" />
                             {if $data['domain'][$sid]}
                             {if $data['domain'][$sid] == SITE_DOMAIN}
-                            <div class="onError">{dr_lang('html-730', $data['domain'][$sid])}</div>
+                            <div class="onError">{man_lang('html-730', $data['domain'][$sid])}</div>
                             {else}
                             <script>
-                                $.get("{dr_url('home/domain', array('domain' => $data['domain'][$sid]))}", function(data){
+                                $.get("{man_url('home/domain', array('domain' => $data['domain'][$sid]))}", function(data){
                                     if (data) {
-                                        $("#dr_domian_{$sid}").html(data);
+                                        $("#man_domian_{$sid}").html(data);
                                     } else {
-                                        $("#dr_domian_{$sid}").hide();
+                                        $("#man_domian_{$sid}").hide();
                                     }
                                 });
                             </script>
-                            <div id="dr_domian_{$sid}" class="onError"></div>
+                            <div id="man_domian_{$sid}" class="onError"></div>
                             {/if}
                             {else}
                             <div class="onShow">{lang('html-291')}</div>
@@ -117,41 +117,41 @@ function import_ucenter() {
 
                 </table>
             </div>
-			<div id="cnt_2" style="display:none" class="dr_hide">
+			<div id="cnt_2" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;{lang('html-293')}： </th>
 					<td>
-					<input type="radio" name="data[register]" value="1" {dr_set_radio('register', $data['register'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[register]" value="1" {man_set_radio('register', $data['register'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[register]" value="0" {dr_set_radio('register', $data['register'], '0')} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[register]" value="0" {man_set_radio('register', $data['register'], '0')} />&nbsp;<label>{lang('close')}</label>
 					</td>
 				</tr>
 				<tr>
 					<th>&nbsp;{lang('html-294')}： </th>
 					<td>
-					<input type="radio" name="data[regcode]" value="1" {dr_set_radio('regcode', $data['regcode'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[regcode]" value="1" {man_set_radio('regcode', $data['regcode'], '1', TRUE)} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[regcode]" value="0" {dr_set_radio('regcode', $data['regcode'], '0')} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[regcode]" value="0" {man_set_radio('regcode', $data['regcode'], '0')} />&nbsp;<label>{lang('close')}</label>
 					</td>
 				</tr>
 				<tr>
 					<th>&nbsp;{lang('html-679')}： </th>
 					<td>
-					<input type="radio" name="data[regoauth]" value="0" {dr_set_radio('regoauth', $data['regoauth'], '0', TRUE)} />&nbsp;<label>{lang('html-680')}</label>
+					<input type="radio" name="data[regoauth]" value="0" {man_set_radio('regoauth', $data['regoauth'], '0', TRUE)} />&nbsp;<label>{lang('html-680')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[regoauth]" value="1" {dr_set_radio('regoauth', $data['regoauth'], '1')} />&nbsp;<label>{lang('html-681')}</label>
+					<input type="radio" name="data[regoauth]" value="1" {man_set_radio('regoauth', $data['regoauth'], '1')} />&nbsp;<label>{lang('html-681')}</label>
 					<div class="onShow">{lang('html-682')}</div>
 					</td>
 				</tr>
 				<tr>
 					<th>&nbsp;{lang('html-295')}： </th>
 					<td>
-					<input type="radio" name="data[regverify]" value="1" {dr_set_radio('regverify', $data['regverify'], '1')} />&nbsp;<label>{lang('html-296')}</label>
+					<input type="radio" name="data[regverify]" value="1" {man_set_radio('regverify', $data['regverify'], '1')} />&nbsp;<label>{lang('html-296')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[regverify]" value="2" {dr_set_radio('regverify', $data['regverify'], '2')} />&nbsp;<label>{lang('html-297')}</label>
+					<input type="radio" name="data[regverify]" value="2" {man_set_radio('regverify', $data['regverify'], '2')} />&nbsp;<label>{lang('html-297')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[regverify]" value="0" {dr_set_radio('regverify', $data['regverify'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[regverify]" value="0" {man_set_radio('regverify', $data['regverify'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
 					<div class="onShow">{lang('html-298')}</div>
 					</td>
 				</tr>
@@ -165,8 +165,8 @@ function import_ucenter() {
 				<tr>
 					<th>&nbsp;{lang('html-301')}： </th>
 					<td>
-					<input class="input-text" type="text" name="data[regnamerule]" id="dr_regnamerule" value="{$data.regnamerule}" size="40" />
-					<select onchange="javascript:$('#dr_regnamerule').val(this.value)" name="pattern_select">
+					<input class="input-text" type="text" name="data[regnamerule]" id="man_regnamerule" value="{$data.regnamerule}" size="40" />
+					<select onchange="javascript:$('#man_regnamerule').val(this.value)" name="pattern_select">
                     <option value="">{lang('html-190')}</option>
 					<option value="/.*/">{lang('html-302')}</option>
 					<option value="/^[0-9.-]+$/">{lang('html-191')}</option>
@@ -190,14 +190,14 @@ function import_ucenter() {
 				</tr>
 				</table>
 			</div>
-			<div id="cnt_3" style="display:none" class="dr_hide">
+			<div id="cnt_3" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">&nbsp;Ucenter： </th>
 					<td>
-					<input type="radio" name="data[ucenter]" value="1" {dr_set_radio('ucenter', $data['ucenter'], '1')} />&nbsp;<label>{lang('open')}</label>
+					<input type="radio" name="data[ucenter]" value="1" {man_set_radio('ucenter', $data['ucenter'], '1')} />&nbsp;<label>{lang('open')}</label>
                     &nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[ucenter]" value="0" {dr_set_radio('ucenter', $data['ucenter'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
+					<input type="radio" name="data[ucenter]" value="0" {man_set_radio('ucenter', $data['ucenter'], '0', TRUE)} />&nbsp;<label>{lang('close')}</label>
 					</td>
 				</tr>
 				<tr>
@@ -222,24 +222,24 @@ function import_ucenter() {
 				</tr>
 				</table>
 			</div>
-            <div id="cnt_4" style="display:none" class="dr_hide">
+            <div id="cnt_4" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                     <tr>
                         <th width="200">{lang('html-753')}： </th>
                         <td>
-                            <textarea style="width:60%;height:120px" class="input-text" name="data[field]">{if $data.field}{$data.field}{else}<tr id="dr_row_{name}"><th>{text} </th><td>{value}</td></tr>{/if}</textarea>
+                            <textarea style="width:60%;height:120px" class="input-text" name="data[field]">{if $data.field}{$data.field}{else}<tr id="man_row_{name}"><th>{text} </th><td>{value}</td></tr>{/if}</textarea>
                         </td>
                     </tr>
                     <tr>
                         <th>&nbsp;{lang('html-754')}： </th>
                         <td>
-                            <textarea style="width:60%;height:120px" class="input-text" name="data[mbfield]">{if $data.mbfield}{$data.mbfield}{else}<tr id="dr_row_{name}"><th>{text} </th><td>{value}</td></tr>{/if}</textarea>
+                            <textarea style="width:60%;height:120px" class="input-text" name="data[mbfield]">{if $data.mbfield}{$data.mbfield}{else}<tr id="man_row_{name}"><th>{text} </th><td>{value}</td></tr>{/if}</textarea>
                             <br><font color="">{lang('html-752')}</font>
                         </td>
                     </tr>
                 </table>
             </div>
-            <div id="cnt_5" style="display:none" class="dr_hide">
+            <div id="cnt_5" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                     <tr>
                         <th width="200">{lang('html-705')}： </th>

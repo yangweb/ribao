@@ -72,7 +72,7 @@ class D_File extends M_Controller {
 			$file = trim(str_replace(array('/', '\\'), '', $this->input->post('file')), '/');
 			
 			if (file_exists($path.$file)) {
-                exit(dr_json(0, lang('227'), 'file'));
+                exit(man_json(0, lang('227'), 'file'));
             }
 			
 			$ext = strrchr($file, '.');
@@ -81,19 +81,19 @@ class D_File extends M_Controller {
 				// 创建文件
 				if (in_array($ext, array('.html', '.js', '.css'))) {
 					if (file_put_contents($path.$file, '') === FALSE) {
-						exit(dr_json(0, lang('226'), 'file'));
+						exit(man_json(0, lang('226'), 'file'));
 					} else {
-						exit(dr_json(1, lang('224'), 'file'));
+						exit(man_json(1, lang('224'), 'file'));
 					}
 				} else {
-					exit(dr_json(0, lang('223'), 'file'));
+					exit(man_json(0, lang('223'), 'file'));
 				}
 			} else {
 				// 创建目录
 				if (mkdir($path.$file)) {
-					exit(dr_json(1, lang('222'), 'file'));
+					exit(man_json(1, lang('222'), 'file'));
 				} else {
-					exit(dr_json(0, lang('225'), 'file'));
+					exit(man_json(0, lang('225'), 'file'));
 				}
 			}
 		}
@@ -119,7 +119,7 @@ class D_File extends M_Controller {
 		$furi = $this->template->get_value('furi');
 		$this->template->assign(array(
 			'path' => $this->path.$file,
-			'back' => dr_url($furi.'index', array('dir'=> dirname($file))),
+			'back' => man_url($furi.'index', array('dir'=> dirname($file))),
 			'body' => file_get_contents($this->path.$file),
 		));
 		$this->template->display('file_edit.html');
@@ -133,17 +133,17 @@ class D_File extends M_Controller {
 		
 		$file = trim(str_replace(array('../', '\\'), array('', '/'), $this->input->get('file')), '/');
 		if (!$file) {
-            exit(dr_json(0, lang('228')));
+            exit(man_json(0, lang('228')));
         }
 		
 		if (is_dir($this->path.$file)) {
 			$this->load->helper('file');
 			delete_files($this->path.$file, TRUE);
 			@rmdir($this->path.$file);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		} else {
 			@unlink($this->path.$file);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 	}
 	
@@ -217,7 +217,7 @@ class D_File extends M_Controller {
 					echo '<li style="list-style: none;">字段调用方式：{$'.$data['return'].'.字段名称}（字段名称下面介绍）</li>';
 					echo '<li style="list-style: none;">{/list}</li>';
 					echo '<li style="list-style: none;">{$error}返回错误提示代码</li>';
-					echo '<li style="list-style: none;">知道id显示菜单名字：{dr_linkagepos(\''.$data['code'].'\', ID, \'\')}</li>';
+					echo '<li style="list-style: none;">知道id显示菜单名字：{man_linkagepos(\''.$data['code'].'\', ID, \'\')}</li>';
 					echo '</div>';
 					echo '<div style="border: 1px solid #DCE3ED;margin-top:10px;padding:10px;width:650px;max-height:300px;overflow:auto;">';
 					echo '<table width="100%"><tbody>';
@@ -311,7 +311,7 @@ class D_File extends M_Controller {
 				case 'member_level':
 					echo '<li style="list-style: none;">{list action=cache name=member.group.'.(int)$data['gid'].'.level return='.$data['return'].'}</li>';
 					echo '<li style="list-style: none;">当前循环序号：{$key}（从0开始）</li>';
-					echo '<li style="list-style: none;">等级星星调用：{dr_show_stars($'.$data['return'].'.stars)}</li>';
+					echo '<li style="list-style: none;">等级星星调用：{man_show_stars($'.$data['return'].'.stars)}</li>';
 					echo '<li style="list-style: none;">字段调用方式：{$'.$data['return'].'.字段名称}（字段名称下面介绍）</li>';
 					echo '<li style="list-style: none;">{/list}</li>';
 					echo '<li style="list-style: none;">{$error}返回错误提示代码</li>';
@@ -374,7 +374,7 @@ class D_File extends M_Controller {
 
     public function store() {
         $this->template->assign(array(
-            'url' => 'http://store.mantob.com/index.php?c=category&id=2&action=application&param='.dr_base64_encode(dr_array2string(array(
+            'url' => 'http://store.mantob.com/index.php?c=category&id=2&action=application&param='.man_base64_encode(man_array2string(array(
                 'site' => SITE_URL,
                 'name' => SITE_NAME,
                 'admin' => SELF,

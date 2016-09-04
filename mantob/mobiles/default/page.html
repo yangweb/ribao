@@ -26,7 +26,7 @@
                         <div id="nav2">
                             <ul>
                                 {loop $related $t}
-                                <li {if $id==$t.id}class="ui-state-active"{/if}><a href="{dr_mobile_page_url(APP_DIR, $t.id)}">{$t.name}</a></li>
+                                <li {if $id==$t.id}class="ui-state-active"{/if}><a href="{man_mobile_page_url(APP_DIR, $t.id)}">{$t.name}</a></li>
                                 {/loop}
                             </ul>
                             <span class="bar"></span>

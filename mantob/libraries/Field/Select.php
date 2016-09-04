@@ -66,7 +66,7 @@ class F_Select extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
 		$value = $value ? $value : $this->get_default_value($cfg['option']['value']);
 		// 当字段必填时，加入html5验证标签
@@ -77,7 +77,7 @@ class F_Select extends A_Field {
 		// 表单选项
 		$options = isset($cfg['option']['options']) && $cfg['option']['options'] ? $cfg['option']['options'] : '';
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
-		$str = '<select '.$disabled.' name="data['.$name.']" id="dr_'.$name.'" '.$attr.' >';
+		$str = '<select '.$disabled.' name="data['.$name.']" id="man_'.$name.'" '.$attr.' >';
 		if ($options) {
 			$options = explode(PHP_EOL, str_replace(array(chr(13), chr(10)), PHP_EOL, $options));
 			foreach ($options as $t) {

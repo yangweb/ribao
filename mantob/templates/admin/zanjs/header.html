@@ -78,8 +78,8 @@
     <div class="page-header-top">
 
         <div class="container">
-            <div class="row" id="dr_mytop">
-                {dr_ajax_html('dr_mytop', 'mytop.html')}
+            <div class="row" id="man_mytop">
+                {man_ajax_html('man_mytop', 'mytop.html')}
                 <!-- 这一段内容采用动态调用的方式 -->
             </div>
             <!-- BEGIN LOGO -->
@@ -131,12 +131,12 @@
             <!-- 调用网站导航菜单 -->
             <div class="hor-menu  ">
                 <ul class="nav navbar-nav">
-                    <li id="dr_nav_0" class="menu-dropdown classic-menu-dropdown {if $indexc}active{/if}">
+                    <li id="man_nav_0" class="menu-dropdown classic-menu-dropdown {if $indexc}active{/if}">
                         <a href="{SITE_URL}" title="{SITE_TITLE}">首页</a>
                     </li>
                     <!--第一层：调用type=0的网站导航数据-->
                     {list action=navigator type=0 pid=0}
-                    <li id="dr_nav_{$t.id}" class="menu-dropdown classic-menu-dropdown {if (MOD_DIR && $t.module==MOD_DIR) || ($pageid && in_array($pageid, $t.pageids))} active{/if}">
+                    <li id="man_nav_{$t.id}" class="menu-dropdown classic-menu-dropdown {if (MOD_DIR && $t.module==MOD_DIR) || ($pageid && in_array($pageid, $t.pageids))} active{/if}">
                         <a href="{$t.url}" title="{$t.title}" {if $t.target}target="_blank"{/if}>{$t.name}</a>
                         {if $t.child}
                         <ul class="dropdown-menu pull-left">

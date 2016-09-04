@@ -98,7 +98,7 @@ class CI_Cart {
 		$this->CI->load->driver('session', $config);
 
 		// Grab the shopping cart array from the session table
-		$this->_cart_contents = dr_string2array($this->CI->session->userdata('cart_contents'));
+		$this->_cart_contents = man_string2array($this->CI->session->userdata('cart_contents'));
 		if ($this->_cart_contents === NULL)
 		{
 			// No cart exists so we'll set some base values
@@ -391,7 +391,7 @@ class CI_Cart {
 
 		// If we made it this far it means that our cart has data.
 		// Let's pass it to the Session class so it can be stored
-		$this->CI->session->set_userdata(array('cart_contents' => dr_array2string($this->_cart_contents)));
+		$this->CI->session->set_userdata(array('cart_contents' => man_array2string($this->_cart_contents)));
 
 		// Woot!
 		return TRUE;
@@ -537,7 +537,7 @@ class CI_Cart {
 	 */
 	public function destroy()
 	{
-		$this->_cart_contents = dr_array2string(array('cart_total' => 0, 'total_items' => 0));
+		$this->_cart_contents = man_array2string(array('cart_total' => 0, 'total_items' => 0));
 		$this->CI->session->unset_userdata('cart_contents');
 	}
 

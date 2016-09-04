@@ -13,7 +13,7 @@
     <div class="sb_box">
 	    <h3 class="title">
 			<div class="position">
-            	当前位置：<a href="{dr_space_url($uid)}">网站首页</a> &gt; {dr_space_catpos($spaceid, $catid, ' > ')}
+            	当前位置：<a href="{man_space_url($uid)}">网站首页</a> &gt; {man_space_catpos($spaceid, $catid, ' > ')}
             </div>
 			<span>{$cat.name}</span>
 		</h3>
@@ -46,7 +46,7 @@
                 {if $page==$i}
                 <span>{$i}</span>
                 {else}
-                <a href="{dr_space_show_url($spaceid, $modelid, $id, $i)}" title="{$t.title}">{$i}</a>
+                <a href="{man_space_show_url($spaceid, $modelid, $id, $i)}" title="{$t.title}">{$i}</a>
                 {/if}
                 {/loop}
                 </div>
@@ -60,14 +60,14 @@
                     </div>
 					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1346378669840136" charset="utf-8"></script>
                 </div>
-                点击次数：<span>{dr_space_show_hits($modelid, $id)}</span>
+                点击次数：<span>{man_space_show_hits($modelid, $id)}</span>
                 &nbsp;&nbsp;更新时间：{$updatetime}
                 &nbsp;&nbsp;【<a href="javascript:window.print()">打印此页</a>】
             </div>
             <div class="met_page">
-            	上一条：{if $prev_page}<a href="{dr_space_show_url($spaceid, $modelid, $prev_page.id)}">{$prev_page.title}</a>{else}没有了{/if}
+            	上一条：{if $prev_page}<a href="{man_space_show_url($spaceid, $modelid, $prev_page.id)}">{$prev_page.title}</a>{else}没有了{/if}
                 &nbsp;&nbsp;
-                下一条：{if $next_page}<a href="{dr_space_show_url($spaceid, $modelid, $prev_page.id)}">{$next_page.title}</a>{else}没有了{/if}
+                下一条：{if $next_page}<a href="{man_space_show_url($spaceid, $modelid, $prev_page.id)}">{$next_page.title}</a>{else}没有了{/if}
             </div>
         </div>
 

@@ -41,7 +41,7 @@ class Login extends M_Controller {
 				    // 登录成功
                     $this->hooks->call_hook('member_login', $data); // 
      //                // 2014年10月17日 11:47:54 修改佳晔
-     //                $this->member_msg(lang('m-002').$code, dr_member_url('home/index'), 1, 3);
+     //                $this->member_msg(lang('m-002').$code, man_member_url('home/index'), 1, 3);
      //                // 登录成功挂钩点
 					$this->member_msg(lang('m-002').$code, $back_url && strpos($back_url, 'register') === FALSE ? $back_url : SITE_URL, 1, 3);
                     
@@ -130,7 +130,7 @@ class Login extends M_Controller {
 					if ($uid = get_cookie('find')) {
 						$this->member_msg(
                             lang('m-093'),
-                            dr_member_url('login/find', array('step' => 2, 'uid' => $uid)),
+                            man_member_url('login/find', array('step' => 2, 'uid' => $uid)),
                             1
                         );
 					} else {
@@ -144,26 +144,26 @@ class Login extends M_Controller {
 									 ->get('member')
 									 ->row_array();
 						if ($data) {
-							$randcode = dr_randcode();
+							$randcode = man_randcode();
 							if ($name == 'email') {
 								$this->load->helper('email');
-								if (!$this->sendmail($value, lang('m-014'), dr_lang('m-187', $data['username'], $randcode, $this->input->ip_address()))) {
+								if (!$this->sendmail($value, lang('m-014'), man_lang('m-187', $data['username'], $randcode, $this->input->ip_address()))) {
 									$this->member_msg(lang('m-189'));
 								}
 								set_cookie('find', $data['uid'], 300);
 								$this->db
                                      ->where('uid', $data['uid'])
                                     ->update('member', array('randcode' => $randcode));
-								$this->member_msg(lang('m-093'), dr_member_url('login/find', array('step' => 2, 'uid' => $data['uid'])), 1);
+								$this->member_msg(lang('m-093'), man_member_url('login/find', array('step' => 2, 'uid' => $data['uid'])), 1);
 							} else {
-								$result = $this->member_model->sendsms($value, dr_lang('m-088', $randcode));
+								$result = $this->member_model->sendsms($value, man_lang('m-088', $randcode));
 								if ($result['status']) {
 								    // 发送成功
 									set_cookie('find', $data['uid'], 300);
 									$this->db
                                          ->where('uid', (int)$data['uid'])
                                          ->update('member', array('randcode' => $randcode));
-									$this->member_msg(lang('m-093'), dr_member_url('login/find', array('step' => 2, 'uid' => $data['uid'])), 1);
+									$this->member_msg(lang('m-093'), man_member_url('login/find', array('step' => 2, 'uid' => $data['uid'])), 1);
 								} else {
 								    // 发送失败
 									$this->member_msg($result['msg']);
@@ -199,7 +199,7 @@ class Login extends M_Controller {
                         $this->db
                              ->where('uid', $uid)
                              ->update('member', array('randcode' => ''));
-                        $this->member_msg(lang('m-202'), dr_member_url('login/find'));
+                        $this->member_msg(lang('m-202'), man_member_url('login/find'));
                     }
 					
 					$password1 = $this->input->post('password1');
@@ -219,7 +219,7 @@ class Login extends M_Controller {
 						if ($this->get_cache('MEMBER', 'setting', 'ucenter')) {
                             uc_user_edit($data['username'], '', $password1, '', 1);
                         }
-						$this->member_msg(lang('m-052'), dr_url('login/index'), 1);
+						$this->member_msg(lang('m-052'), man_url('login/index'), 1);
 					}
 					break;
 			}
@@ -261,7 +261,7 @@ class Login extends M_Controller {
              ->where('groupid<>', 3)
              ->update('member', array('randcode' => 0, 'groupid' => 3));
 
-		$this->member_msg(lang('m-194'), dr_member_url('login/index'), 1);
+		$this->member_msg(lang('m-194'), man_member_url('login/index'), 1);
     }
 	
 	/**
@@ -283,11 +283,11 @@ class Login extends M_Controller {
 		$this->sendmail(
             $this->member['email'],
             lang('m-191'),
-            dr_lang('m-192', $this->member['username'], $url, $url, $this->input->ip_address())
+            man_lang('m-192', $this->member['username'], $url, $url, $this->input->ip_address())
         );
 
 		$this->input->set_cookie('resend', $this->uid, 3600);
-		$this->member_msg(dr_lang('m-231', $this->member['email']), dr_url('home/index'), 1);
+		$this->member_msg(man_lang('m-231', $this->member['email']), man_url('home/index'), 1);
     }
 	
 	/**

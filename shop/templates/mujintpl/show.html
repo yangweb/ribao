@@ -5,7 +5,7 @@
 <div class="zzw mauto zMianBao">
     <h2 class="mianbaoH">
       <a href="{SITE_URL}">首页</a>&gt;
-      {dr_catpos($catid, ' &gt; ')}&gt;
+      {man_catpos($catid, ' &gt; ')}&gt;
       <a href="javascript:;">商品详情</a>
     </h2>
 </div>
@@ -17,13 +17,13 @@
     <div class="fl zProductShowHeadLeft">
       <!--产品参数开始-->
   <div>
-    <div id="preview" class="spec-preview"> <span class="jqzoom"><img jqimg="{dr_get_file($images[0]['file'])}" src="{man_thumb($images[0]['file'], 538, 350)}" /></span> </div>
+    <div id="preview" class="spec-preview"> <span class="jqzoom"><img jqimg="{man_get_file($images[0]['file'])}" src="{man_thumb($images[0]['file'], 538, 350)}" /></span> </div>
     <!--缩图开始-->
     <div class="spec-scroll"> <a class="prev">&lt;</a> <a class="next">&gt;</a>
       <div class="items">
         <ul>
          {loop $images $i $t}
-          <li><img alt="" bimg="{dr_get_file($t.file)}" src="{dr_get_file($t.file)}" onmousemove="preview(this);"></li>
+          <li><img alt="" bimg="{man_get_file($t.file)}" src="{man_get_file($t.file)}" onmousemove="preview(this);"></li>
          {/loop}
          
         </ul>
@@ -61,9 +61,9 @@
         <!-- zan end-->
         <div class="clear"></div>
         <div class="showbtn">
-        <b id="dr_quantity" class="zhiden">{$quantity}</b>
-        <input size="4" type="text" class="zhiden" id="dr_num" value="1" />
-          <button type="button" id="buybtn"class="proshowMark" onclick="dr_buy()">我要预定</button>
+        <b id="man_quantity" class="zhiden">{$quantity}</b>
+        <input size="4" type="text" class="zhiden" id="man_num" value="1" />
+          <button type="button" id="buybtn"class="proshowMark" onclick="man_buy()">我要预定</button>
         </div>
     </div>
     <!-- right end-->

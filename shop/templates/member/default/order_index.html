@@ -5,34 +5,34 @@ $(function(){
 		var name = $(this).attr("name");
 		$(".msearch a").removeClass("cur");
 		$(this).addClass("cur");
-		$("#dr_where").val(name);
+		$("#man_where").val(name);
 	});
-	$("#dr_loadmore a").click(function(){
-		var page = $("#dr_page").val();
-		$("#dr_loading").html("<div style='padding:30px;text-align:center;width:678px;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
+	$("#man_loadmore a").click(function(){
+		var page = $("#man_page").val();
+		$("#man_loading").html("<div style='padding:30px;text-align:center;width:678px;'><img src='{MEMBER_THEME_PATH}images/loading.gif' /></div>");
 		$.get("{$moreurl}", {page:page, where:{intval($get.where)}, kw:{intval($get.kw)}, status:{intval($get.status)} }, function(data){
 			if (data != "null") {
-				$("#dr_body").append(data);
-				$("#dr_page").val(Number(page) + 1);
+				$("#man_body").append(data);
+				$("#man_page").val(Number(page) + 1);
 			}
-			$("#dr_loading").html("&nbsp;");
+			$("#man_loading").html("&nbsp;");
 		});
 	});
 });
 </script>
-<input name="page" id="dr_page" type="hidden" value="2" />
+<input name="page" id="man_page" type="hidden" value="2" />
 <div class="zzw content clearfix">
 	{template "navigator.html"}
     <div class="article">
         <div class="section">
             <div class="title"><strong>{$meta_name}</strong></div>
-            <div class="main dr_table">
+            <div class="main man_table">
 				<div class="msearch mbutton">
                 	<form method="get" action="">
                     <input name="s" type="hidden" value="{APP_DIR}" />
                     <input name="c" type="hidden" value="{$get.c}" />
                     <input name="m" type="hidden" value="{$get.m}" />
-                    <input id="dr_where" name="where" type="hidden" value="{intval($get.where)}" />
+                    <input id="man_where" name="where" type="hidden" value="{intval($get.where)}" />
                     <div style="">
                         <span style="color:#333; padding-right:8px;">时间筛选：</span>
                         <a href="javascript:;" {if $get.where==0}class="cur"{/if} name="0">一周内</a>
@@ -43,7 +43,7 @@ $(function(){
                     </div>
                     <div style="clear:both;padding-top:15px;">
                     	<span style="color:#333; padding-right:8px;">订单编号：
-                        <input type="text" id="dr_id" name="id" value="{$get.id}" class="input_text" style="color:#999;width:80px;" />
+                        <input type="text" id="man_id" name="id" value="{$get.id}" class="input_text" style="color:#999;width:80px;" />
                         </span>
                         <span style="color:#333; padding-right:8px;">订单状态：
                         <select name="status">
@@ -73,14 +73,14 @@ $(function(){
 					</tr>
 				</thead>
                 <tr>
-                <td colspan="6" id="dr_body" style="padding:0;">
+                <td colspan="6" id="man_body" style="padding:0;">
 				{template "order_data.html"}
                 </td>
                 </tr>
 				</table>
                 </form>
-				<div id="dr_loading" style="marign-top:10px;">&nbsp;</div>
-                <div id="dr_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
+				<div id="man_loading" style="marign-top:10px;">&nbsp;</div>
+                <div id="man_loadmore" class="load-more"><a href="javascript:;">查 看 更 多</a></div>
             </div>
         </div>
     </div>

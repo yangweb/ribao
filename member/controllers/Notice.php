@@ -62,7 +62,7 @@ class Notice extends M_Controller {
 			$this->db
 				 ->where_in('id', $this->input->post('ids'))
 				 ->delete('member_notice_'.$this->member['tableid']);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		if ($this->input->get('action') == 'more') { // ajax更多数据

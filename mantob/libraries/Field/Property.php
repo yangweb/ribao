@@ -42,32 +42,32 @@ class F_Property extends A_Field {
 			<div class="onShow">'.lang('290').'</div>
 			</td>
 		</tr>
-		<tr id="dr_option_0" class="dr_option">
-			<th><a href="javascript:;" onclick="dr_add_option()" style="color:blue">[+]</a>&nbsp;'.lang('177').'：</th>
+		<tr id="man_option_0" class="man_option">
+			<th><a href="javascript:;" onclick="man_add_option()" style="color:blue">[+]</a>&nbsp;'.lang('177').'：</th>
 			<td>'.lang('184').'</td>
 		</tr>';
 		if ($option) {
 			foreach ($option as $i => $t) {
-				$str.= '<tr id="dr_option_'.$i.'" class="dr_option">';
-				$str.= '<th><a href="javascript:;" onclick="dr_add_option()" style="color:blue">[+]</a>&nbsp;'.lang('178').'：</th>';
+				$str.= '<tr id="man_option_'.$i.'" class="man_option">';
+				$str.= '<th><a href="javascript:;" onclick="man_add_option()" style="color:blue">[+]</a>&nbsp;'.lang('178').'：</th>';
 				$str.= '<td><input type="text" name="data[setting][option]['.$i.'][name]" value="'.$t['name'].'" style="width:140px;" class="input-text" />';
 				$str.= lang('179').'：<select name="data[setting][option]['.$i.'][type]">';
 				$str.= '<option value="1" '.($t['type'] == 1 ? "selected" : "").'> - '.lang('180').' - </option>';
 				$str.= '<option value="2" '.($t['type'] == 2 ? "selected" : "").'> - '.lang('181').' - </option>';
 				$str.= '<option value="3" '.($t['type'] == 3 ? "selected" : "").'> - '.lang('182').' - </option>';
 				$str.= '</select>&nbsp;&nbsp;';
-				$str.= lang('183').'：<input type="text" name="data[setting][option]['.$i.'][value]" value="'.$t['value'].'" style="width:400px;" class="input-text">&nbsp;&nbsp;<a onclick="$(\'#dr_option_'.$i.'\').remove()" href="javascript:;">'.lang('del').'</a>';
+				$str.= lang('183').'：<input type="text" name="data[setting][option]['.$i.'][value]" value="'.$t['value'].'" style="width:400px;" class="input-text">&nbsp;&nbsp;<a onclick="$(\'#man_option_'.$i.'\').remove()" href="javascript:;">'.lang('del').'</a>';
 				$str.= '</td></tr>';
 			}
 		}
 		$str.= '
 		<script type="text/javascript">
-		var id=$(".dr_option").size();
-		function dr_add_option() {
+		var id=$(".man_option").size();
+		function man_add_option() {
 			id ++;
 			var html = "";
-			html+= "<tr id=\"dr_option_"+id+"\" class=\"dr_option\">";
-			html+= "<th><a href=\"javascript:;\" onclick=\"dr_add_option()\" style=\"color:blue\">[+]</a>&nbsp;'.lang('178').'：</th>";
+			html+= "<tr id=\"man_option_"+id+"\" class=\"man_option\">";
+			html+= "<th><a href=\"javascript:;\" onclick=\"man_add_option()\" style=\"color:blue\">[+]</a>&nbsp;'.lang('178').'：</th>";
 			html+= "<td>";
 			html+= "<input type=\"text\" name=\"data[setting][option]["+id+"][name]\" value=\"\" style=\"width:140px;\" class=\"input-text\" />";
 			html+= "'.lang('179').'：<select name=\"data[setting][option]["+id+"][type]\">";
@@ -75,10 +75,10 @@ class F_Property extends A_Field {
 			html+= "<option value=\"2\"> - '.lang('181').' - </option>";
 			html+= "<option value=\"3\"> - '.lang('182').' - </option>";
 			html+= "</select>&nbsp;&nbsp;";
-			html+= "'.lang('183').'：<input type=\"text\" name=\"data[setting][option]["+id+"][value]\" value=\"\" style=\"width:400px;\" class=\"input-text\">&nbsp;&nbsp;<a onclick=\"$(\'#dr_option_"+id+"\').remove()\" href=\"javascript:;\">'.lang('del').'</a>";
+			html+= "'.lang('183').'：<input type=\"text\" name=\"data[setting][option]["+id+"][value]\" value=\"\" style=\"width:400px;\" class=\"input-text\">&nbsp;&nbsp;<a onclick=\"$(\'#man_option_"+id+"\').remove()\" href=\"javascript:;\">'.lang('del').'</a>";
 			html+= "</td>";
 			html+= "</tr>";
-			$("#dr_option").append(html);
+			$("#man_option").append(html);
 		}
 		</script>
 		';
@@ -90,14 +90,14 @@ class F_Property extends A_Field {
 	 */
 	public function output($value) {
 	
-		return dr_string2array($value);
+		return man_string2array($value);
 	}
 	
 	/**
 	 * 字段入库值
 	 */
 	public function insert_value($field) {
-		$this->ci->data[$field['ismain']][$field['fieldname']] = dr_array2string($this->ci->post[$field['fieldname']]);
+		$this->ci->data[$field['ismain']][$field['fieldname']] = man_array2string($this->ci->post[$field['fieldname']]);
 	}
 	
 	/**
@@ -118,9 +118,9 @@ class F_Property extends A_Field {
 		$width = isset($cfg['option']['width']) && $cfg['option']['width'] ? $cfg['option']['width'] : '80%';
 		unset($cfg['option']['width']);
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 字段默认值
-		$value = $value ? dr_string2array($value) : array();
+		$value = $value ? man_string2array($value) : array();
 		// 禁止修改
 		$disabled = !IS_ADMIN && $id && $value && isset($cfg['validate']['isedit']) && $cfg['validate']['isedit'] ? 'disabled' : ''; 
 		$str = '';
@@ -136,7 +136,7 @@ class F_Property extends A_Field {
 		$i = 1;
 		if (isset($cfg['option']) && $cfg['option']) { // 默认属性选项
 			foreach ($cfg['option'] as $i => $t) {
-				$str.= '<li id="dr_items_'.$name.'_'.$i.'">';
+				$str.= '<li id="man_items_'.$name.'_'.$i.'">';
 				$str.= '属性：<input type="text" '.$disabled.' class="input-text" style="width:140px;" value="'.$t['name'].'" name="data['.$name.']['.$i.'][name]">&nbsp;&nbsp;';
 				$str.= '值：';
 				switch ($t['type']) {
@@ -171,11 +171,11 @@ class F_Property extends A_Field {
 		if ($value) {
 			foreach ($value as $k => $t) {
 				if ($k > $i) {
-					$str.= '<li id="dr_items_'.$name.'_'.$k.'">';
+					$str.= '<li id="man_items_'.$name.'_'.$k.'">';
 					$str.= '属性：<input type="text" '.$disabled.' class="input-text" style="width:140px;" value="'.$t['name'].'" name="data['.$name.']['.$k.'][name]">&nbsp;&nbsp;';
 					$str.= '值：';
 					$str.= '<input type="text" '.$disabled.' class="input-text" style="width:300px;" value="'.$t['value'].'" name="data['.$name.']['.$k.'][value]" />';
-					$str.= '<a href="javascript:;" onclick="$(\'#dr_items_'.$name.'_'.$k.'\').remove()">'.lang('del').'</a></li>';
+					$str.= '<a href="javascript:;" onclick="$(\'#man_items_'.$name.'_'.$k.'\').remove()">'.lang('del').'</a></li>';
 				}
 			}
 		}
@@ -185,16 +185,16 @@ class F_Property extends A_Field {
 		$str.= '</fieldset>';
 		$str.= '<div class="bk10"></div>';
 		$str.= '<div class="picBut cu">';
-		$str.= '	<a href="javascript:;" onClick="dr_add_property_'.$name.'()">添加属性</a>';
+		$str.= '	<a href="javascript:;" onClick="man_add_property_'.$name.'()">添加属性</a>';
 		$str.= '</div>';
 		$str.= '<script type="text/javascript">
 		$("#'.$name.'-sort-items").sortable();
-		function dr_add_property_'.$name.'() {
+		function man_add_property_'.$name.'() {
 			var id=$("#'.$name.'-sort-items li").size() * 10;
-			var html = "<li id=\"dr_items_'.$name.'_"+id+"\">";
+			var html = "<li id=\"man_items_'.$name.'_"+id+"\">";
 			html+= "属性：<input type=\"text\" class=\"input-text\" style=\"width:140px;\" value=\"\" name=\"data['.$name.']["+id+"][name]\">&nbsp;&nbsp;";
 			html+= "值：<input type=\"text\" class=\"input-text\" style=\"width:300px;\" value=\"\" name=\"data['.$name.']["+id+"][value]\">&nbsp;&nbsp;";
-			html+= "<a href=\"javascript:;\" onclick=\"$(\'#dr_items_'.$name.'_"+id+"\').remove()\">'.lang('del').'</a></li>";
+			html+= "<a href=\"javascript:;\" onclick=\"$(\'#man_items_'.$name.'_"+id+"\').remove()\">'.lang('del').'</a></li>";
 			$("#'.$name.'-sort-items").append(html);
 		}
 		</script>'.$tips;

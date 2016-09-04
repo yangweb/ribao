@@ -12,7 +12,7 @@
                         <h1>头像保存后，您可能需要刷新一下本页面(按F5键)，才能查看最新的头像效果</h1><br>
                         {uc_avatar($ucenter)}
                     </td>
-                    <td width="28%" valign="top"><img src="{dr_avatar($uid, 90)}"></td>
+                    <td width="28%" valign="top"><img src="{man_avatar($uid, 90)}"></td>
                   </tr>
                 </table>
                 {else}
@@ -22,7 +22,7 @@
                         <script type="text/javascript" src="{MEMBER_PATH}statics/avatar/swfobject.js"></script>
                         <script type="text/javascript">
                             var flashvars = {
-                                'upurl':"{base64_encode(dr_member_url('account/upload'))}&callback=return_avatar&"
+                                'upurl':"{base64_encode(man_member_url('account/upload'))}&callback=return_avatar&"
                             }; 
                             var params = {
                                 'align':'middle',
@@ -42,10 +42,10 @@
                             swfobject.embedSWF("{MEMBER_PATH}statics/avatar/main.swf", "myContent", "490", "434", "9.0.0","{MEMBER_PATH}statics/avatar/expressInstall.swf", flashvars, params, attributes);
                             function return_avatar(data) {
                                 if(data == 1) {
-                                    dr_tips('上传成功', 3, 1);
+                                    man_tips('上传成功', 3, 1);
                                     window.location.reload();
                                 } else {
-                                    dr_tips('上传失败：'+data);
+                                    man_tips('上传失败：'+data);
                                 }
                             }
                         </script>
@@ -53,7 +53,7 @@
                           <p>Loading ... </p> 
                         </div>
                     </td>
-                    <td width="28%" valign="top"><img src="{dr_avatar($uid, 90)}"><br><img src="{dr_avatar($uid, 45)}"></td>
+                    <td width="28%" valign="top"><img src="{man_avatar($uid, 90)}"><br><img src="{man_avatar($uid, 45)}"></td>
                   </tr>
                 </table>
                 {/if}

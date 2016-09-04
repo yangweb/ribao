@@ -19,7 +19,7 @@ if (!defined('BASEPATH'))
 /**
  * 获取6位数字随机验证码
  */
-function dr_randcode() {
+function man_randcode() {
     return rand(100000, 999999);
 }
 
@@ -32,7 +32,7 @@ function dr_randcode() {
  * @param	intval	$catid		栏目id
  * @return	array
  */
-function dr_down_server($name, $value, $dirname = APP_DIR) {
+function man_down_server($name, $value, $dirname = APP_DIR) {
 
     if (!is_numeric($value)) {
         return array();
@@ -77,7 +77,7 @@ function dr_down_server($name, $value, $dirname = APP_DIR) {
  * @param	string	$dir		路径
  * @return	bool	如果成功则返回 TRUE，失败则返回 FALSE
  */
-function dr_dir_delete($dir) {
+function man_dir_delete($dir) {
 
     $dir = str_replace('\\', '/', $dir);
     if (substr($dir, -1) != '/') {
@@ -89,7 +89,7 @@ function dr_dir_delete($dir) {
 
     $list = glob($dir . '*');
     foreach ($list as $v) {
-        is_dir($v) ? dr_dir_delete($v) : @unlink($v);
+        is_dir($v) ? man_dir_delete($v) : @unlink($v);
     }
 
     return @rmdir($dir);
@@ -203,7 +203,7 @@ function man_member_info($uid, $cache = 10000) {
  * @param	intval	$cache	缓存时间
  * @return	string
  */
-function dr_space_info($uid, $cache = 10000) {
+function man_space_info($uid, $cache = 10000) {
 
     $ci = &get_instance();
     $data = $ci->get_cache_data('space-info-' . $uid);
@@ -229,7 +229,7 @@ function dr_space_info($uid, $cache = 10000) {
  * @param	intval	$cache	缓存时间
  * @return	string
  */
-function dr_sns_info($uid, $cache = 10000) {
+function man_sns_info($uid, $cache = 10000) {
 
     $ci = &get_instance();
     $data = $ci->get_cache_data('sns-info-'.$uid);
@@ -247,14 +247,14 @@ function dr_sns_info($uid, $cache = 10000) {
  * @param	intval	$id
  * @return	string
  */
-function dr_show_buy($id) {
+function man_show_buy($id) {
     return "<script type=\"text/javascript\" src=\"" . MODULE_URL . "index.php?c=api&m=buy&id={$id}\"></script>";
 }
 
 /**
  * 检测会员在线情况
  */
-function dr_member_online($uid, $type) {
+function man_member_online($uid, $type) {
     return "<script type=\"text/javascript\" src=\"" . MEMBER_URL . "index.php?c=api&m=online&uid={$uid}&type={$type}\"></script>";
 }
 
@@ -272,9 +272,9 @@ function dr_member_online($uid, $type) {
  * @param	string	$thumb		视频分享图片
  * @return	array
  */
-function dr_player($name, $value, $width, $height, $next_url = '', $title = '', $url = '', $desc = '', $thumb = '') {
+function man_player($name, $value, $width, $height, $next_url = '', $title = '', $url = '', $desc = '', $thumb = '') {
 
-    $file = dr_get_file($value['file']);
+    $file = man_get_file($value['file']);
     $str = '
 	<div id="video" style="position:relative;z-index: 51;width:'.$width.'px;height:'.$height.'px;"><div id="a1"></div></div>
 	<script type="text/javascript" src="'.SITE_URL.'player/offlights.js"></script>
@@ -325,7 +325,7 @@ function dr_player($name, $value, $width, $height, $next_url = '', $title = '', 
                     $str.= '			d:\''.man_thumb($data['thumb']).'\','.PHP_EOL;
                     $str.= '			u:\''.$data['link'].'\','.PHP_EOL;
 
-                    $member = '<style>.dr_adv td, .dr_adv th { border-bottom: 1px solid #EEEEEE;height: 22px;line-height: 22px;padding-bottom: 3px;padding-top: 3px;}.dr_adv td{ text-align:right;}</style><table class="dr_adv">';
+                    $member = '<style>.man_adv td, .man_adv th { border-bottom: 1px solid #EEEEEE;height: 22px;line-height: 22px;padding-bottom: 3px;padding-top: 3px;}.man_adv td{ text-align:right;}</style><table class="man_adv">';
                     $MEMBER = $ci->get_cache('member');
                     $member.= '<tr>';
                     $member.= '	<th align="left" width="200">'.lang('m-347').'</th>';
@@ -342,7 +342,7 @@ function dr_player($name, $value, $width, $height, $next_url = '', $title = '', 
                             foreach ($group['level'] as $level) {
                                 $id = $group['id'] . '_' . $level['id'];
                                 $member.= '<tr>';
-                                $member.= '<th align="left" style="padding-left:40px">' . $level['name'] . '&nbsp;&nbsp;' . dr_show_stars($level['stars']) . '</th>';
+                                $member.= '<th align="left" style="padding-left:40px">' . $level['name'] . '&nbsp;&nbsp;' . man_show_stars($level['stars']) . '</th>';
                                 $member.= '<td align="left">';
                                 $member.= '' . (int) $option['time'][$id] . lang('m-330');
                                 $member.= '</td>';
@@ -372,8 +372,8 @@ function dr_player($name, $value, $width, $height, $next_url = '', $title = '', 
     }
     $str.= '			my_title:\'' . $title . '\',
 			my_url:\'' . $url . '\',
-			my_summary:\'' . str_replace(array('\'', '"'), '', dr_clearhtml(dr_strcut($desc, 200))) . '\',
-			my_pic:\'' . dr_get_file($thumb) . '\'
+			my_summary:\'' . str_replace(array('\'', '"'), '', man_clearhtml(man_strcut($desc, 200))) . '\',
+			my_pic:\'' . man_get_file($thumb) . '\'
 		};
 		var params={
 			bgcolor:\'#FFF\',
@@ -420,7 +420,7 @@ function dr_player($name, $value, $width, $height, $next_url = '', $title = '', 
 /**
  * 验证码图片获取
  */
-function dr_code($width, $height, $url = '') {
+function man_code($width, $height, $url = '') {
     $url = $url . 'index.php?c=home&m=captcha&width=' . $width . '&height=' . $height;
     return '<img align="absmiddle" style="cursor:pointer;" onclick="this.src=\'' . $url . '&\'+Math.random();" src="' . $url . '" />';
 }
@@ -447,7 +447,7 @@ function ns_sorting($name) {
 /**
  * 移除order字符串
  */
-function dr_member_order($url) {
+function man_member_order($url) {
 
     $data = @explode('&', $url);
     if ($data) {
@@ -466,7 +466,7 @@ function dr_member_order($url) {
 /**
  * 统计图表调用
  */
-function dr_chart($file, $width, $height) {
+function man_chart($file, $width, $height) {
 
     $str = '';
     $id = rand(0, 99999);
@@ -490,13 +490,13 @@ function dr_chart($file, $width, $height) {
 /**
  * 百度地图调用
  */
-function dr_baidu_map($value, $zoom = 5, $width = 600, $height = 400) {
+function man_baidu_map($value, $zoom = 5, $width = 600, $height = 400) {
 
     if (!$value) {
         return NULL;
     }
 
-    $id = 'dr_map_' . rand(0, 99);
+    $id = 'man_map_' . rand(0, 99);
     list($lngX, $latY) = explode(',', $value);
 
     return '<script type=\'text/javascript\' src=\'http://api.map.baidu.com/api?v=1.4\'></script>
@@ -533,7 +533,7 @@ function dr_baidu_map($value, $zoom = 5, $width = 600, $height = 400) {
  * @param	string	$dirname
  * @return	array
  */
-function dr_field_options($name, $catid = 0, $dirname = APP_DIR) {
+function man_field_options($name, $catid = 0, $dirname = APP_DIR) {
 
     if (!$name) {
         return NULL;
@@ -583,7 +583,7 @@ function dr_field_options($name, $catid = 0, $dirname = APP_DIR) {
  * @param	string	$dirname
  * @return	array
  */
-function dr_member_field_options($name) {
+function man_member_field_options($name) {
 
     if (!$name) {
         return NULL;
@@ -629,7 +629,7 @@ function dr_member_field_options($name) {
  * @param	string	$dirname
  * @return	array
  */
-function dr_space_field_options($name) {
+function ma_space_field_options($name) {
 
     if (!$name) {
         return NULL;
@@ -673,7 +673,7 @@ function dr_space_field_options($name) {
  * @param	intval	$id
  * @return	array
  */
-function dr_block($id, $type = 0, $site = 0) {
+function man_block($id, $type = 0, $site = 0) {
     $ci = &get_instance();
     $site = $site ? $site : SITE_ID;
     return $ci->get_cache('block-' . $site, $id, $type);
@@ -688,7 +688,7 @@ function dr_block($id, $type = 0, $site = 0) {
  * @param	string	$name	菜单名称，如果有显示它的值，否则返回数组
  * @return	array
  */
-function dr_linkage($code, $id, $level = 0, $name = '') {
+function man_linkage($code, $id, $level = 0, $name = '') {
 
     $ci = &get_instance();
     $link = $ci->get_cache('linkage-' . SITE_ID . '-' . $code);
@@ -722,7 +722,7 @@ function dr_linkage($code, $id, $level = 0, $name = '') {
  * @param	string	$string
  * @return	string
  */
-function dr_lang_note($string) {
+function man_lang_note($string) {
 
     $string = trim($string);
     if (!$string) {
@@ -732,7 +732,7 @@ function dr_lang_note($string) {
     if (strpos($string, 'lang') === 0) {
         $data = explode(',', $string);
         unset($data[0]);
-        return call_user_func_array('dr_lang', $data);
+        return call_user_func_array('man_lang', $data);
     }
 
     return $string;
@@ -745,7 +745,7 @@ function dr_lang_note($string) {
  * @param	string	$size
  * @return	string
  */
-function dr_avatar($uid, $size = '45') {
+function man_avatar($uid, $size = '45') {
 
     if (!$uid) {
         return $size == 45 ? SITE_URL . 'mantob/statics/images/avatar_45.png' : SITE_URL . 'mantob/statics/images/avatar_90.png';
@@ -765,7 +765,7 @@ function dr_avatar($uid, $size = '45') {
     }
     $data = $ci->db->select('avatar')->where('uid', $uid)->limit(1)->get('member')->row_array();
 
-    return isset($data['avatar']) && $data['avatar'] ? dr_get_file($data['avatar']) : ($size == 45 ? SITE_URL . 'mantob/statics/images/avatar_45.png' : SITE_URL . 'mantob/statics/images/avatar_90.png');
+    return isset($data['avatar']) && $data['avatar'] ? man_get_file($data['avatar']) : ($size == 45 ? SITE_URL . 'mantob/statics/images/avatar_45.png' : SITE_URL . 'mantob/statics/images/avatar_90.png');
 }
 
 /**
@@ -774,7 +774,7 @@ function dr_avatar($uid, $size = '45') {
  * @param	string	$name
  * @return	bool
  */
-function dr_is_app($name) {
+function man_is_app($name) {
 
     if (!$name || !is_dir(FCPATH . 'app/' . $name)) {
         return FALSE;
@@ -790,7 +790,7 @@ function dr_is_app($name) {
  * @param	intval	$starthreshold	星星数在达到此阈值(设为 N)时，N 个星星显示为 1 个月亮、N 个月亮显示为 1 个太阳。
  * @return	string
  */
-function dr_show_stars($num, $starthreshold = 4) {
+function man_show_stars($num, $starthreshold = 4) {
 
     $str = '';
     $alt = 'alt="Rank: ' . $num . '"';
@@ -812,7 +812,7 @@ function dr_show_stars($num, $starthreshold = 4) {
  * @param	intval	$id
  * @return	string
  */
-function dr_show_hits($id) {
+function man_show_hits($id) {
     return "<script type=\"text/javascript\" src=\"" . SITE_URL . "index.php?c=api&m=hits&module=" . APP_DIR . "&id={$id}\"></script>";
 }
 
@@ -822,7 +822,7 @@ function dr_show_hits($id) {
  * @param	intval	$id
  * @return	string
  */
-function dr_space_show_hits($mid, $id) {
+function man_space_show_hits($mid, $id) {
     return "<script type=\"text/javascript\" src=\"" . MEMBER_URL . "index.php?c=api&m=hits&mid=" . $mid . "&id={$id}\"></script>";
 }
 
@@ -832,7 +832,7 @@ function dr_space_show_hits($mid, $id) {
  * @param	string	$url
  * @return	string
  */
-function dr_catcher_data($url) {
+function man_catcher_data($url) {
 
     // fopen模式
     if (ini_get('allow_url_fopen')) {
@@ -938,7 +938,7 @@ function man_thumb2($img, $width = 100, $height = 100, $autocut = 1) {
     if (is_numeric($img) || strpos($img, SITE_URL) !== FALSE) {
         return MEMBER_URL.'index.php?c=api&m=thumb2&id='.urlencode($img).'&width='.$width.'&height='.$height.'&autocut='.$autocut;
     } else {
-        return dr_file($img);
+        return man_file($img);
     }
 }
 
@@ -975,7 +975,7 @@ function man_thumb($img, $width = NULL, $height = NULL, $water = 1) {
         unset($info);
     }
 
-    $img = dr_file($img);
+    $img = man_file($img);
 
     return $img ? $img : SITE_URL.'mantob/statics/images/nopic.gif';
 }
@@ -999,7 +999,7 @@ function man_down_file($id) {
         }
     }
 
-    $file = dr_file($id);
+    $file = man_file($id);
 
     return $file ? $file : '';
 }
@@ -1010,7 +1010,7 @@ function man_down_file($id) {
  * @param	string	$id
  * @return  array
  */
-function dr_get_file($id) {
+function man_get_file($id) {
 
     if (!$id) {
         return '';
@@ -1021,7 +1021,7 @@ function dr_get_file($id) {
         $id = $info['attachment'] ? $info['attachment'] : '';
     }
 
-    $file = dr_file($id);
+    $file = man_file($id);
 
     return $file ? $file : '';
 }
@@ -1032,7 +1032,7 @@ function dr_get_file($id) {
  * @param	string	$url
  * @return  string
  */
-function dr_file($url) {
+function man_file($url) {
 
     if (!$url || strlen($url) == 1) {
         return NULL;
@@ -1056,7 +1056,7 @@ function dr_file($url) {
  * @param	string	$dirname模块目录
  * @return
  */
-function dr_get_value($field, $value, $cfg = NULL, $dirname = NULL) {
+function man_get_value($field, $value, $cfg = NULL, $dirname = NULL) {
 
     $ci = &get_instance();
     $ci->load->library('dfield', array($dirname ? $dirname : APP_DIR));
@@ -1075,7 +1075,7 @@ function dr_get_value($field, $value, $cfg = NULL, $dirname = NULL) {
  * @param $string
  * @return string
  */
-function dr_safe_replace($string) {
+function man_safe_replace($string) {
     $string = str_replace('%20', '', $string);
     $string = str_replace('%27', '', $string);
     $string = str_replace('%2527', '', $string);
@@ -1099,7 +1099,7 @@ function dr_safe_replace($string) {
  * @param	string	$dot
  * @return  string
  */
-function dr_strcut($string, $length, $dot = '...') {
+function man_strcut($string, $length, $dot = '...') {
 
     $charset = 'utf-8';
     if (strlen($string) <= $length) {
@@ -1163,7 +1163,7 @@ function dr_strcut($string, $length, $dot = '...') {
  * @param	string	$str
  * @return  string
  */
-function dr_clearhtml($str) {
+function man_clearhtml($str) {
 
     $str = str_replace(
         array('&nbsp;', '&amp;', '&quot;', '&#039;', '&ldquo;', '&rdquo;', '&mdash;', '&lt;', '&gt;', '&middot;', '&hellip;'), array(' ', '&', '"', "'", '“', '”', '—', '<', '>', '·', '…'), $str
@@ -1206,7 +1206,7 @@ function get_module($dirname, $siteid = SITE_ID) {
  *
  * @return	string
  */
-function dr_random_color() {
+function man_random_color() {
 
     $str = '#';
 
@@ -1238,7 +1238,7 @@ function dr_random_color() {
  * @param	int		$time	时间戳
  * @return	string
  */
-function dr_fdate($sTime) {
+function man_fdate($sTime) {
 
     if (!$sTime) {
         return '';
@@ -1306,7 +1306,7 @@ function man_date($time = NULL, $format = SITE_TIME_FORMAT, $color = NULL) {
  * @param	string|int		$id		表单名称|返回Id
  * @return	string
  */
-function dr_json($status, $code = '', $id = 0) {
+function man_json($status, $code = '', $id = 0) {
     return json_encode(array('status' => $status, 'code' => $code, 'id' => $id));
 }
 
@@ -1316,7 +1316,7 @@ function dr_json($status, $code = '', $id = 0) {
  * @param	多个参数
  * @return	string|NULL
  */
-function dr_lang() {
+function man_lang() {
 
     $param = func_get_args();
     if (empty($param)) {
@@ -1340,11 +1340,11 @@ function dr_lang() {
  * @param	object	$obj	数组对象
  * @return	array
  */
-function dr_object2array($obj) {
+function man_object2array($obj) {
     $_arr = is_object($obj) ? get_object_vars($obj) : $obj;
     if ($_arr && is_array($_arr)) {
         foreach ($_arr as $key => $val) {
-            $val = (is_array($val) || is_object($val)) ? dr_object2array($val) : $val;
+            $val = (is_array($val) || is_object($val)) ? man_object2array($val) : $val;
             $arr[$key] = $val;
         }
     }
@@ -1357,7 +1357,7 @@ function dr_object2array($obj) {
  * @param	string	$data	字符串
  * @return	array
  */
-function dr_string2array($data) {
+function man_string2array($data) {
     return $data ? (is_array($data) ? $data : unserialize(stripslashes($data))) : array();
 }
 
@@ -1367,7 +1367,7 @@ function dr_string2array($data) {
  * @param	array	$data	数组
  * @return	string
  */
-function dr_array2string($data) {
+function man_array2string($data) {
     return $data ? addslashes(serialize($data)) : '';
 }
 
@@ -1377,12 +1377,12 @@ function dr_array2string($data) {
  * @param	string	$dir	目录名称
  * @return	bool|void
  */
-function dr_mkdirs($dir) {
+function man_mkdirs($dir) {
     if (!$dir) {
         return FALSE;
     }
     if (!is_dir($dir)) {
-        dr_mkdirs(dirname($dir));
+        man_mkdirs(dirname($dir));
         if (!file_exists($dir)) {
             mkdir($dir, 0777);
         }
@@ -1396,7 +1396,7 @@ function dr_mkdirs($dir) {
  * @param	string	$value	修改时的值$data[$name]
  * @return	string	
  */
-function dr_set_value($name, $value = NULL) {
+function man_set_value($name, $value = NULL) {
     return isset($_POST['data'][$name]) ? $_POST['data'][$name] : $value;
 }
 
@@ -1407,8 +1407,8 @@ function dr_set_value($name, $value = NULL) {
  * @param	string	$value	修改时的值$data[$name]
  * @return	string	
  */
-function dr_set_select($name, $value = NULL, $field = NULL, $default = FALSE) {
-    $value = dr_set_value($name, $value);
+function man_set_select($name, $value = NULL, $field = NULL, $default = FALSE) {
+    $value = man_set_value($name, $value);
     if ($value === NULL && $default == TRUE) {
         return ' selected';
     }
@@ -1426,8 +1426,8 @@ function dr_set_select($name, $value = NULL, $field = NULL, $default = FALSE) {
  * @param	string	$default	默认选中状态
  * @return	string|void
  */
-function dr_set_radio($name, $value = NULL, $field = NULL, $default = FALSE) {
-    $value = dr_set_value($name, $value);
+function man_set_radio($name, $value = NULL, $field = NULL, $default = FALSE) {
+    $value = man_set_value($name, $value);
     if ($value === NULL && $default == TRUE) {
         return ' checked';
     }
@@ -1445,8 +1445,8 @@ function dr_set_radio($name, $value = NULL, $field = NULL, $default = FALSE) {
  * @param	string	$default	默认选中状态
  * @return	string|void
  */
-function dr_set_checkbox($name, $value = NULL, $field = NULL, $default = FALSE) {
-    $value = dr_set_value($name, $value);
+function man_set_checkbox($name, $value = NULL, $field = NULL, $default = FALSE) {
+    $value = man_set_value($name, $value);
     if ($value === NULL && $default == TRUE) {
         return ' checked';
     }
@@ -1461,7 +1461,7 @@ function dr_set_checkbox($name, $value = NULL, $field = NULL, $default = FALSE) 
  * @param	string	$word
  * @return	string
  */
-function dr_word2pinyin($word) {
+function man_word2pinyin($word) {
     if (!$word) {
         return '';
     }
@@ -1477,7 +1477,7 @@ function dr_word2pinyin($word) {
  * @param	int	$round		保留小数位
  * @return	string
  */
-function dr_format_file_size($fileSize, $round = 2) {
+function man_format_file_size($fileSize, $round = 2) {
 
     if (!$fileSize) {
         return 0;
@@ -1505,7 +1505,7 @@ function dr_format_file_size($fileSize, $round = 2) {
  * @param	string	$keyword	关键字
  * @return	string
  */
-function dr_keyword_highlight($string, $keyword) {
+function man_keyword_highlight($string, $keyword) {
     return $keyword != '' ? str_ireplace($keyword, '<font color=red><strong>' . $keyword . '</strong></font>', $string) : $string;
 }
 
@@ -1523,7 +1523,7 @@ function dollar($value, $include_cents = TRUE) {
  * @param	string	$string
  * @return	string
  */
-function dr_base64_encode($string) {
+function man_base64_encode($string) {
     $data = base64_encode($string);
     $data = str_replace(array('+', '/', '='), array('-', '_', ''), $data);
     return $data;
@@ -1535,7 +1535,7 @@ function dr_base64_encode($string) {
  * @param	string	$string
  * @return	string
  */
-function dr_base64_decode($string) {
+function man_base64_decode($string) {
     $data = str_replace(array('-', '_'), array('+', '/'), $string);
     $mod4 = strlen($data) % 4;
     if ($mod4) {
@@ -1553,13 +1553,13 @@ function dr_base64_decode($string) {
  * @param	string	$lang	语言名称
  * @return	string
  */
-function dr_lang2name($_name, $lang = SITE_LANGUAGE) {
+function man_lang2name($_name, $lang = SITE_LANGUAGE) {
 
     if (!$_name) {
         return NULL;
     }
 
-    $name = dr_string2array($_name);
+    $name = man_string2array($_name);
     if (!$name) {
         return lang($_name);
     }
@@ -1574,10 +1574,10 @@ function dr_lang2name($_name, $lang = SITE_LANGUAGE) {
  * @param	array	$data	原语言数据
  * @return	string
  */
-function dr_name2lang($value, $data = array()) {
+function man_name2lang($value, $data = array()) {
 
     if (!is_array($data)) {
-        $data = dr_string2array($data);
+        $data = man_string2array($data);
     }
 
     if (!isset($data['zh-cn'])) {
@@ -1585,7 +1585,7 @@ function dr_name2lang($value, $data = array()) {
     }
     $data[SITE_LANGUAGE] = $value;
 
-    return dr_array2string($data);
+    return man_array2string($data);
 }
 
 /**
@@ -1597,7 +1597,7 @@ function dr_name2lang($value, $data = array()) {
  * @param	intval	$level		当前级别
  * @return	string
  */
-function dr_array2xml($arr, $htmlon = TRUE, $isnormal = FALSE, $level = 1) {
+function man_array2xml($arr, $htmlon = TRUE, $isnormal = FALSE, $level = 1) {
     $space = str_repeat("\t", $level);
     $string = $level == 1 ? "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<result>\r\n" : '';
     foreach ($arr as $k => $v) {
@@ -1605,7 +1605,7 @@ function dr_array2xml($arr, $htmlon = TRUE, $isnormal = FALSE, $level = 1) {
             $string.= $space . "<$k>" . ($htmlon ? '<![CDATA[' : '') . $v . ($htmlon ? ']]>' : '') . "</$k>\r\n";
         } else {
             $name = is_numeric($k) ? 'item' . $k : $k;
-            $string.= $space . "<$name>\r\n" . dr_array2xml($v, $htmlon, $isnormal, $level + 1) . $space . "</$name>\r\n";
+            $string.= $space . "<$name>\r\n" . man_array2xml($v, $htmlon, $isnormal, $level + 1) . $space . "</$name>\r\n";
         }
     }
     $string = preg_replace("/([\x01-\x08\x0b-\x0c\x0e-\x1f])+/", ' ', $string);
@@ -1624,7 +1624,7 @@ if (!function_exists('gethostbyname')) {
  *
  * @param   $html
  */
-function dr_preg_html($html){
+function man_preg_html($html){
     $p = array("/<[a|A][^>]+(topic=\"true\")+[^>]*+>#([^<]+)#<\/[a|A]>/",
         "/<[a|A][^>]+(data=\")+([^\"]+)\"[^>]*+>[^<]*+<\/[a|A]>/",
         "/<[img|IMG][^>]+(src=\")+([^\"]+)\"[^>]*+>/");
@@ -1644,12 +1644,12 @@ function _format_feed_content_url_length($match) {
 }
 
 // 替换互动内容
-function dr_sns_content($content) {
+function man_sns_content($content) {
 
     // 替换话题URL
     if (preg_match_all('/\[TOPIC\-URL\-([0-9]+)\]/Ui', $content, $match)) {
         foreach ($match[1] as $t) {
-            $content = str_replace('[TOPIC-URL-'.$t.']', dr_member_url('sns/topic', array('id' => $t)), $content);
+            $content = str_replace('[TOPIC-URL-'.$t.']', man_member_url('sns/topic', array('id' => $t)), $content);
         }
     }
 
@@ -1672,7 +1672,7 @@ function dr_sns_content($content) {
  * @param	intval	$cache	缓存时间
  * @return	string
  */
-function dr_sns_feed($id, $cache = 3600) {
+function man_sns_feed($id, $cache = 3600) {
 
     $ci = &get_instance();
     $data = $ci->get_cache_data('sns-feed-'.$id);
@@ -1691,7 +1691,7 @@ function dr_sns_feed($id, $cache = 3600) {
  * @param	intval	$uid2   对方id
  * @return	string
  */
-function dr_sns_follow($uid, $uid2) {
+function man_sns_follow($uid, $uid2) {
 
     $ci = &get_instance();
     $data = $ci->db

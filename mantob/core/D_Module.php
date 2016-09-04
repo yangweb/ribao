@@ -123,7 +123,7 @@ class D_Module extends D_Common {
 	 */
 	public function select_category($data, $id = 0, $str = '', $default = ' -- ', $onlysub = 0, $is_push = 0) {
 
-        $cache = md5(dr_array2string($data).dr_array2string($id).$str.$default.$onlysub.$is_push.$this->member['uid']);
+        $cache = md5(man_array2string($data).man_array2string($id).$str.$default.$onlysub.$is_push.$this->member['uid']);
 		if ($cache_data = $this->get_cache_data($cache)) {
             return $cache_data;
         }
@@ -331,7 +331,7 @@ class D_Module extends D_Common {
                 $this->msg(lang('m-039'));
             } // 会员未登录
 			if (-$data['score'] + $this->member['score'] < 0) {
-                $this->msg(dr_lang('m-103', $data['score'], $this->member['score']));
+                $this->msg(man_lang('m-103', $data['score'], $this->member['score']));
             } // 虚拟币检查
 			$this->member_model->update_score(1, $this->uid, -$data['score'], '', 'lang,m-106'); // 扣减虚拟币
 			$this->link->insert($table, array(
@@ -370,14 +370,14 @@ class D_Module extends D_Common {
             && !$this->template->mobile
             && !is_file($file)) {
             ob_start();
-            $this->template->assign(dr_module_seo($mod));
+            $this->template->assign(man_module_seo($mod));
             $this->template->assign('indexm', 1);
             $this->template->display($name);
             $html = ob_get_clean();
             file_put_contents($file, $html, LOCK_EX);
             echo $html;exit;
 		} else {
-			$this->template->assign(dr_module_seo($mod));
+			$this->template->assign(man_module_seo($mod));
             $this->template->assign('indexm', 1);
 			$this->template->display($name);
 		}
@@ -393,7 +393,7 @@ class D_Module extends D_Common {
 	    if ($id) {
 			$cat = $mod['category'][$id];
 			if (!$cat) {
-                $this->goto_404_page(dr_lang('cat-23', $id));
+                $this->goto_404_page(man_lang('cat-23', $id));
             }
 		} elseif ($dir) {
 			$id = $mod['category_dir'][$dir];
@@ -416,7 +416,7 @@ class D_Module extends D_Common {
 				}
 				// 返回无法找到栏目
 				if (!$cat) {
-                    $this->goto_404_page(dr_lang('cat-23', $dir));
+                    $this->goto_404_page(man_lang('cat-23', $dir));
                 }
 			}
 		} else {
@@ -425,7 +425,7 @@ class D_Module extends D_Common {
 		
 		list($parent, $related) = $this->_related_cat($mod, $id);
 		
-		$this->template->assign(dr_category_seo($mod, $cat, max(1, (int)$this->input->get('page'))));
+		$this->template->assign(man_category_seo($mod, $cat, max(1, (int)$this->input->get('page'))));
 		$this->template->assign(array(
 			'cat' => $cat,
 			'page' => $page,
@@ -433,7 +433,7 @@ class D_Module extends D_Common {
 			'params' => array('catid' => $id),
 			'parent' => $parent,
 			'related' => $related,
-			'urlrule' => $this->mobile ? dr_mobile_category_url($this->dir, $catid, '{page}') : dr_category_url($catid, '{page}'),
+			'urlrule' => $this->mobile ? man_mobile_category_url($this->dir, $catid, '{page}') : man_category_url($catid, '{page}'),
 		));
 		$this->template->display($cat['child']? $cat['setting']['template']['category'] : $cat['setting']['template']['list']);
 	}
@@ -455,7 +455,7 @@ class D_Module extends D_Common {
 				if ($return) {
                     return NULL;
                 }
-				$this->goto_404_page(dr_lang('mod-30', $id));
+				$this->goto_404_page(man_lang('mod-30', $id));
 			}
 			
 			$mod = $this->get_cache('module-'.SITE_ID.'-'.$this->dir);
@@ -494,7 +494,7 @@ class D_Module extends D_Common {
 				$array = explode(',', $data['keywords']);
 				$data['keywords'] = array();
 				foreach ($array as $t) {
-					$data['keywords'][$t] = dr_tag_url($mod, $t);
+					$data['keywords'][$t] = man_tag_url($mod, $t);
 				}
 			}
 			
@@ -552,14 +552,14 @@ class D_Module extends D_Common {
 		list($parent, $related) = $this->_related_cat($mod, $data['catid']);
 		
 	    $this->template->assign($data);
-		$this->template->assign(dr_show_seo($mod, $data, $page));
+		$this->template->assign(man_show_seo($mod, $data, $page));
 		$this->template->assign(array(
 			'cat' => $cat,
 			'page' => $page,
 			'params' => array('catid' => $data['catid']),
 			'parent' => $parent,
 			'related' => $related,
-			'urlrule' => $this->mobile ? dr_mobile_show_url($this->dir, $id, '{page}') : dr_show_url($mod, $data, '{page}'),
+			'urlrule' => $this->mobile ? man_mobile_show_url($this->dir, $id, '{page}') : man_show_url($mod, $data, '{page}'),
 		));
 		
 		$tpl = $cat['setting']['template']['show'];
@@ -599,7 +599,7 @@ class D_Module extends D_Common {
 				if ($return) {
                     return NULL;
                 }
-				$this->goto_404_page(dr_lang('mod-45', $id));
+				$this->goto_404_page(man_lang('mod-45', $id));
 			}
 			
 			$content = $this->get_cache_data('show'.$this->dir.SITE_ID.$data['cid']);
@@ -614,7 +614,7 @@ class D_Module extends D_Common {
 				if ($return) {
                     return NULL;
                 }
-				$this->goto_404_page(dr_lang('mod-30', $data['cid']));
+				$this->goto_404_page(man_lang('mod-30', $data['cid']));
 			}
 			
 			$data = $data + $content;
@@ -684,13 +684,13 @@ class D_Module extends D_Common {
 		list($parent, $related) = $this->_related_cat($mod, $data['catid']);
 		
 	    $this->template->assign($data);
-		$this->template->assign(dr_extend_seo($mod, $data));
+		$this->template->assign(man_extend_seo($mod, $data));
 		$this->template->assign(array(
 			'cat' => $cat,
 			'params' => array('catid' => $data['catid']),
 			'parent' => $parent,
 			'related' => $related,
-			'urlrule' => $this->mobile ? dr_mobile_extend_url($this->dir, $id, '{page}') : dr_extend_url($mod, $data, '{page}'),
+			'urlrule' => $this->mobile ? man_mobile_extend_url($this->dir, $id, '{page}') : man_extend_url($mod, $data, '{page}'),
 		));
 		
 		$tpl = $cat['setting']['template']['extend'];
@@ -736,7 +736,7 @@ class D_Module extends D_Common {
 
 		// 搜索参数
 		$get = $this->input->get(NULL, TRUE);
-		$get = isset($get['rewrite']) ? dr_rewrite_decode($get['rewrite']) : $get;
+		$get = isset($get['rewrite']) ? man_rewrite_decode($get['rewrite']) : $get;
 		$id = $get['id'];
 		$catid = (int)$get['catid'];
         $_GET['page'] = $get['page'];
@@ -770,7 +770,7 @@ class D_Module extends D_Common {
 
 		list($parent, $related) = $this->_related_cat($mod, $catid);
 
-        $seoinfo = dr_category_seo($mod, $mod['category'][$catid], max(1, (int)$this->input->get('page')));
+        $seoinfo = man_category_seo($mod, $mod['category'][$catid], max(1, (int)$this->input->get('page')));
 
         if ($call) {
             $urlrule = $mod['setting']['search']['rewrite'] ? SITE_URL.'so-module-'.$this->dir.'-id-{id}-page-{page}.html' : SITE_URL.'index.php?c=so&module='.$this->dir.'&id={id}&page={page}';
@@ -884,11 +884,11 @@ class D_Module extends D_Common {
             $dir = trim('html/'.SITE_ID.'/'.trim($dir, '.'), '/');
         }
 		if ($dir != '.' && !file_exists(APPPATH.$dir)) {
-            dr_mkdirs(APPPATH.$dir, TRUE);
+            man_mkdirs(APPPATH.$dir, TRUE);
         }
         // 判断是否为目录形式
         if (strpos($file, '.html') === FALSE) {
-            dr_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
+            man_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
         }
         // 如果是目录就生成一个index.html
         if (is_dir(APPPATH.$dir.'/'.$file)) {
@@ -902,7 +902,7 @@ class D_Module extends D_Common {
 		$filepath[] = APPPATH.$dir.'/'.$file;
 		if (isset($data['content_page']) && $data['content_page']) { // 表示存在内容分页
 			foreach ($data['content_page'] as $i => $p) {
-				$url = dr_show_url($mod, $data, $i);
+				$url = man_show_url($mod, $data, $i);
 				$file = str_replace($mod['url'], '', $url);
 				list($cdata, $tpl) = $this->index($id, $i, TRUE);
 				if ($cdata) {
@@ -915,11 +915,11 @@ class D_Module extends D_Common {
                         $dir = trim('html/'.SITE_ID.'/'.trim($dir, '.'), '/');
                     }
 					if ($dir != '.' && !file_exists(APPPATH.$dir)) {
-                        dr_mkdirs(APPPATH.$dir, TRUE);
+                        man_mkdirs(APPPATH.$dir, TRUE);
                     }
                     // 判断是否为目录形式
                     if (strpos($file, '.html') === FALSE) {
-                        dr_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
+                        man_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
                     }
                     // 如果是目录就生成一个index.html
                     if (is_dir(APPPATH.$dir.'/'.$file)) {
@@ -961,11 +961,11 @@ class D_Module extends D_Common {
                         $dir = trim('html/'.SITE_ID.'/'.trim($dir, '.'), '/');
                     }
 					if ($dir != '.' && !file_exists(APPPATH.$dir)) {
-                        dr_mkdirs(APPPATH.$dir, TRUE);
+                        man_mkdirs(APPPATH.$dir, TRUE);
                     }
                     // 判断是否为目录形式
                     if (strpos($file, '.html') === FALSE) {
-                        dr_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
+                        man_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
                     }
                     // 如果是目录就生成一个index.html
                     if (is_dir(APPPATH.$dir.'/'.$file)) {
@@ -1150,7 +1150,7 @@ class D_Module extends D_Common {
 		
 		$mod = $this->get_cache('module-'.SITE_ID.'-'.$this->dir);
 		$cat = $mod['category'][$catid];
-		$url = $page > 1 ? dr_category_url($mod, $cat, $page) : $cat['url'];
+		$url = $page > 1 ? man_category_url($mod, $cat, $page) : $cat['url'];
 		if (!$url) {
             return NULL;
         }
@@ -1170,11 +1170,11 @@ class D_Module extends D_Common {
             $dir = trim('html/'.SITE_ID.'/'.trim($dir, '.'), '/');
         }
 		if ($dir != '.' && !file_exists(APPPATH.$dir)) {
-            dr_mkdirs(APPPATH.$dir, TRUE);
+            man_mkdirs(APPPATH.$dir, TRUE);
         }
         // 判断是否为目录形式
         if (strpos($file, '.html') === FALSE) {
-            dr_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
+            man_mkdirs(APPPATH.$dir.'/'.$file, TRUE);
         }
         // 如果是目录就生成一个index.html
         if (is_dir(APPPATH.$dir.'/'.$file)) {
@@ -1188,11 +1188,11 @@ class D_Module extends D_Common {
         $this->content_model->set_html(3, 0, 0, $catid, $catid, array(APPPATH.$dir.'/'.$file));
         // 生成栏目的第一页
         if ($page <= 1) {
-            $purl = dr_category_url($mod, $cat, '{page}');
+            $purl = man_category_url($mod, $cat, '{page}');
             $pfile = basename(str_replace(array($mod['url'], '{page}'), array('', 1), $purl));
             // 判断是否为目录形式
             if (strpos($pfile, '.html') === FALSE) {
-                dr_mkdirs(APPPATH.$dir.'/'.$pfile, TRUE);
+                man_mkdirs(APPPATH.$dir.'/'.$pfile, TRUE);
             }
             // 如果是目录就生成一个index.html
             if (is_dir(APPPATH.$dir.'/'.$pfile)) {

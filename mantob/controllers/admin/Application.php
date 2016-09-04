@@ -32,7 +32,7 @@ class Application extends M_Controller {
     public function index() {
 	
 		$store = $data = array();
-		$local = dr_dir_map(FCPATH.'app/', 1); // 搜索本地应用
+		$local = man_dir_map(FCPATH.'app/', 1); // 搜索本地应用
 		$application = $this->application_model->get_data(); // 库中已安装应用
 		
 		if ($local) {
@@ -58,7 +58,7 @@ class Application extends M_Controller {
 		
 		$this->template->assign(array(
 			'list' => $data,
-			'store' => dr_base64_encode(dr_array2string($store)),
+			'store' => man_base64_encode(man_array2string($store)),
 		));
 		$this->template->display('application_index.html');
     }
@@ -82,7 +82,7 @@ class Application extends M_Controller {
             $this->clear_cache('app');
 		}
 		
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
     }
 	
 	/**
@@ -108,7 +108,7 @@ class Application extends M_Controller {
         $this->db->where('mark', 'app-'.$dir)->delete('member_menu');
 
         $this->clear_cache('app');
-		$this->admin_msg(lang('000'), dr_url('application/index'), 1);
+		$this->admin_msg(lang('000'), man_url('application/index'), 1);
     }
 	
 	/**
@@ -117,7 +117,7 @@ class Application extends M_Controller {
     public function store() {
 	
 		$data = array();
-		$local = dr_dir_map(FCPATH.'app/', 1); // 搜索本地应用
+		$local = man_dir_map(FCPATH.'app/', 1); // 搜索本地应用
 		if ($local) {
 			foreach ($local as $dir) {
 				if (is_file(FCPATH.'app/'.$dir.'/config/app.php')) {
@@ -129,7 +129,7 @@ class Application extends M_Controller {
 			}
 		}
 		
-$url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&param='.dr_base64_encode(dr_array2string(array(
+$url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&param='.man_base64_encode(man_array2string(array(
 			'site' => SITE_URL,
 			'name' => SITE_NAME,
 			'data' => $data,
@@ -152,7 +152,7 @@ $url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&par
             $this->admin_msg('目录（/app/'.$dir.'/）已经存在');
         }
 		
-    	$data = dr_catcher_data(urldecode($this->input->get('id')));
+    	$data = man_catcher_data(urldecode($this->input->get('id')));
     	if (!$data) {
             $this->admin_msg('对不起，您的服务器不支持远程下载');
         }
@@ -199,7 +199,7 @@ $url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&par
     	
     	delete_files(FCPATH.'cache/down/', TRUE);
     	
-		$this->admin_msg('下载成功，即将为您跳转到应用中心', dr_url('application/index'), 1);
+		$this->admin_msg('下载成功，即将为您跳转到应用中心', man_url('application/index'), 1);
     }
 	
 	/**
@@ -217,7 +217,7 @@ $url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&par
             $this->admin_msg('此应用无法在线更新（key不存在）');
         }
 		
-		$url = 'http://store.mantob.com/index.php?c=down&m=update&action=application&param='.dr_base64_encode(dr_array2string(array(
+		$url = 'http://store.mantob.com/index.php?c=down&m=update&action=application&param='.man_base64_encode(man_array2string(array(
 			'site' => SITE_URL,
 			'name' => SITE_NAME,
 			'data' => array(
@@ -251,7 +251,7 @@ $url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&par
 			 $this->admin_msg('此应用无法在线升级，目录（/app/'.$dir.'/）不存在');
 		}
 		
-    	$data = dr_catcher_data(urldecode($this->input->get('id')));
+    	$data = man_catcher_data(urldecode($this->input->get('id')));
     	if (!$data) {
             $this->admin_msg('对不起，您的服务器不支持远程下载');
         }
@@ -307,10 +307,10 @@ $url = 'http://store.mantob.com/index.php?c=category&id=1&action=application&par
     	
     	//检查update控制器
 		if (is_file(FCPATH.'app/'.$dir.'/controllers/admin/Update.php')) {
-            $this->admin_msg('正在升级数据，请稍候...', dr_url($dir.'/update/index'), 2);
+            $this->admin_msg('正在升级数据，请稍候...', man_url($dir.'/update/index'), 2);
         }
 		
-		$this->admin_msg('升级完成，请重新检测一次版本', dr_url('application/index'), 1);
+		$this->admin_msg('升级完成，请重新检测一次版本', man_url('application/index'), 1);
     }
 
     /**

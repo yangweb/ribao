@@ -52,10 +52,10 @@ body fieldset.blue legend {
 	padding-left:12px;
 	font-weight:normal;
 }
-.table-list .dr_option {
+.table-list .man_option {
 	padding-left:20px;
 }
-.table-list .dr_option a {
+.table-list .man_option a {
 	padding-right:10px;
 }
 .table-list thead th {
@@ -83,7 +83,7 @@ div.btn {
 .nHover tr:hover,.nHover tr:hover td {
 	background:none;
 }
-.dr_table tr:hover {
+.man_table tr:hover {
 	background:none!important;	
 }
 .table-list .input-text-c {
@@ -420,28 +420,28 @@ div#areaid {
     padding: 0 8px;
     width: 16px;
 }
-.dr_format_wrap {
+.man_format_wrap {
     background-color: #F8F8F8;
     border: 1px solid #D7D7D7;
     overflow: hidden;
 }
-.dr_format_group {
+.man_format_group {
     margin: 5px 20px 15px;
 }
-.dr_format_label {
+.man_format_label {
     display: inline-block;
     margin-top: 5px;
     margin-bottom: 5px;
 	font-weight: bold;
 }
-.dr_format_wrap label {
+.man_format_wrap label {
     float: none;
     line-height: 1.5;
     padding: 0;
     text-align: left;
     width: auto;
 }
-.dr_format_list li {
+.man_format_list li {
     display: inline-block;
     height: 25px;
     overflow: hidden;
@@ -450,16 +450,16 @@ div#areaid {
     clear: none;
     margin: 0;
 }
-.dr_format_map {
+.man_format_map {
     display: inline-block;
     overflow-x: hidden;
     overflow-y: auto;
     width: auto;
 }
-.dr_format_wrapper {
+.man_format_wrapper {
     margin: 10px 10px 0 0px;
 }
-.dr_format_wrap .labelname {
+.man_format_wrap .labelname {
     display: inline-block;
     height: 22px;
     line-height: 23px;
@@ -468,7 +468,7 @@ div#areaid {
     white-space: nowrap;
     width: 100px;
 }
-.dr_format_table th {
+.man_format_table th {
     background-color: #EDEDED;
     border: 1px solid #D7D7D7 !important;
     font-weight: 400;
@@ -477,7 +477,7 @@ div#areaid {
     text-align: center;
     vertical-align: middle;
 }
-.dr_format_table td {
+.man_format_table td {
     border: 1px solid #D7D7D7 !important;
     height: 25px;
     max-width: 200px;
@@ -486,6 +486,6 @@ div#areaid {
     text-align: center;
     vertical-align: middle;
 }
-.dr_border_none td, .dr_border_none th {
+.man_border_none td, .man_border_none th {
 	border:none !important;
 }

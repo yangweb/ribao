@@ -155,7 +155,7 @@ class Field extends M_Controller {
 		if (IS_POST) {
 			if ($this->input->post('action') == 'del') {
 				$this->field_model->del($this->input->post('ids'));
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			} else {
 				$_ids = $this->input->post('ids');
 				$_data = $this->input->post('data');
@@ -163,7 +163,7 @@ class Field extends M_Controller {
 					$this->db->where('id', $id)->update('field',  $_data[$id]);
 				}
 				unset($_ids, $_data);
-				exit(dr_json(1, lang('014')));
+				exit(man_json(1, lang('014')));
 			}
 		}
 
@@ -172,7 +172,7 @@ class Field extends M_Controller {
 		if ($data) {
 			foreach ($data as $t) {
 				if ($t['fieldtype'] == 'Group' && preg_match_all('/\{(.+)\}/U', $t['setting']['option']['value'], $value)) {
-					$group[$t['fieldname']] = dr_random_color();
+					$group[$t['fieldname']] = man_random_color();
 					foreach ($value[1] as $v) {
 						$group[$v] = $group[$t['fieldname']];
 					}
@@ -219,7 +219,7 @@ class Field extends M_Controller {
 			} else {
                 $this->clear_cache($this->cacheuri);
 				$this->field_model->add($data, $field->create_sql($data['fieldname'], $data['setting']['option']));
-				$this->admin_msg(lang('014'), dr_url('field/index', array('rname' => $this->relatedname, 'rid' => $this->relatedid)), 1);
+				$this->admin_msg(lang('014'), man_url('field/index', array('rname' => $this->relatedname, 'rid' => $this->relatedid)), 1);
 			}
 
 		}
@@ -264,7 +264,7 @@ class Field extends M_Controller {
 			} else {
                 $this->clear_cache($this->cacheuri);
 				$this->field_model->edit($_data, $data, $field->alter_sql($_data['fieldname'], $data['setting']['option']));
-				$this->admin_msg(lang('014'), dr_url('field/index', array('rname' => $this->relatedname, 'rid' => $this->relatedid)), 1);
+				$this->admin_msg(lang('014'), man_url('field/index', array('rname' => $this->relatedname, 'rid' => $this->relatedid)), 1);
 			
 			}
 			$data['fieldname'] = $_data['fieldname'];
@@ -305,7 +305,7 @@ class Field extends M_Controller {
             $this->clear_cache($this->cacheuri);
 		}
         
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
     }
 	
 	/**
@@ -314,6 +314,6 @@ class Field extends M_Controller {
     public function del() {
 		$this->field_model->del(array((int)$this->input->get('id')));
         $this->clear_cache($this->cacheuri);
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
     }
 }

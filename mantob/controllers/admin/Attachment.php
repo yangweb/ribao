@@ -83,7 +83,7 @@ class Attachment extends M_Controller {
 							$cache[] = (int)$t['id'];
 						}
 						$this->cache->file->save($this->cache_file, $cache, 7200);
-						$this->admin_msg(lang('217'), dr_url('attachment/result'), 2, 3);
+						$this->admin_msg(lang('217'), man_url('attachment/result'), 2, 3);
 					}
 				}
 				$error = lang('216');
@@ -118,7 +118,7 @@ class Attachment extends M_Controller {
 					$this->attachment_model->_delete_attachment($t);
 				}
 			}
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 	
 		$cache = $this->cache->file->get($this->cache_file);
@@ -144,7 +144,7 @@ class Attachment extends M_Controller {
 					 
 		$this->template->assign(array(
 			'list' => $data,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/attachment/result'), $total),
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/attachment/result'), $total),
             'totals' => $total,
 		));
 		$this->template->display('attachment_result.html');
@@ -170,7 +170,7 @@ class Attachment extends M_Controller {
 					$this->attachment_model->_delete_attachment($t);
 				}
 			}
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$page = max((int)$this->input->get('page'), 1);
@@ -199,7 +199,7 @@ class Attachment extends M_Controller {
 		$this->template->assign(array(
 			'list' => $data,
 			'param'	=> $param,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/attachment/unused', $param), $param['total'])
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/attachment/unused', $param), $param['total'])
 		));
 		$this->template->display('attachment_unused.html');
     }

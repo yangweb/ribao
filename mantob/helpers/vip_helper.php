@@ -17,7 +17,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @param	string	$dir	目录名称
  * @return	bool|void
  */
-function dr_vip_login($db, $value) {
+function man_vip_login($db, $value) {
 
     if (preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/', $value)) {
         // 邮箱登录
@@ -51,7 +51,7 @@ function dr_vip_login($db, $value) {
  * @param	intval	$cache	缓存时间，默认为10000秒
  * @return	array|void
  */
-function dr_vip_form($id, $form, $field = 0, $sid = 0, $cache = 0) {
+function man_vip_form($id, $form, $field = 0, $sid = 0, $cache = 0) {
 
     $ci = &get_instance();
     $sid = $sid ? $sid : SITE_ID;

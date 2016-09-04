@@ -67,14 +67,14 @@ class Block extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/block/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
             $this->link->where_in('id', $ids)->delete($this->tablename);
             $this->cache(1);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->template->assign('list', $this->link->get($this->tablename)->result_array());
@@ -89,12 +89,12 @@ class Block extends M_Controller {
 		if (IS_POST) {
 			$data = $this->validate_filter($this->field);
 			if (isset($data['error'])) {
-                exit(dr_json(0, $data['msg'], $data['error']));
+                exit(man_json(0, $data['msg'], $data['error']));
             }
 			$this->link
 				 ->insert($this->tablename, $data[1]);
 			$this->cache(1);
-			exit(dr_json(1, lang('000'), ''));
+			exit(man_json(1, lang('000'), ''));
 		}
 		
 		$this->template->assign(array(
@@ -121,13 +121,13 @@ class Block extends M_Controller {
 		if (IS_POST) {
 			$data = $this->validate_filter($this->field);
 			if (isset($data['error'])) {
-                exit(dr_json(0, $data['msg'], $data['error']));
+                exit(man_json(0, $data['msg'], $data['error']));
             }
 			$this->link
 				 ->where('id',(int) $id)
 				 ->update($this->tablename, $data[1]);
 			$this->cache(1);
-			exit(dr_json(1, lang('000'), ''));
+			exit(man_json(1, lang('000'), ''));
 		}
 		
 		$this->template->assign(array(

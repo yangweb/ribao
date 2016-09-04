@@ -144,7 +144,7 @@ class F_Baidumap extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 地图默认值
 		$value && list($lng, $lat) = explode(',', $value);
 		$value = ($value == '0,0' || $value == '0.000000,0.000000' || strlen($value) < 5) ? '' : $value;
@@ -172,7 +172,7 @@ class F_Baidumap extends A_Field {
 								$("#result_'.$name.'").html("<font color=red>'.lang('m-069').'（"+value+"）</font>");
 								return true;
 							}
-							$("#dr_'.$name.'").val(value);
+							$("#man_'.$name.'").val(value);
 							return true;
 						},
 						cancel: true
@@ -180,7 +180,7 @@ class F_Baidumap extends A_Field {
 				}
 				</script>
 				<input type="button" name="'.$name.'_mark" onclick="map_'.$name.'_mark()" id="'.$name.'_mark" value="'.lang('m-070').'" class="button" />
-				<input name="data['.$name.']" id="dr_'.$name.'" type="hidden" value="'.$value.'" />
+				<input name="data['.$name.']" id="man_'.$name.'" type="hidden" value="'.$value.'" />
 				<span id="result_'.$name.'">'.($value ? '<font color=green>'.lang('m-068').'（'.$value.'）</font>' : '').'</span>'.$tips;
 				
 		return $this->input_format($name, $text, $str);

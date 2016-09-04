@@ -8,12 +8,12 @@ $(function() {
 		}
 	}
 });
-function dr_form_check() {
-	if ($("#dr_name").val() == '') {
-		dr_form_tips('name', false, '{dr_lang("020", lang("html-026"))}');
+function man_form_check() {
+	if ($("#man_name").val() == '') {
+		man_form_tips('name', false, '{man_lang("020", lang("html-026"))}');
 		return false;
 	} else {
-		dr_form_tips('name', true, '&nbsp;');
+		man_form_tips('name', true, '&nbsp;');
 	}
 	if ($("#mark").val() == 0) { 
 		return true;
@@ -23,12 +23,12 @@ function dr_form_check() {
 }
 </script>
 <div class="table-list" style="width:530px;">
-<form action="" method="post" id="myform" name="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" id="myform" name="myform" onsubmit="return man_form_check()">
 <input name="mark" id="mark" type="hidden" value="0">
 <table width="100%" class="table_form">
   <tr>
     <th width="100"><font color="red">*</font>&nbsp;{lang('html-026')}： </th>
-    <td><input class="input-text" type="text" name="data[name]" id="dr_name" value="{$data['name']}" size="20" /><div class="onShow" id="dr_name_tips">{lang('html-027')}</div></td>
+    <td><input class="input-text" type="text" name="data[name]" id="man_name" value="{$data['name']}" size="20" /><div class="onShow" id="man_name_tips">{lang('html-027')}</div></td>
 </tr>
 <tr>
     <th>&nbsp;{lang('030')}： </th>

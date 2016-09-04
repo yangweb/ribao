@@ -17,7 +17,7 @@
 <script type="text/javascript" src="{SITE_PATH}member/statics/js/mantob.js"></script>
 <script type="text/javascript">
 $(function() {
-	$(".table-list tr").last().addClass("dr_border_none");
+	$(".table-list tr").last().addClass("man_border_none");
 	$(".subnav .content-menu span").last().remove();
 }); 
 </script>
@@ -27,7 +27,7 @@ $(function() {
 <table width="440" border="0" cellspacing="0" cellpadding="0" class="table_form">
 <tr>
     <th align="right" width="120">{lang('html-347')}：</th>
-    <td align="left">{$data.username}&nbsp;&nbsp;{dr_member_online($data.uid, 1)}</td>
+    <td align="left">{$data.username}&nbsp;&nbsp;{man_member_online($data.uid, 1)}</td>
 </tr>
 {if $data.email}
 <tr>
@@ -40,7 +40,7 @@ $(function() {
     <td align="left">
 	{MEMBER.group.$data[groupid].name}
 	{if $data.levelid}&nbsp;（{MEMBER.group.$data[groupid].level.$data[levelid].name}）{/if}
-	{if $data.overdue}&nbsp;{dr_lang('html-488', man_date($data.overdue))}{/if}</td>
+	{if $data.overdue}&nbsp;{man_lang('html-488', man_date($data.overdue))}{/if}</td>
 </tr>
 {if $data.name}
 <tr>

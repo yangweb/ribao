@@ -6,7 +6,7 @@ $(function() {
 	art.dialog.tips('{$result}', 3);
 	{/if}
 	{if $member_rule}
-	$(".dr_select_all input").click(function(data){
+	$(".man_select_all input").click(function(data){
 		var _class = $(this).attr("class");
 		if ($(this).attr('checked')) {
 			$("."+_class).attr("checked",true);
@@ -16,7 +16,7 @@ $(function() {
 	});
 	{/if}
 	// 会员组权限联动
-	$(".dr_select_all input").click(function(data){
+	$(".man_select_all input").click(function(data){
 		var _class = $(this).attr("class");
 		if ($(this).attr('checked')) {
 			$("."+_class).attr("checked",true);
@@ -25,48 +25,48 @@ $(function() {
 		}
 	});
      // 关闭搜索
-    {if $data['setting']['search']['close']}dr_set_search(1);{/if}
+    {if $data['setting']['search']['close']}man_set_search(1);{/if}
 });
-function dr_set_search(v){
+function man_set_search(v){
     if (v == 1) {
-        $(".dr_search").hide();
+        $(".man_search").hide();
     } else {
-        $(".dr_search").show();
+        $(".man_search").show();
     }
 }
 function sitetips(_this) {
 	var id = $(_this).attr("sid");
 	if (!$(_this).attr("checked")) {
 		art.dialog.confirm("{lang('html-152')}", function(){
-			$(".dr_site_"+id).hide();
+			$(".man_site_"+id).hide();
 			return true;
 		}, function(){
-			$(".dr_site_"+id).show();
+			$(".man_site_"+id).show();
 			$(_this).attr("checked", "checked");
 		});
 	} else {
-		$(".dr_site_"+id).show();
+		$(".man_site_"+id).show();
 	}
 }
 
-function dr_admin_rule(id, url, title) {
+function man_admin_rule(id, url, title) {
 	var throughBox = $.dialog.through; // 创建窗口
-	var dr_Dialog = throughBox({title: title});
+	var man_Dialog = throughBox({title: title});
 	// ajax调用窗口内容
 	$.ajax({type: "GET", url:url, dataType:'text', success: function (text) {
 			var win = $.dialog.top;
-			dr_Dialog.content(text);
+			man_Dialog.content(text);
 			// 添加按钮
-			dr_Dialog.button({name: fc_lang[36], callback:function() {
+			man_Dialog.button({name: fc_lang[36], callback:function() {
 					win.$("#mark").val("0"); // 标示可以提交表单
-					if (win.dr_form_check()) { // 按钮返回验证表单函数
+					if (win.man_form_check()) { // 按钮返回验证表单函数
 						var _data = win.$("#myform").serialize();
 						$.ajax({type: "POST",dataType:"json", url: url, data: _data, // 将表单数据ajax提交验证
 							success: function(data) {
-								$("#dr_status_"+id).attr("class", "onCorrect");
-								$("#dr_status_"+id).html("&nbsp;&nbsp;");
+								$("#man_status_"+id).attr("class", "onCorrect");
+								$("#man_status_"+id).html("&nbsp;&nbsp;");
 								$.dialog.tips(fc_lang[37], 2, 1);
-								dr_Dialog.close();
+								man_Dialog.close();
 							},
 							error: function(HttpRequest, ajaxOptions, thrownError) {
 								alert(HttpRequest.responseText);
@@ -84,14 +84,14 @@ function dr_admin_rule(id, url, title) {
 	});
 }
 
-function dr_set_flag(id) {
-	art.dialog.open('{dr_url("module/flag")}', {
+function man_set_flag(id) {
+	art.dialog.open('{man_url("module/flag")}', {
 		title: '{lang("html-175")}',
 		init: function () {
 			var iframe = this.iframe.contentWindow;
-			$(".dr_flag_"+id).each(function(){
+			$(".man_flag_"+id).each(function(){
 				var iid = $(this).attr('iid');
-				iframe.document.getElementById('top_dr_flag_'+iid).value = Math.abs($("#dr_flag_"+id+"_"+iid).val());
+				iframe.document.getElementById('top_man_flag_'+iid).value = Math.abs($("#man_flag_"+id+"_"+iid).val());
 			});
 		},
 		ok: function () {
@@ -100,12 +100,12 @@ function dr_set_flag(id) {
 				alert('iframe loading')
 				return false;
 			};
-			$(".dr_flag_"+id).each(function(){
+			$(".man_flag_"+id).each(function(){
 				var iid = $(this).attr('iid');
-				$("#dr_flag_"+id+"_"+iid).val(iframe.document.getElementById('top_dr_flag_'+iid).value);
+				$("#man_flag_"+id+"_"+iid).val(iframe.document.getElementById('top_man_flag_'+iid).value);
 			});
-			$("#dr_status_"+id).attr("class", "onCorrect");
-			$("#dr_status_"+id).html("&nbsp;&nbsp;");
+			$("#man_status_"+id).attr("class", "onCorrect");
+			$("#man_status_"+id).html("&nbsp;&nbsp;");
 			return true;
 		},
 		cancel: true
@@ -135,7 +135,7 @@ function dr_set_flag(id) {
 			<li onclick="SwapTab(7)">{lang('html-550')}</li>
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200">{lang('html-583')}： </th>
@@ -154,12 +154,12 @@ function dr_set_flag(id) {
 				{loop $SITE $sid $t}
                 {if $all || (!$all && SITE_ID==$sid)}
 				<tr>
-					<th style="font-weight:700;{if $sid>1}padding-top:30px;{/if}">{dr_strcut($t['SITE_NAME'], 25)}： </th>
+					<th style="font-weight:700;{if $sid>1}padding-top:30px;{/if}">{man_strcut($t['SITE_NAME'], 25)}： </th>
 					<td style="font-weight:700;{if $sid>1}padding-top:30px;{/if}">
                     {lang('html-153')}&nbsp;&nbsp;<input name="data[site][{$sid}][use]" type="checkbox" onclick="sitetips(this)" sid="{$sid}" value="{$sid}" {if $data['site'][$sid]['use']}checked="checked"{/if} />
                     </td>
 				</tr>
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th>{lang('html-097')}： </th>
 					<td>
 					<select name="data[site][{$sid}][theme]">
@@ -168,10 +168,10 @@ function dr_set_flag(id) {
                     <option{if $t==$data['site'][$sid]['theme']} selected=""{/if} value="{$t}">{$t}</option>
                     {/loop}
                     </select>
-					<div class="onShow">{dr_lang('html-619', $data.dirname)}</div>
+					<div class="onShow">{man_lang('html-619', $data.dirname)}</div>
 					</td>
 				</tr>
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th>{lang('html-099')}： </th>
 					<td>
 					<select name="data[site][{$sid}][template]">
@@ -180,10 +180,10 @@ function dr_set_flag(id) {
                     <option{if $t==$data['site'][$sid]['template']} selected=""{/if} value="{$t}">{$t}</option>
                     {/loop}
                     </select>
-					<div class="onShow">{dr_lang('html-620', $data.dirname)}</div>
+					<div class="onShow">{man_lang('html-620', $data.dirname)}</div>
 					</td>
 				</tr>
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th>{lang('html-621')}： </th>
 					<td>
                     <input type="radio" name="data[site][{$sid}][html]" value="1" {if $data['site'][$sid]['html']}checked{/if} />&nbsp;<label>{lang('open')}&nbsp;&nbsp;&nbsp;&nbsp;</label>
@@ -191,36 +191,36 @@ function dr_set_flag(id) {
 					{if $sid>1}<div class="onShow">{lang('html-622')}</div>{/if}
                     </td>
 				</tr>
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th>{lang('html-155')}： </th>
 					<td>
                     <input class="input-text" type="text" name="data[site][{$sid}][domain]" value="{$data['site'][$sid]['domain']}" size="30" />
                     {if $data['site'][$sid]['domain']}
                         {if $data['site'][$sid]['domain'] == SITE_DOMAIN}
-                        <div class="onError">{dr_lang('html-730', $data['site'][$sid]['domain'])}</div>
+                        <div class="onError">{man_lang('html-730', $data['site'][$sid]['domain'])}</div>
                         {else}
                         <script>
-                            $.get("{dr_url('home/domain', array('domain' => $data['site'][$sid]['domain']))}", function(data){
+                            $.get("{man_url('home/domain', array('domain' => $data['site'][$sid]['domain']))}", function(data){
                                 if (data) {
-                                    $("#dr_domian_{$sid}").html(data);
+                                    $("#man_domian_{$sid}").html(data);
                                 } else {
-                                    $("#dr_domian_{$sid}").hide();
+                                    $("#man_domian_{$sid}").hide();
                                 }
                             });
                         </script>
-                        <div id="dr_domian_{$sid}" class="onError"></div>
+                        <div id="man_domian_{$sid}" class="onError"></div>
                         {/if}
                     {else}
                         <div class="onShow">{lang('html-090')}</div>
                     {/if}
                     </td>
 				</tr>
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th style="color: blue">{lang('html-623')}： </th>
 					<td style="color: blue">{FCPATH}{$data.dirname}/</td>
 				</tr>
 				{if $sid > 1}
-				<tr class="dr_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
+				<tr class="man_site_{$sid}" {if !$data['site'][$sid]['use']}style="display:none"{/if}>
 					<th style="color: blue">{lang('html-624')}： </th>
 					<td style="color: blue">{FCPATH}{$data.dirname}/html/{$sid}/</td>
 				</tr>
@@ -229,27 +229,27 @@ function dr_set_flag(id) {
                 {/loop}
 				</table>
 			</div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 {loop $role $t}
                 {if $t.id > 1}
                 <tr>
                     <th width="200">{$t.name}： </th>
-                    <td><a href="javascript:;" onclick="dr_admin_rule('{$t.id}', '{dr_url("module/role", array("dir" => $data.dirname, "id" => $t.id))}', '{$t.name}')" class="blue">[{lang('028')}]</a>
-					<div id="dr_status_{$t.id}" class="onShow"></div>
+                    <td><a href="javascript:;" onclick="man_admin_rule('{$t.id}', '{man_url("module/role", array("dir" => $data.dirname, "id" => $t.id))}', '{$t.name}')" class="blue">[{lang('028')}]</a>
+					<div id="man_status_{$t.id}" class="onShow"></div>
 					</td>
                 </tr>
                 {/if}
                 {/loop}
 				</table>
 			</div>
-            <div id="cnt_2" style="display:none" class="dr_hide">
+            <div id="cnt_2" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
 					<td align="left" width="100">&nbsp;</td>
 					<td align="left" width="250">{lang('html-316')}&nbsp;</td>
-					<td align="left" class="dr_select_all">
-					<label>{lang('html-511')}</label>&nbsp;<input class="dr_use" type="checkbox" />
+					<td align="left" class="man_select_all">
+					<label>{lang('html-511')}</label>&nbsp;<input class="man_use" type="checkbox" />
 					</td>
 				</tr>
 				{list action=cache name=MEMBER.group return=group}
@@ -263,9 +263,9 @@ function dr_set_flag(id) {
 				<tr>
 					{php $id=$group['id'].'_'.$level['id'];}
 					<td align="left">&nbsp;</td>
-					<td align="left" style="padding-left:40px">{$level.name}&nbsp;&nbsp;{dr_show_stars($level.stars)}</td>
+					<td align="left" style="padding-left:40px">{$level.name}&nbsp;&nbsp;{man_show_stars($level.stars)}</td>
 					<td align="left">
-					<label>{lang('html-511')}</label>&nbsp;<input class="dr_use" name="data[setting][member][{$id}]" {if $data['setting']['member'][$id]}checked{/if} value=1 type="checkbox" />
+					<label>{lang('html-511')}</label>&nbsp;<input class="man_use" name="data[setting][member][{$id}]" {if $data['setting']['member'][$id]}checked{/if} value=1 type="checkbox" />
 					</td>
 				</tr>
 				{/loop}
@@ -275,7 +275,7 @@ function dr_set_flag(id) {
 					<td align="left" width="100">&nbsp;</td>
 					<td align="left" width="250">{$group.name}</td>
 					<td align="left">
-					<label>{lang('html-511')}</label>&nbsp;<input class="dr_use" name="data[setting][member][{$id}]" {if $data['setting']['member'][$id]}checked{/if} value=1 type="checkbox" />
+					<label>{lang('html-511')}</label>&nbsp;<input class="man_use" name="data[setting][member][{$id}]" {if $data['setting']['member'][$id]}checked{/if} value=1 type="checkbox" />
 					</td>
 				</tr>
 				{/if}
@@ -287,7 +287,7 @@ function dr_set_flag(id) {
                 </tr>
 				</table>
 			</div>
-			<div id="cnt_3" style="display:none" class="dr_hide">
+			<div id="cnt_3" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 {php for ($i = 1; $i <= 9; $i ++) {}
                 <tr {if $i==9}class=""{/if}>
@@ -298,18 +298,18 @@ function dr_set_flag(id) {
 					{if $group.id > 2}
                     	{loop $group.level $level}
 							{php $iid=$group['id'].'_'.$level['id'];}
-                            <input name="data[setting][flag][{$i}][{$iid}]" class="dr_flag_{$i}" iid="{$iid}" id="dr_flag_{$i}_{$iid}" type="hidden" value="{intval($data['setting']['flag'][$i][$iid])}" />
+                            <input name="data[setting][flag][{$i}][{$iid}]" class="man_flag_{$i}" iid="{$iid}" id="man_flag_{$i}_{$iid}" type="hidden" value="{intval($data['setting']['flag'][$i][$iid])}" />
                         {/loop}
                     {/if}
                     {/list}
-                    <a href="javascript:;" onclick="dr_set_flag('{$i}')" style="color:#06F">[{lang('html-175')}]</a>
-					<div id="dr_status_{$i}" class="onShow"></div>
+                    <a href="javascript:;" onclick="man_set_flag('{$i}')" style="color:#06F">[{lang('html-175')}]</a>
+					<div id="man_status_{$i}" class="onShow"></div>
                     </td>
                 </tr>
                 {php }}
 				</table>
 			</div>
-            <div id="cnt_4" style="display:none" class="dr_hide">
+            <div id="cnt_4" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
 					<th width="200">Title： </th>
@@ -328,7 +328,7 @@ function dr_set_flag(id) {
 				</tr>
 				</table>
 			</div>
-           	<div id="cnt_5" style="display:none" class="dr_hide">
+           	<div id="cnt_5" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-332')}： </th>
@@ -347,34 +347,34 @@ function dr_set_flag(id) {
                 </tr>
 				</table>
 			</div>
-            <div id="cnt_6" style="display:none" class="dr_hide">
+            <div id="cnt_6" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-037')}： </th>
                     <td>
-                        <input type="radio" name="data[setting][search][close]" {if $data['setting']['search']['close']}checked{/if} onclick="dr_set_search(1)" value="1" />&nbsp;<label>{lang('yes')}</label>
+                        <input type="radio" name="data[setting][search][close]" {if $data['setting']['search']['close']}checked{/if} onclick="man_set_search(1)" value="1" />&nbsp;<label>{lang('yes')}</label>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="data[setting][search][close]" {if !$data['setting']['search']['close']}checked{/if} onclick="dr_set_search(0)" value="0" />&nbsp;<label>{lang('no')}</label>
+                        <input type="radio" name="data[setting][search][close]" {if !$data['setting']['search']['close']}checked{/if} onclick="man_set_search(0)" value="0" />&nbsp;<label>{lang('no')}</label>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="onShow">{lang('html-038')}</div>
                     </td>
                 </tr>
-                <tr class="dr_search">
+                <tr class="man_search">
                     <th>{lang('html-545')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][search][cache]" value="{if isset($data['setting']['search']['cache'])}{$data['setting']['search']['cache']}{else}10000{/if}" size="10" />
                         <div class="onShow">{lang('html-547')}</div></td>
                 </tr>
-                <tr class="dr_search">
+                <tr class="man_search">
                     <th>{lang('html-633')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][search][total]" value="{if isset($data['setting']['search']['total'])}{$data['setting']['search']['total']}{else}500{/if}" size="10" />
                     <div class="onShow">{lang('html-634')}</div></td>
                 </tr>
-                <tr class="dr_search">
+                <tr class="man_search">
                     <th>{lang('html-546')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][search][length]" value="{if $data['setting']['search']['length']}{$data['setting']['search']['length']}{else}4{/if}" size="10" />
                     <div class="onShow">{lang('html-548')}</div></td>
                 </tr>
-                <tr class="dr_search">
+                <tr class="man_search">
                     <th>{lang('html-328')}： </th>
                     <td>
 					<input type="radio" name="data[setting][search][rewrite]" {if $data['setting']['search']['rewrite']}checked{/if} value="1" />&nbsp;<label>{lang('yes')}</label>
@@ -386,7 +386,7 @@ function dr_set_flag(id) {
                 </tr>
 				</table>
 			</div>
-            <div id="cnt_7" style="display:none" class="dr_hide">
+            <div id="cnt_7" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-551')}： </th>

@@ -39,10 +39,10 @@ class Mail extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/mail/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
 			
 			$this->db
@@ -51,7 +51,7 @@ class Mail extends M_Controller {
 				 
 			$this->cache(1);
 			
-			exit(dr_json(1, lang('014')));
+			exit(man_json(1, lang('014')));
 		}
 		
 		$this->template->assign(array(
@@ -75,7 +75,7 @@ class Mail extends M_Controller {
 			$this->db->insert('mail_smtp', $data);
 			$this->cache(1);
 			
-			exit(dr_json(1, lang('014'), ''));
+			exit(man_json(1, lang('014'), ''));
 		}
 		
 		$this->template->display('mail_add.html');
@@ -109,7 +109,7 @@ class Mail extends M_Controller {
 				 ->update('mail_smtp', $data);
 			$this->cache(1);
 			
-			exit(dr_json(1, lang('014'), ''));
+			exit(man_json(1, lang('014'), ''));
 		}
 		
 		$this->template->assign(array(
@@ -145,11 +145,11 @@ class Mail extends M_Controller {
                     $mail = trim($mail, ',');
                 }
                 if (!$mail) {
-                    exit(dr_json(0, lang('328')));
+                    exit(man_json(0, lang('328')));
                 }
                 $mail = @explode(',', $mail);
                 if (!$data['title'] || !$data['message']) {
-                    exit(dr_json(0, lang('329')));
+                    exit(man_json(0, lang('329')));
                 }
                 foreach ($mail as $tomail) {
                     if ($this->member_model->sendmail($tomail, $data['title'], $data['message'])) {
@@ -158,37 +158,37 @@ class Mail extends M_Controller {
                         $j ++;
                     }
                 }
-                exit(dr_json(1, dr_lang('327', $i, $j)));
+                exit(man_json(1, man_lang('327', $i, $j)));
                 break;
 
             case 2:
                 if (!$data['title'] || !$data['message']) {
-                    $this->admin_msg(lang('329'), dr_url('mail/send'));
+                    $this->admin_msg(lang('329'), man_url('mail/send'));
                 }
                 $data['total'] = $data['groupid'] ?
                     $this->db->where('groupid', $data['groupid'])->count_all_results('member') :
                     $this->db->count_all_results('member');
                 if (!$data['total']) {
-                    $this->admin_msg(lang('347'), dr_url('mail/send'));
+                    $this->admin_msg(lang('347'), man_url('mail/send'));
                 }
                 // 保存缓存文件
                 $this->cache->file->save($this->cache_file, $data, 36000);
-                $this->admin_msg(dr_lang('348', $data['total'], '...'), dr_url('mail/member'), 2);
+                $this->admin_msg(man_lang('348', $data['total'], '...'), man_url('mail/member'), 2);
                 break;
 
             default:
                 if (!$data['mail']) {
-                    exit(dr_json(0, lang('328')));
+                    exit(man_json(0, lang('328')));
                 }
                 if (!$data['title'] || !$data['message']) {
-                    exit(dr_json(0, lang('329')));
+                    exit(man_json(0, lang('329')));
                 }
                 if ($this->member_model->sendmail($data['mail'], $data['title'], $data['message'])) {
                     $i ++;
                 } else {
                     $j ++;
                 }
-                exit(dr_json(1, dr_lang('327', $i, $j)));
+                exit(man_json(1, man_lang('327', $i, $j)));
                 break;
         }
     }
@@ -220,13 +220,13 @@ class Mail extends M_Controller {
                 $this->member_model->sendmail($t['email'], $data['title'], $data['message']);
             }
             $this->admin_msg(
-                dr_lang('348', $data['total'], $tpage.'/'.$page),
-                dr_url('mail/member', array('page' => $page + 1)),
+                man_lang('348', $data['total'], $tpage.'/'.$page),
+                man_url('mail/member', array('page' => $page + 1)),
                 2,1
             );
         } else {
             $this->cache->file->delete($this->cache_file);
-            $this->admin_msg(lang('000'), dr_url('mail/send'), 1);
+            $this->admin_msg(lang('000'), man_url('mail/send'), 1);
         }
 
     }
@@ -238,7 +238,7 @@ class Mail extends M_Controller {
 	
 		if (IS_POST) {
 			@unlink(FCPATH.'cache/mail_error.log');
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$data = $list = array();
@@ -263,7 +263,7 @@ class Mail extends M_Controller {
 		$this->template->assign(array(
 			'list' => $list,
 			'total' => $total,
-			'pages'	=> $this->get_pagination(dr_url('mail/log'), $total)
+			'pages'	=> $this->get_pagination(man_url('mail/log'), $total)
 		));
 		$this->template->display('mail_log.html');
     }

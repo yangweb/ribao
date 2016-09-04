@@ -25,8 +25,8 @@ function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){
             <div class="l"><script type="text/javascript" src="{SITE_URL}member/index.php?c=api&m=userinfo"></script></div>
             <div class="r">
                 <a href="{SITE_URL}" class="bgone">首页</a>
-                <a href="javascript:void(0);" onclick="dr_set_homepage('{MODULE_URL}')">设为首页</a>
-                <a href="javascript:void(0);" onclick="dr_add_favorite('{MODULE_URL}','{MODULE_TITLE}')">加入收藏</a>
+                <a href="javascript:void(0);" onclick="man_set_homepage('{MODULE_URL}')">设为首页</a>
+                <a href="javascript:void(0);" onclick="man_add_favorite('{MODULE_URL}','{MODULE_TITLE}')">加入收藏</a>
                 <a href="{SITE_URL}index.php?c=api&m=desktop&site={SITE_ID}&module={APP_DIR}">放在桌面</a>
             </div>
         </div>
@@ -52,7 +52,7 @@ function openShutManager(oSourceObj,oTargetObj,shutAble,oOpenTip,oShutTip){
                 <li {if in_array($catid, $t.catids)}class="curr"{/if}><a href="{$t.url}">{$t.name}</a></li>
                 {/list}
             </div>
-            <div class="rgwc"><a href="{dr_url('order/cart')}">购物车</a></div>
+            <div class="rgwc"><a href="{man_url('order/cart')}">购物车</a></div>
         </ul>
     </div>
 </div>

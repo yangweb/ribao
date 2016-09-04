@@ -118,8 +118,8 @@ class F_Ueditor extends A_Field {
     public function insert_value($field) {
 
         $value = $this->ci->post[$field['fieldname']];
-        $value = str_replace('class="pagebreak" name="dr_page_break"', 'name="dr_page_break" class="pagebreak"', $value);
-        $value = str_replace('name="dr_page_break" class="pagebreak"', 'class="pagebreak"', $value);
+        $value = str_replace('class="pagebreak" name="man_page_break"', 'name="man_page_break" class="pagebreak"', $value);
+        $value = str_replace('name="man_page_break" class="pagebreak"', 'class="pagebreak"', $value);
         $value = str_replace('id="undefined"', '', $value);
         $attach = array();
 
@@ -154,7 +154,7 @@ class F_Ueditor extends A_Field {
                     if (is_array($result)) {
                         list($id, $file, $_ext) = $result;
                         $timg = 0;
-                        $value = str_replace($imgs[0][$i], " id=\"mantob_img_$id\" src=\"".dr_file($file)."\"", $value);
+                        $value = str_replace($imgs[0][$i], " id=\"mantob_img_$id\" src=\"".man_file($file)."\"", $value);
                         $attach[] = $id;
                     }
                 }
@@ -297,7 +297,7 @@ class F_Ueditor extends A_Field {
         $height = isset($cfg['option']['height']) && $cfg['option']['height'] ? $cfg['option']['height'] : '300';
 
         // 字段提示信息
-        $tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+        $tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 
         // 字段默认值
         $value = $value ? $value : $this->get_default_value($cfg['option']['value']);
@@ -357,7 +357,7 @@ class F_Ueditor extends A_Field {
         }
 
         $str.= "
-		<script name=\"data[$name]\" type=\"text/plain\" id=\"dr_$name\">$value</script>
+		<script name=\"data[$name]\" type=\"text/plain\" id=\"man_$name\">$value</script>
 		<script type=\"text/javascript\">
 			var editorOption = {
 				UEDITOR_HOME_URL: \"".$ueurl."\",
@@ -377,7 +377,7 @@ class F_Ueditor extends A_Field {
 				pageBreakTag:\"_page_break_tag_\"
 			};
 			var editor = new baidu.editor.ui.Editor(editorOption);
-			editor.render(\"dr_$name\");
+			editor.render(\"man_$name\");
 		</script>
 		".$tips;
 

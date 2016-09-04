@@ -6,9 +6,9 @@ $(function() {
 	$.getScript("{$service}?c=check&uid={$data.uid}&key={$data.key}");
 	{/if}
 	{if $data.third}
-	$('.dr_1').show();$('.dr_0').hide();
+	$('.man_1').show();$('.man_0').hide();
 	{else}
-	$('.dr_0').show();$('.dr_1').hide();
+	$('.man_0').show();$('.man_1').hide();
 	{/if}
 });
 </script>
@@ -27,37 +27,37 @@ $(function() {
             <tr>
                 <th width="200">{lang('html-659')}： </th>
                 <td>
-                <input name="aa" type="radio" value="0" onclick="$('.dr_0').show();$('.dr_1').hide();" {if !$data.third}checked="checked"{/if} />&nbsp;{lang('html-660')}&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="aa" type="radio" value="1" onclick="$('.dr_1').show();$('.dr_0').hide();" {if $data.third}checked="checked"{/if} />&nbsp;{lang('html-661')}
+                <input name="aa" type="radio" value="0" onclick="$('.man_0').show();$('.man_1').hide();" {if !$data.third}checked="checked"{/if} />&nbsp;{lang('html-660')}&nbsp;&nbsp;&nbsp;&nbsp;
+                <input name="aa" type="radio" value="1" onclick="$('.man_1').show();$('.man_0').hide();" {if $data.third}checked="checked"{/if} />&nbsp;{lang('html-661')}
                 </td>
             </tr>
-            <tr class="dr_0">
+            <tr class="man_0">
                 <th width="200">{lang('html-637')}： </th>
                 <td><a href=" http://www.mantob.com/member/zwsms.php?action=receive" target="_blank"> http://www.mantob.com/member/zwsms.php?action=receive</a></td>
             </tr>
-            <tr class="dr_0">
+            <tr class="man_0">
                 <th><font color="red">*</font>&nbsp;SMS Uid： </th>
                 <td>
                 <input class="input-text" type="text" name="data[uid]" value="{$data.uid}" size="10" />
                 </td>
             </tr>
-            <tr class="dr_0">
+            <tr class="man_0">
                 <th><font color="red">*</font>&nbsp;SMS Key： </th>
                 <td>
                 <input class="input-text" type="text" name="data[key]" value="{$data.key}" size="25" />
                 </td>
             </tr>
             {if $data.uid && !$data.third}
-            <tr class="dr_0">
+            <tr class="man_0">
                 <th>{lang('html-638')}： </th>
-                <td><span id="dr_sms">...</span></td>
+                <td><span id="man_sms">...</span></td>
             </tr>
             {/if}
-            <tr class="dr_1">
+            <tr class="man_1">
                 <th width="200">{lang('html-637')}： </th>
                 <td><a href="http://www.mantob.com/help/list-341.html" target="_blank">http://www.mantob.com/help/list-341.html</a></td>
             </tr>
-            <tr class="dr_1">
+            <tr class="man_1">
                 <th><font color="red">*</font>&nbsp;{lang('html-662')}： </th>
                 <td>
                 <textarea class="input-text" name="data[third]" style="height:100px; width:220px;">{$data.third}</textarea>

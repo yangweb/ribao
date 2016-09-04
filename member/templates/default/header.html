@@ -18,7 +18,7 @@
 <header>
 	<div class="inner">
 		<div class="top-logo">
-			<a href="{dr_space_url($space.uid)}" title="{$space.name}" id="web_logo">
+			<a href="{man_space_url($space.uid)}" title="{$space.name}" id="web_logo">
 				<img src="{man_thumb($space.logo, 180, 60)}" width="180" height="60" title="{$space.name}" style="margin:20px 0px 0px 0px;" />
 			</a>
 			<ul class="top-nav list-none">
@@ -33,12 +33,12 @@
 		</div>
 		<nav>
 			<ul class="list-none">
-				<li select="0" style='width:121px;' class='dr_category'><a href='{dr_space_url($space.uid)}' class='nav'><span>空间首页</span></a></li>
+				<li select="0" style='width:121px;' class='man_category'><a href='{man_space_url($space.uid)}' class='nav'><span>空间首页</span></a></li>
 				<li class="line"></li>
 				<!--循环栏目开始-->
 				{loop $category $c}
 				{if !$c.pid && ($c.showid == 1 || $c.showid == 3)}<!--这里表示循环显示顶部栏目，你就这样写就行了-->
-				<li select="{$c.id}" class='dr_category' style='width:120px;'><a href='{dr_space_list_url($spaceid, $c.id)}' class='hover-none nav'><span>{$c.name}</span></a></li>
+				<li select="{$c.id}" class='man_category' style='width:120px;'><a href='{man_space_list_url($spaceid, $c.id)}' class='hover-none nav'><span>{$c.name}</span></a></li>
 				<li class="line"></li>
 				{/if}
 				{/loop}

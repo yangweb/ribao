@@ -11,6 +11,6 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @copyright   Copyright (c) 2013 - 9999, mantob.Com, Inc.
  */
 
-function dr_mylang() {
+function man_mylang() {
 
 }

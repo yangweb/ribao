@@ -1,13 +1,13 @@
 {template "header.html"}
 <script type="text/javascript">
-function dr_search_kd(id, sn) {
-	dr_dialog_show("快递跟踪", "{dr_url(APP_DIR.'/order/kd')}&id="+id+"&sn="+sn);
+function man_search_kd(id, sn) {
+	man_dialog_show("快递跟踪", "{man_url(APP_DIR.'/order/kd')}&id="+id+"&sn="+sn);
 }
-function dr_set_kd(id) {
+function man_set_kd(id) {
 	if (id == "null") {
-		$("#dr_kd_name").html("收货说明");
+		$("#man_kd_name").html("收货说明");
 	} else {
-		$("#dr_kd_name").html("运单编号"); 
+		$("#man_kd_name").html("运单编号"); 
 	}
 }
 </script>
@@ -34,10 +34,10 @@ function dr_set_kd(id) {
 		</thead>
 		<tr>
 		<td colspan="7" style="border:none">
-			<table border="0" cellspacing="0" cellpadding="0" class="dr_order_item" width="100%">
+			<table border="0" cellspacing="0" cellpadding="0" class="man_order_item" width="100%">
 			{loop $data.items $i $item}
 			  <tr>
-				<td width="70"><a href="{$item.url}" target="_blank" class="dr_order_item_thumb"><img src="{man_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
+				<td width="70"><a href="{$item.url}" target="_blank" class="man_order_item_thumb"><img src="{man_thumb($item.thumb, 70, 60)}" width="70" /></a></td>
 				<td style="padding-right:5px;"><a href="{$item.url}" target="_blank">{$item.title}</a><div style="padding-top:3px; color:#999">{$item.format}</div></td>
 				<td style="width:80px;color:red;" align="center">
 				{if $item.discount}
@@ -61,7 +61,7 @@ function dr_set_kd(id) {
 				{if $review}
 				<td style="width:80px;" align="left">
                 <script language="javascript">
-                function dr_order_review_{$i}() {
+                function man_order_review_{$i}() {
                     var rbody = '';
                     rbody+= '<style>.table-list2 tbody td, .table-list2 .btn { padding-bottom:1px;padding-top:1px; }</style>';
                     rbody+= '<table border="0" style="min-width:300px;" cellpadding="1" cellspacing="0" class="table-list table-list2">';
@@ -78,7 +78,7 @@ function dr_set_kd(id) {
                     });
                 }
                 </script>
-                <a href="javascript:;" onclick="dr_order_review_{$i}();" style="color:blue;">[查看评分]</a></td>
+                <a href="javascript:;" onclick="man_order_review_{$i}();" style="color:blue;">[查看评分]</a></td>
 				{/if}
 			  </tr>
 			{/loop}
@@ -101,17 +101,17 @@ function dr_set_kd(id) {
                 <th>付款方式：</th> 
                 <td><font color="{$paytype[$data.ptid]['color']}"><b>{$paytype[$data.ptid]['name']}</b></font></td>
                 <th>订单价格：</th> 
-                <td><span class="dr_pirce">￥{$data.price}元</span> {if $data.freight >0}（含邮费￥{$data.freight}元）{/if}</td>
+                <td><span class="man_pirce">￥{$data.price}元</span> {if $data.freight >0}（含邮费￥{$data.freight}元）{/if}</td>
             </tr>
             <tr>
                 <th>已使用{SITE_SCORE}：</th>
-                <td><span class="dr_pirce">{$data.score}</span></td>
+                <td><span class="man_pirce">{$data.score}</span></td>
                 <th>{if $data.successtime}成交时间：{/if}</th>
                 <td>{if $data.successtime}{man_date($data.successtime, NULL, 'red')}{/if}</td>
             </tr>
             <tr>
                 <th>买家信息：</th>
-                <td><input name="dr_author_{$data.id}" id="dr_author_{$data.id}" type="hidden" value="{$data.username}" /><a href="javascript:;" onclick="dr_dialog_member('author_{$data.id}')">{dr_strcut($data.username, 10)}</a></td>
+                <td><input name="man_author_{$data.id}" id="man_author_{$data.id}" type="hidden" value="{$data.username}" /><a href="javascript:;" onclick="man_dialog_member('author_{$data.id}')">{man_strcut($data.username, 10)}</a></td>
                 <th>订单状态：</th>
                 <td><b>{if $data.status==0}<font color="#FF0000">交易关闭</font>
 				{else if $data.status==1}<font color="#FF9933">等待付款</font>
@@ -119,7 +119,7 @@ function dr_set_kd(id) {
 				{else if $data.status==3}<font color="#FF0000">等待收货</font>
 				{else if $data.status==4}<font color="#009900">交易成功</font>{/if}</b></td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>买家留言：</th>
                 <td colspan="3">{$data.gbook}</td>
             </tr>
@@ -137,11 +137,11 @@ function dr_set_kd(id) {
             </tr>
             <tr>
                 <th>所在城市：</th>
-                <td>{dr_linkagepos('address', $data.city, ' > ', '')}</td>
+                <td>{man_linkagepos('address', $data.city, ' > ', '')}</td>
                 <th>邮政编码：</th>
                 <td>{$data.zipcode}</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>详细地址：</th>
                 <td colspan="3">{$data.address}</td>
             </tr>
@@ -156,7 +156,7 @@ function dr_set_kd(id) {
 		<tr>
 			<th>运送方式：</th>
 			<td>
-			<select name="data[id]" id="dr_kd" onchange="dr_set_kd(this.value)">
+			<select name="data[id]" id="man_kd" onchange="man_set_kd(this.value)">
 			<option value="0"> - 选择 - </option>
 			{loop $kdlist $i $t}
 			<option value="{$i}">{$t}</option>
@@ -165,7 +165,7 @@ function dr_set_kd(id) {
 			</td>
 		</tr>
 		<tr>
-			<th><font id="dr_kd_name">运单编号</font>：</th>
+			<th><font id="man_kd_name">运单编号</font>：</th>
 			<td>
 			<input type="text" value="" name="data[text]" class="input-text" style="width:70%" />
 			</td>
@@ -179,15 +179,15 @@ function dr_set_kd(id) {
 		</tr>
 		{if $data.sendnote.id != 'null'}
 		<tr>
-			<th><font id="dr_kd_name">运单编号</font>：</th>
+			<th><font id="man_kd_name">运单编号</font>：</th>
 			<td>
 			{$data.sendnote.text}
-			<input value="查询运单" onclick="dr_search_kd('{$data.sendnote.id}', '{$data.sendnote.text}')" type="button" name="submit" class="button" />
+			<input value="查询运单" onclick="man_search_kd('{$data.sendnote.id}', '{$data.sendnote.text}')" type="button" name="submit" class="button" />
 			</td>
 		</tr>
 		{else}
 		<tr>
-			<th><font id="dr_kd_name">收货说明</font>：</th>
+			<th><font id="man_kd_name">收货说明</font>：</th>
 			<td>
 			{$data.sendnote.text}
 			</td>
@@ -201,7 +201,7 @@ function dr_set_kd(id) {
 			</td>
 		</tr>
 		{/if}
-		<tr class="dr_border_none">
+		<tr class="man_border_none">
 			<th width="150"> </th>
 			<td>
 			{if $data.status==1}

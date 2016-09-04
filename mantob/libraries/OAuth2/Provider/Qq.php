@@ -38,7 +38,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider {
 	public function get_user_info(OAuth2_Token_Access $token) {
 		// ʹ��Access Token����ȡ�û���OpenID
 		$url = 'https://graph.qq.com/oauth2.0/me?'.http_build_query(array('access_token' => $token->access_token));
-		$response = dr_catcher_data($url);
+		$response = man_catcher_data($url);
         if (strpos($response, 'callback') !== false) {
             $lpos = strpos($response, '(');
             $rpos = strrpos($response, ')');
@@ -50,7 +50,7 @@ class OAuth2_Provider_Qq extends OAuth2_Provider {
         }
 		// ʹ��Access Token��OpenID��ȡ�û���Ϣ
         $url = 'https://graph.qq.com/user/get_user_info?'.http_build_query(array('access_token' => $token->access_token, 'openid' => $me->openid, 'oauth_consumer_key' => $this->client_id));
-        $response = dr_catcher_data($url);
+        $response = man_catcher_data($url);
 		$user = json_decode($response);
 	    if (isset($user->ret) && $user->ret != 0) {
             throw new OAuth2_Exception($response);

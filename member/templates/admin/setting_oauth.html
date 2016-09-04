@@ -1,7 +1,7 @@
 {template header.html}
 <script type="text/javascript">
 $(function(){
-	$("#dr_remove").sortable();
+	$("#man_remove").sortable();
 	{if $result}
 	art.dialog.tips('{$result}', 3, 1);
 	{/if}
@@ -25,17 +25,17 @@ $(function(){
 			<th width="120" align="left">OAuth</th>
 			<th width="200" align="left">App Id</th>
 			<th width="300" align="left">App Key</th>
-			<th align="left" class="dr_option">{lang('html-314')}</th>
+			<th align="left" class="man_option">{lang('html-314')}</th>
 		</tr>
 		</thead>
-		<tbody id="dr_remove">
+		<tbody id="man_remove">
 		{loop $data $id $t}
 		<tr>
 			<td align="right">&nbsp;<input name="data[id][]" type="hidden" value="{$id}" /></td>
 			<td align="left"><img src="{SITE_URL}member/statics/OAuth/{$t.icon}.png" style="cursor:move">&nbsp;&nbsp;{$t.name}</td>
 			<td align="left"><input class="input-text" type="text" style="width:200px" name="data[key][]" value="{$t['key']}" /></td>
 			<td align="left"><input class="input-text" type="text" style="width:300px" name="data[secret][]" value="{$t['secret']}" /></td>
-			<td align="left" class="dr_option">&nbsp;<input name="data[use][{$id}][]" type="checkbox" value="1" {if $t['use']}checked{/if} /></td>
+			<td align="left" class="man_option">&nbsp;<input name="data[use][{$id}][]" type="checkbox" value="1" {if $t['use']}checked{/if} /></td>
 		</tr>
 		{/loop}
 		<tr>

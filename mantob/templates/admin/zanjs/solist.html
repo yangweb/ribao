@@ -20,7 +20,7 @@
         </div>
 
         <div class="wrap sr_logo">
-            <a href="{dr_so_url()}" class="l" style="padding-top: 20px;padding-right: 20px;"><img src="{HOME_THEME_PATH}layouts/layout3/img/logo.png" /></a>
+            <a href="{man_so_url()}" class="l" style="padding-top: 20px;padding-right: 20px;"><img src="{HOME_THEME_PATH}layouts/layout3/img/logo.png" /></a>
             <div class="l">
                 <div class="sr_frm_box">
                     <form name="search" action="index.php" type="get">
@@ -40,7 +40,7 @@
                     <span>按模块搜索</span>
                     <ul>
                         {loop $module $dir $t}
-                        <li><a href="{dr_so_url($params, 'module', $dir)}" {if $dir==$dirname}class="ac"{/if}>{$t.name}（{intval($t.search.sototal)}）</a></li>
+                        <li><a href="{man_so_url($params, 'module', $dir)}" {if $dir==$dirname}class="ac"{/if}>{$t.name}（{intval($t.search.sototal)}）</a></li>
                         {/loop}
                     </ul>
                 </div>
@@ -49,7 +49,7 @@
                     {php $time = array('不限'=>'', '一天内'=>strtotime(date('Y-m-d 00:00:00')).','.strtotime(date('Y-m-d 23:59:59')), '一周内'=>strtotime(date('Y-m-d 00:00:00', strtotime('-7 day'))).','.strtotime(date('Y-m-d 23:59:59')), '一月内'=>strtotime(date('Y-m-d 00:00:00', strtotime('-1 month'))).','.strtotime(date('Y-m-d 23:59:59')), '一年内'=>strtotime(date('Y-m-d 00:00:00', strtotime('-1 year'))).','.strtotime(date('Y-m-d 23:59:59')));}
                     <ul>
                         {loop $time $i $t}
-                        <li><a href="{dr_so_url($params, 'updatetime', $t)}" {if $get.updatetime==$t}class="ac"{/if}>{$i}</a></li>
+                        <li><a href="{man_so_url($params, 'updatetime', $t)}" {if $get.updatetime==$t}class="ac"{/if}>{$i}</a></li>
                         {/loop}
                     </ul>
                 </div>
@@ -60,8 +60,8 @@
                     {list action=search module=$dirname id=$searchid total=$sototal catid=$catid order=$params.order page=1 pagesize=10 urlrule=$urlrule}
                     <li class="wrap">
                         <div>
-                            <h5><a href="{$t.url}" target="_blank">{dr_keyword_highlight($t.title, $keyword)}</a></h5>
-                            <p>{dr_keyword_highlight($t.description, $keyword)}</p>
+                            <h5><a href="{$t.url}" target="_blank">{man_keyword_highlight($t.title, $keyword)}</a></h5>
+                            <p>{man_keyword_highlight($t.description, $keyword)}</p>
                         </div>
                         <div class="adds">时间：{$t.updatetime}</div>
                     </li>

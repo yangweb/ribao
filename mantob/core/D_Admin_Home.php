@@ -51,7 +51,7 @@ class D_Admin_Home extends M_Controller {
                         'tips' => lang('102'),
                         'check' => '_check_member',
                         'required' => 1,
-                        'formattr' => ' /><input type="button" class="button" value="'.lang('103').'" onclick="dr_dialog_member(\'author\')" name="user"',
+                        'formattr' => ' /><input type="button" class="button" value="'.lang('103').'" onclick="man_dialog_member(\'author\')" name="user"',
                     )
                 )
             ),
@@ -96,7 +96,7 @@ class D_Admin_Home extends M_Controller {
                         'value' => $this->input->ip_address()
                     ),
                     'validate' => array(
-                        'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="dr_dialog_ip(\'inputip\')" name="ip"',
+                        'formattr' => ' /><input type="button" class="button" value="'.lang('107').'" onclick="man_dialog_ip(\'inputip\')" name="ip"',
                     )
                 )
             )
@@ -115,7 +115,7 @@ class D_Admin_Home extends M_Controller {
         if (IS_POST && !$this->input->post('search')) {
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
             switch ($this->input->post('action')) {
                 case 'del':
@@ -136,7 +136,7 @@ class D_Admin_Home extends M_Controller {
                             }
                         }
                     }
-                    exit(dr_json($no ? 0 : 1, $no ? dr_lang('033', $ok, $no) : lang('000')));
+                    exit(man_json($no ? 0 : 1, $no ? man_lang('033', $ok, $no) : lang('000')));
                     break;
                 case 'order':
                     $_data = $this->input->post('data');
@@ -145,30 +145,30 @@ class D_Admin_Home extends M_Controller {
                              ->where('id', $id)
                              ->update($this->content_model->prefix, $_data[$id]);
                     }
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                     break;
                 case 'move':
                     $catid = $this->input->post('catid');
                     if (!$catid) {
-                        exit(dr_json(0, lang('cat-20')));
+                        exit(man_json(0, lang('cat-20')));
                     }
                     if (!$this->is_auth(APP_DIR.'/admin/home/edit')
                         || !$this->is_category_auth($catid, 'edit')) {
-                        exit(dr_json(0, lang('160')));
+                        exit(man_json(0, lang('160')));
                     }
                     $this->content_model->move($ids, $catid);
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                     break;
                 case 'flag':
                     if (!$this->is_auth(APP_DIR.'/admin/home/edit')) {
-                        exit(dr_json(0, lang('160')));
+                        exit(man_json(0, lang('160')));
                     }
                     $flag = $this->input->post('flagid');
                     $this->content_model->flag($ids, $flag);
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                     break;
                 default :
-                    exit(dr_json(0, lang('000')));
+                    exit(man_json(0, lang('000')));
                     break;
             }
         }
@@ -209,7 +209,7 @@ class D_Admin_Home extends M_Controller {
                 $a = $this->get_cache('app-' . $dir);
                 if (isset($a['module'][APP_DIR]) && isset($a['related']) && $a['related']) {
                     $app[] = array(
-                        'url' => dr_url($dir.'/content/index'),
+                        'url' => man_url($dir.'/content/index'),
                         'name' => $a['name'],
                         'field' => $a['related'],
                     );
@@ -222,7 +222,7 @@ class D_Admin_Home extends M_Controller {
         if ($data) {
             foreach ($data as $t) {
                 $form[] = array(
-                    'url' => dr_url(APP_DIR.'/form_'.SITE_ID.'_'.$t['id'].'/index'),
+                    'url' => man_url(APP_DIR.'/form_'.SITE_ID.'_'.$t['id'].'/index'),
                     'name' => $t['name'],
                 );
             }
@@ -247,7 +247,7 @@ class D_Admin_Home extends M_Controller {
             'flags' => $flag,
             'param' => $_param,
             'field' => $this->field,
-            'pages' => $this->get_pagination(dr_url(APP_DIR.'/home/index', $param), $param['total']),
+            'pages' => $this->get_pagination(man_url(APP_DIR.'/home/index', $param), $param['total']),
             'extend' => $this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'extend'),
             'select' => $this->select_category($category, 0, 'id=\'move_id\' name=\'catid\'', ' --- ', 1, 1),
             'select2' => $this->select_category($category, $catid, 'name=\'data[catid]\'', ' --- ', 0, 1),
@@ -268,7 +268,7 @@ class D_Admin_Home extends M_Controller {
         if (IS_POST && $this->input->post('action') != 'search') {
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
             if ($this->admin['adminid'] > 1) {
                 // 非管理员角色只能操作自己审核的
@@ -297,32 +297,32 @@ class D_Admin_Home extends M_Controller {
                             $this->attachment_model->delete_for_table($this->content_model->prefix.'_verify-'.$id);
                         }
                     }
-                    exit(dr_json(1, lang('000')));
+                    exit(man_json(1, lang('000')));
                     break;
                 case 'flag': // 标记
                     $js = $error = array();
                     if (!$this->input->post('flagid')) {
-                        exit(dr_json(0, lang('013')));
+                        exit(man_json(0, lang('013')));
                     }
                     foreach ($ids as $id) {
                         $result = $this->_verify($id, NULL, $where ? $where.' AND `id`='.(int)$id : '`id`='.(int)$id);
                         if (is_array($result)) {
                             if (MODULE_HTML) {
-                                $js[] = dr_module_create_show_file($result['id'], 1);
-                                $js[] = dr_module_create_list_file($result['catid'], 1);
+                                $js[] = man_module_create_show_file($result['id'], 1);
+                                $js[] = man_module_create_list_file($result['catid'], 1);
                             }
                         } elseif ($result) {
                             $error[] = str_replace('<br>', '', $result);
                         }
                     }
                     if ($error) {
-                        exit(dr_json(1, $error, $js));
+                        exit(man_json(1, $error, $js));
                     } else {
-                        exit(dr_json(2, lang('000'), $js));
+                        exit(man_json(2, lang('000'), $js));
                     }
                     break;
                 default:
-                    exit(dr_json(0, lang('047')));
+                    exit(man_json(0, lang('047')));
                     break;
             }
         }
@@ -380,7 +380,7 @@ class D_Admin_Home extends M_Controller {
             'list' => $data,
             'menu' => $this->get_menu($_menu),
             'param' => $param,
-            'pages' => $this->get_pagination(dr_url(APP_DIR.'/home/verify', $param), $param['total'])
+            'pages' => $this->get_pagination(man_url(APP_DIR.'/home/verify', $param), $param['total'])
         ));
         $this->template->display('content_verify.html');
     }
@@ -452,11 +452,11 @@ class D_Admin_Home extends M_Controller {
                         }
                     }
                     // 创建静态页面链接
-                    $create = MODULE_HTML ? dr_module_create_show_file($id, 1) : '';
+                    $create = MODULE_HTML ? man_module_create_show_file($id, 1) : '';
                     if ($this->input->post('action') == 'back') {
                         $this->admin_msg(
                             lang('000').
-                            ($create ? "<script src='".$create."'></script>".dr_module_create_list_file($catid) : ''),
+                            ($create ? "<script src='".$create."'></script>".man_module_create_list_file($catid) : ''),
                             $backurl,
                             1,
                             1
@@ -482,7 +482,7 @@ class D_Admin_Home extends M_Controller {
             'result' => $result,
             'create' => $create,
             'myflag' => $this->input->post('flag'),
-            'select' => $this->is_category ? $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $catid, 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1) : NULL,
+            'select' => $this->is_category ? $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $catid, 'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1) : NULL,
             'backurl' => $backurl ? $backurl : $_SERVER['HTTP_REFERER'],
             'myfield' => $this->field_input($this->field, $data, TRUE),
             'is_category' => $this->is_category
@@ -570,7 +570,7 @@ class D_Admin_Home extends M_Controller {
                 //exit;
                 $this->admin_msg(
                     lang('000') .
-                    (MODULE_HTML ? dr_module_create_show_file($id).dr_module_create_list_file($catid) : ''),
+                    (MODULE_HTML ? man_module_create_show_file($id).man_module_create_list_file($catid) : ''),
                     $backurl,
                     1,
                     1
@@ -593,7 +593,7 @@ class D_Admin_Home extends M_Controller {
             'error' => $error,
             'myflag' => $myflag,
             'result' => $result,
-            'select' => $this->is_category ? $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1) : $this->is_category,
+            'select' => $this->is_category ? $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1, 1) : $this->is_category,
             'backurl' => $backurl ? $backurl : $_SERVER['HTTP_REFERER'],
             'myfield' => $this->field_input($this->field, $data, TRUE),
             'is_category' => $this->is_category
@@ -640,7 +640,7 @@ class D_Admin_Home extends M_Controller {
                 if (is_array($result)) {
                     $this->admin_msg(
                         lang('000').
-                        (MODULE_HTML ? dr_module_create_show_file($id).dr_module_create_list_file($catid) : ''),
+                        (MODULE_HTML ? man_module_create_show_file($id).man_module_create_list_file($catid) : ''),
                         $this->input->post('backurl'),
                         1,
                         1
@@ -669,7 +669,7 @@ class D_Admin_Home extends M_Controller {
             )),
             'catid' => $catid,
             'error' => $error,
-            'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'dr_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1),
+            'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), $data['catid'], 'id=\'man_catid\' name=\'catid\' onChange="show_category_field(this.value)"', '', 1),
             'backurl' => $_SERVER['HTTP_REFERER'],
             'myfield' => $this->field_input($this->field, $data, TRUE),
         ));
@@ -707,7 +707,7 @@ class D_Admin_Home extends M_Controller {
                               ->count_all_results('member_scorelog_'.(int)substr((string)$verify['uid'], -1, 1))) {
                         if ($rule['score'] + $member['score'] < 0) {
                             // 数量不足提示
-                            return dr_lang('m-118', $verify['title'],  $member['username'], SITE_SCORE, abs($rule['score']));
+                            return man_lang('m-118', $verify['title'],  $member['username'], SITE_SCORE, abs($rule['score']));
                         }
                         $this->member_model->update_score(1, $verify['uid'], $rule['score'], $mark, "lang,m-151,{$category['name']}", 1);
                     }
@@ -750,7 +750,7 @@ class D_Admin_Home extends M_Controller {
                 $this->member_model->add_notice(
                     $data[1]['uid'],
                     3,
-                    dr_lang('m-084', $verify['title'])
+                    man_lang('m-084', $verify['title'])
                 );
                 return array('id' => $id, 'catid' => $data[1]['catid']);
             }
@@ -767,7 +767,7 @@ class D_Admin_Home extends M_Controller {
                  ->update($this->content_model->prefix.'_verify', array(
                     'status' => 0,
                     'backuid' => (int)$this->uid,
-                    'backinfo' => dr_array2string(array(
+                    'backinfo' => man_array2string(array(
                         'uid' => $this->uid,
                         'author' => $this->admin['username'],
                         'rolename' => $this->admin['role']['name'],
@@ -779,7 +779,7 @@ class D_Admin_Home extends M_Controller {
             $this->member_model->add_notice(
                 $verify['uid'],
                 3,
-                dr_lang('m-124', $verify['title'], MEMBER_URL.'index.php?s='.APP_DIR.'&c=back&m=edit&id='.$id)
+                man_lang('m-124', $verify['title'], MEMBER_URL.'index.php?s='.APP_DIR.'&c=back&m=edit&id='.$id)
             );
         }
     }
@@ -804,7 +804,7 @@ class D_Admin_Home extends M_Controller {
                     $id[] = $t['id'];
                 }
                 $this->cache->file->save($cfile, $id, 7200); // 缓存搜索结果->id
-                $this->mini_msg(dr_lang('132', count($id)), dr_url(APP_DIR.'/home/url', array('todo' => 1)), 2);
+                $this->mini_msg(man_lang('132', count($id)), man_url(APP_DIR.'/home/url', array('todo' => 1)), 2);
             } else {
                 $this->mini_msg(lang('133'));
             }
@@ -837,7 +837,7 @@ class D_Admin_Home extends M_Controller {
                          ->get($table)
                          ->result_array();
             foreach ($data as $t) {
-                $url = dr_show_url($module, $t);
+                $url = man_show_url($module, $t);
                 $this->link->update($table, array('url' => $url), 'id='.$t['id']);
                 if ($module['extend']) {
                     $extend = $this->link
@@ -847,20 +847,20 @@ class D_Admin_Home extends M_Controller {
                                    ->result_array();
                     if ($extend) {
                         foreach ($extend as $e) {
-                            $url = dr_extend_url($module, $e);
+                            $url = man_extend_url($module, $e);
                             $this->link->update($table.'_extend', array('url' => $url), 'id='.(int)$e['id']);
                         }
                     }
                 }
             }
-            $this->mini_msg(dr_lang('135', "$tpage/$page"), dr_url(APP_DIR . '/home/url', array('todo' => 1, 'page' => $page + 1)), 2, 0);
+            $this->mini_msg(man_lang('135', "$tpage/$page"), man_url(APP_DIR . '/home/url', array('todo' => 1, 'page' => $page + 1)), 2, 0);
         } else {
             $this->template->assign(array(
                 'menu' => $this->get_menu(array(
                     lang('136') => APP_DIR.'/admin/home/url',
                     lang('001') => 'admin/module/cache'
                 )),
-                'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), 0, 'id="dr_synid" name=\'catid[]\' multiple style="width:200px;height:250px;"', ''),
+                'select' => $this->select_category($this->get_cache('module-'.SITE_ID.'-'.APP_DIR, 'category'), 0, 'id="man_synid" name=\'catid[]\' multiple style="width:200px;height:250px;"', ''),
             ));
             $this->template->display('content_url.html');
         }
@@ -916,7 +916,7 @@ class D_Admin_Home extends M_Controller {
                 $this->link->where('type <>', 3);
             }
             $total = $this->link->count_all_results($this->content_model->prefix.'_html');
-            $this->mini_msg('正在统计静态文件数量...', dr_url(APP_DIR.'/home/clear', array('type' => $type, 'page' => 1, 'total' => $total)));
+            $this->mini_msg('正在统计静态文件数量...', man_url(APP_DIR.'/home/clear', array('type' => $type, 'page' => 1, 'total' => $total)));
         }
         $pagesize = 100; // 每次清除数量
         $count = ceil($total / $pagesize); // 计算总页数
@@ -935,7 +935,7 @@ class D_Admin_Home extends M_Controller {
                      ->result_array();
         $this->content_model->delete_html_file($data);
         $next = $page + 1;
-        $this->mini_msg("共{$total}个文件，共需清理{$count}次，每次删除{$pagesize}个，正在进行第{$next}次...", dr_url(APP_DIR . '/home/clear', array('type' => $type, 'page' => $next, 'total' => $total)), 2, 0);
+        $this->mini_msg("共{$total}个文件，共需清理{$count}次，每次删除{$pagesize}个，正在进行第{$next}次...", man_url(APP_DIR . '/home/clear', array('type' => $type, 'page' => $next, 'total' => $total)), 2, 0);
     }
 
     // 复制文章
@@ -944,7 +944,7 @@ class D_Admin_Home extends M_Controller {
         $id = (int)$this->input->get('id');
         $row = $this->content_model->get($id);
         if (!$row) {
-            exit(dr_json(0, lang('019')));
+            exit(man_json(0, lang('019')));
         }
         // 格式化字段
         $data = array();
@@ -972,9 +972,9 @@ class D_Admin_Home extends M_Controller {
         $data[1]['status'] = 9;
         // 入库
         if (($id = $this->content_model->add($data)) != FALSE) {
-            exit(dr_json(1, lang('000')));
+            exit(man_json(1, lang('000')));
         } else {
-            exit(dr_json(0, lang('357')));
+            exit(man_json(0, lang('357')));
         }
 
     }

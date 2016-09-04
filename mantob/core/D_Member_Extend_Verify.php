@@ -34,7 +34,7 @@ class D_Member_Extend_Verify extends M_Controller {
 
             $ids = $this->input->post('ids', TRUE);
             if (!$ids) {
-                exit(dr_json(0, lang('019')));
+                exit(man_json(0, lang('019')));
             }
 
             $this->load->model('attachment_model');
@@ -54,7 +54,7 @@ class D_Member_Extend_Verify extends M_Controller {
                 }
             }
 
-            exit(dr_json(1, lang('mod-40')));
+            exit(man_json(1, lang('mod-40')));
         }
 
         $this->link
@@ -132,13 +132,13 @@ class D_Member_Extend_Verify extends M_Controller {
                 // 修改数据
                 if ($this->content_model->edit_extend($_data, $data)) {
                     if (IS_AJAX) {
-                        exit(dr_json(1, lang('m-341'), dr_member_url(APP_DIR.'/everify/index')));
+                        exit(man_json(1, lang('m-341'), man_member_url(APP_DIR.'/everify/index')));
                     }
                     $this->template->assign(array(
-                        'url' => dr_member_url(APP_DIR.'/everify/index'),
-                        'add' => dr_member_url(APP_DIR.'/extend/add', array('cid' => $_data['cid'])),
+                        'url' => man_member_url(APP_DIR.'/everify/index'),
+                        'add' => man_member_url(APP_DIR.'/extend/add', array('cid' => $_data['cid'])),
                         'edit' => 1,
-                        'list' => dr_member_url(APP_DIR.'/extend/index', array('cid' => $_data['cid'])),
+                        'list' => man_member_url(APP_DIR.'/extend/index', array('cid' => $_data['cid'])),
                         'meta_name' => lang('mod-03')
                     ));
                     $this->template->display('verify.html');
@@ -151,11 +151,11 @@ class D_Member_Extend_Verify extends M_Controller {
 
         $backurl = str_replace(MEMBER_URL, '', $_SERVER['HTTP_REFERER']);
         $this->template->assign(array(
-            'purl' => dr_url(APP_DIR.'/everify/edit', array('id' => $id)),
+            'purl' => man_url(APP_DIR.'/everify/edit', array('id' => $id)),
             'data' => $data,
-            'backurl' => $backurl ? $backurl : dr_url(APP_DIR.'/everify/index'),
+            'backurl' => $backurl ? $backurl : man_url(APP_DIR.'/everify/index'),
             'myfield' => $this->field_input($field, $data, TRUE),
-            'listurl' => $backurl ? $backurl : dr_url(APP_DIR.'/everify/index'),
+            'listurl' => $backurl ? $backurl : man_url(APP_DIR.'/everify/index'),
             'meta_name' => lang('mod-41'),
             'result_error' => $error,
         ));

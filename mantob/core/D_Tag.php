@@ -34,7 +34,7 @@ class D_Tag extends M_Controller {
 		$this->load->model('tag_model');
 		$data = $this->tag_model->tag($code);
 		if (!$data) {
-            $this->msg(dr_lang('mod-33', $code));
+            $this->msg(man_lang('mod-33', $code));
         }
 		
 		$urlrule = $this->module['setting']['tag']['url_page'] ? $this->module['setting']['tag']['url_page'] : 'index.php?c=tag&name={tag}&page={page}';
@@ -79,13 +79,13 @@ class D_Tag extends M_Controller {
 		
 		if (IS_POST) {
 			if (!$this->is_auth(APP_DIR.'/admin/tag/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
 			$id = $this->input->post('ids');
 			if ($id) {
                 $this->link->where_in('id', $id)->delete($this->tag_model->tablename);
             }
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		// 数据库中分页查询
@@ -106,7 +106,7 @@ class D_Tag extends M_Controller {
 			'mod' => $this->module,
 			'list' => $data,
 			'param'	=> $param,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/tag/index', $param), $param['total'])
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/tag/index', $param), $param['total'])
 		));
 		$this->template->display('tag_index.html');
     }
@@ -122,15 +122,15 @@ class D_Tag extends M_Controller {
 			switch ($result) {
 				
 				case -1:
-					exit(dr_json(0, lang('126'), 'name'));
+					exit(man_json(0, lang('126'), 'name'));
 					break;
 					
 				case -2:
-					exit(dr_json(0, lang('127'), 'name'));
+					exit(man_json(0, lang('127'), 'name'));
 					break;
 				
 				default:
-					exit(dr_json(1, lang('000')));
+					exit(man_json(1, lang('000')));
 					break;
 			}
 		}
@@ -159,15 +159,15 @@ class D_Tag extends M_Controller {
 			switch ($result) {
 				
 				case -1:
-					exit(dr_json(0, lang('126')));
+					exit(man_json(0, lang('126')));
 					break;
 					
 				case -2:
-					exit(dr_json(0, lang('127')));
+					exit(man_json(0, lang('127')));
 					break;
 				
 				default:
-					exit(dr_json(1, lang('000')));
+					exit(man_json(1, lang('000')));
 					break;
 			}
 		}
@@ -186,7 +186,7 @@ class D_Tag extends M_Controller {
 		$this->link
 			 ->where('id', (int)$this->input->get('id'))
 			 ->delete($this->tag_model->tablename);
-		exit(dr_json(1, lang('000')));
+		exit(man_json(1, lang('000')));
 	}
 	
 }

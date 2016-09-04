@@ -1,6 +1,6 @@
 {template "header.html"}
 <script>
-function dr_show_wb(obj) {
+function man_show_wb(obj) {
     var msg = $(obj).html();
     var throughBox = art.dialog.through;
     throughBox({
@@ -38,43 +38,43 @@ function dr_show_wb(obj) {
 		<table width="100%">
 		<thead>
 		<tr>
-			<th width="10" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+			<th width="10" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<th class="{ns_sorting('content')}" name="content" align="left">{lang('html-214')}</th>
 			<th hide="1" class="{ns_sorting('username')}" name="username" width="150" align="left">{lang('html-347')}</th>
 			<th class="{ns_sorting('comment')}" name="comment" width="70" align="center">{lang('html-761')}</th>
 			<th class="{ns_sorting('digg')}" name="digg" width="70" align="center">{lang('html-762')}</th>
 			<th hide="1" class="{ns_sorting('repost')}" name="repost" width="70" align="center">{lang('html-763')}</th>
 			<th class="{ns_sorting('inputtime')}" name="inputtime" width="120" align="left">{lang('html-457')}</th>
-			<th align="left" class="dr_option">{lang('option')}</th>
+			<th align="left" class="man_option">{lang('option')}</th>
 		</tr>
 		</thead>
 		<tbody>
 		{loop $list $t}
-		<tr id="dr_row_{$t.id}">
-			<td align="right"><input name="ids[]" type="checkbox" class="dr_select" value="{$t.id}" />&nbsp;</td>
-			<td align="left"><div onclick="dr_show_wb(this)" style="width:300px;height:25px;overflow:hidden;cursor:pointer;">{dr_sns_content($t.content)}</div></td>
-			<td hide="1" align="left"><a onclick="dr_dialog_member('{$t.uid}')" href="javascript:;">{$t.username}</a></td>
+		<tr id="man_row_{$t.id}">
+			<td align="right"><input name="ids[]" type="checkbox" class="man_select" value="{$t.id}" />&nbsp;</td>
+			<td align="left"><div onclick="man_show_wb(this)" style="width:300px;height:25px;overflow:hidden;cursor:pointer;">{man_sns_content($t.content)}</div></td>
+			<td hide="1" align="left"><a onclick="man_dialog_member('{$t.uid}')" href="javascript:;">{$t.username}</a></td>
 			<td align="center">{$t.comment}</td>
 			<td align="center">{$t.digg}</td>
 			<td hide="1" align="center">{$t.repost}</td>
 			<td align="left">{man_date($t.inputtime, NULL, 'red')}</td>
-			<td align="left" class="dr_option">
-			<a href="{dr_sns_feed_url($t.id)}" target="_blank">{lang('go')}</a>
+			<td align="left" class="man_option">
+			<a href="{man_sns_feed_url($t.id)}" target="_blank">{lang('go')}</a>
 			</td>
 		</tr> 
 		{/loop}
 		<tr>
-        	<th width="20" align="right"><input name="dr_select" id="dr_select" type="checkbox" onClick="dr_selected()" />&nbsp;</th>
+        	<th width="20" align="right"><input name="man_select" id="man_select" type="checkbox" onClick="man_selected()" />&nbsp;</th>
 			<td colspan="10" align="left" style="border:none">
             {if $this->ci->is_auth('member/admin/sns/del')}
-			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');dr_confirm_set_all('{lang('015')}')" />
+			<input type="button" class="button" value="{lang('del')}" name="option" onClick="$('#action').val('del');man_confirm_set_all('{lang('015')}')" />
             {/if}
 			</td>
 		</tr>
 		</tbody>
 		</table>
 		</form>
-        <div id="pages"><a>{dr_lang('html-346', $param['total'])}</a>{$pages}</div>
+        <div id="pages"><a>{man_lang('html-346', $param['total'])}</a>{$pages}</div>
 	</div>
 </div>
 {template footer.html}

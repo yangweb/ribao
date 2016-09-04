@@ -7,14 +7,14 @@ $(function() {
 	art.dialog.tips('<font color=red>{$error.msg}</font>', 3);
 	d_tips('{$error.error}', 0);
 	{/if}
-	var catid = $("#dr_catid").val();
+	var catid = $("#man_catid").val();
 	if (catid) {
 		show_category_field(catid);
 	}
 });
 function show_category_field(catid) {
-	$.post(siteurl+'?s={APP_DIR}&c=category&m=field&rand='+Math.random(),{ catid:catid, data:{json_encode(dr_array2string($data))} }, function(data){
-		$('#dr_category_field').html(data);
+	$.post(siteurl+'?s={APP_DIR}&c=category&m=field&rand='+Math.random(),{ catid:catid, data:{json_encode(man_array2string($data))} }, function(data){
+		$('#man_category_field').html(data);
 	});
 }
 function setflag(i) {
@@ -26,11 +26,11 @@ function setflag(i) {
 }
 </script>
 <form action="" method="post" name="myform" id="myform">
-<input name="action" id="dr_action" type="hidden" value="back" />
+<input name="action" id="man_action" type="hidden" value="back" />
 <input name="page" id="page" type="hidden" value="{$page}" />
 <input name="backurl" type="hidden" value="{$backurl}" />
-<input name="dr_id" id="dr_id" type="hidden" value="{$data.id}" />
-<input name="dr_module" id="dr_module" type="hidden" value="{APP_DIR}" />
+<input name="man_id" id="man_id" type="hidden" value="{$data.id}" />
+<input name="man_module" id="man_module" type="hidden" value="{APP_DIR}" />
 <div class="subnav">
 	<div class="content-menu ib-a blue line-x">
 		{$menu}
@@ -40,7 +40,7 @@ function setflag(i) {
         <ul class="tabBut cu-li">
             <li class="on">{lang('html-720')}</li>
         </ul>
-        <div class="contentList pad-10 dr_table">
+        <div class="contentList pad-10 man_table">
         <table width="100%" class="table_form">
         <tr>
             <th width="200"><font color="red">*</font>&nbsp;{lang('cat-00')}： </th>

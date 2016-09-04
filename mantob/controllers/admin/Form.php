@@ -53,7 +53,7 @@ class Form extends M_Controller {
 			$result = $this->form_model->add($data);
 			if ($result === TRUE) {
 				$this->form_model->cache();
-				$this->admin_msg(lang('000'), dr_url('form/index'), 1);
+				$this->admin_msg(lang('000'), man_url('form/index'), 1);
 			}
 			
 		}
@@ -94,10 +94,10 @@ class Form extends M_Controller {
 			$data = $this->input->post('data', TRUE);
 			$this->form_model->edit($id, $data);
 			$this->form_model->cache();
-			$this->admin_msg(lang('000'), dr_url('form/index'), 1);
+			$this->admin_msg(lang('000'), man_url('form/index'), 1);
 		}
 		
-		$data['setting'] = dr_string2array($data['setting']);
+		$data['setting'] = man_string2array($data['setting']);
 		
 		$this->template->assign(array(
 			'menu' => $this->get_menu(array(
@@ -116,7 +116,7 @@ class Form extends M_Controller {
      */
     public function del() {
 		$this->form_model->del((int)$this->input->get('id'));
-		$this->admin_msg(lang('000'), dr_url('form/index'), 1);
+		$this->admin_msg(lang('000'), man_url('form/index'), 1);
 	}
 	
 	/**
@@ -139,7 +139,7 @@ class Form extends M_Controller {
 			$code = MEMBER_URL.'index.php?c=api&m=captcha&width=100&height=40';
 			$string.= '<tr>'.PHP_EOL;
 			$string.= '<th width="200"><font color="red">*</font> 验证码：</th>'.PHP_EOL;
-			$string.= '<td><input name="code" id="dr_code" class="input-text" type="text" /><img align="absmiddle" style="cursor:pointer;" onclick="this.src=\''.$code.'&\'+Math.random();" src="'.$code.'" /></td>'.PHP_EOL;
+			$string.= '<td><input name="code" id="man_code" class="input-text" type="text" /><img align="absmiddle" style="cursor:pointer;" onclick="this.src=\''.$code.'&\'+Math.random();" src="'.$code.'" /></td>'.PHP_EOL;
 			$string.= '</tr>'.PHP_EOL;
 		}
 		

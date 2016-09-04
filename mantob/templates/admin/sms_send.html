@@ -22,17 +22,17 @@ $(function() {
 				<tr>
                     <th width="200">{lang('html-028')}： </th>
                     <td>
-                    <input name="is_all" type="radio" value="0" onclick="$('.dr_0').show();$('.dr_1').hide();" checked="checked" />&nbsp;{lang('html-651')}&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input name="is_all" type="radio" value="1" onclick="$('.dr_1').show();$('.dr_0').hide();" />&nbsp;{lang('html-652')}
+                    <input name="is_all" type="radio" value="0" onclick="$('.man_0').show();$('.man_1').hide();" checked="checked" />&nbsp;{lang('html-651')}&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="is_all" type="radio" value="1" onclick="$('.man_1').show();$('.man_0').hide();" />&nbsp;{lang('html-652')}
                     </td>
                 </tr>
-				<tr class="dr_0">
+				<tr class="man_0">
                     <th>{lang('html-653')}： </th>
                     <td>
                     <input class="input-text" type="text" name="data[mobile]" style="width:150px;" />
                     </td>
                 </tr>
-                <tr class="dr_1" style="display:none">
+                <tr class="man_1" style="display:none">
                     <th>{lang('html-653')}： </th>
                     <td>
                     <textarea class="input-text" name="data[mobiles]" style="height:200px; width:150px;"></textarea>
@@ -49,8 +49,8 @@ $(function() {
                 <tr>
                     <th style="border:none;">&nbsp;</th>
                     <td>
-                    <input class="button" type="button" name="button" value="{lang('html-655')}" onclick="dr_send()" />
-                    <span id="dr_send_note"></span>
+                    <input class="button" type="button" name="button" value="{lang('html-655')}" onclick="man_send()" />
+                    <span id="man_send_note"></span>
                     </td>
                 </tr>
 				</table>
@@ -61,19 +61,19 @@ $(function() {
 </form>
 <script type="text/javascript">
 <!--
-function dr_send() {
-	$("#dr_send_note").html('<img src="{SITE_URL}mantob/statics/images/loading.gif">');
+function man_send() {
+	$("#man_send_note").html('<img src="{SITE_URL}mantob/statics/images/loading.gif">');
 	var data = $("#myform").serialize();
-	$.ajax({type: "POST",dataType:"json", url: "{dr_url('sms/ajaxsend')}&"+Math.random(), data: data,
+	$.ajax({type: "POST",dataType:"json", url: "{man_url('sms/ajaxsend')}&"+Math.random(), data: data,
 		success: function(data) {
 			if (data.status == 1) {
-				$("#dr_send_note").html('<font color=green>'+data.code+'</font>');
+				$("#man_send_note").html('<font color=green>'+data.code+'</font>');
 			} else {
-				$("#dr_send_note").html('<font color=red>'+data.code+'</font>');
+				$("#man_send_note").html('<font color=red>'+data.code+'</font>');
 			}
 		},
 		error: function(HttpRequest, ajaxOptions, thrownError) {
-			$("#dr_send_note").html('');
+			$("#man_send_note").html('');
 			alert(thrownError + "\r\n" + HttpRequest.statusText + "\r\n" + HttpRequest.responseText);
 		}
 	});

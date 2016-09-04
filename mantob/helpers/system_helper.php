@@ -17,7 +17,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
  * @param	string	$dir	目录名称
  * @return	bool|void
  */
-function dr_rmdir($dir) {
+function man_rmdir($dir) {
 	
 	if (!$dir || is_file(trim($dir, DIRECTORY_SEPARATOR).'/index.php')) {
         return FALSE;
@@ -33,7 +33,7 @@ function dr_rmdir($dir) {
  * @param	intval	$url	是否返回url
  * @return  string
  */
-function dr_module_create_list_file($id, $url = 0) {
+function man_module_create_list_file($id, $url = 0) {
 
 	$file = SITE_URL.APP_DIR.'/index.php?c=home&m=create_list_html&id='.$id;
 	if ($url) {
@@ -50,7 +50,7 @@ function dr_module_create_list_file($id, $url = 0) {
  * @param	intval	$url	是否返回url
  * @return  string
  */
-function dr_module_create_show_file($id, $url = 0) {
+function man_module_create_show_file($id, $url = 0) {
 
 	$file = SITE_URL.APP_DIR.'/index.php?c=show&m=create_html&id='.$id;
 	if ($url) {
@@ -67,7 +67,7 @@ function dr_module_create_show_file($id, $url = 0) {
  * @param	intval	$url	是否返回url
  * @return  string
  */
-function dr_module_create_extend_file($id, $url = 0) {
+function man_module_create_extend_file($id, $url = 0) {
 
 	$file = SITE_URL.APP_DIR.'/index.php?c=extend&m=create_html&cid='.$id;
 
@@ -85,7 +85,7 @@ function dr_module_create_extend_file($id, $url = 0) {
  * @param	array	$value	值
  * @return  string
  */
-function dr_admin_rule($role, $value = NULL) {
+function man_admin_rule($role, $value = NULL) {
 
 	if (!$role) {
         return NULL;
@@ -97,10 +97,10 @@ function dr_admin_rule($role, $value = NULL) {
 			$html.= '<tr>';
 			$html.= '	<th width="200"> '.$t['name'].'：</th>';
 			$html.= '	<td>';
-			$html.= '		<label>'.lang('admin').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][show]" class="dr_show" type="checkbox" value="1" '.(isset($value[$id]['show']) && $value[$id]['show'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
-            $html.= '		<label>'.lang('add').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][add]" class="dr_add" type="checkbox" value="1" '.(isset($value[$id]['add']) && $value[$id]['add'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
-            $html.= '		<label>'.lang('edit').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][edit]" class="dr_edit" type="checkbox" value="1" '.(isset($value[$id]['edit']) && $value[$id]['edit'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
-            $html.= '		<label>'.lang('del').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][del]" class="dr_del" type="checkbox" value="1" '.(isset($value[$id]['del']) && $value[$id]['del'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
+			$html.= '		<label>'.lang('admin').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][show]" class="man_show" type="checkbox" value="1" '.(isset($value[$id]['show']) && $value[$id]['show'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
+            $html.= '		<label>'.lang('add').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][add]" class="man_add" type="checkbox" value="1" '.(isset($value[$id]['add']) && $value[$id]['add'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
+            $html.= '		<label>'.lang('edit').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][edit]" class="man_edit" type="checkbox" value="1" '.(isset($value[$id]['edit']) && $value[$id]['edit'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
+            $html.= '		<label>'.lang('del').'</label>&nbsp;<input name="data[setting][admin]['.$id.'][del]" class="man_del" type="checkbox" value="1" '.(isset($value[$id]['del']) && $value[$id]['del'] ? 'checked' : '').' />&nbsp;&nbsp&nbsp;';
             $html.= '	</td>';
 			$html.= '</tr>';
 		}
@@ -184,7 +184,7 @@ function get_member_value($uid, $value = 'username') {
  * @param	string	$key
  * @return  array
  */
-function dr_file_info($key) {
+function man_file_info($key) {
 
 	if (!$key) {
         return NULL;
@@ -200,7 +200,7 @@ function dr_file_info($key) {
 		} else {
 			$info['icon'] = is_file(FCPATH.'mantob/statics/images/ext/'.$info['fileext'].'.gif') ? SITE_URL.'mantob/statics/images/ext/'.$info['fileext'].'.gif' : SITE_URL.'mantob/statics/images/ext/blank.gif';
 		}
-		$info['size'] = dr_format_file_size($info['filesize']);
+		$info['size'] = man_format_file_size($info['filesize']);
 		return $info;
 	} else {
 		return array('icon' => SITE_URL.'mantob/statics/images/ext/url.gif', 'size' => '');
@@ -213,7 +213,7 @@ function dr_file_info($key) {
  * @param	string	$username
  * @return  intval
  */
-function dr_field_input($name, $type, $option, $value = NULL, $id = 0) {
+function man_field_input($name, $type, $option, $value = NULL, $id = 0) {
 
 	$ci	= &get_instance();
 	$ci->load->library('Dfield', array(APP_DIR));
@@ -237,7 +237,7 @@ function dr_field_input($name, $type, $option, $value = NULL, $id = 0) {
  * @param	bool	$hidden			Whether to show hidden files
  * @return	array
  */
-function dr_dir_map($source_dir, $directory_depth = 0, $hidden = FALSE) {
+function man_dir_map($source_dir, $directory_depth = 0, $hidden = FALSE) {
 
 	if ($fp = @opendir($source_dir)) {
 	
@@ -253,7 +253,7 @@ function dr_dir_map($source_dir, $directory_depth = 0, $hidden = FALSE) {
 			}
 			if (($directory_depth < 1 OR $new_depth > 0)
             && @is_dir($source_dir.$file)) {
-				$filedata[$file] = dr_dir_map($source_dir.DIRECTORY_SEPARATOR.$file, $new_depth, $hidden);
+				$filedata[$file] = man_dir_map($source_dir.DIRECTORY_SEPARATOR.$file, $new_depth, $hidden);
 			} else {
 				$filedata[] = $file;
 			}

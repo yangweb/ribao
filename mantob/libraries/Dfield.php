@@ -134,7 +134,7 @@ abstract class A_Field  {
 		'MEDIUMTEXT' => ''
 		
 	);	// 内置可用字段及默认长度
-	static public $format = '<tr id="dr_row_{name}">
+	static public $format = '<tr id="man_row_{name}">
 					<th>{text} </th>
 					<td>
 					{value}

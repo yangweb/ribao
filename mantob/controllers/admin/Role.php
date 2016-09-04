@@ -36,9 +36,9 @@ class Role extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
-			exit(dr_json(1, lang('014'), $this->auth_model->del_role_all($ids)));
+			exit(man_json(1, lang('014'), $this->auth_model->del_role_all($ids)));
 		}
 		
 		$this->template->assign('list', $this->auth_model->get_admin_role_all());
@@ -50,7 +50,7 @@ class Role extends M_Controller {
      */
     public function add() {
 		if (IS_POST) {
-            exit(dr_json(1, lang('014'), $this->auth_model->add_role($this->input->post('data', TRUE))));
+            exit(man_json(1, lang('014'), $this->auth_model->add_role($this->input->post('data', TRUE))));
         }
 		$this->template->display('role_add.html');
     }
@@ -71,9 +71,9 @@ class Role extends M_Controller {
         }
 		
 		if (IS_POST) {
-            exit(dr_json(1, lang('014'), $this->auth_model->edit_role($data, $this->input->post('data', TRUE))));
+            exit(man_json(1, lang('014'), $this->auth_model->edit_role($data, $this->input->post('data', TRUE))));
         }
-		$data['site'] = dr_string2array($data['site']);
+		$data['site'] = man_string2array($data['site']);
 		
 		$this->template->assign('data', $data);
         $this->template->display('role_add.html');
@@ -84,7 +84,7 @@ class Role extends M_Controller {
      */
     public function del() {
 		$this->auth_model->del_role((int)$this->input->get('id'));
-		exit(dr_json(1, lang('014')));
+		exit(man_json(1, lang('014')));
 	}
 	
 	/**

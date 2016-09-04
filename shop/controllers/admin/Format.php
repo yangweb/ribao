@@ -58,12 +58,12 @@ class Format extends M_Controller {
 		if (IS_POST && $this->input->post('action')) {
 			
 			$ids = $this->input->post('ids', TRUE);
-			if (!$ids) exit(dr_json(0, lang('013')));
+			if (!$ids) exit(man_json(0, lang('013')));
 			
 			if ($this->input->post('action') == 'del') {
 				print_r(post);
 				die;
-				if (!$this->is_auth(APP_DIR.'admin/format/del')) exit(dr_json(0, lang('160')));
+				if (!$this->is_auth(APP_DIR.'admin/format/del')) exit(man_json(0, lang('160')));
 				$this->link
 					 ->where_in('id', $ids)
 					 ->delete($this->format_model->tablename);
@@ -71,9 +71,9 @@ class Format extends M_Controller {
 					 ->where_in('fid', $ids)
 					 ->delete($this->format_model->dataname);
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				if (!$this->is_auth(APP_DIR.'admin/format/edit')) exit(dr_json(0, lang('160')));
+				if (!$this->is_auth(APP_DIR.'admin/format/edit')) exit(man_json(0, lang('160')));
 				$_data = $this->input->post('data');
 				foreach ($ids as $id) {
 					$this->link
@@ -81,7 +81,7 @@ class Format extends M_Controller {
 						 ->update($this->format_model->tablename, $_data[$id]);
 				}
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}			
 		}
 	
@@ -101,7 +101,7 @@ class Format extends M_Controller {
 		
 		$this->template->assign(array(
 			'list' => $data,
-			'pages'	=> $this->get_pagination(dr_url(APP_DIR.'/format/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url(APP_DIR.'/format/index', $param), $param['total']),
 			'param'	=> $_param,
 			'menu' => $this->get_menu(array(
 				lang('mod-43') => APP_DIR.'/admin/format/index',
@@ -121,15 +121,15 @@ class Format extends M_Controller {
 		
 			$data = $this->validate_filter($this->field);
 			$data[1]['catid'] = $this->input->post('catid');
-			if (!$data[1]['catid']) exit(dr_json(0, lang('cat-22'), 'catid'));
-			if (isset($data['error'])) exit(dr_json(0, $data['msg'], $data['error']));
+			if (!$data[1]['catid']) exit(man_json(0, lang('cat-22'), 'catid'));
+			if (isset($data['error'])) exit(man_json(0, $data['msg'], $data['error']));
 			
 			$format = $this->format_model->add($data[1]);
 			if (is_numeric($format)) {
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				exit(dr_json(0, $format, 'name'));
+				exit(man_json(0, $format, 'name'));
 			}
 		}
 		
@@ -164,16 +164,16 @@ class Format extends M_Controller {
 		
 			$data = $this->validate_filter($this->field);
 			$data[1]['catid'] = $this->input->post('catid');
-			if (!$data[1]['catid']) exit(dr_json(0, lang('cat-22'), 'catid'));
-			if (isset($data['error'])) exit(dr_json(0, $data['msg'], $data['error']));
+			if (!$data[1]['catid']) exit(man_json(0, lang('cat-22'), 'catid'));
+			if (isset($data['error'])) exit(man_json(0, $data['msg'], $data['error']));
 			
 			$format = $this->format_model->edit($id, $data[1]);
 			if (is_numeric($format)) {
 				$this->attachment_handle($this->uid, $this->format_model->tablename.'-'.$format, $this->field);
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				exit(dr_json(0, $format, 'name'));
+				exit(man_json(0, $format, 'name'));
 			}
 		}
 		
@@ -209,18 +209,18 @@ class Format extends M_Controller {
 		if (IS_POST && $this->input->post('action')) {
 			
 			$ids = $this->input->post('ids', TRUE);
-			if (!$ids) exit(dr_json(0, lang('013')));
+			if (!$ids) exit(man_json(0, lang('013')));
 			
 			if ($this->input->post('action') == 'del') {
-				if (!$this->is_auth(APP_DIR.'admin/format/del')) exit(dr_json(0, lang('160')));
+				if (!$this->is_auth(APP_DIR.'admin/format/del')) exit(man_json(0, lang('160')));
 				$this->link
 					 ->where('fid', $fid)
 					 ->where_in('id', $ids)
 					 ->delete($this->format_model->dataname);
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				if (!$this->is_auth(APP_DIR.'admin/format/edit')) exit(dr_json(0, lang('160')));
+				if (!$this->is_auth(APP_DIR.'admin/format/edit')) exit(man_json(0, lang('160')));
 				$_data = $this->input->post('data');
 				foreach ($ids as $id) {
 					$this->link
@@ -228,7 +228,7 @@ class Format extends M_Controller {
 						 ->update($this->format_model->dataname, $_data[$id]);
 				}
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			}			
 		}
 		
@@ -242,17 +242,17 @@ class Format extends M_Controller {
 			foreach($data as $t) {
 				$t['option'] = '';
 				if ($this->is_auth(APP_DIR.'/admin/format/adddata') && $t['pid'] == 0) {
-					$t['option'] .= '<a class="add" title="'.lang('add').'" href="'.dr_dialog_url(dr_url(APP_DIR.'/format/adddata', array('fid'=>$fid, 'pid'=>$t['id'])), 'add').'"></a>&nbsp;&nbsp;';
+					$t['option'] .= '<a class="add" title="'.lang('add').'" href="'.man_dialog_url(man_url(APP_DIR.'/format/adddata', array('fid'=>$fid, 'pid'=>$t['id'])), 'add').'"></a>&nbsp;&nbsp;';
 				}
 				if ($this->is_auth(APP_DIR.'/admin/format/editdata')) {
-					$t['option'] .= '<a class="edit" title="'.lang('edit').'" href="'.dr_dialog_url(dr_url(APP_DIR.'/format/editdata', array('fid'=>$fid, 'id'=>$t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
+					$t['option'] .= '<a class="edit" title="'.lang('edit').'" href="'.man_dialog_url(man_url(APP_DIR.'/format/editdata', array('fid'=>$fid, 'id'=>$t['id'])), 'edit').'"></a>&nbsp;&nbsp;';
 				}
 				$tree[$t['id']] = $t;
 			}
 		}
 		
 		$str = "<tr>
-					<td align='right'><input name='ids[]' type='checkbox' class='dr_select' value='\$id' />&nbsp;</td>
+					<td align='right'><input name='ids[]' type='checkbox' class='man_select' value='\$id' />&nbsp;</td>
 					<td align='center'><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>
 					<td align='left'>&nbsp;</td>
 					<td>\$spacer\$name</td>
@@ -286,14 +286,14 @@ class Format extends M_Controller {
 			$data = $this->validate_filter($this->data_field);
 			$data[1]['fid'] = $fid;
 			$data[1]['pid'] = $pid;
-			if (isset($data['error'])) exit(dr_json(0, $data['msg'], $data['error']));
+			if (isset($data['error'])) exit(man_json(0, $data['msg'], $data['error']));
 			
 			$format = $this->format_model->adddata($data[1]);
 			if (is_numeric($format)) {
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				exit(dr_json(0, $format, 'name'));
+				exit(man_json(0, $format, 'name'));
 			}
 		}
 		
@@ -324,14 +324,14 @@ class Format extends M_Controller {
 			$data = $this->validate_filter($this->data_field);
 			$data[1]['fid'] = $fid;
 			$data[1]['pid'] = $this->input->post('pid');
-			if (isset($data['error'])) exit(dr_json(0, $data['msg'], $data['error']));
+			if (isset($data['error'])) exit(man_json(0, $data['msg'], $data['error']));
 			
 			$format = $this->format_model->editdata($id, $data[1]);
 			if (is_numeric($format)) {
 				$this->format_model->cache();
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
-				exit(dr_json(0, $format, 'name'));
+				exit(man_json(0, $format, 'name'));
 			}
 		}
 		
@@ -376,7 +376,7 @@ class Format extends M_Controller {
 	 */
 	public function _category2($data, $id = 0, $str = '', $format) {
 		
-		$cache = md5(dr_array2string($data).dr_array2string($id).dr_array2string($format).$str.$default.$this->member['uid']);
+		$cache = md5(man_array2string($data).man_array2string($id).man_array2string($format).$str.$default.$this->member['uid']);
 		//if ($cache_data = $this->get_cache_data($cache)) return $cache_data;
 		
 		$tree = array();

@@ -82,7 +82,7 @@ class Account extends M_Controller {
 						),
 						'validate' => array(
 							'xss' => 1,
-							'formattr' => ' /><input type="button" class="button" value="'.lang('m-086').'" onclick="dr_send_sms()" name="sms" ',
+							'formattr' => ' /><input type="button" class="button" value="'.lang('m-086').'" onclick="man_send_sms()" name="sms" ',
 						)
 					)
 				);
@@ -174,7 +174,7 @@ class Account extends M_Controller {
 						$this->member_model->update_score(1, $this->uid, (int)$this->member_rule['complete_score'], 'complete', "lang,m-058");
 					}
 				}
-				$this->member_msg(lang('000'), dr_url('account/index'), 1);
+				$this->member_msg(lang('000'), man_url('account/index'), 1);
 			}
 		} else {
 			$data = $this->member;
@@ -197,37 +197,37 @@ class Account extends M_Controller {
 
         // 重复发送
 		if (get_cookie('send_sms')) {
-            exit(dr_json(0, lang('m-091')));
+            exit(man_json(0, lang('m-091')));
         }
 
         // 是否已经认证过
 		if ($this->member['ismobile'] && $this->member['phone']) {
-			exit(dr_json(0, lang('m-092')));
+			exit(man_json(0, lang('m-092')));
 		}
 
         // 安全字符替换
-		$mobile = dr_safe_replace($this->input->get('phone'));
+		$mobile = man_safe_replace($this->input->get('phone'));
 		if (strlen($mobile) != 11 || !is_numeric($mobile)) {
-			exit(dr_json(0, lang('m-095')));
+			exit(man_json(0, lang('m-095')));
 		}
 
 		// 号码是否重复
 		if ($this->db->where('uid<>', $this->uid)->where('phone', $mobile)->count_all_results('member')) {
-			exit(dr_json(0, lang('m-089')));
+			exit(man_json(0, lang('m-089')));
 		}
 		
-		$code = dr_randcode();
-		$result = $this->member_model->sendsms($mobile, dr_lang('m-088', $code));
+		$code = man_randcode();
+		$result = $this->member_model->sendsms($mobile, man_lang('m-088', $code));
 		if ($result['status']) {
 			// 发送成功
 			$this->db
 				 ->where('uid', $this->uid)
 				 ->update('member', array('randcode' => $code, 'phone' => $mobile));
 			set_cookie('send_sms', 1, 120);
-			exit(dr_json(1, lang('m-093')));
+			exit(man_json(1, lang('m-093')));
 		} else {
 			// 发送失败
-			exit(dr_json(0, $result['msg']));
+			exit(man_json(0, $result['msg']));
 		}
 	}
 	
@@ -236,7 +236,7 @@ class Account extends M_Controller {
      */
 	public function jie() {
 		
-		$id = dr_safe_replace($this->input->get('id'));
+		$id = man_safe_replace($this->input->get('id'));
 		if ($this->get_cache('member', 'setting', 'regoauth')) {
             $this->msg(lang('m-112'));
         }
@@ -267,7 +267,7 @@ class Account extends M_Controller {
 			$this->member_model->update_score(1, $this->uid, (int)$this->member_rule['jie_score'], 'jie_'.$id, 'lang,m-060');
 		}
 		
-		$this->msg(lang('000'), dr_url('account/oauth'), 1, 3);
+		$this->msg(lang('000'), man_url('account/oauth'), 1, 3);
 	}
 	
 	/**
@@ -275,7 +275,7 @@ class Account extends M_Controller {
      */
 	public function bang() {
 	
-		$appid = dr_safe_replace($this->input->get('id'));
+		$appid = man_safe_replace($this->input->get('id'));
 		$oauth = require FCPATH.'config/oauth.php';
 		$config	= $oauth[$appid];
 		if (!$config) {
@@ -300,7 +300,7 @@ class Account extends M_Controller {
 	        	$user = $oauth->get_user_info($oauth->access($code));
 				if (is_array($user) && $user['oid']) {
 					if ($uid = $this->member_model->OAuth_bang($appid, $user)) {
-						$this->msg(dr_lang('m-049', dr_space_url($uid)));
+						$this->msg(man_lang('m-049', man_space_url($uid)));
 					} else {
 						
 						// 绑定积分处理
@@ -320,7 +320,7 @@ class Account extends M_Controller {
 								  ->count_all_results('member_scorelog_'.$this->member['tableid'])) {
 							$this->member_model->update_score(1, $this->uid, (int)$this->member_rule['bang_score'], 'bang_'.$appid, 'lang,m-059');
 						}
-						$this->msg(lang('m-050'), dr_url('account/oauth'), 1, 3);
+						$this->msg(lang('m-050'), man_url('account/oauth'), 1, 3);
 					}
 				} else {
 					$this->msg(lang('m-051'));
@@ -358,9 +358,9 @@ class Account extends M_Controller {
 		
 		if (IS_POST) {
 		
-			$password = dr_safe_replace($this->input->post('password'));
-			$password1 = dr_safe_replace($this->input->post('password1'));
-			$password2 = dr_safe_replace($this->input->post('password2'));
+			$password = man_safe_replace($this->input->post('password'));
+			$password1 = man_safe_replace($this->input->post('password1'));
+			$password2 = man_safe_replace($this->input->post('password2'));
 			
 			if (!$password1 || $password1 != $password2) {
 				$error = lang('m-054');
@@ -379,7 +379,7 @@ class Account extends M_Controller {
 				$this->db
 					 ->where('uid', $this->uid)
 					 ->update('member', array('password' => md5(md5($password1).$this->member['salt'].md5($password1))));
-				$this->member_msg(lang('m-052'), dr_url('account/password'), 1);
+				$this->member_msg(lang('m-052'), man_url('account/password'), 1);
 			}
 		}
 		
@@ -393,7 +393,7 @@ class Account extends M_Controller {
      * 密码校验
      */
     public function cpassword() {
-		$password = dr_safe_replace($this->input->post('password'));
+		$password = man_safe_replace($this->input->post('password'));
 		echo md5(md5($password).$this->member['salt'].md5($password)) == $this->member['password'] ? lang('m-055') : lang('m-053');
     }
 	
@@ -461,7 +461,7 @@ class Account extends M_Controller {
 
         // 解压文件
 		if ($this->pclzip->extract(PCLZIP_OPT_PATH, $dir, PCLZIP_OPT_REPLACE_NEWER) == 0) {
-            @dr_dir_delete($dir);
+            @man_dir_delete($dir);
             exit($this->pclzip->zip(true));
         }
         @unlink($filename);
@@ -529,13 +529,13 @@ class Account extends M_Controller {
 				// 虚拟币扣减
 				$value = intval($group['price']);
 				if ($this->member['score'] - $value < 0) {
-                    $this->member_msg(dr_lang('m-259', $value, $this->member['score']));
+                    $this->member_msg(man_lang('m-259', $value, $this->member['score']));
                 }
 				$this->member_model->update_score(1, $this->uid, -$value, '', 'lang,m-260,'.$group['name']);
 			} else {
 				// 人民币扣减
 				if ($this->member['money'] - $group['price'] < 0) {
-                    $this->member_msg(dr_lang('m-267', $group['price'], $this->member['money']));
+                    $this->member_msg(man_lang('m-267', $group['price'], $this->member['money']));
                 }
 				$this->load->model('pay_model');
 				$this->pay_model->add($this->uid, -$group['price'], 'lang,m-260,'.$group['name']);
@@ -544,11 +544,11 @@ class Account extends M_Controller {
 			$time = $this->member_model->upgrade($this->uid, $id, $group['limit'], $time);
 			$time = $time > 2000000000 ? lang('m-265') : man_date($time);
 			$subject = $renew ? lang('m-263') : lang('m-261');
-			$message = dr_lang($renew ? 'm-264' : 'm-262', $this->member['name'] ? $this->member['name'] : $this->member['username'], $group['name'], $time);
+			$message = man_lang($renew ? 'm-264' : 'm-262', $this->member['name'] ? $this->member['name'] : $this->member['username'], $group['name'], $time);
 			
 			// 邮件提醒
 			$this->sendmail_queue($this->member['email'], $subject, $message);
-			$this->member_msg(dr_lang('m-266', $time), dr_url('account/permission'), 1, 3);
+			$this->member_msg(man_lang('m-266', $time), man_url('account/permission'), 1, 3);
 			
 		} else {
 			
@@ -597,21 +597,21 @@ class Account extends M_Controller {
 		if ($page == 0) {
 			// 会员的基本权限表格
 			$rule = $this->get_cache('member', 'setting', 'permission', $markrule);
-			$content = '<table class="dr_table" width="100%" border="0">';
-			$content.= '  <tr><td width="200" align="right">'.dr_lang('m-269', SITE_EXPERIENCE).'：&nbsp;</td><td width="100">&nbsp;'.intval($rule['login_experience']).'</td>';
-			$content.= '  <td width="200" align="right">'.dr_lang('m-269', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['login_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-270', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['avatar_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-270', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['avatar_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-271', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['complete_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-271', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['complete_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-272', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['bang_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-272', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['bang_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-273', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['jie_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-273', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['jie_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-274', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['update_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-274', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['update_score']).'</td></tr>';
-			$content.= '  <tr><td align="right">'.dr_lang('m-323', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['download_experience']).'</td>';
-			$content.= '  <td align="right">'.dr_lang('m-323', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['download_score']).'</td></tr>';
+			$content = '<table class="man_table" width="100%" border="0">';
+			$content.= '  <tr><td width="200" align="right">'.man_lang('m-269', SITE_EXPERIENCE).'：&nbsp;</td><td width="100">&nbsp;'.intval($rule['login_experience']).'</td>';
+			$content.= '  <td width="200" align="right">'.man_lang('m-269', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['login_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-270', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['avatar_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-270', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['avatar_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-271', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['complete_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-271', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['complete_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-272', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['bang_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-272', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['bang_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-273', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['jie_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-273', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['jie_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-274', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['update_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-274', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['update_score']).'</td></tr>';
+			$content.= '  <tr><td align="right">'.man_lang('m-323', SITE_EXPERIENCE).'：&nbsp;</td><td>&nbsp;'.intval($rule['download_experience']).'</td>';
+			$content.= '  <td align="right">'.man_lang('m-323', SITE_SCORE).'：&nbsp;</td><td>&nbsp;'.intval($rule['download_score']).'</td></tr>';
 			$content.= '  <tr><td align="right">'.lang('m-275').'：&nbsp;</td><td>&nbsp;<img src="'.SITE_URL.'mantob/statics/images/'.(int)$rule['is_upload'].'.gif"></td>';
 			$content.= '  <td align="right">'.lang('m-276').'：&nbsp;</td><td>&nbsp;<img src="'.SITE_URL.'mantob/statics/images/'.(int)$rule['is_download'].'.gif"></td></tr>';
 			$content.= '  <tr><td align="right">'.lang('m-277').'：&nbsp;</td><td>&nbsp;'.($rule['attachsize'] ? $rule['attachsize'].'MB' : lang('m-278')).'</td></tr>';
@@ -620,7 +620,7 @@ class Account extends M_Controller {
 			$setting = $this->get_cache('member', 'setting');
 			// 会员空间表格
 			$content = '
-			<table class="dr_table" width="100%" border="0">
+			<table class="man_table" width="100%" border="0">
 			<tr>
 				<td width="120" align="right">'.lang('m-331').'：&nbsp;</td>
 				<td><img src="'.SITE_URL.'mantob/statics/images/'.(int)$setting['verifyspace'].'.gif"></td>
@@ -628,15 +628,15 @@ class Account extends M_Controller {
 				<td><img src="'.SITE_URL.'mantob/statics/images/'.(int)$this->get_cache('member', 'group', $this->member['groupid'], 'allowspace').'.gif"></td>
 			</tr>
 			</table>
-			<table class="dr_table" width="100%" border="0">
+			<table class="man_table" width="100%" border="0">
 			<tr>
 				<td>'.lang('m-328').'</td>
 				<td align="center">'.lang('m-329').'</td>
 				<td align="center">'.lang('m-061').'</td>
 				<td align="center">'.lang('m-283').'</td>
 				<td align="center">'.lang('m-284').'</td>
-				<td align="center">'.dr_lang('m-279', SITE_EXPERIENCE).'</td>
-				<td align="center">'.dr_lang('m-279', SITE_SCORE).'</td>
+				<td align="center">'.man_lang('m-279', SITE_EXPERIENCE).'</td>
+				<td align="center">'.man_lang('m-279', SITE_SCORE).'</td>
 			</tr>';
 			$model = $this->get_cache('space-model');
 			foreach ($model as $t) {
@@ -668,7 +668,7 @@ class Account extends M_Controller {
                 $category[$key] = $mod['name'];
 				// 权限表格
 				if ($key == $page) {
-					$content = '<table class="dr_table" width="100%" border="0">';
+					$content = '<table class="man_table" width="100%" border="0">';
 					$content.= '  <tr>
 						<td>'.lang('m-282').'</td>
 						<td align="center">'.lang('m-345').'</td>
@@ -692,11 +692,11 @@ class Account extends M_Controller {
 							$content.= '<td align="center"><img src="'.SITE_URL.'mantob/statics/images/'.($rule['verify'] ? 1 : 0).'.gif"></td>';
 							$content.= '<td align="center">'.($rule['postnum'] ? $rule['postnum'] : lang('m-278')).'</td>';
 							$content.= '<td align="center">'.($rule['postcount'] ? $rule['postcount'] : lang('m-278')).'</td>';
-							$content.= '<td align="center"><a href="javascript:;" onclick="dr_show_more('.$c['id'].')">'.lang('m-285').'</a></td>';
+							$content.= '<td align="center"><a href="javascript:;" onclick="man_show_more('.$c['id'].')">'.lang('m-285').'</a></td>';
 							$content.= '</tr>';
-							$content.= '<tr class="dr_clear dr_hide_'.$c['id'].'" style="display:none"><td></td>';
-							$content.= '<td colspan="4">'.dr_lang('m-279', SITE_EXPERIENCE).'：'.intval($rule['experience']).'</td>';
-							$content.= '<td colspan="4">'.dr_lang('m-279', SITE_SCORE).'：'.intval($rule['score']).'</td>';
+							$content.= '<tr class="man_clear man_hide_'.$c['id'].'" style="display:none"><td></td>';
+							$content.= '<td colspan="4">'.man_lang('m-279', SITE_EXPERIENCE).'：'.intval($rule['experience']).'</td>';
+							$content.= '<td colspan="4">'.man_lang('m-279', SITE_SCORE).'：'.intval($rule['score']).'</td>';
 							$content.= '</tr>';
 						}
 						
@@ -724,7 +724,7 @@ class Account extends M_Controller {
      */
 	public function attachment() {
 		
-		$ext = dr_safe_replace($this->input->get('ext'));
+		$ext = man_safe_replace($this->input->get('ext'));
 		$table = $this->input->get('module');
 		$this->load->model('attachment_model');
 		
@@ -778,9 +778,9 @@ class Account extends M_Controller {
 		$this->load->model('attachment_model');
 		
 		if ($this->attachment_model->delete($this->uid, '', $id)) {
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		} else {
-			exit(dr_json(0, 'Error'));
+			exit(man_json(0, 'Error'));
 		}
 	}
 }

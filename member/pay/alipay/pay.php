@@ -107,7 +107,7 @@ if ($this->mobile && $pay['wap']) {
 
         'out_trade_no'		=> $sn,
         'subject'			=> $title,
-        'body'				=> dr_lang('m-178', $this->member['username'], $id),
+        'body'				=> man_lang('m-178', $this->member['username'], $id),
         'total_fee'			=> $money,
     );
 

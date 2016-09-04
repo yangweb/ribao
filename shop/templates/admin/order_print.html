@@ -125,7 +125,7 @@ end function
         </thead>
         <tr>
         <td colspan="7" style="border:none">
-            <table border="0" cellspacing="0" cellpadding="0" class="dr_order_item" width="100%">
+            <table border="0" cellspacing="0" cellpadding="0" class="man_order_item" width="100%">
             {loop $data.items $i $item}
               <tr>
                
@@ -170,9 +170,9 @@ end function
             </tr>
             <tr>
                 <th width="150">买家信息：</th> 
-                <td width="200">{dr_strcut($data.username, 10)}</td>
+                <td width="200">{man_strcut($data.username, 10)}</td>
                 <th width="150">订单价格：</th> 
-                <td><span class="dr_pirce">￥{$data.price}元</span> {if $data.freight >0}（含邮费￥{$data.freight}元）{/if}</td>
+                <td><span class="man_pirce">￥{$data.price}元</span> {if $data.freight >0}（含邮费￥{$data.freight}元）{/if}</td>
             </tr>
             <tr>
                 <th width="150">订单编号：</th> 
@@ -188,15 +188,15 @@ end function
             </tr>
             <tr>
                 <th>所在城市：</th>
-                <td>{dr_linkagepos('address', $data.city, ' > ', '')}</td>
+                <td>{man_linkagepos('address', $data.city, ' > ', '')}</td>
                 <th>邮政编码：</th>
                 <td>{$data.zipcode}</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>详细地址：</th>
                 <td colspan="3">{$data.address}</td>
             </tr>
-            <tr class="dr_border_none">
+            <tr class="man_border_none">
                 <th>买家留言：</th>
                 <td colspan="3">{if $data.gbook}{else}没有留言{/if}</td>
             </tr>

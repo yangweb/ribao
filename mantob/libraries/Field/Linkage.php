@@ -86,14 +86,14 @@ class F_Linkage extends A_Field {
 		// 表单附加参数
 		$attr = isset($cfg['validate']['formattr']) && $cfg['validate']['formattr'] ? $cfg['validate']['formattr'] : '';
 		// 字段提示信息
-		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="dr_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
+		$tips = isset($cfg['validate']['tips']) && $cfg['validate']['tips'] ? '<div class="onShow" id="man_'.$name.'_tips">'.$cfg['validate']['tips'].'</div>' : '';
 		// 联动菜单缓存
 		$linkage = $this->ci->dcache->get('linkage-'.SITE_ID.'-'.$cfg['option']['linkage']);
 		$linklevel = $this->ci->dcache->get('linklevel-'.SITE_ID);
 		// 
 		$value = $value ? $value : $this->get_default_value($cfg['option']['value']);
 		$linklevel = $linklevel[$cfg['option']['linkage']] + 1;
-		$str = '<input type="hidden" name="data['.$name.']" id="dr_'.$name.'" value="'.(int)$value.'">';
+		$str = '<input type="hidden" name="data['.$name.']" id="man_'.$name.'" value="'.(int)$value.'">';
 		if(!defined('mantob_LINKAGE_INIT_LD')) {
 			define('mantob_LINKAGE_INIT_LD', 1);
 			$str.= '<script type="text/javascript" src="'.MEMBER_PATH.'statics/js/jquery.ld.js"></script>';
@@ -124,7 +124,7 @@ class F_Linkage extends A_Field {
 					var $target = $(e.target);
 					var index = $ld5.index($target);
 					//$("#'.$name.'-'.$i.'").remove();
-					$("#dr_'.$name.'").val($ld5.eq(index).show().val());
+					$("#man_'.$name.'").val($ld5.eq(index).show().val());
 					index ++;
 					$ld5.eq(index).show();
 				}

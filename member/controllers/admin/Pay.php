@@ -60,7 +60,7 @@ class Pay extends M_Controller {
             'pay' => $this->get_cache('member', 'setting', 'pay'),
 			'list' => $data,
 			'param'	=> $_param,
-			'pages'	=> $this->get_pagination(dr_url('member/pay/index', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url('member/pay/index', $param), $param['total']),
 			'userinfo' => $userinfo
 		));
 		$this->template->display('pay_index.html');
@@ -74,19 +74,19 @@ class Pay extends M_Controller {
 		$uid = (int)$this->input->get('uid');
 		$userinfo = $this->member_model->get_member($uid);
 		if (!$userinfo) {
-            exit(dr_json(1, lang('130')));
+            exit(man_json(1, lang('130')));
         }
 		
 		if (IS_POST) {
 			$data = $this->input->post('data');
 			$value = intval($data['value']);
 			if (!$value) {
-                exit(dr_json(0, lang('131'), 'value'));
+                exit(man_json(0, lang('131'), 'value'));
             }
 			
 			$this->pay_model->add($uid, $data['value'], $data['note']);
-			$this->member_model->add_notice($this->userinfo['uid'], 1, dr_lang('m-080', SITE_MONEY, $value, $this->member['username']));
-			exit(dr_json(1, lang('000')));
+			$this->member_model->add_notice($this->userinfo['uid'], 1, man_lang('m-080', SITE_MONEY, $value, $this->member['username']));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->template->assign('userinfo', $userinfo);
@@ -102,17 +102,17 @@ class Pay extends M_Controller {
 		
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			
 			if ($this->input->post('action') == 'del') {
 				if (!$this->is_auth('member/admin/pay/del')) {
-                    exit(dr_json(0, lang('160')));
+                    exit(man_json(0, lang('160')));
                 }
 				$this->db
 					 ->where_in('id', $ids)
 					 ->delete($this->db->dbprefix('member_paycard'));
-				exit(dr_json(1, lang('000')));
+				exit(man_json(1, lang('000')));
 			} else {
 				$data = $this->db
 							 ->where_in('id', $ids)
@@ -151,7 +151,7 @@ class Pay extends M_Controller {
 			)),
 			'list' => $data,
 			'param'	=> $_param,
-			'pages'	=> $this->get_pagination(dr_url('member/pay/card', $param), $param['total']),
+			'pages'	=> $this->get_pagination(man_url('member/pay/card', $param), $param['total']),
 			'userinfo' => $userinfo
 		));
 		$this->template->display('pay_card.html');
@@ -167,14 +167,14 @@ class Pay extends M_Controller {
 			$data = $this->input->post('data');
 			$value = intval($data['money']);
 			if (!$value > 0) {
-                exit(dr_json(0, '&nbsp;', 'money'));
+                exit(man_json(0, '&nbsp;', 'money'));
             }
 			
 			for ($i = 0; $i < $data['num']; $i++) {
 				$this->pay_model->card($value, $data['endtime'], $i);
 			}
 			
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		
 		$this->template->display('pay_addcard.html');

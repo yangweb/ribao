@@ -6,8 +6,8 @@ $(function() {
 	art.dialog.tips('{$error}', 3);
 	{/if}
 });
-function dr_select_all() {
-    $("#dr_synid").find("option").attr("selected", "selected");
+function man_select_all() {
+    $("#man_synid").find("option").attr("selected", "selected");
 }
 </script>
 <form action="" method="post" name="myform" id="myform">
@@ -25,11 +25,11 @@ function dr_select_all() {
             {if $data.id}<li onclick="SwapTab({php echo MEMBER_OPEN_SPACE ? 3 : 2;})">{lang('html-219')}</li>{/if}
 		</ul>
 		<div class="contentList pad-10">
-			<div id="cnt_0" style="display:none" class="dr_hide">
+			<div id="cnt_0" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				<tr>
 					<th width="200"><font color="red">*</font>&nbsp;{lang('html-026')}： </th>
-					<td><input class="input-text" type="text" name="data[name]" value="{$data.name}" id="dr_name" size="12" />
+					<td><input class="input-text" type="text" name="data[name]" value="{$data.name}" id="man_name" size="12" />
 					<div class="onShow">{lang('html-027')}</div>
 					</td>
 				</tr>
@@ -43,21 +43,21 @@ function dr_select_all() {
 				<tr>
 					<th>{lang('html-274')}： </th>
 					<td>
-					<input type="radio" name="data[unit]" value="1" {dr_set_radio('unit', $data.unit, '1', TRUE)} />&nbsp;<label>{SITE_SCORE}</label>
+					<input type="radio" name="data[unit]" value="1" {man_set_radio('unit', $data.unit, '1', TRUE)} />&nbsp;<label>{SITE_SCORE}</label>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[unit]" value="2" {dr_set_radio('unit', $data.unit, '2')} />&nbsp;<label>{SITE_MONEY}</label>
+					<input type="radio" name="data[unit]" value="2" {man_set_radio('unit', $data.unit, '2')} />&nbsp;<label>{SITE_MONEY}</label>
 					</td>
 				</tr>
 				<tr>
 					<th>{lang('html-275')}： </th>
 					<td>
-					<input type="radio" name="data[limit]" value="1" {dr_set_radio('limit', $data.limit, '1', TRUE)} />&nbsp;<label>{lang('html-276')}</label>
+					<input type="radio" name="data[limit]" value="1" {man_set_radio('limit', $data.limit, '1', TRUE)} />&nbsp;<label>{lang('html-276')}</label>
 					&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[limit]" value="2" {dr_set_radio('limit', $data.limit, '2')} />&nbsp;<label>{lang('html-277')}</label>
+					<input type="radio" name="data[limit]" value="2" {man_set_radio('limit', $data.limit, '2')} />&nbsp;<label>{lang('html-277')}</label>
 					&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[limit]" value="3" {dr_set_radio('limit', $data.limit, '3')} />&nbsp;<label>{lang('html-278')}</label>
+					<input type="radio" name="data[limit]" value="3" {man_set_radio('limit', $data.limit, '3')} />&nbsp;<label>{lang('html-278')}</label>
 					&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[limit]" value="4" {dr_set_radio('limit', $data.limit, '4')} />&nbsp;<label>{lang('html-486')}</label>
+					<input type="radio" name="data[limit]" value="4" {man_set_radio('limit', $data.limit, '4')} />&nbsp;<label>{lang('html-486')}</label>
 					</td>
 				</tr>
 				<tr>
@@ -74,9 +74,9 @@ function dr_select_all() {
 				<tr>
 					<th>{lang('html-269')}： </th>
 					<td>
-					<input type="radio" name="data[allowapply]" value="1" {dr_set_radio('allowapply', $data.allowapply, '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>
+					<input type="radio" name="data[allowapply]" value="1" {man_set_radio('allowapply', $data.allowapply, '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>
 					&nbsp;&nbsp;&nbsp;
-					<input type="radio" name="data[allowapply]" value="0" {dr_set_radio('allowapply', $data.allowapply, '0')} />&nbsp;<label>{lang('no')}</label>&nbsp;
+					<input type="radio" name="data[allowapply]" value="0" {man_set_radio('allowapply', $data.allowapply, '0')} />&nbsp;<label>{lang('no')}</label>&nbsp;
 					<div class="onShow">{lang('html-279')}</div>
 					</td>
 				</tr>
@@ -108,9 +108,9 @@ function dr_select_all() {
                     <tr>
                         <th>{lang('html-229')}： </th>
                         <td>
-                            <input type="radio" name="data[allowspace]" value="1" {dr_set_radio('allowspace', $data.allowspace, '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>
+                            <input type="radio" name="data[allowspace]" value="1" {man_set_radio('allowspace', $data.allowspace, '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>
                             &nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="data[allowspace]" value="0" {dr_set_radio('allowspace', $data.allowspace, '0')} />&nbsp;<label>{lang('no')}</label>&nbsp;
+                            <input type="radio" name="data[allowspace]" value="0" {man_set_radio('allowspace', $data.allowspace, '0')} />&nbsp;<label>{lang('no')}</label>&nbsp;
                             <div class="onShow">{lang('html-255')}</div>
                         </td>
                     </tr>
@@ -128,7 +128,7 @@ function dr_select_all() {
                     </tr>
 				</table>
 			</div>
-			<div id="cnt_1" style="display:none" class="dr_hide">
+			<div id="cnt_1" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				{list action=cache name=MEMBER.field}
 				<tr>
@@ -136,14 +136,14 @@ function dr_select_all() {
 					<td><input type="checkbox" {if @in_array($t.fieldname, $data.allowfield)}checked="checked"{/if} value="{$t.fieldname}"  name="data[allowfield][]" />&nbsp;&nbsp;<label>{lang('html-314')}</label></td>
 				</tr>
 				{/list}
-				<tr class="dr_border_none">
+				<tr class="man_border_none">
 					<th>&nbsp;</th>
 					<td><font color="gray">{lang('html-280')}</font></td>
 				</tr>
 				</table>
 			</div>
             {if MEMBER_OPEN_SPACE}
-			<div id="cnt_2" style="display:none" class="dr_hide">
+			<div id="cnt_2" style="display:none" class="man_hide">
 				<table width="100%" class="table_form">
 				{list action=cache name=MEMBER.spacefield}
 				<tr>
@@ -151,7 +151,7 @@ function dr_select_all() {
 					<td><input type="checkbox" {if $t.fieldname == 'name'} disabled="disabled" checked="checked"{else}{if @in_array($t.fieldname, $data.spacefield)}checked="checked"{/if}{/if} value="{$t.fieldname}"  name="data[spacefield][]" />&nbsp;&nbsp;<label>{lang('html-314')}</label></td>
 				</tr>
 				{/list}
-				<tr class="dr_border_none">
+				<tr class="man_border_none">
 					<th>&nbsp;</th>
 					<td><font color="gray">{lang('html-695')}</font></td>
 				</tr>
@@ -159,19 +159,19 @@ function dr_select_all() {
 			</div>
             {/if}
             {if $data.id}
-            <div id="cnt_{php echo MEMBER_OPEN_SPACE ? 3 : 2;}" style="display:none" class="dr_hide">
+            <div id="cnt_{php echo MEMBER_OPEN_SPACE ? 3 : 2;}" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                     <tr>
                         <th>{lang('html-706')}：</th>
                         <td>
-                            <select id="dr_synid" name="synid[]" multiple style="width: 150px; height: 180px;">
+                            <select id="man_synid" name="synid[]" multiple style="width: 150px; height: 180px;">
                                 {loop $group $t}
                                 {if $data.id!=$t.id}
                                 <option value="{$t.id}">{$t.name}</option>
                                 {/if}
                                 {/loop}
                             </select>
-                            <input value="{lang('html-605')}" type="button" onclick="dr_select_all()" name="button" class="button" />
+                            <input value="{lang('html-605')}" type="button" onclick="man_select_all()" name="button" class="button" />
                             <br>
                             <font color="gray">{lang('html-707')}</font></td>
                     </tr>

@@ -97,7 +97,7 @@ class D_Member_Form extends M_Controller {
 		// 相关文档
 		$cdata = $this->_get_data($cid);
 		if (!$cdata) {
-            $this->member_msg(dr_lang('mod-30', $cid));
+            $this->member_msg(man_lang('mod-30', $cid));
         }
 		if ($cdata['uid'] != $this->uid) {
             $this->member_msg(lang('mod-05'));
@@ -148,7 +148,7 @@ class D_Member_Form extends M_Controller {
 					 ->get($this->table)
 					 ->row_array();
 		if (!$data) {
-            $this->admin_msg(dr_lang('mod-109', $id));
+            $this->admin_msg(man_lang('mod-109', $id));
         }
 		
 		if (IS_POST) {
@@ -169,7 +169,7 @@ class D_Member_Form extends M_Controller {
 					 ->update($table, $post[1]);
 				// 操作成功处理附件
 				$this->attachment_handle($data['uid'], $table.'-'.$id, $this->form['field'], $post);
-				$this->admin_msg(lang('000'), dr_url(APP_DIR.'/'.$this->router->class.'/index'), 1, 0);
+				$this->admin_msg(lang('000'), man_url(APP_DIR.'/'.$this->router->class.'/index'), 1, 0);
 			}
 		}
 		
@@ -195,7 +195,7 @@ class D_Member_Form extends M_Controller {
 			$this->attachment_model->delete_for_table($table.'-'.$id);
 		}
 		
-		exit(dr_json(1, lang('000')));
+		exit(man_json(1, lang('000')));
 	}
 	
 	/**
@@ -209,7 +209,7 @@ class D_Member_Form extends M_Controller {
 					 ->get($this->table)
 					 ->row_array();
 		if (!$data) {
-            exit('<div style="padding:10px 20px 20px;">'.dr_lang('mod-109', $id).'</div>');
+            exit('<div style="padding:10px 20px 20px;">'.man_lang('mod-109', $id).'</div>');
         }
 		// 格式化输出自定义字段
 		$fields = $this->form['field'];

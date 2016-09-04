@@ -38,14 +38,14 @@ class Urlrule extends M_Controller {
 		if (IS_POST) {
 			$ids = $this->input->post('ids', TRUE);
 			if (!$ids) {
-                exit(dr_json(0, lang('013')));
+                exit(man_json(0, lang('013')));
             }
 			if (!$this->is_auth('admin/urlrule/del')) {
-                exit(dr_json(0, lang('160')));
+                exit(man_json(0, lang('160')));
             }
             $this->db->where_in('id', $ids)->delete('urlrule');
 			$this->cache(1);
-			exit(dr_json(1, lang('000')));
+			exit(man_json(1, lang('000')));
 		}
 		$this->template->assign(array(
 			'list' => $this->db->get('urlrule')->result_array(),
@@ -65,10 +65,10 @@ class Urlrule extends M_Controller {
 			$this->db->insert('urlrule', array(
 				'type' => $this->input->post('type'),
 				'name' => $this->input->post('name'),
-				'value' => dr_array2string($this->input->post('data')),
+				'value' => man_array2string($this->input->post('data')),
 			 ));
 			$this->cache(1);
-			$this->admin_msg(lang('000'), dr_url('urlrule/index'), 1);
+			$this->admin_msg(lang('000'), man_url('urlrule/index'), 1);
 		}
 		$this->template->display('urlrule_add.html');
     }
@@ -89,12 +89,12 @@ class Urlrule extends M_Controller {
 		if (IS_POST) {
 			$this->db->where('id', $id)->update('urlrule', array(
 				'name' => $this->input->post('name'),
-				'value' => dr_array2string($this->input->post('data')),
+				'value' => man_array2string($this->input->post('data')),
 			 ));
 			$this->cache(1);
-			$this->admin_msg(lang('000'), dr_url('urlrule/index'), 1);
+			$this->admin_msg(lang('000'), man_url('urlrule/index'), 1);
 		}
-		$data['value'] = dr_string2array($data['value']);
+		$data['value'] = man_string2array($data['value']);
 		$this->template->assign(array(
 			'data' => $data,
         ));

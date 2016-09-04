@@ -120,7 +120,7 @@ artDialog.fn = artDialog.prototype = {
 		_box = null;
 		
 		if (config.id == 'Tips') {
-			DOM.wrap.addClass("dr_tips");
+			DOM.wrap.addClass("man_tips");
 		}
 		config.init && config.init.call(that, window);
 		return that;
@@ -1670,7 +1670,7 @@ artDialog.tips = function (content, time, mark) {
 			fixed: true,
 			lock: false
 		})
-		.content('<div class="dr_tipbox tip-success"><div class="tip-l"></div><div class="tip-c" style="font-size:14px">' + content + '</div><div class="tip-r"></div></div>')
+		.content('<div class="man_tipbox tip-success"><div class="tip-l"></div><div class="tip-c" style="font-size:14px">' + content + '</div><div class="tip-r"></div></div>')
 		.time(time || 1.5);
 	} else if (mark == 2) {
 		return _proxyDialog({
@@ -1682,7 +1682,7 @@ artDialog.tips = function (content, time, mark) {
 			fixed: true,
 			lock: false
 		})
-		.content('<div class="dr_tipbox tip-alert"><div class="tip-l"></div><div class="tip-c" style="font-size:14px">' + content + '</div><div class="tip-r"></div></div>')
+		.content('<div class="man_tipbox tip-alert"><div class="tip-l"></div><div class="tip-c" style="font-size:14px">' + content + '</div><div class="tip-r"></div></div>')
 		.time(time || 1.5);
 	} else {
 		return _proxyDialog({
@@ -1694,7 +1694,7 @@ artDialog.tips = function (content, time, mark) {
 			fixed: true,
 			lock: false
 		})
-		.content('<div class="dr_tipbox tip-error"><div class="tip-l"></div><div class="tip-c" style="font-size:14px;color:red;">' + content + '</div><div class="tip-r"></div></div>')
+		.content('<div class="man_tipbox tip-error"><div class="tip-l"></div><div class="tip-c" style="font-size:14px;color:red;">' + content + '</div><div class="tip-r"></div></div>')
 		.time(time || 1.5);
 	}
 };
@@ -1757,7 +1757,7 @@ artDialog.notice = function (options) {
         api, aConfig, hide, wrap, top,   
         duration = 800;
     var config = {   
-        id: 'dr_notice',   
+        id: 'man_notice',   
         left: '95%',   
         top: '100%',
         lock: false,   

@@ -15,9 +15,9 @@
         	<td align="left" width="200">{$group.name}</td>
             <td align="left">
             {if $group.allowspace}
-                <a style="color:#0000ff" href="{dr_url('member/space/category', array('id' => $group.id))}">{lang('html-711')}</a>
+                <a style="color:#0000ff" href="{man_url('member/space/category', array('id' => $group.id))}">{lang('html-711')}</a>
             {else}
-                {dr_lang('html-712', dr_url('member/group/edit/', array('id' => $group.id, 'page' => 2)))}
+                {man_lang('html-712', man_url('member/group/edit/', array('id' => $group.id, 'page' => 2)))}
             {/if}
             </td>
         </tr>

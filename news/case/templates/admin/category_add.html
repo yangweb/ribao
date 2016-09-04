@@ -5,9 +5,9 @@ $(function() {
     {if $result}
     art.dialog.tips('<font color=red>{$result}</font>', 3, 2);
     {/if}
-    $("#dr_row_thumb").addClass("dr_one");
+    $("#man_row_thumb").addClass("man_one");
     // 会员组权限联动
-    $(".dr_select_all input").click(function(data){
+    $(".man_select_all input").click(function(data){
         var _class = $(this).attr("class");
         if ($(this).attr('checked')) {
             $("."+_class).attr("checked",true);
@@ -16,34 +16,34 @@ $(function() {
         }
     });
     // 管理组权限联动
-    $(".dr_admin .dr_show").click(function(data){
+    $(".man_admin .man_show").click(function(data){
         if (!$(this).attr('checked')) {
             //设置增删改不可用
-            $(this).next(".dr_add").attr("disabled", true);
-            $(this).next(".dr_add").next(".dr_edit").attr("disabled", true);
-            $(this).next(".dr_add").next(".dr_edit").next(".dr_del").attr("disabled", true);
+            $(this).next(".man_add").attr("disabled", true);
+            $(this).next(".man_add").next(".man_edit").attr("disabled", true);
+            $(this).next(".man_add").next(".man_edit").next(".man_del").attr("disabled", true);
         } else {
             //设置增删改可用
-            $(this).next(".dr_add").attr("disabled", false);
-            $(this).next(".dr_add").next(".dr_edit").attr("disabled", false);
-            $(this).next(".dr_add").next(".dr_edit").next(".dr_del").attr("disabled", false);
+            $(this).next(".man_add").attr("disabled", false);
+            $(this).next(".man_add").next(".man_edit").attr("disabled", false);
+            $(this).next(".man_add").next(".man_edit").next(".man_del").attr("disabled", false);
         }
     });
-    $(".dr_admin .dr_show").each(function(data){
+    $(".man_admin .man_show").each(function(data){
         if (!$(this).attr('checked')) {
             //设置增删改不可用
-            $(this).next(".dr_add").attr("disabled", true);
-            $(this).next(".dr_add").next(".dr_edit").attr("disabled", true);
-            $(this).next(".dr_add").next(".dr_edit").next(".dr_del").attr("disabled", true);
+            $(this).next(".man_add").attr("disabled", true);
+            $(this).next(".man_add").next(".man_edit").attr("disabled", true);
+            $(this).next(".man_add").next(".man_edit").next(".man_del").attr("disabled", true);
         } else {
             //设置增删改可用
-            $(this).next(".dr_add").attr("disabled", false);
-            $(this).next(".dr_add").next(".dr_edit").attr("disabled", false);
-            $(this).next(".dr_add").next(".dr_edit").next(".dr_del").attr("disabled", false);
+            $(this).next(".man_add").attr("disabled", false);
+            $(this).next(".man_add").next(".man_edit").attr("disabled", false);
+            $(this).next(".man_add").next(".man_edit").next(".man_del").attr("disabled", false);
         }
     });
 });
-function dr_form_check() {
+function man_form_check() {
     var radio = $('input[name="_all"]').filter(':checked');
     if (radio.length && radio.val() == 1) {
         if (d_required('names')) return false;
@@ -53,13 +53,13 @@ function dr_form_check() {
     }
     return true;
 }
-function dr_load_url() {
-    var catid = $("#dr_load_catid").val();
+function man_load_url() {
+    var catid = $("#man_load_catid").val();
     if (catid==0) {
         art.dialog.tips("<font color=red>{lang('html-604')}</font>", 3);
         return;
     }
-    $.post("{dr_url(APP_DIR.'/category/urlrule')}&catid="+catid, function(data) {
+    $.post("{man_url(APP_DIR.'/category/urlrule')}&catid="+catid, function(data) {
         if (data) {
             $("#url_show").val(data.show);
             $("#url_show_page").val(data.show_page);
@@ -75,11 +75,11 @@ function dr_load_url() {
         }
     }, 'json');
 }
-function dr_select_all() {
-    $("#dr_synid").find("option").attr("selected", "selected");
+function man_select_all() {
+    $("#man_synid").find("option").attr("selected", "selected");
 }
 </script>
-<form action="" method="post" name="myform" id="myform" onsubmit="return dr_form_check()">
+<form action="" method="post" name="myform" id="myform" onsubmit="return man_form_check()">
 <input name="page" id="page" type="hidden" value="{$page}" />
 <input name="backurl" type="hidden" value="{$backurl}" />
 <div class="subnav">
@@ -98,8 +98,8 @@ function dr_select_all() {
             <li onclick="SwapTab(5)">{lang('html-219')}</li>
             {/if}
         </ul>
-        <div class="contentList pad-10 dr_table">
-            <div id="cnt_0" style="display:none" class="dr_hide">
+        <div class="contentList pad-10 man_table">
+            <div id="cnt_0" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
               <!--   <tr>
                     <th width="200"><font color="red">*</font>&nbsp;文本域 </th>
@@ -114,35 +114,35 @@ function dr_select_all() {
                 <tr>
                     <th>{lang('cat-11')}： </th>
                     <td>
-                    <input type="radio" name="_all" value="0" onclick="$('.dr_more').hide();$('.dr_one').show();" checked />&nbsp;<label>{lang('no')}</label>
+                    <input type="radio" name="_all" value="0" onclick="$('.man_more').hide();$('.man_one').show();" checked />&nbsp;<label>{lang('no')}</label>
                     &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="_all" value="1" onclick="$('.dr_more').show();$('.dr_one').hide();" />&nbsp;<label>{lang('yes')}</label>
+                    <input type="radio" name="_all" value="1" onclick="$('.man_more').show();$('.man_one').hide();" />&nbsp;<label>{lang('yes')}</label>
                     </td>
                 </tr>
-                <tr class="dr_more" style="display:none">
+                <tr class="man_more" style="display:none">
                     <th><font color="red">*</font>&nbsp;{lang('cat-12')}： </th>
-                    <td><textarea style="width:200px;height:150px" name="names" id="dr_names" ></textarea>
-                    <br><font id="dr_names_tips" color="#999999">{lang('cat-13')}</font>
+                    <td><textarea style="width:200px;height:150px" name="names" id="man_names" ></textarea>
+                    <br><font id="man_names_tips" color="#999999">{lang('cat-13')}</font>
                     </td>
                 </tr>
                 {/if}
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th><font color="red">*</font>&nbsp;{lang('cat-14')}： </th>
-                    <td><input class="input-text" type="text" name="data[name]" value="{$data.name}" id="dr_name" onblur="d_topinyin('dirname','name', 1);" size="20" />
-                    <div class="onShow" id="dr_name_tips">{lang('cat-15')}</div>
+                    <td><input class="input-text" type="text" name="data[name]" value="{$data.name}" id="man_name" onblur="d_topinyin('dirname','name', 1);" size="20" />
+                    <div class="onShow" id="man_name_tips">{lang('cat-15')}</div>
                     </td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th><font color="red">*</font>&nbsp;{lang('cat-08')}： </th>
                     <td>
-                    <input class="input-text" type="text" name="data[dirname]" id="dr_dirname" value="{$data.dirname}" size="20" />
-                    <div class="onShow" id="dr_dirname_tips">{lang('cat-16')}</div>
+                    <input class="input-text" type="text" name="data[dirname]" id="man_dirname" value="{$data.dirname}" size="20" />
+                    <div class="onShow" id="man_dirname_tips">{lang('cat-16')}</div>
                     </td>
                 </tr>
-                <tr class="dr_one">
+                <tr class="man_one">
                     <th>{lang('cat-07')}： </th>
                     <td>
-                    <input class="input-text" type="text" name="data[letter]" id="dr_letter" value="{$data.letter}" size="20" />
+                    <input class="input-text" type="text" name="data[letter]" id="man_letter" value="{$data.letter}" size="20" />
                     <div class="onShow">{lang('cat-17')}</div>
                     </td>
                 </tr>
@@ -162,8 +162,8 @@ function dr_select_all() {
                 <tr>
                     <th>{lang('html-357')}： </th>
                     <td>
-                    <input type="radio" name="data[show]" value="1" {dr_set_radio('show', $data['show'], '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="data[show]" value="0" {dr_set_radio('show', $data['show'], '0')} />&nbsp;<label>{lang('no')}</label>
+                    <input type="radio" name="data[show]" value="1" {man_set_radio('show', $data['show'], '1', TRUE)} />&nbsp;<label>{lang('yes')}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="data[show]" value="0" {man_set_radio('show', $data['show'], '0')} />&nbsp;<label>{lang('no')}</label>
                     <div class="onShow">{lang('html-358')}</div>
                     </td>
                 </tr>
@@ -184,43 +184,43 @@ function dr_select_all() {
                 </tr>
                 </table>
             </div>
-            <div id="cnt_1" style="display:none" class="dr_hide">
+            <div id="cnt_1" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-231')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][seo][show_title]" value="{$data['setting']['seo']['show_title']}" size="80" />
-                    <div class="onShow">&nbsp;<a href="javascript:dr_seo_rule();">{lang('html-173')}</a></div>
+                    <div class="onShow">&nbsp;<a href="javascript:man_seo_rule();">{lang('html-173')}</a></div>
                     </td>
                 </tr>
                 {if $extend}
                 <tr>
                     <th>{lang('html-596')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][seo][extend_title]" value="{$data['setting']['seo']['extend_title']}" size="80" />
-                    <div class="onShow">&nbsp;<a href="javascript:dr_seo_rule();">{lang('html-173')}</a></div>
+                    <div class="onShow">&nbsp;<a href="javascript:man_seo_rule();">{lang('html-173')}</a></div>
                     </td>
                 </tr>
                 {/if}
                 <tr>
                     <th>{lang('html-232')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][seo][list_title]" value="{$data['setting']['seo']['list_title']}" size="80" />
-                    <div class="onShow">&nbsp;<a href="javascript:dr_seo_rule();">{lang('html-173')}</a></div>
+                    <div class="onShow">&nbsp;<a href="javascript:man_seo_rule();">{lang('html-173')}</a></div>
                     </td>
                 </tr>
                 <tr>
                     <th>{lang('html-233')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][seo][list_keywords]" value="{$data['setting']['seo']['list_keywords']}" size="80" />
-                    <div class="onShow">&nbsp;<a href="javascript:dr_seo_rule();">{lang('html-173')}</a></div>
+                    <div class="onShow">&nbsp;<a href="javascript:man_seo_rule();">{lang('html-173')}</a></div>
                     </td>
                 </tr>
-                <tr class="dr_border_none">
+                <tr class="man_border_none">
                     <th>{lang('html-234')}： </th>
                     <td><input class="input-text" type="text" name="data[setting][seo][list_description]" value="{$data['setting']['seo']['list_description']}" size="80" />
-                    <div class="onShow">&nbsp;<a href="javascript:dr_seo_rule();">{lang('html-173')}</a></div>
+                    <div class="onShow">&nbsp;<a href="javascript:man_seo_rule();">{lang('html-173')}</a></div>
                     </td>
                 </tr>
                 </table>
             </div>
-            <div id="cnt_2" style="display:none" class="dr_hide">
+            <div id="cnt_2" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 <tr>
                     <th width="200">{lang('html-235')}：</th>
@@ -252,7 +252,7 @@ function dr_select_all() {
                     <div class="onShow">{lang('html-237')}</div>
                     </td>
                 </tr>
-                <tr class="dr_border_none">
+                <tr class="man_border_none">
                     <th>{lang('html-238')}：</th>
                     <td>
                     <input type="text" class="input-text" size="30" value="{$data['setting']['template']['list']}" name="data[setting][template][list]" />
@@ -261,10 +261,10 @@ function dr_select_all() {
                 </tr>
                 </table>
             </div>
-            <div id="cnt_3" style="display:none" class="dr_hide">
-                <table width="100%" class="table_form dr_admin">
+            <div id="cnt_3" style="display:none" class="man_hide">
+                <table width="100%" class="table_form man_admin">
                 {if !$data.child}
-                {dr_admin_rule($role, $data['setting']['admin'])}
+                {man_admin_rule($role, $data['setting']['admin'])}
                 <tr>
                     <th width="200"> </th>
                     <td><font color="red">{lang('html-253')}</font></td>
@@ -278,25 +278,25 @@ function dr_select_all() {
                 </table>
             </div>
             {if $data.id}
-            <div id="cnt_4" style="display:none" class="dr_hide">
+            <div id="cnt_4" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 {if !$data.child}
                 <tr>
                     <td align="left" width="100">&nbsp;</td>
                     <td align="left" width="250">{lang('html-316')}&nbsp;</td>
-                    <td align="left" class="dr_select_all">
-                    <label>{lang('deny')}</label>&nbsp;<input class="dr_show" name="show" type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('add')}</label>&nbsp;<input class="dr_add" name="add" type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('edit')}</label>&nbsp;<input class="dr_edit" name="edit" type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('del')}</label>&nbsp;<input class="dr_del" name="del" type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <td align="left" class="man_select_all">
+                    <label>{lang('deny')}</label>&nbsp;<input class="man_show" name="show" type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('add')}</label>&nbsp;<input class="man_add" name="add" type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('edit')}</label>&nbsp;<input class="man_edit" name="edit" type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('del')}</label>&nbsp;<input class="man_del" name="del" type="checkbox" />&nbsp;&nbsp&nbsp;
                     </td>
                 </tr>
                 <tr>
                     <td align="left">&nbsp;</td>
                     <td align="left">{lang('guest')}&nbsp;</td>
                     <td align="left">
-                    <label>{lang('deny')}</label>&nbsp;<input class="dr_show" name="rule[0][show]" {if $data['permission'][0]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('add')}</label>&nbsp;<input class="dr_add" name="rule[0][add]" {if $data['permission'][0]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('deny')}</label>&nbsp;<input class="man_show" name="rule[0][show]" {if $data['permission'][0]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('add')}</label>&nbsp;<input class="man_add" name="rule[0][add]" {if $data['permission'][0]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
                     </td>
                 </tr>
                 {list action=cache name=MEMBER.group return=group}
@@ -310,14 +310,14 @@ function dr_select_all() {
                 <tr>
                     {php $id=$group['id'].'_'.$level['id'];}
                     <td align="left">&nbsp;</td>
-                    <td align="left" style="padding-left:40px">{$level.name}&nbsp;&nbsp;{dr_show_stars($level.stars)}</td>
+                    <td align="left" style="padding-left:40px">{$level.name}&nbsp;&nbsp;{man_show_stars($level.stars)}</td>
                     <td align="left">
-                    <label>{lang('deny')}</label>&nbsp;<input class="dr_show" name="rule[{$id}][show]" {if $data['permission'][$id]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('add')}</label>&nbsp;<input class="dr_add" name="rule[{$id}][add]" {if $data['permission'][$id]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('edit')}</label>&nbsp;<input class="dr_edit" name="rule[{$id}][edit]" {if $data['permission'][$id]['edit']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('del')}</label>&nbsp;<input class="dr_del" name="rule[{$id}][del]" {if $data['permission'][$id]['del']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <a href="javascript:;" onclick="dr_member_rule('{$id}', '{dr_url(APP_DIR."/category/rule", array("catid"=>$data['id'], "id"=>$id))}', '{$group['name']}-{$level['name']}')" class="blue">[{lang('113')}]</a>
-                    <div id="dr_status_{$id}" class="onShow"></div>
+                    <label>{lang('deny')}</label>&nbsp;<input class="man_show" name="rule[{$id}][show]" {if $data['permission'][$id]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('add')}</label>&nbsp;<input class="man_add" name="rule[{$id}][add]" {if $data['permission'][$id]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('edit')}</label>&nbsp;<input class="man_edit" name="rule[{$id}][edit]" {if $data['permission'][$id]['edit']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('del')}</label>&nbsp;<input class="man_del" name="rule[{$id}][del]" {if $data['permission'][$id]['del']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <a href="javascript:;" onclick="man_member_rule('{$id}', '{man_url(APP_DIR."/category/rule", array("catid"=>$data['id'], "id"=>$id))}', '{$group['name']}-{$level['name']}')" class="blue">[{lang('113')}]</a>
+                    <div id="man_status_{$id}" class="onShow"></div>
                     </td>
                 </tr>
                 {/loop}
@@ -327,12 +327,12 @@ function dr_select_all() {
                     <td align="left">&nbsp;</td>
                     <td align="left">{$group.name}</td>
                     <td align="left">
-                    <label>{lang('deny')}</label>&nbsp;<input class="dr_show" name="rule[{$id}][show]" {if $data['permission'][$id]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('add')}</label>&nbsp;<input class="dr_add" name="rule[{$id}][add]" {if $data['permission'][$id]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('edit')}</label>&nbsp;<input class="dr_edit" name="rule[{$id}][edit]" {if $data['permission'][$id]['edit']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <label>{lang('del')}</label>&nbsp;<input class="dr_del" name="rule[{$id}][del]" {if $data['permission'][$id]['del']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
-                    <a href="javascript:;" onclick="dr_member_rule('{$id}', '{dr_url(APP_DIR."/category/rule", array("catid"=>$data['id'], "id"=>$id))}', '{$group['name']}')" class="blue">[{lang('113')}]</a>
-                    <div id="dr_status_{$id}" class="onShow"></div>
+                    <label>{lang('deny')}</label>&nbsp;<input class="man_show" name="rule[{$id}][show]" {if $data['permission'][$id]['show']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('add')}</label>&nbsp;<input class="man_add" name="rule[{$id}][add]" {if $data['permission'][$id]['add']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('edit')}</label>&nbsp;<input class="man_edit" name="rule[{$id}][edit]" {if $data['permission'][$id]['edit']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <label>{lang('del')}</label>&nbsp;<input class="man_del" name="rule[{$id}][del]" {if $data['permission'][$id]['del']}checked{/if} value=1 type="checkbox" />&nbsp;&nbsp&nbsp;
+                    <a href="javascript:;" onclick="man_member_rule('{$id}', '{man_url(APP_DIR."/category/rule", array("catid"=>$data['id'], "id"=>$id))}', '{$group['name']}')" class="blue">[{lang('113')}]</a>
+                    <div id="man_status_{$id}" class="onShow"></div>
                     </td>
                 </tr>
                 {/if}
@@ -351,13 +351,13 @@ function dr_select_all() {
                 {/if}
                 </table>
             </div>
-            <div id="cnt_5" style="display:none" class="dr_hide">
+            <div id="cnt_5" style="display:none" class="man_hide">
                 <table width="100%" class="table_form">
                 <tr>
                     <th>{lang('html-024')}：</th>
                     <td>
                     {$select_syn}
-                        <input value="{lang('html-605')}" type="button" onclick="dr_select_all()" name="button" class="button" />
+                        <input value="{lang('html-605')}" type="button" onclick="man_select_all()" name="button" class="button" />
                     <br>
                     <font color="gray">{lang('cat-21')}</font></td>
                 </tr>
