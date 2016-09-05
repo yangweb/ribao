@@ -16,7 +16,7 @@
 return array(
 
 	'key'			=> 1,
-	'name'			=> '报告',
+	'name'			=> '媒体',
 	'author'		=> 'mantob团队',
 	'version'		=> '1.2',
 

@@ -1,22 +1,11 @@
 <div class="pagination__container" id="pagination">
-    <div class="pagination__direction direction-previous">
-        <div class="pagination__nav-text">
-            上一页
-        </div>
-    </div>
-    <div class="pagination__page-info">
-        1/2
-    </div>
-    <a rel="next" class="pagination__direction direction-next" href="">
-        <div class="pagination__nav-text">
-            下一页
-        </div>
-    </a>
 </div>
-
 <script>
     function pagination(){
-        var pajson = {$pages};
+        var pajson = {if $pages}{$pages}{else}""{/if};
+        if(pajson==""){
+            return false;
+        }
         var pages = pajson.pages;
         var page_on = pajson.page_on;
         var prev_url = pajson.prev_url;

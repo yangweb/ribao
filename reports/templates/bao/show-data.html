@@ -40,9 +40,8 @@
                     </div>
                     <div class="report__social-icons">
                         <div>
-                            <a href="" class="social-share--weibo js-social-share" target="_blank"></a>
-                            <a href="" class="social-share--linkedin js-social-share" target="_blank"></a>
-                            <a href="" class="social-share--email"></a>
+                            {template "layout/share-a.html"}
+                            <a href="mailto:?subject={$title}&body={$content}" class="social-share--email"></a>
                         </div>
                     </div>
                 </div>

@@ -5,22 +5,21 @@
                 <img src="{HOME_THEME_PATH}build/imgs/hamburger-d4a8924e2554b1c8a9206e72c97a44cc624d3da299ccb9e9d4a2a8ef37e76f72.svg" alt="Hamburger" />
             </a>
             <li class="header-item logo">
-                <a href="/"><img class="header-wef__logo" src="{HOME_THEME_PATH}build/imgs/logo-d8b23e233f85a1af9093a1946e18cff462b0ca82fcd720e2a9633270e53a0bcd.svg" alt="Logo" /></a>
+                <a href="/">
+                {list action=navigator type=0 id=1}
+                    <img class="header-wef__logo" src="{man_thumb($t.thumb)}" alt="Logo" />
+                 {/list}
+                </a>
             </li>
 
             <div class="header-pane-selectors">
-                <li class="header-pane" data-pane="agenda">
-                    <a class="header-item__link" href="{SITE_URL}agenda">议题</a>
+                {list action=cache name=module order=displayorder}
+                {if $t.dirname=='press'}{else}
+                <li class="header-pane" data-pane="{$t.dirname}">
+                    <a class="header-item__link" href="{$t.url}">{$t.name}</a>
                 </li>
-                <li class="header-pane" data-pane="events">
-                    <a class="header-item__link" href="{SITE_URL}">会议</a>
-                </li>
-                <li class="header-pane" data-pane="reports">
-                    <a class="header-item__link" href="{SITE_URL}/">报告</a>
-                </li>
-                <li class="header-pane" data-pane="projects">
-                    <a class="header-item__link" href="{SITE_URL}/">项目</a>
-                </li>
+                {/if}
+                {/list}
                 <li class="header-pane" data-pane="about">
                     <a class="header-item__link" href="{$ci->get_cache('page-1', 'data', 'index', 1, 'url')}">关于</a>
                 </li>

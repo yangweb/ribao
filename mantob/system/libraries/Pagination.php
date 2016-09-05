@@ -1185,7 +1185,7 @@ class CI_Pagination {
 		$bao_page_on = $this->cur_page;
 		$bao_pages = $num_pages;
 
-
+		
 		$bao_json = '{"pages":"'.$bao_pages.'","page_on":"'.$bao_page_on.'","prev_url":"'.$bao_prev_url.'","next_url":"'.$bao_next_url.'"}';
 
 		$output = $bao_json;

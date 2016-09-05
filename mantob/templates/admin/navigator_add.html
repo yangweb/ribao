@@ -147,35 +147,9 @@ function getRadioCss(){
                 <div class="onShow">{lang('html-380')}</div>
             </td>
         </tr>
-        <!--<tr class="nav_0 nav_c">
-            <th>样式选择器： </th>
-            <td>
-                {man_field_input('css', 'Text', $field['css']['setting'], $data['css'])}
-                <div class="onShow">普通网站无需修改，只用于高级样式使用：可以展现不同的模板样式风格，只能输入数字哦 例如输入1为模板样式一</div>
-            </td>
-        </tr>-->
-        <tr>
-			<th><font color="red">*</font>动画类型： </th>
-			<td>
-            <label><input  type="radio" name="data[css]" {if $data.css == 0} checked{/if} value="0" class="nomantype" onclick="man_type_hide()" />普通导航</label>
-            <br/>
-            <label><input  type="radio" name="data[css]" {if $data.css == 1} checked{/if} value="1" class="yesmantype" onclick="man_type_show(1)" />&nbsp;1 （背景图片 + 内容图片 + 按钮链接）</label>
-            <br/>
-            <label><input  type="radio" name="data[css]" {if $data.css == 2} checked{/if} value="2" class="yesmantype" onclick="man_type_show(2)"  />&nbsp;2 （背景图片 + 大标题文本 + 描述文本 + 按钮链接）</label>
-             <br/>
-            <label><input  type="radio" name="data[css]" {if $data.css == 3} checked{/if} value="3" class="yesmantype" onclick="man_type_show(3)"  />&nbsp;3 （背景视频 + 大标题文本 + 描述文本 + 按钮链接）</label>
-            
-           
-            <!--{man_field_input('css', 'Text', $field['css']['setting'], $data['css'])}-->
-            </td>
-		</tr>
-        <tr class="mantype_box mantype_2 mantype_3">
-            <th><font color="red">*</font>&nbsp;文本大标题： </th>
-            <td>
-                {man_field_input('words', 'Text', $field['words']['setting'], $data['words'])}
-                <div class="onShow">用于复杂广告动画文本大标题内容</div>
-            </td>
-        </tr>    
+
+        
+       
         <tr class="mantype_box mantype_2 mantype_3">
             <th>{lang('html-1005')}： </th>
             <td>

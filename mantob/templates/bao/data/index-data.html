@@ -4,7 +4,7 @@
             <div class="small-12 columns">
                 {list action=module flag=1 module=agenda order=updatetime num=3}
                 <article class="tout tout--hero tout--article">
-                    <a class="tout__link" href="">
+                    <a class="tout__link" href="{$t.url}">
                         {template "data/image.html"}
                         <div class="tout__details">
                             <div class="tout__topic caption"></div>
@@ -26,7 +26,7 @@
                 <div class="tout-list--grid__container">
                     {list action=module flag=2 module=agenda order=updatetime num=6}
                     <article class="tout tout--default tout--article">
-                        <a class="tout__link" href="">
+                        <a class="tout__link" href="{$t.url}">
                             {template "data/image.html"}
                             <div class="tout__details">
                                 <div class="tout__topic caption"></div>
@@ -50,21 +50,26 @@
             </div>
             <div class="small-12 columns">
                 <div class="strapline">
-                    世界经济论坛是一个致力于通过公私合作改善世界状况的国际机构。
+                   {man_block(1)}
                 </div>
             </div>
             <div class="small-12 columns">
                 <div class="press-release-container">
+                    {list action=module module=press num=1 return=t}
                     <div class="press-release__content">
                         <div class="press-release__caption">
-                            <span class="bold">新闻通稿</span>
-                            <span>8 天 发布时间</span>
+                            <span class="bold">{$ci->get_cache('module-1-press', 'category', $t.catid, 'name')}通稿</span>
+                            <span>{man_fdate($t._updatetime)} 发布</span>
                         </div>
-                        <a class="press-release__text" href="">全球青年调查：“全球公民”一代担忧腐败、气候变化和机会缺失</a>
+                        <a class="press-release__text" href="{$t.url}">{$t.title}</a>
                     </div>
                     <div class="press-release__more">
-                        <a class="press-release__trigger" href=""> <span>所有媒体</span><img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="Thin" /> </a>
+                        <a class="press-release__trigger" href="{$ci->get_cache('module-1-press', 'category', 1, 'url')}">
+                            <span>所有{$ci->get_cache('module-1-press', 'category', 1, 'name')}</span>
+                            <img src="{HOME_THEME_PATH}build/imgs/thin-chevron-8a1b04b5181ea90a0b42486358eb215e5c907b3aba8d6e1fb852d05d2eda620b.svg" alt="more" />
+                        </a>
                     </div>
+                    {/list}
                 </div>
             </div>
         </div>
@@ -108,7 +113,7 @@
                         </div>
                         {list action=module flag=4 module=agenda order=updatetime num=6}
                         <article class="tout tout--mini tout--article">
-                            <a class="tout__link" href="">
+                            <a class="tout__link" href="{$t.url}">
                                 {template "data/image-tiny.html"}
                                 <div class="tout__details">
                                     <h3 class="tout__title">{$t.title}</h3>
@@ -133,7 +138,7 @@
                         </div>
                         {list action=module flag=5 module=agenda order=updatetime num=6}
                         <article class="tout tout--mini tout--article">
-                            <a class="tout__link" href="">
+                            <a class="tout__link" href="{$t.url}">
                                 {template "data/image-tiny.html"}
                                 <div class="tout__details">
                                     <h3 class="tout__title">{$t.title}</h3>
