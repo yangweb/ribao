@@ -1,69 +1,44 @@
 <section>
-<<<<<<< HEAD
-    <div class="homepage" >
-        <div class="row">
-            <div class="small-12 columns">
-                <div class='sangar-slideshow-container' id='sangar-example'>
-                    <div class='sangar-content-wrapper'>
-                        {list action=navigator type=1 }
-                        <div class='sangar-content'>
-                            <img src='{man_thumb($t.thumb)}' alt="{$t.name}" title="{$t.title}" />
-                            <a href='{$t.url}' target="_blank" title="{$t.title}" ></a>
-=======
-    <div class="homepage"  style="padding-top:20px;">
+    <div class="homepage">
        <!--banner-->
        <div class="row">
             <div class="small-12 columns">
                 <div class='sangar-slideshow-container' id='sangar-example'>
                     <div class='sangar-content-wrapper'>
                         <div class='sangar-content'>
-                            <img src='{HOME_THEME_PATH}build/imgs/slide-1.jpg' />
+                            <img src='<?php echo HOME_THEME_PATH; ?>build/imgs/slide-1.jpg' />
                             <a href='#' target="_blank"></a>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                             <div class="sangar-textbox">
                                 <div class="sangar-textbox-inner sangar-position-sticky-bottom">
-                                    <div class="sangar-textbox-content" style="width: 40%;background: url({HOME_THEME_PATH}build/imgs/background.png) repeat scroll 0% 0% transparent !important;">
+                                    <div class="sangar-textbox-content" style="width: 40%;background: url(<?php echo HOME_THEME_PATH; ?>build/imgs/background.png) repeat scroll 0% 0% transparent !important;">
                                         <!--<p class="sangar-slide-title" style="color:#ffffff;font-size:22px;">Title</p>-->
                                         <div style="color:#ffffff;">
-<<<<<<< HEAD
-                                            <p>{$t.name}</p>
-=======
                                             <p>Lorem Ipsum Dolor Sit Amet</p>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-                        {/list}
-=======
 
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                     </div>
                 </div>
             </div>
         </div>
        <!--banner end-->
     </div>
-    
     <div class="highlights-section border-bottom">
 
         <div class="row">
             <div class="small-12 large-8 columns">
                 <!--<div class="gutter-marking"></div>-->
                 <div class="sbs-section-header">
-                    <span>媒体</span>
+                    <span>全球议题</span>
                 </div>
-<<<<<<< HEAD
-                {list action=module flag=1 module=agenda order=updatetime num=3  }
-=======
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                 <article class="tout tout--large tout--article">
                     <a class="tout__link" href="">
                         <figure class="placeholder small">
-                            <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_45AmZZ8RSbjiXet1VO2Q3a2PJbCRepdIp_NOBm815jc.jpeg" />
-                            <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_45AmZZ8RSbjiXet1VO2Q3a2PJbCRepdIp_NOBm815jc.jpeg" alt="Tiny" />
+                            <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_45AmZZ8RSbjiXet1VO2Q3a2PJbCRepdIp_NOBm815jc.jpeg" />
+                            <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_45AmZZ8RSbjiXet1VO2Q3a2PJbCRepdIp_NOBm815jc.jpeg" alt="Tiny" />
                         </figure>
                         <div class="tout__details">
                             <h3 class="tout__title">它竟然是世界上最环保、最幸福的国家！</h3>
@@ -79,8 +54,8 @@
                 <article class="tout tout--large tout--article">
                     <a class="tout__link" href="">
                         <figure class="placeholder small">
-                            <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" />
-                            <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" alt="Tiny unaz" />
+                            <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" />
+                            <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" alt="Tiny unaz" />
                         </figure>
                         <div class="tout__details">
                             <h3 class="tout__title">现在才八月，可我们已经把今年的自然资源都用完了！</h3>
@@ -96,8 +71,8 @@
                 <article class="tout tout--large tout--article">
                     <a class="tout__link" href="">
                         <figure class="placeholder small">
-                            <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small__mXCeQqgPmmTFWA7oYDW0ODWrDtcdIH4jNVxcLahs9Q.jpg" />
-                            <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny__mXCeQqgPmmTFWA7oYDW0ODWrDtcdIH4jNVxcLahs9Q.jpg" alt="Tiny" />
+                            <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small__mXCeQqgPmmTFWA7oYDW0ODWrDtcdIH4jNVxcLahs9Q.jpg" />
+                            <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny__mXCeQqgPmmTFWA7oYDW0ODWrDtcdIH4jNVxcLahs9Q.jpg" alt="Tiny" />
                         </figure>
                         <div class="tout__details">
                             <h3 class="tout__title">全球化使我们的经济更容易受到气候变化的影响</h3>
@@ -111,26 +86,17 @@
                     </a>
                 </article>
             </div>
-            <div class="small-12 medium-12 large-4 columns">
+            <div class="small-12 medium-6 large-4 columns">
                 <div class="row">
                     <div class="small-12 columns">
                         <div class="sbs-section-header">
-                            <span>会议</span>
+                            <span>地区议题</span>
                         </div>
-<<<<<<< HEAD
-                        {list action=module flag=4 module=events order=updatetime  num=3}
-                        <article class="tout tout--default tout--article">
-                            <a class="tout__link" href="{$t.url}">
-                                {template "data/image.html"}
-                                <div class="tout__details bhide">
-                                    <div class="tout__topic caption"></div>
-                                    <h3 class="tout__title">{$t.title}</h3>
-=======
                         <article class="tout tout--default tout--article">
                             <a class="tout__link" href="">
                                 <figure class="placeholder small">
-                                    <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
-                                    <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
+                                    <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
+                                    <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
                                 </figure>
                                 <div class="tout__details bhide">
                                     <div class="tout__topic caption"></div>
@@ -147,8 +113,8 @@
                         <article class="tout tout--default tout--article">
                             <a class="tout__link" href="">
                                 <figure class="placeholder small">
-                                    <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
-                                    <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
+                                    <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
+                                    <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
                                 </figure>
                                 <div class="tout__details bhide">
                                     <div class="tout__topic caption"></div>
@@ -165,26 +131,21 @@
                         <article class="tout tout--default tout--article">
                             <a class="tout__link" href="">
                                 <figure class="placeholder small">
-                                    <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
-                                    <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
+                                    <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
+                                    <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
                                 </figure>
                                 <div class="tout__details bhide">
                                     <div class="tout__topic caption"></div>
                                     <h3 class="tout__title">企业应当如何应对中国水危机？</h3>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                                     <div class="tout__meta">
                                         <div class="caption">
-                                            <span class="article__author bold">{$t.author}</span>
-                                            <span>{man_date($t._updatetime,null,'')}</span>
+                                            <span class="article__author bold"></span>
+                                            <span>10 Aug 2016</span>
                                         </div>
                                     </div>
                                 </div>
                             </a>
                         </article>
-<<<<<<< HEAD
-                       {/list}
-=======
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                     </div>
                 </div>
             </div>
@@ -193,11 +154,7 @@
         <div class="row">
             <div class="small-12 large-12 columns">
                 <div class="sbs-section-header">
-<<<<<<< HEAD
-                    <span>学术</span>
-=======
                     <span>全球议题</span>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                 </div>
             </div>
         </div>
@@ -206,18 +163,6 @@
 
                 <div class="tout-list tout-list--grid tout-list--grid-x2">
                     <div class="tout-list--grid__container">
-<<<<<<< HEAD
-                        {list action=module flag=1 module=reports order=updatetime  num=4}
-                        <article class="tout tout--default tout--event">
-                            <a class="tout__link" href="{$t.url}">
-                                {template "data/image.html"}
-                                <div class="tout__details">
-                                    <h3 class="tout__title">{$t.title}</h3>
-                                    <p class="tout__description">{$t.description}</p>
-                                    <div class="tout__meta">
-                                        <div class="caption">
-                                            <span>{man_date($t._updatetime,null,'')}</span>
-=======
                         <article class="tout tout--default tout--event">
                             <a class="tout__link" href="http://b.nnn.li/events/index.php?c=show&amp;id=5">
                                 <figure class="placeholder small">
@@ -230,7 +175,6 @@
                                     <div class="tout__meta">
                                         <div class="caption">
                                             <span>2016-09-03</span>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                                             <span></span>
                                         </div>
                                     </div>
@@ -265,33 +209,16 @@
         <div class="row">
             <div class="small-12 large-12 columns">
                 <div class="sbs-section-header">
-<<<<<<< HEAD
-                    <span>合作</span>
-=======
                     <span>全球议题</span>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                 </div>
             </div>
             <div class="columns tout-list tout-list--grid">
                 <div class="tout-list--grid__container">
-<<<<<<< HEAD
-                    {list action=module flag=2 module=challenges order=updatetime  num=4}
-                    <article class="tout tout--default tout--article">
-                        <a class="tout__link" href="{$t.url}">
-                            {template "data/image.html"}
-                            <div class="tout__details">
-                                <div class="tout__topic caption"></div>
-                                <h3 class="tout__title">{$t.title}</h3>
-                                <div class="tout__meta">
-                                    <div class="caption">
-                                        <span class="article__author bold">{$t.author}</span>
-                                        <span>{man_date($t._updatetime,null,'')}</span>
-=======
                     <article class="tout tout--default tout--article">
                         <a class="tout__link" href="">
                             <figure class="placeholder small">
-                                <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_8J6AilQoEnWLjRsvGazW1b81tpWf0hm_bIqpHDRWiJY.jpeg" />
-                                <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_8J6AilQoEnWLjRsvGazW1b81tpWf0hm_bIqpHDRWiJY.jpeg" alt="Tiny" />
+                                <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_8J6AilQoEnWLjRsvGazW1b81tpWf0hm_bIqpHDRWiJY.jpeg" />
+                                <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_8J6AilQoEnWLjRsvGazW1b81tpWf0hm_bIqpHDRWiJY.jpeg" alt="Tiny" />
                             </figure>
                             <div class="tout__details">
                                 <div class="tout__topic caption"></div>
@@ -300,42 +227,16 @@
                                     <div class="caption">
                                         <span class="article__author bold">Thu-Huong Ha</span>
                                         <span>16 Aug 2016</span>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </article>
-<<<<<<< HEAD
-                    {/list}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="small-12 large-12 columns">
-                <div class="sbs-section-header">
-                    <span>关于</span>
-                </div>
-            </div>
-            <div class="columns tout-list tout-list--grid">
-                <div class="tout-list--grid__container">
-                    {list action=page module=index pid=1}
-                    <article class="index-page--article" >
-                        <a class="tout__link" href="{$t.url}">
-                            {template "data/image.html"}
-                            <div class="tout__details">
-                                <div class="tout__topic caption"></div>
-                                <h3 class="tout__title">{$t.name}</h3>
-                            </div>
-                        </a>
-                    </article>
-                    {/list}
-=======
                     <article class="tout tout--default tout--article">
                         <a class="tout__link" href="">
                             <figure class="placeholder small">
-                                <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" />
-                                <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" alt="Tiny" />
+                                <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" />
+                                <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_UNAZ-oKq9Vvd-zcaRuQj16JwIKgLyFdgq-APcuI5zoM.png" alt="Tiny" />
                             </figure>
                             <div class="tout__details">
                                 <div class="tout__topic caption"></div>
@@ -352,8 +253,8 @@
                     <article class="tout tout--default tout--article">
                         <a class="tout__link" href="">
                             <figure class="placeholder small">
-                                <img class="image" alt="" src="{HOME_THEME_PATH}build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
-                                <img class="tiny-fallback" src="{HOME_THEME_PATH}build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
+                                <img class="image" alt="" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/small_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" />
+                                <img class="tiny-fallback" src="<?php echo HOME_THEME_PATH; ?>build/imgs/upload/tiny_7RZtCW95iJSTplcLxAQolo-s2C8Ii2HVQkE8pU7vl78.jpg" alt="Tiny" />
                             </figure>
                             <div class="tout__details">
                                 <div class="tout__topic caption"></div>
@@ -367,15 +268,10 @@
                             </div>
                         </a>
                     </article>
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
                 </div>
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 520cc1d15f66583b96faa65958e19f9c1304fa8b
 </section>
 <script type='text/javascript'>
 		$(document).ready(function($) {

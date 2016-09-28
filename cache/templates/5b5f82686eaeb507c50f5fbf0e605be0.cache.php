@@ -1,3 +1,0 @@
-<div class="meganav-container">
-    <?php if ($fn_include = $this->_include("meganav/yiti.html")) include($fn_include);  if ($fn_include = $this->_include("meganav/huiyi.html")) include($fn_include);  if ($fn_include = $this->_include("meganav/baogao.html")) include($fn_include);  if ($fn_include = $this->_include("meganav/xiangmu.html")) include($fn_include);  if ($fn_include = $this->_include("meganav/guanyu.html")) include($fn_include); ?>
-</div>
