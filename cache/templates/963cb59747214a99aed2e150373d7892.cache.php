@@ -39,7 +39,7 @@
                     <span>媒体</span>
                 </div>
                 <div class="list-group__items">
-                    <?php $return_t = $this->list_tag("action=category module=press pid=0  return=t"); if ($return_t) extract($return_t); $count_t=count($return_t); if (is_array($return_t)) { foreach ($return_t as $key_t=>$t) { ?>
+                    <?php $return_t = $this->list_tag("action=category module=agenda pid=8  return=t"); if ($return_t) extract($return_t); $count_t=count($return_t); if (is_array($return_t)) { foreach ($return_t as $key_t=>$t) { ?>
                     <div class="list-group__item">
                         <a href="<?php echo $t['url']; ?>"><?php echo $t['name']; ?></a>
                     </div>

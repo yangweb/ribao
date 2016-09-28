@@ -30,7 +30,7 @@
     <div class="row">
         <div class="small-12 columns">
             <div class="meganav-section-end">
-                <a href="<?php echo SITE_URL; ?>agenda"> <span>阅读全文</span> <img src="<?php echo HOME_THEME_PATH; ?>build/imgs/link-arrow-9adfe464cd987bc5b3097b1218678552fcdd94a3e6cb7b3664bd1f75205873cc.svg" alt="Link arrow" /> </a>
+                <a href="<?php echo SITE_URL; ?>agenda"> <span>更多</span> <img src="<?php echo HOME_THEME_PATH; ?>build/imgs/link-arrow-9adfe464cd987bc5b3097b1218678552fcdd94a3e6cb7b3664bd1f75205873cc.svg" alt="Link arrow" /> </a>
             </div>
         </div>
     </div>

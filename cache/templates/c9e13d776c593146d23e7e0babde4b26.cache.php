@@ -21,10 +21,12 @@
     <meta name="twitter:image" content="" />
     <meta name="twitter:description" content="<?php echo $meta_description; ?>" />
     <link rel="stylesheet" media="all" href="<?php echo HOME_THEME_PATH; ?>build/css/application.css" />
+    <link rel="stylesheet" media="all" href="<?php echo HOME_THEME_PATH; ?>build/css/app.css" />
     <link rel="stylesheet" media="print" href="<?php echo HOME_THEME_PATH; ?>build/css/print.css" />
     <link rel="canonical" href="https://nnn.li/" />
     <link rel="alternate" type="application/atom+xml" title="ATOM" href="https://nnn.li/feed" />
     <script src="<?php echo HOME_THEME_PATH; ?>build/js/application.js"></script>
+    <script src="<?php echo HOME_THEME_PATH; ?>build/js/app.js"></script>
     <script>
         var siteUrl = '<?php echo SITE_URL; ?>',
             md5 = '<?php echo md5(SYS_KEY); ?>';

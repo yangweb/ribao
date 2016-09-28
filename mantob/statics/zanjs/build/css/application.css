@@ -1896,6 +1896,9 @@ footer .list-group__item {
         margin-right: 0;
         margin-bottom: 0.25em
     }
+    .tout__details.bhide{
+        display: none;
+    }
     .tout .placeholder .image {
         display: block
     }
@@ -2089,7 +2092,8 @@ footer .list-group__item {
 }
 
 @media only screen and (min-width: 40.0625em) {
-    .tout--hero {
+   
+    .tout--hero,.hiSlider{
         max-height: 590px;
         overflow: hidden;
         position: relative
@@ -2272,6 +2276,7 @@ footer .list-group__item {
     .tout-list--grid-x6 .tout-list--grid__container .tout {
         width: calc(100% / 3)
     }
+    
 }
 
 @media only screen and (min-width: 64.0625em) {
