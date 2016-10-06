@@ -2943,7 +2943,7 @@ footer .list-group__item {
 }
 
 .highlights-section .tout:first-child {
-    margin-top: 0
+    /*margin-top: 0*/
 }
 
 .highlights-section .tout--hero:last-child {
@@ -4546,7 +4546,7 @@ footer .list-group__item {
 
 .stream-widget-block--alt {
     margin-top: -2em;
-    background-color: #f0f0f0
+    /*background-color: #f0f0f0*/
 }
 
 .stream-widget {
@@ -6152,4 +6152,7 @@ h2.stream-title {
         position: relative;
         left: .75em
     }
+}
+.row .row-no-mag{
+    margin: 0 auto;
 }

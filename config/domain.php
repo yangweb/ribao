@@ -15,6 +15,6 @@
 
 return array(
 
-	'b.nnn.li'                      => 1,
+	'b.guapin.com'                  => 1,
 
 );

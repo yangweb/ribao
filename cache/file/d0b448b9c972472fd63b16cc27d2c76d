@@ -1,1 +1,0 @@
-a:3:{s:4:"time";i:1475069265;s:3:"ttl";i:7200;s:4:"data";s:271:"<select id='man_catid' name='catid' onChange="show_category_field(this.value)"><optgroup label=' 峰会专题'></optgroup><option value='5' >&nbsp;├ 全球</option><option value='6' selected>&nbsp;├ 地区</option><option value='7' >&nbsp;├ 行业</option></select>";}

@@ -1,14 +1,18 @@
 <section>
     <div class="agenda-home">
         {php $imgid = $ci->get_cache('module-1-agenda', 'category', 8, 'thumb'); $description = $ci->get_cache('module-1-agenda', 'category', 8, 'description'); }
-        <header class="articles-header" style="background-image:url({man_thumb($imgid)})">
-            <div class="row">
-                <div class="columns">
-                    <h1 class="agenda-title"><span>{MODULE_NAME}</span></h1>
-                    <p class="articles-description">{$description}</p>
-                </div>
+        <div class="row">
+            <div class="columns ">
+                <header class="articles-header" style="background-image:url({man_thumb($imgid)})">
+                    <div class="row row-no-mag">
+                        <div class="columns">
+                            <h1 class="agenda-title"><span>{MODULE_NAME}</span></h1>
+                            <p class="articles-description">{$description}</p>
+                        </div>
+                    </div>
+                </header>
             </div>
-        </header>
+        </div>
         <div class="row">
             <!--循环输出顶级栏目下面的子栏目及其内容，运用到了双list循环标签因此需要定义返回值return=c（都懂得）-->
             {list action=category pid=8 return=c}

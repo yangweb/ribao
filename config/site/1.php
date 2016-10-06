@@ -16,7 +16,7 @@
 return array(
 
 	'SITE_NAME'                     => '泰州（中国）医药峰会', //网站的名称
-	'SITE_DOMAIN'                   => 'b.nnn.li', //网站的域名
+	'SITE_DOMAIN'                   => 'b.guapin.com', //网站的域名
 	'SITE_MOBILE'                   => '', //移动端域名
 	'SITE_LANGUAGE'                 => 'zh-cn', //网站的语言
 	'SITE_THEME'                    => 'zanjs', //网站的主题风格
